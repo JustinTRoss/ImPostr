@@ -34,5 +34,10 @@
     "redux-logger": "^2.6.1",
     "redux-thunk": "^2.1.0",
     "webpack": "^1.13.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.2.2",
+    "eslint-config-airbnb": "^10.0.0",
+    "eslint-plugin-react": "^6.0.0"
   }
 }
