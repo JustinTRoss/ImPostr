@@ -22,9 +22,10 @@ App State
 
 PlatformListEntry: {
   platformName: ‘FB’, (String),
-  userPlatformLoggedIn: {FB object}
-  autoPilot: true, (Boolean),
+  userPlatformLoggedIn: true,
+  showModal: false,
   settings: {
+    autoPilot: true, (Boolean),
     interests: [‘football’], (Array of strings),
     postFrequency: .85, (number)
   } (Object)
