@@ -46,18 +46,6 @@ app.get('/platformLogout', (req, res) => {
   res.send(response)
 })
 
-app.put('/toggleAutopilot', (req, res) => {
-  let response;
-  if (req.body.platform === 'facebook') {
-    response = {autoPilot: 'fb toggled'}
-  } else if (req.body.platform === 'linkedin') {
-    response = {autoPilot: 'li toggled'}
-  } else if (req.body.platform === 'twitter') {
-    response = {autoPilot: 'tw toggled'}
-  }
-  res.send(response)
-})
-
 app.put('/updateSettings', (req, res) => {
   let response;
   if (req.body.platform === 'facebook') {

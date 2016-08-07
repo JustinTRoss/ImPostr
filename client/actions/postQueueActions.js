@@ -14,7 +14,7 @@ export const removeItem = (index) => {
 
 export const insertItem = (index) => {
   return {
-    TYPE: INSERT_ITEM_FROM_QUEUE,
+    type: INSERT_ITEM_FROM_QUEUE,
     index,
   };
 };
