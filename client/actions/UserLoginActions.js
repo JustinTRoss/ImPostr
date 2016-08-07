@@ -69,7 +69,7 @@ const sendLoginToServer = ({ username, password }) => {
 const requestLogout = ({ username }) => {
   return (dispatch, getState) => {
     let stateToStore = getState();
-    return fetch(`http://localhost:3000/login`, {
+    return fetch(`http://localhost:3000/logout`, {
       method: 'POST',
       body: JSON.stringify({
         username,
