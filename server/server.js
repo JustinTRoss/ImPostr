@@ -1,12 +1,24 @@
 const app = require('express')();
+const parser = require('body-parser');
+const morgan = require('morgan');
+
+app.use(morgan('dev'));
+app.use(parser.json());
 
 app.get('/login', (req, res) => {
   res.send({loggedIn: true})
 })
 
 app.get('/signup', (req, res) => {
-  res.send(res.send({loggedIn: true}))
-})
+  res.json()
+});
+
+app.post('/logout', (req, res) => {
+  console.log(req.body, 'this should receive state');
+  res.json({
+    message: 'loggedOut',
+  });
+});
 
 app.get('/platformLogin', (req, res) => {
   const platform = req.body.platform;
