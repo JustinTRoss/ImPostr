@@ -38,7 +38,7 @@ const receiveFailure = ({ username }) => {
   // in the event incorrect credentials are supplyed
 };
 
-const requestLogin = ({ username, password }) => {
+const sendLoginToServer = ({ username, password }) => {
   return dispatch => {
     dispatch(requestLogin());
     return fetch(`http://localhost:3000/login`, {

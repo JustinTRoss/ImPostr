@@ -6,11 +6,11 @@ app.use(morgan('dev'));
 app.use(parser.json());
 
 app.get('/login', (req, res) => {
-  res.send({loggedIn: true})
-})
+  res.json({ loggedIn: true });
+});
 
 app.get('/signup', (req, res) => {
-  res.json()
+  res.json();
 });
 
 app.post('/logout', (req, res) => {
