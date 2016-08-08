@@ -4,3 +4,4 @@ node_modules
 
 ##ignore compiled files
 /client/bundle.js
+/client/bundle.js.map
