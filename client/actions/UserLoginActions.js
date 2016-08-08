@@ -1,13 +1,16 @@
 import fetch from 'isomorphic-fetch';
 
-export const REQUEST_USER_LOG_IN = 'REQUEST_USER_LOG_IN';
-export const RECEIVE_USER_LOG_IN = 'RECEIVE_USER_LOG_IN';
-export const RECEIVE_FAILED_LOG_IN = 'RECEIVE_FAILED_LOG_IN';
-export const USER_LOG_OUT = 'USER_LOG_OUT';
+export const REQUEST_USER_LOGIN = 'REQUEST_USER_LOGIN';
+export const RECEIVE_USER_LOGIN = 'RECEIVE_USER_LOGIN';
+export const RECEIVE_FAILED_LOGIN = 'RECEIVE_FAILED_LOGIN';
+export const USER_LOGOUT = 'USER_LOGOUT';
+export const REQUEST_JWT_VALIDATION = 'REQUEST_JWT_VALIDATION';
+export const RECEIVE_JWT_SUCCESS = 'RECEIVE_JWT_SUCCESS';
+export const RECEIVE_JWT_FAILURE = 'RECEIVE_JWT_FAILURE';
 
 const requestLogin = () => {
   return {
-    type: REQUEST_USER_LOG_IN,
+    type: REQUEST_USER_LOGIN,
   };
 
   // toggles the user logging in flag, which should
@@ -17,31 +20,25 @@ const requestLogin = () => {
 
 const receiveLogin = ({ userId, loggedIn }) => {
   return {
-    type: RECEIVE_USER_LOG_IN,
+    type: RECEIVE_USER_LOGIN,
     userId,
-    loggedIn,
-    password: null,
-
-    // for successful login, remove pass and set loggedIn to true
   };
 };
 
-const receiveFailure = ({ username }) => {
+const receiveFailure = { username } => {
   return {
-    type: RECEIVE_FAILED_LOG_IN,
+    type: RECEIVE_FAILED_LOGIN,
     username,
-    password: '',
-    loggedIn: false,
   };
 
   // clear out password since it was wrong
-  // in the event incorrect credentials are supplyed
+  // in the event incorrect credentials are supplied
 };
 
 const sendLoginToServer = ({ username, password }) => {
   return dispatch => {
     dispatch(requestLogin());
-    return fetch(`http://localhost:3000/login`, {
+    return fetch(`http://localhost:3000/auth/login`, {
       method: 'POST',
       body: JSON.stringify({
         username,
@@ -51,25 +48,23 @@ const sendLoginToServer = ({ username, password }) => {
         'Content-Type': 'application/json',
       }),
     })
+      // if successful login
       .then(response => response.json())
       .then(json => {
         dispatch(receiveLogin(json));
-
-        // if successful login
       })
-      .catch((err) => {
-        console.log(err, 'error logging in');
+      // if failed login
+      .catch(err => {
+        console.error(err, 'error logging in');
         dispatch(receiveFailure({ username }));
-
-        // if failed login
       });
   };
 };
 
-const requestLogout = ({ username }) => {
+const requestLogout = { username } => {
   return (dispatch, getState) => {
     let stateToStore = getState();
-    return fetch(`http://localhost:3000/logout`, {
+    return fetch(`http://localhost:3000/auth/logout`, {
       method: 'POST',
       body: JSON.stringify({
         username,
@@ -81,6 +76,56 @@ const requestLogout = ({ username }) => {
     })
       .then(response => response.json())
       .then(json => console.log(json, 'logged out'))
-      .catch((err) => console.log(err, 'could not log out!'));
+      .catch(err => console.error(err, 'could not log out!'));
   };
 };
+
+const setNewUserState = () => {
+  return {
+    //wtf is the default state?
+  }
+}
+
+const sendJWTToServer = JWT => {
+  return dispatch => {
+    dispatch(requestJWTValidation());
+    return fetch(`http://localhost:3000/auth/validateJWT`, {
+      method: 'POST',
+      headers: new Headers({
+        'Authorization' : `JWT ${JWT}`, // <~~~ May need to be 'Bearer' - Check later
+      }),
+    })
+      // if JWT is valid
+      .then(response => response.json())
+      .then(json => {
+        dispatch(receiveJWTSuccess(json));
+      })
+      // if JWT is not valid
+      .catch(err => {
+        console.error(err, 'error validating JWT');
+        dispatch(receiveJWTFailure());
+      });
+  };
+}
+
+// Idk what we will use this for yet.
+const requestJWTValidation = () => {
+  return {
+    type: REQUEST_JWT_VALIDATION,
+  }
+}
+
+const receiveJWTSuccess = {PlatformList, PostQueue, UserLoggedIn} => {
+  return {
+    type: RECEIVE_JWT_SUCCESS,
+    PlatformList,
+    PostQueue,
+    UserLoggedIn,
+  }
+}
+
+const receiveJWTFailure = () => {
+  return {
+    type: RECEIVE_JWT_FAILURE,
+  }
+}
