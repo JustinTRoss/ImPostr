@@ -1,14 +1,22 @@
 import React from 'react';
 
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-	}
+    console.log(props)
+  }
 
-	render() {
+  render() {
+
 		return (
-			<div>
-			</div>
+			<div>App
+        <Navbar />
+
+        <Footer />
+      </div>
 		)
 	}
 }
