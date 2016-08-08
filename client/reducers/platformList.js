@@ -3,7 +3,7 @@ import {
   LOGOUT_PLATFORM,
   TOGGLE_MODAL,
   RECEIVE_SETTINGS_FIELDS,
-} from '../actions/platformListActions.js';
+} from '../actions/platformListActions';
 
 const PlatformListEntry = (state, action) => {
   switch (action.type) {

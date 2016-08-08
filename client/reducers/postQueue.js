@@ -1,4 +1,4 @@
-import { REMOVE_ITEM_FROM_QUEUE, INSERT_ITEM_FROM_QUEUE } from '../actions/postQueueActions.js';
+import { REMOVE_ITEM_FROM_QUEUE, INSERT_ITEM_FROM_QUEUE } from '../actions/postQueueActions';
 
 const PostQueue = (state = {
   queuedItems: [],
