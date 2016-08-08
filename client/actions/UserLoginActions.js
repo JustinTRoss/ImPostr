@@ -1,13 +1,13 @@
 import fetch from 'isomorphic-fetch';
 
-export const REQUEST_USER_LOG_IN = 'REQUEST_USER_LOG_IN';
-export const RECEIVE_USER_LOG_IN = 'RECEIVE_USER_LOG_IN';
-export const RECEIVE_FAILED_LOG_IN = 'RECEIVE_FAILED_LOG_IN';
-export const USER_LOG_OUT = 'USER_LOG_OUT';
+export const REQUEST_START = 'REQUEST_START';
+export const RECEIVE_USER_LOGIN = 'RECEIVE_USER_LOGIN';
+export const RECEIVE_FAILURE = 'RECEIVE_FAILURE';
+export const RECEIVE_USER_LOGOUT = 'RECEIVE_USER_LOGOUT';
 
-const requestLogin = () => {
+const requestStart = () => {
   return {
-    type: REQUEST_USER_LOG_IN,
+    type: REQUEST_START,
   };
 
   // toggles the user logging in flag, which should
@@ -15,33 +15,31 @@ const requestLogin = () => {
   // process is queued, but not yet complete
 };
 
-const receiveLogin = ({ userId, loggedIn }) => {
+const receiveFailure = ({ username }) => {
   return {
-    type: RECEIVE_USER_LOG_IN,
-    userId,
-    loggedIn,
-    password: null,
-
-    // for successful login, remove pass and set loggedIn to true
+    type: RECEIVE_FAILURE,
+    username,
   };
 };
 
-const receiveFailure = ({ username }) => {
+const receiveLogin = ({ userId, loggedIn }) => {
   return {
-    type: RECEIVE_FAILED_LOG_IN,
-    username,
-    password: '',
-    loggedIn: false,
+    type: RECEIVE_USER_LOGIN,
+    userId,
   };
+};
 
-  // clear out password since it was wrong
-  // in the event incorrect credentials are supplyed
+
+const receiveLogout = () => {
+  return {
+    type: RECEIVE_USER_LOGOUT,
+  };
 };
 
 const sendLoginToServer = ({ username, password }) => {
   return dispatch => {
-    dispatch(requestLogin());
-    return fetch(`http://localhost:3000/login`, {
+    dispatch(requestStart());
+    return fetch(`http://localhost:3000/auth/login`, {
       method: 'POST',
       body: JSON.stringify({
         username,
@@ -51,25 +49,24 @@ const sendLoginToServer = ({ username, password }) => {
         'Content-Type': 'application/json',
       }),
     })
+      // if successful login
       .then(response => response.json())
       .then(json => {
         dispatch(receiveLogin(json));
-
-        // if successful login
       })
-      .catch((err) => {
-        console.log(err, 'error logging in');
+      // if failed login
+      .catch(err => {
+        console.error(err, 'error logging in');
         dispatch(receiveFailure({ username }));
-
-        // if failed login
       });
   };
 };
 
 const requestLogout = ({ username }) => {
   return (dispatch, getState) => {
+    dispatch(requestStart());
     let stateToStore = getState();
-    return fetch(`http://localhost:3000/logout`, {
+    return fetch(`http://localhost:3000/auth/logout`, {
       method: 'POST',
       body: JSON.stringify({
         username,
@@ -80,7 +77,13 @@ const requestLogout = ({ username }) => {
       }),
     })
       .then(response => response.json())
-      .then(json => console.log(json, 'logged out'))
-      .catch((err) => console.log(err, 'could not log out!'));
+      .then(json => {
+        dispatch(receiveLogin(json));
+        console.log(json, 'logged out');
+      })
+      .catch(err => {
+        dispatch(receiveFailure({ username }));
+        console.error(err, 'could not log out!');
+      });
   };
 };

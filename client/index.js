@@ -6,7 +6,10 @@ import { createStore } from 'redux';
 import app from './reducers/reducers';
 import App from './containers/App';
 
-let store = createStore(app);
+
+// Check JWT here, and then perform the necessaries:
+
+let store = createStore(app, window.STORE_FROM_SERVER);
 
 render(
   <Provider store={store}>
