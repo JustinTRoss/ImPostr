@@ -1,7 +1,7 @@
 /*
 HARD CODED SERVER URLS IN FILE
  */
-
+require('es6-promise').polyfill();
 import fetch from 'isomorphic-fetch';
 
 export const LOGIN_PLATFORM = 'LOGIN_PLATFORM';
@@ -9,27 +9,32 @@ export const LOGOUT_PLATFORM = 'LOGOUT_PLATFORM';
 export const TOGGLE_MODAL = 'TOGGLE_MODAL';
 export const RECEIVE_SETTINGS_FIELDS = 'RECEIVE_SETTINGS_FIELDS';
 
-export const receivePlatformLogin = (platform, status) => {
+export const receivePlatformLogin = (platform) => {
   return {
     type: LOGIN_PLATFORM,
     platform,
-    status,
   };
 };
 
 export const requestPlatformLogin = (platform) => {
+  console.log('requestPlatformLogin', JSON.stringify({
+    platform: platform,
+  }));
   return dispatch => {
-    return fetch('http://127.0.0.1:3000/platform/platformLogin', {
+    return fetch('http://127.0.0.1:3000/platform/platformlogin', {
       method: 'post',
-      body: {
-        platform,
+      headers: {
+        'Content-Type': 'application/json',
       },
+      body: JSON.stringify({
+        platform: platform,
+      }),
     })
     .then(response => response.json())
     .then(json => {
-      console.log('json ' , json);
-      //json map to status and platform
-      dispatch(receivePlatformLogin(platform, status));
+      if (json.status === 'FB logged in') {
+        dispatch(receivePlatformLogin(platform));
+      }
     });
   };
 };
@@ -58,19 +63,28 @@ export const receiveSettingsFields = (platform, settings) => {
 };
 
 export const setSettingsFields = (platform, settings) => {
+  console.log('setSettingsFields ' , JSON.stringify({
+    platform: platform,
+    settings: settings,
+  }));
   return dispatch => {
-    return fetch('http://127.0.0.1:3000/platform/setSettingsFields', {
+    return fetch('http://127.0.0.1:3000/platform/updatesettings', {
       method: 'put',
-      body: {
-        platform,
-        settings,
+      headers: {
+        'Content-Type': 'application/json',
       },
+      body: JSON.stringify({
+        platform: platform,
+        settings: settings,
+      }),
     })
     .then(response => response.json())
     .then(json => {
       console.log('json ' , json);
-      //json map to settings and platform
-      dispatch(receiveSettingsFields(platform, settings));
+      if (json.status === 'FB settings updated') {
+        settings.interests = settings.interests.split(', ');
+        dispatch(receiveSettingsFields(platform, settings));
+      }
     });
   };
 };

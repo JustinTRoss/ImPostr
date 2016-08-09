@@ -5,6 +5,7 @@ router.post('/platformlogin', (req, res) => {
   console.log('/platform/platformlogin');
   console.log(req.body);
   let platform = req.body.platform;
+  console.log('platform ' , platform);
   let response;
   switch (platform) {
     case 'facebook':
