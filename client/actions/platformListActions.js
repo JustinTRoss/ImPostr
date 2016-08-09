@@ -33,10 +33,19 @@ export const requestPlatformLogin = (platform) => {
   };
 };
 
+<<<<<<< bfe0a8f0fec3e7e096c3597524f8ff67fdf63a31
 export const logoutPlatform = (platform) => ({
   type: LOGOUT_PLATFORM,
   platform,
 });
+=======
+export const logoutPlatform = (platform) => {
+  return {
+    type: LOGOUT_PLATFORM,
+    platform,
+  };
+};
+>>>>>>> refactor container components for more maintainability
 
 export const toggleModal = (platform) => ({
   type: TOGGLE_MODAL,
