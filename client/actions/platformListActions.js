@@ -17,9 +17,6 @@ export const receivePlatformLogin = (platform) => ({
 });
 
 export const requestPlatformLogin = (platform) => {
-  console.log('requestPlatformLogin', JSON.stringify({
-    platform: platform,
-  }));
   return dispatch => {
     return fetch('http://127.0.0.1:3000/platform/platformlogin', {
       method: 'post',
@@ -55,10 +52,6 @@ export const receiveSettingsFields = (platform, settings) => ({
 });
 
 export const setSettingsFields = (platform, settings) => {
-  console.log('setSettingsFields ' , JSON.stringify({
-    platform: platform,
-    settings: settings,
-  }));
   return dispatch => {
     return fetch('http://127.0.0.1:3000/platform/updatesettings', {
       method: 'put',
@@ -72,7 +65,7 @@ export const setSettingsFields = (platform, settings) => {
     })
     .then(response => response.json())
     .then(json => {
-      if (json.status === 'FB settings updated') {
+      if (json.status !== 'not found') {
         settings.interests = settings.interests.split(', ');
         dispatch(receiveSettingsFields(platform, settings));
       }
