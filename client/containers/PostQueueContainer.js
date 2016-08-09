@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-
 import PostQueue from '../components/PostQueue';
 import { removeItem, insertItem } from '../actions/postQueueActions';
 

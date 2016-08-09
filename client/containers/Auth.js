@@ -1,10 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-<<<<<<< c9ca0cf8f08f9de96d12962254e525afd5a2c28a
 import { updateFieldValue, changeFormType, sendLoginToServer, sendSignupToServer } from '../actions/UserLoginActions';
-=======
-import { updateFieldValue, updateFormType, sendLoginToServer, sendSignupToServer } from '../actions/UserLoginActions';
->>>>>>> Allow users to sign in and sign out - actions still not found
 
 import Login from '../components/Login';
 import Signup from '../components/Signup';
@@ -15,7 +11,6 @@ class Auth extends React.Component {
 
     this.handleSignupSubmit = this.props.handleSignupSubmit.bind(this);
     this.handleLoginSubmit = this.props.handleLoginSubmit.bind(this);
-<<<<<<< c9ca0cf8f08f9de96d12962254e525afd5a2c28a
     this.handleFieldChange = this.handleFieldChange.bind(this);
     
     this.state = {
@@ -36,8 +31,6 @@ class Auth extends React.Component {
     temp[field] = value;
     console.log(temp);
     this.setState(temp);
-=======
->>>>>>> Allow users to sign in and sign out - actions still not found
   }
 
   render() {
@@ -46,7 +39,6 @@ class Auth extends React.Component {
 
     let childToRender = this.props.isLogin === 'login' ?
       <Login
-<<<<<<< c9ca0cf8f08f9de96d12962254e525afd5a2c28a
         username={this.state.login.username}
         password={this.state.login.password}
         handleFieldChange={e => this.handleFieldChange('login', e.target.name, e.target.value)}
@@ -60,19 +52,6 @@ class Auth extends React.Component {
           console.log(this.handleSignupSubmit);
           this.handleSignupSubmit(this.state.signup);
         }}
-=======
-        username={this.props.login.username}
-        password={this.props.login.password}
-        handleFieldChange={e => this.props.handleFieldChange('login', e)}
-        handleLoginSubmit={this.handleLoginSubmit}
-      /> : <Signup
-        username={this.props.signup.username}
-        password={this.props.signup.password}
-        fullName={this.props.signup.fullName}
-        handleFieldChange={e => this.props.handleFieldChange('signup', e)}
-        handleSignupSubmit={this.handleSignupSubmit}
-
->>>>>>> Allow users to sign in and sign out - actions still not found
       />;
 
     return (
@@ -89,7 +68,6 @@ class Auth extends React.Component {
   }
 }
 
-<<<<<<< c9ca0cf8f08f9de96d12962254e525afd5a2c28a
 const mapStateToProps = state => {
   return {
     login: state.userLogin.login,
@@ -110,30 +88,6 @@ const mapDispatchToProps = dispatch => {
     handleSignupSubmit: formData => {
       //this reference lost - Fix manana
       dispatch(sendSignupToServer(formData)); 
-=======
-const mapStateToProps = ({userLogin}) => {
-  return {
-    login: userLogin.login,
-    signup: userLogin.signup,
-  };
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    handleFormChange: (formType) => {
-      dispatch(updateFormType(formType));
-    },
-    handleFieldChange: (formName, e) => {
-      dispatch(updateFieldValue(formName, e.target.name, e.target.value));
-    },
-    handleLoginSubmit: () => {
-      //this reference lost - Fix manana
-      dispatch(sendLoginToServer(this.props.login.username, this.props.login.password)); 
-    },
-    handleSignupSubmit: () => {
-      //this reference lost - Fix manana
-      dispatch(sendSignupToServer(this.props.signup.username, this.props.signup.password, this.props.signup.fullName)); 
->>>>>>> Allow users to sign in and sign out - actions still not found
     },
 
   };
