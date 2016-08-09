@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateFieldValue, updateFormType, sendLoginToServer, sendSignupToServer } from '../actions/UserLoginActions';
+import { updateFieldValue, changeFormType, sendLoginToServer, sendSignupToServer } from '../actions/UserLoginActions';
 
 import Login from '../components/Login';
 import Signup from '../components/Signup';
@@ -11,22 +11,46 @@ class Auth extends React.Component {
 
     this.handleSignupSubmit = this.props.handleSignupSubmit.bind(this);
     this.handleLoginSubmit = this.props.handleLoginSubmit.bind(this);
+    this.handleFieldChange = this.handleFieldChange.bind(this);
+    this.state = {
+      login: {
+        username: '',
+        password: '',
+      },
+      signup: {
+        username: '',
+        password: '',
+        fullName: '',
+      }
+    };
+  }
+
+  handleFieldChange(form, field, value) {
+    const temp = this.state[form];
+    temp[field] = value;
+    console.log(temp);
+    this.setState(temp);
   }
 
   render() {
-    const childToRender = this.props.isLogin ?
-      <Login
-        username={this.props.login.username}
-        password={this.props.login.password}
-        handleFieldChange={e => this.props.handleFieldChange('login', e)}
-        handleLoginSubmit={this.handleLoginSubmit}
-      /> : <Signup
-        username={this.props.signup.username}
-        password={this.props.signup.password}
-        fullName={this.props.signup.fullName}
-        handleFieldChange={e => this.props.handleFieldChange('signup', e)}
-        handleSignupSubmit={this.handleSignupSubmit}
+    console.log(this.props);
+    console.log(this.state.signup);
 
+    let childToRender = this.props.isLogin === 'login' ?
+      <Login
+        username={this.state.login.username}
+        password={this.state.login.password}
+        handleFieldChange={e => this.handleFieldChange('login', e.target.name, e.target.value)}
+        handleLoginSubmit={() => this.handleLoginSubmit(this.state.login)}
+      /> : <Signup
+        username={this.state.signup.username}
+        password={this.state.signup.password}
+        fullName={this.state.signup.fullName}
+        handleFieldChange={e => this.handleFieldChange('signup', e.target.name, e.target.value)}
+        handleSignupSubmit={() => {
+          console.log('clickem');
+          this.handleSignupSubmit(this.state.signup);
+        }}
       />;
 
     return (
@@ -43,28 +67,27 @@ class Auth extends React.Component {
   }
 }
 
-const mapStateToProps = ({userLogin}) => {
+
+const mapStateToProps = state => {
   return {
-    login: userLogin.login,
-    signup: userLogin.signup,
+    login: state.userLogin.login,
+    signup: state.userLogin.signup,
+    isLogin: state.userLogin.isLogin,
   };
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    handleFormChange: (formType) => {
-      dispatch(updateFormType(formType));
+    handleFormChange: formType => {
+      dispatch(changeFormType(formType));
     },
-    handleFieldChange: (formName, e) => {
-      dispatch(updateFieldValue(formName, e.target.name, e.target.value));
-    },
-    handleLoginSubmit: () => {
+    handleLoginSubmit: formData => {
       //this reference lost - Fix manana
-      dispatch(sendLoginToServer(this.props.login.username, this.props.login.password)); 
+      dispatch(formData => sendLoginToServer(formData)); 
     },
-    handleSignupSubmit: () => {
+    handleSignupSubmit: formData => {
       //this reference lost - Fix manana
-      dispatch(sendSignupToServer(this.props.signup.username, this.props.signup.password, this.props.signup.fullName)); 
+      dispatch(formData => sendSignupToServer(formData)); 
     },
 
   };
