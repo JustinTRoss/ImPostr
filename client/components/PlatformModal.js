@@ -12,13 +12,12 @@ const PlatformModal = ({
   };
   return (
     <div>
-      <p>Click to edit</p>
       <Button
         bsStyle="primary"
         bsSize="small"
         onClick={() => { onToggleModalClick(platform.platformName); }}
       >
-        Launch demo modal
+        Change settings
       </Button>
 
       <Modal show={platform.showModal}>

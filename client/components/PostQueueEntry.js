@@ -1,9 +1,18 @@
 import React from 'react';
+import moment from 'moment';
+import { ListGroupItem, Button } from 'react-bootstrap';
 
-const PostQueueEntry = ({ post, onInsertItemClick }) => (
-  <div>PostQueueEntry
-    {`${post.message} will be posted on ${post.platform} at ${post.time}`}
-  </div>
+const PostQueueEntry = ({ post, onRemoveItemClick, index }) => (
+  <ListGroupItem>
+    {`${post.message} will be posted on ${post.platform} at ${moment(post.time).fromNow()}`}
+    <Button
+      onClick={() => { onRemoveItemClick(index); }}
+      bsStyle="warning"
+      size="small"
+    >
+      Remove item
+    </Button>
+  </ListGroupItem>
 );
 
 export default PostQueueEntry;

@@ -1,4 +1,6 @@
 import React from 'react';
+import { Panel, ListGroup } from 'react-bootstrap';
+
 
 import PostQueueEntry from './PostQueueEntry';
 import PostQueueRemovedEntry from './PostQueueRemovedEntry';
@@ -6,29 +8,33 @@ import PostQueueRemovedEntry from './PostQueueRemovedEntry';
 const PostQueue = ({
   queuedItems,
   removedItems,
-  onInsertItemClick,
   onRemoveItemClick,
+  onInsertItemClick,
 }) => (
-  <div>
-    <div>
-      {queuedItems.map(post => (
+  <Panel header="All posts">
+    <ListGroup>
+      Pending posts
+      {queuedItems.map((post, index) => (
         <PostQueueEntry
-          onInsertItemClick={onInsertItemClick}
-          post={post}
-        />
-      )
-      )}
-    </div>
-    <div>
-      {removedItems.map(post => (
-        <PostQueueRemovedEntry
+          index={index}
           onRemoveItemClick={onRemoveItemClick}
           post={post}
         />
       )
       )}
-    </div>
-  </div>
+    </ListGroup>
+    <ListGroup>
+      Cancelled posts
+      {removedItems.map((post, index) => (
+        <PostQueueRemovedEntry
+          index={index}
+          onInsertItemClick={onInsertItemClick}
+          post={post}
+        />
+      )
+      )}
+    </ListGroup>
+  </Panel>
 );
 
 export default PostQueue;

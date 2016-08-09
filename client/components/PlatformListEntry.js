@@ -1,6 +1,7 @@
 import React from 'react';
+import { ListGroupItem } from 'react-bootstrap';
 
-import PlatformModal from '../containers/PlatformModal';
+import PlatformModal from './PlatformModal';
 
 const PlatformListEntry = ({
   platform,
@@ -9,12 +10,15 @@ const PlatformListEntry = ({
   onToggleModalClick,
   onSetSettingsClick,
 }) => (
-  <div>
+  <ListGroupItem>
     <div>
       {platform.platformName}
     </div>
     <div>
-      Userlogged in: {platform.userPlatformLoggedIn.toString()}
+      {`Autopost is currently ${platform.settings.autoPilot ? 'on' : 'off'}`}
+    </div>
+    <div>
+      {`User is currently ${platform.userPlatformLoggedIn ? '' : 'not '}logged in`}
     </div>
     <div>
       <PlatformModal
@@ -23,8 +27,7 @@ const PlatformListEntry = ({
         onSetSettingsClick={onSetSettingsClick}
       />
     </div>
-  </div>
+  </ListGroupItem>
 );
-
 
 export default PlatformListEntry;
