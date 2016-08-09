@@ -69,8 +69,7 @@ export const sendLoginToServer = ( formData ) => {
     return fetch(`http://localhost:3000/auth/login`, {
       method: 'POST',
       body: JSON.stringify({
-        username,
-        password,
+        formData,
       }),
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -84,7 +83,7 @@ export const sendLoginToServer = ( formData ) => {
       // if failed login
       .catch(err => {
         console.error(err, 'error logging in');
-        dispatch(receiveFailure({ username }));
+        dispatch(receiveFailure(formData));
       });
   };
 };
@@ -96,9 +95,7 @@ export const sendSignupToServer = ( formData ) => {
     return fetch(`http://localhost:3000/auth/signup`, {
       method: 'POST',
       body: JSON.stringify({
-        username,
-        password,
-        fullName,
+        formData,
       }),
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -112,7 +109,7 @@ export const sendSignupToServer = ( formData ) => {
       // if failed SIGNUP
       .catch(err => {
         console.error(err, 'error signing up');
-        dispatch(receiveFailure({ username }));
+        dispatch(receiveFailure(formData));
       });
   };
 };

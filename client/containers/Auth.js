@@ -48,7 +48,7 @@ class Auth extends React.Component {
         fullName={this.state.signup.fullName}
         handleFieldChange={e => this.handleFieldChange('signup', e.target.name, e.target.value)}
         handleSignupSubmit={() => {
-          console.log('clickem');
+          console.log(this.handleSignupSubmit);
           this.handleSignupSubmit(this.state.signup);
         }}
       />;
@@ -83,11 +83,11 @@ const mapDispatchToProps = dispatch => {
     },
     handleLoginSubmit: formData => {
       //this reference lost - Fix manana
-      dispatch(formData => sendLoginToServer(formData)); 
+      dispatch(sendLoginToServer(formData)); 
     },
     handleSignupSubmit: formData => {
       //this reference lost - Fix manana
-      dispatch(formData => sendSignupToServer(formData)); 
+      dispatch(sendSignupToServer(formData)); 
     },
 
   };
