@@ -1,25 +1,19 @@
-/*
-HARD CODED SERVER URLS IN FILE
- */
-require('es6-promise').polyfill();
 import fetch from 'isomorphic-fetch';
+import { polyfill } from 'es6-promise';
+
+polyfill();
 
 export const LOGIN_PLATFORM = 'LOGIN_PLATFORM';
 export const LOGOUT_PLATFORM = 'LOGOUT_PLATFORM';
 export const TOGGLE_MODAL = 'TOGGLE_MODAL';
 export const RECEIVE_SETTINGS_FIELDS = 'RECEIVE_SETTINGS_FIELDS';
 
-export const receivePlatformLogin = (platform) => {
-  return {
-    type: LOGIN_PLATFORM,
-    platform,
-  };
-};
+export const receivePlatformLogin = (platform) => ({
+  type: LOGIN_PLATFORM,
+  platform,
+});
 
 export const requestPlatformLogin = (platform) => {
-  console.log('requestPlatformLogin', JSON.stringify({
-    platform: platform,
-  }));
   return dispatch => {
     return fetch('http://127.0.0.1:3000/platform/platformlogin', {
       method: 'post',
@@ -39,34 +33,24 @@ export const requestPlatformLogin = (platform) => {
   };
 };
 
-export const logoutPlatform = (platform) => {
-  return {
-    type: LOGOUT_PLATFORM,
-    platform,
-  };
-};
+export const logoutPlatform = (platform) => ({
+  type: LOGOUT_PLATFORM,
+  platform,
+});
 
-export const toggleModal = (platform) => {
-  return {
-    type: TOGGLE_MODAL,
-    platform,
-  };
-};
+export const toggleModal = (platform) => ({
+  type: TOGGLE_MODAL,
+  platform,
+});
 
 
-export const receiveSettingsFields = (platform, settings) => {
-  return {
-    type: RECEIVE_SETTINGS_FIELDS,
-    platform,
-    settings,
-  };
-};
+export const receiveSettingsFields = (platform, settings) => ({
+  type: RECEIVE_SETTINGS_FIELDS,
+  platform,
+  settings,
+});
 
 export const setSettingsFields = (platform, settings) => {
-  console.log('setSettingsFields ' , JSON.stringify({
-    platform: platform,
-    settings: settings,
-  }));
   return dispatch => {
     return fetch('http://127.0.0.1:3000/platform/updatesettings', {
       method: 'put',
@@ -80,7 +64,6 @@ export const setSettingsFields = (platform, settings) => {
     })
     .then(response => response.json())
     .then(json => {
-      console.log('json ' , json);
       if (json.status !== 'not found') {
         settings.interests = settings.interests.split(', ');
         dispatch(receiveSettingsFields(platform, settings));
