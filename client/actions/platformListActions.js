@@ -14,6 +14,9 @@ export const receivePlatformLogin = (platform) => ({
 });
 
 export const requestPlatformLogin = (platform) => {
+  console.log('requestPlatformLogin', JSON.stringify({
+    platform: platform,
+  }));
   return dispatch => {
     return fetch('http://127.0.0.1:3000/platform/platformlogin', {
       method: 'post',
@@ -26,32 +29,21 @@ export const requestPlatformLogin = (platform) => {
     })
     .then(response => response.json())
     .then(json => {
-      if (json.status !== 'not found') {
         dispatch(receivePlatformLogin(platform));
       }
     });
   };
 };
 
-<<<<<<< bfe0a8f0fec3e7e096c3597524f8ff67fdf63a31
 export const logoutPlatform = (platform) => ({
   type: LOGOUT_PLATFORM,
   platform,
 });
-=======
-export const logoutPlatform = (platform) => {
-  return {
-    type: LOGOUT_PLATFORM,
-    platform,
-  };
-};
->>>>>>> refactor container components for more maintainability
 
 export const toggleModal = (platform) => ({
   type: TOGGLE_MODAL,
   platform,
 });
-
 
 export const receiveSettingsFields = (platform, settings) => ({
   type: RECEIVE_SETTINGS_FIELDS,
@@ -60,6 +52,10 @@ export const receiveSettingsFields = (platform, settings) => ({
 });
 
 export const setSettingsFields = (platform, settings) => {
+  console.log('setSettingsFields ' , JSON.stringify({
+    platform: platform,
+    settings: settings,
+  }));
   return dispatch => {
     return fetch('http://127.0.0.1:3000/platform/updatesettings', {
       method: 'put',
@@ -73,7 +69,7 @@ export const setSettingsFields = (platform, settings) => {
     })
     .then(response => response.json())
     .then(json => {
-      if (json.status !== 'not found') {
+      if (json.status === 'FB settings updated') {
         settings.interests = settings.interests.split(', ');
         dispatch(receiveSettingsFields(platform, settings));
       }

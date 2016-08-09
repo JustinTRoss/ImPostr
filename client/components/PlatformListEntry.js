@@ -1,6 +1,10 @@
 import React from 'react';
 import { Button, ListGroupItem } from 'react-bootstrap';
+<<<<<<< 657c9aa9bccb7611191e526726ddaa0423af00ca
 import { ListGroupItem } from 'react-bootstrap';
+=======
+
+>>>>>>> server communicates to client for all platform list actions
 import PlatformModal from './PlatformModal';
 
 const PlatformListEntry = ({
