@@ -1,8 +1,8 @@
-import { REQUEST_START, RECEIVE_FAILURE, RECEIVE_USER_LOGIN, RECEIVE_USER_LOGOUT, RECEIVE_USER_SIGNUP, UPDATE_FIELD_VALUE, CHANGE_FORM_TYPE } from '../actions/UserLoginActions';
+import { REQUEST_START, RECEIVE_FAILURE, RECEIVE_USER_LOGIN, RECEIVE_USER_LOGOUT, RECEIVE_USER_SIGNUP, UPDATE_FORM_VALUE, CHANGE_FORM_TYPE } from '../actions/UserLoginActions';
 
 const UserObject = (state = {
   userId: '',
-  isLogin: false,
+  isLogin: 'login',
   loggedIn: false,
   login: {  
     username: '',
@@ -17,12 +17,10 @@ const UserObject = (state = {
   switch (action.type) {
     case CHANGE_FORM_TYPE:
       return Object.assign({}, state, {
-        isLogin: action.isLogin,
+        isLogin: action.formType,
       })
-    case UPDATE_FIELD_VALUE:
-      return Object.assign({}, state, {
-        [action.formName.fieldName]: action.newValue,
-      });
+    case UPDATE_FORM_VALUE:
+      return Object.assign({}, state, action.formData);
     case REQUEST_START:
       return Object.assign({}, state, {
         // Do something to let user know we are processing request
