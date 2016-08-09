@@ -43,7 +43,6 @@ export const toggleModal = (platform) => ({
   platform,
 });
 
-
 export const receiveSettingsFields = (platform, settings) => ({
   type: RECEIVE_SETTINGS_FIELDS,
   platform,
