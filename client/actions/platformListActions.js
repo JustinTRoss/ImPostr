@@ -34,11 +34,10 @@ export const requestPlatformLogin = (platform) => {
   };
 };
 
-export const logoutPlatform = (platform, status) => {
+export const logoutPlatform = (platform) => {
   return {
     type: LOGOUT_PLATFORM,
     platform,
-    status,
   };
 };
 
