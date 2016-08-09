@@ -14,5 +14,8 @@ const Login = ({ username, handleFieldChange, password, handleLoginSubmit }) => 
         onChange={handleFieldChange}
       />
       <button onClick={handleLoginSubmit}> Submit </button>
+    </div>
+  );
+}
 
 export default Login;
