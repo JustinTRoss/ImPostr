@@ -49,6 +49,6 @@ UserObject: {
 
 //todo 8/9
 Connect client to server
-Fix checkbox multiple components
+xFix checkbox multiple components
 Fix interests array processing
 Integrate with Justin Auth
