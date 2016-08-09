@@ -43,3 +43,6 @@ UserObject: {
   password: , (String)
   loggedIn: , (Boolean) 
 }
+
+
+//Client component design
