@@ -32,10 +32,10 @@ class Auth extends React.Component {
 
     return (
       <div>
-        <button onClick={isLogin = false}>
+        <button onClick={}>
           Signup
         </button>
-        <button onClick={isLogin = true}>
+        <button onClick={}>
           Login
         </button>
         {childToRender}
