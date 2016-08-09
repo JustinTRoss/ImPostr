@@ -1,5 +1,4 @@
 import React from 'react';
-
 import PlatformListEntry from './PlatformListEntry';
 
 const PlatformList = ({ platforms }) => {

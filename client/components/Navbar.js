@@ -4,6 +4,7 @@ const Navbar = () => {
 	return (
 		<div>
       Navbar
+      PlatformModal
 		</div>
 	);
 }

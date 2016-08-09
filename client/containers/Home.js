@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import PlatformList from '../components/PlatformList';
 import PostQueue from '../components/PostQueue';
 
