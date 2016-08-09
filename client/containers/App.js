@@ -6,18 +6,19 @@ import Footer from '../components/Footer';
 import Home from './Home';
 import Auth from './Auth';
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    const childToRender = this.props.loggedIn ? <Auth /> : <Home />;
+    // const childToRender = this.props.loggedIn ? <Auth /> : <Home />;
 
     return (
       <div>App
         <Navbar />
-          {childToRender}
+          <Home />
         <Footer />
       </div>
 		);

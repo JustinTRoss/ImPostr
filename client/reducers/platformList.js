@@ -37,7 +37,7 @@ const PlatformList = (state = [
     showModal: false,
     settings: {
       autoPilot: false,
-      interests: [],
+      interests: ['whales', 'pizza', 'pasta'],
       postFrequency: 0,
     },
   },
