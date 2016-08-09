@@ -32,7 +32,6 @@ export const requestPlatformLogin = (platform) => {
     })
     .then(response => response.json())
     .then(json => {
-      if (json.status !== 'not found') {
         dispatch(receivePlatformLogin(platform));
       }
     });
@@ -73,7 +72,7 @@ export const setSettingsFields = (platform, settings) => {
     })
     .then(response => response.json())
     .then(json => {
-      if (json.status !== 'not found') {
+      if (json.status === 'FB settings updated') {
         settings.interests = settings.interests.split(', ');
         dispatch(receiveSettingsFields(platform, settings));
       }
