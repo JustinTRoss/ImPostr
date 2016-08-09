@@ -10,17 +10,13 @@ export const INSERT_ITEM_FROM_QUEUE = 'INSERT_ITEM_FROM_QUEUE';
 //gets removed once the time expires by worker 
 
 //allows user to veto and item in the queue
-export const removeItem = (index) => {
-  return {
-    type: REMOVE_ITEM_FROM_QUEUE,
-    index,
-  };
-};
+export const removeItem = (index) => ({
+  type: REMOVE_ITEM_FROM_QUEUE,
+  index,
+});
 
 //allows user to put a removed item back into queue
-export const insertItem = (index) => {
-  return {
-    type: INSERT_ITEM_FROM_QUEUE,
-    index,
-  };
-};
+export const insertItem = (index) => ({
+  type: INSERT_ITEM_FROM_QUEUE,
+  index,
+});
