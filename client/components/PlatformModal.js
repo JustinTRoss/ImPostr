@@ -11,26 +11,6 @@ const PlatformModal = ({
     frequency: platform.settings.frequency,
     autoPilot: platform.settings.autoPilot,
   };
-
-  const checked = (
-    <Checkbox
-      defaultChecked="true"
-      onChange={(e) => { settings.autoPilot = e.target.checked; }}
-    >
-      Autopost mode
-    </Checkbox>
-  );
-
-  const notChecked = (
-    <Checkbox
-      onChange={(e) => { settings.autoPilot = e.target.checked; }}
-    >
-      Autopost mode
-    </Checkbox>
-  );
-
-  let checkbox = settings.autoPilot ? checked : notChecked;
-
   return (
     <div>
       <Button
@@ -57,7 +37,12 @@ const PlatformModal = ({
                 />
               </div>
             </div>
-            { checkbox }
+            <Checkbox
+              defaultChecked={settings.autoPilot}
+              onChange={(e) => { settings.autoPilot = e.target.checked; }}
+            >
+              Autopost mode
+            </Checkbox>
             <div>
               <label>Frequency</label>
               <div>
