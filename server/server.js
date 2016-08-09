@@ -9,7 +9,6 @@ const db = require('./db/dbconnection.js');
 config.init(app);
 // middleware in ./config/init.js
 
-db.dbStart();
 app.use('/auth', authRoutes);
 app.use('/platform', platformRoutes);
 // routes
