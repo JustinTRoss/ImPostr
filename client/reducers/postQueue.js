@@ -4,25 +4,14 @@ const PostQueue = (state = {
   queuedItems: [
     {
       message: 'yo',
-      time: new Date(),
+      time: 'tomorrow',
       platform: 'facebook',
     },
     {
       message: 'hey',
-      time: new Date(),
-      platform: 'linkedin',
-    },
-    {
-      message: 'yes',
-      time: new Date(),
+      time: 'tomorrow',
       platform: 'twitter',
     },
-    {
-      message: 'yo',
-      time: new Date(),
-      platform: 'facebook',
-    },
-
   ],
   removedItems: [],
 }, action) => {
