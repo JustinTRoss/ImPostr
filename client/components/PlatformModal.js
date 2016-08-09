@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Modal, Checkbox } from 'react-bootstrap';
 
 const PlatformModal = ({
   platform,
@@ -9,7 +9,28 @@ const PlatformModal = ({
   let settings = {
     interests: platform.settings.interests.join(', '),
     frequency: platform.settings.frequency,
+    autoPilot: platform.settings.autoPilot,
   };
+
+  const checked = (
+    <Checkbox
+      defaultChecked="true"
+      onChange={(e) => { settings.autoPilot = e.target.checked; }}
+    >
+      Autopost mode
+    </Checkbox>
+  );
+
+  const notChecked = (
+    <Checkbox
+      onChange={(e) => { settings.autoPilot = e.target.checked; }}
+    >
+      Autopost mode
+    </Checkbox>
+  );
+
+  let checkbox = settings.autoPilot ? checked : notChecked;
+
   return (
     <div>
       <Button
@@ -36,6 +57,7 @@ const PlatformModal = ({
                 />
               </div>
             </div>
+            { checkbox }
             <div>
               <label>Frequency</label>
               <div>
