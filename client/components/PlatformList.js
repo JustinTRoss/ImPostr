@@ -3,8 +3,6 @@ import { Panel, ListGroup } from 'react-bootstrap';
 
 import PlatformListEntry from './PlatformListEntry';
 
-
-
 const PlatformList = ({
   platforms,
   onLoginClick,
