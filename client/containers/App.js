@@ -18,7 +18,7 @@ class App extends React.Component {
     return (
       <div>App
         <Navbar />
-          <Home />
+          <Auth />
         <Footer />
       </div>
 		);

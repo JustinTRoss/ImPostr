@@ -1,23 +1,24 @@
 import React from 'react';
 
-const Signup = ({ username, handleUsernameChange, password, handlePasswordChange, fullName, handleFullNameChange }) => {
+const Signup = ({ username, password, fullName, handleFieldChange, handleSignupSubmit }) => {
   return (
     <div>
       <input
         name="username"
         value={username}
-        onChange={handleUsernameChange}
+        onChange={handleFieldChange}
       />
       <input
         name="password"
         value={password}
-        onChange={handlePasswordChange}
+        onChange={handleFieldChange}
       />
       <input
         name="fullName"
         value={fullName}
-        onChange={handleFullNameChange}
+        onChange={handleFieldChange}
       />
+      <button onClick={handleSignupSubmit}> Submit </button>
     </div>
   );
 }

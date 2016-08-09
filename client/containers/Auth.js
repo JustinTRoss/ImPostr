@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { updateFieldValue, updateFormType, sendLoginToServer, sendSignupToServer } from '../actions/UserLoginActions';
 
 import Login from '../components/Login';
 import Signup from '../components/Signup';
@@ -7,35 +8,33 @@ import Signup from '../components/Signup';
 class Auth extends React.Component {
   constructor(props) {
     super(props);
-    this.handleLoginUsernameChange = this.handleLoginUsernameChange.bind(this)
-    this.handleLoginPasswordChange = this.handleLoginPasswordChange.bind(this);
-    this.handleSignupUsernameChange = this.handleSignupUsernameChange.bind(this);
-    this.handleSignupPasswordChange = this.handleSignupPasswordChange.bind(this);
-    this.handleSignupFullNameChange = this.handleSignupFullNameChange.bind(this);
+
+    this.handleSignupSubmit = this.props.handleSignupSubmit.bind(this);
+    this.handleLoginSubmit = this.props.handleLoginSubmit.bind(this);
   }
 
   render() {
     const childToRender = this.props.isLogin ?
       <Login
-        username={}
-        password={}
-        handleUsernameChange={handleLoginUsernameChange}
-        handlePasswordChange={handleLoginPasswordChange}
+        username={this.props.login.username}
+        password={this.props.login.password}
+        handleFieldChange={e => this.props.handleFieldChange('login', e)}
+        handleLoginSubmit={this.handleLoginSubmit}
       /> : <Signup
-        username={}
-        password={}
-        fullName={}
-        handleUsernameChange={handleSignupUsernameChange}
-        handlePasswordChange={handleSignupPasswordChange}
-        handlefullNameChange={handleSignupfullNameChange}
+        username={this.props.signup.username}
+        password={this.props.signup.password}
+        fullName={this.props.signup.fullName}
+        handleFieldChange={e => this.props.handleFieldChange('signup', e)}
+        handleSignupSubmit={this.handleSignupSubmit}
+
       />;
 
     return (
       <div>
-        <button onClick={}>
+        <button onClick={() => this.props.handleFormChange('signup')}>
           Signup
         </button>
-        <button onClick={}>
+        <button onClick={() => this.props.handleFormChange('login')}>
           Login
         </button>
         {childToRender}
@@ -44,31 +43,30 @@ class Auth extends React.Component {
   }
 }
 
-function handleLoginUsernameChange(e) {
-
-}
-function handleLoginPasswordChange(e) {
-
-}
-function handleSignupUsernameChange(e) {
-
-}
-function handleSignupPasswordChange(e) {
-
-}
-function handleSignupfullNameChange(e) {
-
-}
-
-function mapStateToProps({loggedIn}) {
+const mapStateToProps = ({userLogin}) => {
   return {
-    loggedIn,
-    isLogin,
+    login: userLogin.login,
+    signup: userLogin.signup,
   };
 }
-function mapDispatchToProps({loggedIn}) {
+
+const mapDispatchToProps = (dispatch) => {
   return {
-    loggedIn,
+    handleFormChange: (formType) => {
+      dispatch(updateFormType(formType));
+    },
+    handleFieldChange: (formName, e) => {
+      dispatch(updateFieldValue(formName, e.target.name, e.target.value));
+    },
+    handleLoginSubmit: () => {
+      //this reference lost - Fix manana
+      dispatch(sendLoginToServer(this.props.login.username, this.props.login.password)); 
+    },
+    handleSignupSubmit: () => {
+      //this reference lost - Fix manana
+      dispatch(sendSignupToServer(this.props.signup.username, this.props.signup.password, this.props.signup.fullName)); 
+    },
+
   };
 }
 
