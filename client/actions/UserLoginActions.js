@@ -8,7 +8,6 @@ export const RECEIVE_USER_SIGNUP = 'RECEIVE_USER_SIGNUP';
 export const UPDATE_FORM_VALUE = 'UPDATE_FORM_VALUE';
 export const CHANGE_FORM_TYPE = 'CHANGE_FORM_TYPE';
 
-
 export const requestStart = () => {
   return {
     type: REQUEST_START,
