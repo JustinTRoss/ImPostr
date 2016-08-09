@@ -27,21 +27,33 @@ const UserObject = (state = {
       });
     case RECEIVE_FAILURE:
       return Object.assign({}, state, {
-        [login.password]: '',
+        login: {
+          username: '',
+          password: '',
+        },
+        signup: {
+          username: '',
+          password: '',
+          fullName: '',
+        },
         loggedIn: false,
       });
     case RECEIVE_USER_LOGIN:
       return Object.assign({}, state, {
         loggedIn: true,
-        [login.username]: '',
-        [login.password]: '',
+        login: {
+          username: '',
+          password: '',
+        },
       });
     case RECEIVE_USER_SIGNUP:
       return Object.assign({}, state, {
         loggedIn: true,
-        [signup.username]: '',
-        [signup.password]: '',
-        [signup.fullName]: '',
+        signup: {
+          username: '',
+          password: '',
+          fullName: '',
+        },
       });
     case RECEIVE_USER_LOGOUT:
       return Object.assign({}, state, {

@@ -1,16 +1,18 @@
 const express = require('express');
 const app = express();
 const config = require('./config/initMiddleware.js');
-const authRoutes = require('./routes/authRoutes.js');
-const platformRoutes = require('./routes/platformRoutes.js');
+const AuthRouter = require('./routes/authRoutes.js');
+const PlatformRouter = require('./routes/platformRoutes.js');
 const publicDir = require('path').join(__dirname, '../client');
 const db = require('./db/dbconnection.js');
 
 config.init(app);
 // middleware in ./config/init.js
 
-app.use('/auth', authRoutes);
-app.use('/platform', platformRoutes);
+db.dbStart();
+app.use('/auth', AuthRouter);
+app.use('/platform', PlatformRouter);
+>>>>>>> Complete auth functionality
 // routes
 
 app.use(express.static(publicDir));
