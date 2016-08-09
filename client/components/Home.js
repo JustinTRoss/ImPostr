@@ -1,7 +1,7 @@
 import React from 'react';
 
-import PlatformListContainer from './PlatformListContainer';
-import PostQueueContainer from './PostQueueContainer';
+import PlatformListContainer from '../containers/PlatformListContainer';
+import PostQueueContainer from '../containers/PostQueueContainer';
 
 const Home = () => (
   <div>Home
