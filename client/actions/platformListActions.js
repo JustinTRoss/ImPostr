@@ -1,77 +1,73 @@
-/*
-HARD CODED SERVER URLS IN FILE
- */
-
 import fetch from 'isomorphic-fetch';
+import { polyfill } from 'es6-promise';
+
+polyfill();
 
 export const LOGIN_PLATFORM = 'LOGIN_PLATFORM';
 export const LOGOUT_PLATFORM = 'LOGOUT_PLATFORM';
 export const TOGGLE_MODAL = 'TOGGLE_MODAL';
 export const RECEIVE_SETTINGS_FIELDS = 'RECEIVE_SETTINGS_FIELDS';
 
-export const receivePlatformLogin = (platform, status) => {
-  return {
-    type: LOGIN_PLATFORM,
-    platform,
-    status,
-  };
-};
+export const receivePlatformLogin = (platform) => ({
+  type: LOGIN_PLATFORM,
+  platform,
+});
 
 export const requestPlatformLogin = (platform) => {
   return dispatch => {
-    return fetch('http://127.0.0.1:3000/platform/platformLogin', {
+    return fetch('http://127.0.0.1:3000/platform/platformlogin', {
       method: 'post',
-      body: {
-        platform,
+      headers: {
+        'Content-Type': 'application/json',
       },
+      body: JSON.stringify({
+        platform: platform,
+      }),
     })
     .then(response => response.json())
     .then(json => {
-      console.log('json ' , json);
-      //json map to status and platform
-      dispatch(receivePlatformLogin(platform, status));
+      if (json.status !== 'not found') {
+        dispatch(receivePlatformLogin(platform));
+      }
     });
   };
 };
 
-export const logoutPlatform = (platform, status) => {
-  return {
-    type: LOGOUT_PLATFORM,
-    platform,
-    status,
-  };
-};
+export const logoutPlatform = (platform) => ({
+  type: LOGOUT_PLATFORM,
+  platform,
+});
 
-export const toggleModal = (platform) => {
-  return {
-    type: TOGGLE_MODAL,
-    platform,
-  };
-};
+export const toggleModal = (platform) => ({
+  type: TOGGLE_MODAL,
+  platform,
+});
 
 
-export const receiveSettingsFields = (platform, settings) => {
-  return {
-    type: RECEIVE_SETTINGS_FIELDS,
-    platform,
-    settings,
-  };
-};
+export const receiveSettingsFields = (platform, settings) => ({
+  type: RECEIVE_SETTINGS_FIELDS,
+  platform,
+  settings,
+});
 
 export const setSettingsFields = (platform, settings) => {
   return dispatch => {
-    return fetch('http://127.0.0.1:3000/platform/setSettingsFields', {
+    return fetch('http://127.0.0.1:3000/platform/updatesettings', {
       method: 'put',
-      body: {
-        platform,
-        settings,
+      headers: {
+        'Content-Type': 'application/json',
       },
+      body: JSON.stringify({
+        platform: platform,
+        settings: settings,
+      }),
     })
     .then(response => response.json())
     .then(json => {
-      console.log('json ' , json);
-      //json map to settings and platform
-      dispatch(receiveSettingsFields(platform, settings));
+      if (json.status !== 'not found') {
+        settings.interests = settings.interests.split(', ');
+        dispatch(receiveSettingsFields(platform, settings));
+      }
     });
   };
 };

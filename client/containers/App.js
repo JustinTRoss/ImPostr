@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import Home from './Home';
+import Home from '../components/Home';
 import Auth from './Auth';
 
 
