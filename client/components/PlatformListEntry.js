@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, ListGroupItem } from 'react-bootstrap';
-
+import { ListGroupItem } from 'react-bootstrap';
 import PlatformModal from './PlatformModal';
 
 const PlatformListEntry = ({
