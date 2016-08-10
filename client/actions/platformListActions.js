@@ -1,6 +1,9 @@
+<<<<<<< HEAD
 /*
 HARD CODED SERVER URLS IN FILE
  */
+=======
+>>>>>>> 66a499b2f6191d9d6272b1fe78aeb3caa17892fd
 import fetch from 'isomorphic-fetch';
 import { polyfill } from 'es6-promise';
 
@@ -17,6 +20,9 @@ export const receivePlatformLogin = (platform) => ({
 });
 
 export const requestPlatformLogin = (platform) => {
+  console.log('requestPlatformLogin', JSON.stringify({
+    platform: platform,
+  }));
   return dispatch => {
     return fetch('http://127.0.0.1:3000/platform/platformlogin', {
       method: 'post',
@@ -30,7 +36,10 @@ export const requestPlatformLogin = (platform) => {
     .then(response => response.json())
     .then(json => {
         dispatch(receivePlatformLogin(platform));
+<<<<<<< HEAD
       }
+=======
+>>>>>>> 66a499b2f6191d9d6272b1fe78aeb3caa17892fd
     });
   };
 };
@@ -52,6 +61,10 @@ export const receiveSettingsFields = (platform, settings) => ({
 });
 
 export const setSettingsFields = (platform, settings) => {
+  console.log('setSettingsFields ' , JSON.stringify({
+    platform: platform,
+    settings: settings,
+  }));
   return dispatch => {
     return fetch('http://127.0.0.1:3000/platform/updatesettings', {
       method: 'put',
@@ -65,7 +78,11 @@ export const setSettingsFields = (platform, settings) => {
     })
     .then(response => response.json())
     .then(json => {
+<<<<<<< HEAD
       if (json.status !== 'not found') {
+=======
+      if (json.status === 'FB settings updated') {
+>>>>>>> 66a499b2f6191d9d6272b1fe78aeb3caa17892fd
         settings.interests = settings.interests.split(', ');
         dispatch(receiveSettingsFields(platform, settings));
       }

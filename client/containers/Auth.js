@@ -12,7 +12,10 @@ class Auth extends React.Component {
     this.handleSignupSubmit = this.props.handleSignupSubmit.bind(this);
     this.handleLoginSubmit = this.props.handleLoginSubmit.bind(this);
     this.handleFieldChange = this.handleFieldChange.bind(this);
+<<<<<<< HEAD
     
+=======
+>>>>>>> 66a499b2f6191d9d6272b1fe78aeb3caa17892fd
     this.state = {
       login: {
         username: '',

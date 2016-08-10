@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD
 <<<<<<< fb5faaa5b2bbd1182a4bfa7cc5d45e0512790240
 import PlatformListContainer from '../containers/PlatformListContainer';
 import PostQueueContainer from '../containers/PostQueueContainer';
@@ -18,6 +19,11 @@ import PostQueueContainer from '../containers/PostQueueContainer';
 
 >>>>>>> user can enter form settings
 >>>>>>> user can enter form settings
+=======
+import PlatformListContainer from '../containers/PlatformListContainer';
+import PostQueueContainer from '../containers/PostQueueContainer';
+
+>>>>>>> 66a499b2f6191d9d6272b1fe78aeb3caa17892fd
 const Home = () => (
   <div>Home
     <div>

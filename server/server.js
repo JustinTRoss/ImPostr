@@ -9,10 +9,15 @@ const db = require('./db/dbconnection.js');
 config.init(app);
 // middleware in ./config/init.js
 
+<<<<<<< HEAD
 db.dbStart();
 app.use('/auth', AuthRouter);
 app.use('/platform', PlatformRouter);
 >>>>>>> Complete auth functionality
+=======
+app.use('/auth', AuthRouter);
+app.use('/platform', PlatformRouter);
+>>>>>>> 66a499b2f6191d9d6272b1fe78aeb3caa17892fd
 // routes
 
 app.use(express.static(publicDir));

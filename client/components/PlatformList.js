@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React from 'react' ;
+=======
+import React from 'react';
+>>>>>>> 66a499b2f6191d9d6272b1fe78aeb3caa17892fd
 import { Panel, ListGroup } from 'react-bootstrap';
 import PlatformListEntry from './PlatformListEntry';
 
