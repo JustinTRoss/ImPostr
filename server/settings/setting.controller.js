@@ -1,10 +1,11 @@
-const Platform_User = require('./platform_user.model');
+const Setting = require('./setting.model');
 
+//updateSettings
 
 //getActiveOverDueNext
   //for postGenerator worker to get a list of users over due to generate post
 const getActiveOverDueNext = (cb) => {
-  Platform_User.findAll({
+  Setting.findAll({
     where: {
       isActive: true,
       dueNext: {
@@ -20,7 +21,7 @@ const getActiveOverDueNext = (cb) => {
 //updateDueNext
   //for postGenerator worker to update a specific users dueNext field
 const updateDueNext = (platform_userId, dueNext, cb) => {
-  Platform_User.update({
+  Setting.update({
     dueNext,
   }, {
     where: {
@@ -36,7 +37,7 @@ const updateDueNext = (platform_userId, dueNext, cb) => {
   //for client to populate state { interests, frequency, isActive }
 const getSettings = (req, res) => {
   const { userId } = req.body;
-  Platform_User.findAll({
+  Setting.findAll({
     where: {
       userId,
     },
@@ -46,9 +47,21 @@ const getSettings = (req, res) => {
   });
 };
 
+//updateSettings
+  //for client to update settings { interests, frequency, isActive }
+const updateSettings = (req, res) => {
+
+};
+
 //requestPlatformLogin
   //for client to login to a platform { boolean }
 const requestPlatformLogin = (req, res) => {
+  //make a call to social media manager
+};
+
+//requestPlatformLogout
+  //for client to logout to a platform { boolean }
+const requestPlatformLogout = (req, res) => {
   //make a call to social media manager
 };
 
@@ -56,5 +69,7 @@ module.exports = {
   getActiveOverDueNext,
   updateDueNext,
   getSettings,
+  updateSettings,
   requestPlatformLogin,
+  requestPlatformLogout,
 };

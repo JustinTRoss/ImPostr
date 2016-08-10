@@ -3,9 +3,8 @@
 const sequelize = require('../config/sequelize');
 const Sequelize = require('sequelize');
 const User = require('../users/user.model');
-const Platform = require('../topics/platform.model');
 
-const Platform_User = sequelize.define('platform_user', {
+const Setting = sequelize.define('platform_user', {
   platform_userId: { type: Sequelize.INTEGER, autoIncrement: true },
   userId: Sequelize.INTEGER,
   platformId: Sequelize.INTEGER,
@@ -16,10 +15,10 @@ const Platform_User = sequelize.define('platform_user', {
   dueNext: Sequelize.DATE,
 });
 
-User.belongsToMany(Platform, { through: Platform_User });
-Platform.belongsToMany(User, { through: Platform_User });
-Platform_User.belongsTo(Platform);
+User.belongsToMany(Platform, { through: Setting });
+Platform.belongsToMany(User, { through: Setting });
+Setting.belongsTo(Platform);
 
-Platform_User.sync();
+Setting.sync();
 
-module.exports = Platform_User;
+module.exports = Setting;

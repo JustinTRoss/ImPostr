@@ -7,6 +7,10 @@ module.exports = {
 
 /****** PUBLIC ******/
 
+//checkJWT
+
+//logout
+
 function userSignup(req, res) {
   let { username, password } = req.body;
   console.log(username, password);

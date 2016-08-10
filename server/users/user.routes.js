@@ -1,25 +1,25 @@
-// We want auth stuff to go in user ??
-const AuthRouter = require('express').Router();
+// We want user stuff to go in user ??
+const UserRouter = require('express').Router();
 const UserCtrl = require('./user.controller');
 
-AuthRouter.post('/login', (req, res) => {
+UserRouter.post('/login', (req, res) => {
   console.log(req.body);
-  console.log('/auth/login');
+  console.log('/user/login');
   UserCtrl.userLogin(req, res);
 });
 
-AuthRouter.post('/signup', (req, res) => {
+UserRouter.post('/signup', (req, res) => {
   console.log(req.body);
-  console.log('/auth/signup');
+  console.log('/user/signup');
   UserCtrl.userSignup(req, res);
 });
 
-AuthRouter.post('/logout', (req, res) => {
+UserRouter.post('/logout', (req, res) => {
   console.log(req.body, 'this should receive state');
-  console.log('/auth/logout');
+  console.log('/user/logout');
   res.json({
     message: 'loggedOut',
   });
 });
 
-module.exports = AuthRouter;
+module.exports = UserRouter;
