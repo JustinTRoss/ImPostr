@@ -35,16 +35,14 @@ const removeExpired = (cb) => {
   //for worker to add a post
 const addNew = (post, cb) => {
   const {
-    userId,
-    platformId,
+    platform,
     isActive,
     message,
     expires,
   } = post;
 
   Post.create({
-    userId,
-    platformId,
+    platform,
     isActive,
     message,
     expires,
@@ -74,6 +72,7 @@ const toggleIsActive = (req, res) => {
 //getUser
   //for client to get all unserviced posts when user logs in
 const getUser = (req, res) => {
+  console.log('May be formatting differences with userId', userId);
   const { userId } = req.body;
   Post.findAll({
     where: {
