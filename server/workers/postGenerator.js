@@ -17,7 +17,7 @@ const postGenerator = new CronJob('* * * * * *', () => {
     //fetchUrl for interests array
     //generate messageObject
     //addNew(messageObject)
-    //updateDueNext(timeNow + interval)
+    //updateDueNext(platform_userId, new Date(new Date() + timeInterval))
 
 }, null, true, 'America/Los_Angeles');
 
