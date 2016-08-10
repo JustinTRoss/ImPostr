@@ -1,6 +1,6 @@
 const express = require('express');
 const config = require('./config/config');
-// const publicDir = require('path').join(__dirname, '../client');
+const publicDir = require('path').join(__dirname, '../client');
 
 const app = express();
 
@@ -11,7 +11,7 @@ require('./config/routes')(app, config);
 //initiate worker
 require('./workers/postGenerator.js');
 
-// app.use(express.static(publicDir));
+app.use(express.static(publicDir));
 
 app.listen(config.port, () => {
   console.log('Listening on ${config.port}');

@@ -15,7 +15,7 @@ const config = {
     rootPath: rootPath,
     port: process.env.PORT || '3000',
     secret: process.env.SECRET || 'mattdubiesucks123',
-    db: process.env.DATABASE_URL || 'impostorthesis.ct52emcpwnt6.us-west-1.rds.amazonaws.com',
+    db: process.env.DATABASE_URL || 'postgres://palpaca:mattdubiesucks123@impostorthesis.ct52emcpwnt6.us-west-1.rds.amazonaws.com',
     logLevel: process.env.LOG_LEVEL || 'tiny',
   }
 };
