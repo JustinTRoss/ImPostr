@@ -14,7 +14,7 @@ import {
   LOGOUT_PLATFORM,
   TOGGLE_MODAL,
   RECEIVE_SETTINGS_FIELDS,
-} from '../../client/actions/platformListActions';
+} from '../../../client/actions/platformListActions';
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);

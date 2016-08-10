@@ -8,13 +8,13 @@ require('./config/sequelize');
 require('./config/middleware')(app, config);
 require('./config/routes')(app, config);
 
-//initiate worker
-require('./workers/postGenerator.js');
+require('./workers/postGenerator');
+require('./workers/queueMonitor');
 
 app.use(express.static(publicDir));
 
 app.listen(config.port, () => {
-  console.log('Listening on ${config.port}');
+  console.log(`Listening on ${config.port}`);
 });
 
 module.exports = app;
