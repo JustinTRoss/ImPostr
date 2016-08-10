@@ -1,28 +1,28 @@
-const PlatformUserRouter = require('express').Router();
-const PlatformUserRouterCntl = require('./platform_user.controller');
+const SettingRouter = require('express').Router();
+const SettingCntl = require('./setting.controller');
 
-PlatformUserRouter.get('/getSettings', (req, res) => {
+SettingRouter.get('/getSettings', (req, res) => {
   console.log(req.body);
-  console.log('/platformuser/getSettings');
-  PlatformUserRouterCntl.getSettings(req, res);
+  console.log('/settings/getSettings');
+  SettingCntl.getSettings(req, res);
 });
 
-PlatformUserRouter.put('/updateSettings', (req, res) => {
+SettingRouter.put('/updateSettings', (req, res) => {
   console.log(req.body);
-  console.log('/platformuser/updateSettings');
-  PlatformUserRouterCntl.updateSettings(req, res);
+  console.log('/settings/updateSettings');
+  SettingCntl.updateSettings(req, res);
 });
 
-PlatformUserRouter.post('/requestPlatformLogin', (req, res) => {
+SettingRouter.post('/requestPlatformLogin', (req, res) => {
   console.log(req.body);
-  console.log('/platformuser/requestPlatformLogin');
-  PlatformUserRouterCntl.requestPlatformLogin(req, res);
+  console.log('/settings/requestPlatformLogin');
+  SettingCntl.requestPlatformLogin(req, res);
 });
 
-PlatformUserRouter.post('/requestPlatformLogout', (req, res) => {
+SettingRouter.post('/requestPlatformLogout', (req, res) => {
   console.log(req.body);
-  console.log('/platformuser/requestPlatformLogout');
-  PlatformUserRouterCntl.requestPlatformLogout(req, res);
+  console.log('/settings/requestPlatformLogout');
+  SettingCntl.requestPlatformLogout(req, res);
 });
 
-module.exports = PlatformUserRouter;
+module.exports = SettingRouter;

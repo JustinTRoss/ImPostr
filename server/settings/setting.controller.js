@@ -1,7 +1,5 @@
 const Setting = require('./setting.model');
 
-//updateSettings
-
 //getActiveOverDueNext
   //for postGenerator worker to get a list of users over due to generate post
 const getActiveOverDueNext = (cb) => {
@@ -20,12 +18,12 @@ const getActiveOverDueNext = (cb) => {
 
 //updateDueNext
   //for postGenerator worker to update a specific users dueNext field
-const updateDueNext = (platform_userId, dueNext, cb) => {
+const updateDueNext = (settingId, dueNext, cb) => {
   Setting.update({
     dueNext,
   }, {
     where: {
-      platform_userId,
+      settingId,
     },
   }).then(updateStatus => {
     console.log('updateStatus ' , updateStatus);
@@ -36,6 +34,7 @@ const updateDueNext = (platform_userId, dueNext, cb) => {
 //getSettings
   //for client to populate state { interests, frequency, isActive }
 const getSettings = (req, res) => {
+  console.log('Mat be syntax issue with userId', userId);
   const { userId } = req.body;
   Setting.findAll({
     where: {
@@ -49,8 +48,22 @@ const getSettings = (req, res) => {
 
 //updateSettings
   //for client to update settings { interests, frequency, isActive }
+  //**FIX CLIENT LABELLING and interests to a comma deliminated string
 const updateSettings = (req, res) => {
-
+  const { settingId, settings } = req.body;
+  const { autoPilot, interests, postFrequency } = settings;
+  Setting.update({
+    isActive: autoPilot,
+    interval: postFrequency,
+    interests,
+  }, {
+    where: {
+      settingId,
+    },
+  }).then(updateStatus => {
+    console.log('updateStatus ' , updateStatus);
+    res.send(updateStatus);
+  });
 };
 
 //requestPlatformLogin
