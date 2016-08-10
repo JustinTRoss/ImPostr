@@ -1,3 +1,5 @@
+// MOVE THIS LOGIC ELSEWHERE AND DELETE DB FOLDER
+
 const bcrypt = require('bcrypt-nodejs');
 const SALT = require('../../../__cutestuff').SALTFACTOR;
 const pg = require('pg');

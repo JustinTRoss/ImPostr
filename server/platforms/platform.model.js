@@ -1,7 +1,7 @@
-const express = require('express');
-const router = express.Router();
+const PlatformRouter = require('express').Router();
+const PlatformCtrl = require('./platform.controller');
 
-router.post('/platformlogin', (req, res) => {
+PlatformRouter.post('/platformlogin', (req, res) => {
   console.log('/platform/platformlogin');
   console.log(req.body);
   let platform = req.body.platform;
@@ -31,7 +31,7 @@ router.post('/platformlogin', (req, res) => {
   res.json(response);
 });
 
-router.post('/platformlogout', (req, res) => {
+PlatformRouter.post('/platformlogout', (req, res) => {
   console.log('/platform/platformlogout');
   console.log(req.body);
   let platform = req.body.platform;
@@ -60,7 +60,7 @@ router.post('/platformlogout', (req, res) => {
   res.json(response);
 });
 
-router.put('/updatesettings', (req, res) => {
+PlatformRouter.put('/updatesettings', (req, res) => {
   console.log('/platform/updatesettings');
   console.log(req.body);
   let platform = req.body.platform;
@@ -89,4 +89,4 @@ router.put('/updatesettings', (req, res) => {
   res.json(response);
 });
 
-module.exports = router;
+module.exports = PlatformRouter;
