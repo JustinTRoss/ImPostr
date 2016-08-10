@@ -26,6 +26,7 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-react-hmre": "^1.1.1",
     "bcrypt-nodejs": "0.0.3",
+    "bluebird": "^3.4.1",
     "body-parser": "^1.15.2",
     "bootstrap": "^3.3.7",
     "chai": "^3.5.0",
