@@ -11,7 +11,7 @@ require('./config/routes')(app, config);
 //initiate worker
 require('./workers/postGenerator.js');
 
-app.use(express.static(publicDir));
+// app.use(express.static(publicDir));
 
 app.listen(config.port, () => {
   console.log('Listening on ${config.port}');
