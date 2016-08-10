@@ -1,18 +1,49 @@
 const CronJob = require('cron').CronJob;
 
-//get url function
+// fetch url content based upon interests
 const getUrl = (interests) => {
-  return 'www.google.com';
+  const topic = interests[Math.floor(Math.random())*interests.length]
+  return `www.google.com?${topic}`;
 };
 
+//write message to the post queue
+const writeMessage = (message) => {
+  console.log(message);
+};
 
+// update field for post due date
+const updateDueNext
 
-const testUser = {
+const updateMessage = (user) => {
+
+}
+
+const users = {
+  a: {
+    interests: ['dogs', 'cats'],
+    interval: 3,
+    dueNext: 10,
+  },
+  b: {
+    interests: ['pizza', 'elephants'],
+    interval: 7,
+    dueNext: 10,
+  },
 
 };
+
+let counter = 0;
 
 const test = new CronJob('* * * * * *', () => {
-  console.log('You will see this message every second');
+  counter++;
+
+  for (let key in users) {
+    if (users[key].dueNext <= counter) {
+      users[key].dueNext += users[key].interval;
+    }
+  }
+
+
 }, null, true, 'America/Los_Angeles');
 
 //OPTION A (naive): check on certain intervals
@@ -21,9 +52,6 @@ const test = new CronJob('* * * * * *', () => {
 //    fetch url content based upon interests
 //    write message to the post queue
 //    update field for post due date
-
-//OPTION B (more efficient): when a user logs in or creates a post
-// schedule a job with that user id and a date object
 
 module.exports = {
   test,
