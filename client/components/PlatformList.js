@@ -1,6 +1,5 @@
 import React from 'react';
 import { Panel, ListGroup } from 'react-bootstrap';
-
 import PlatformListEntry from './PlatformListEntry';
 
 const PlatformList = ({
