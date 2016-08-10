@@ -24,7 +24,7 @@ export const requestPlatformLogin = (platform) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        platform: platform,
+        platform,
       }),
     })
     .then(response => response.json())
@@ -44,33 +44,35 @@ export const toggleModal = (platform) => ({
   platform,
 });
 
-export const receiveSettingsFields = (platform, settings) => ({
+export const receiveSettingsFields = (platform, settings, settingId) => ({
   type: RECEIVE_SETTINGS_FIELDS,
   platform,
   settings,
+  settingId,
 });
 
-export const setSettingsFields = (platform, settings) => {
-  console.log('setSettingsFields ' , JSON.stringify({
-    platform: platform,
-    settings: settings,
-  }));
+export const setSettingsFields = (platformObject, settings) => {
+  let { platform, settingId } = platformObject;
+
+  console.log('JSON.stringify({platform, settingId, settings, })', JSON.stringify({platform, settingId, settings, }));
   return dispatch => {
-    return fetch('http://127.0.0.1:3000/platform/updatesettings', {
+    return fetch('http://127.0.0.1:3000/settings/updateSettings', {
       method: 'put',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        platform: platform,
-        settings: settings,
+        platform,
+        settingId,
+        settings,
       }),
     })
     .then(response => response.json())
     .then(json => {
-      if (json.status === 'FB settings updated') {
-        settings.interests = settings.interests.split(', ');
-        dispatch(receiveSettingsFields(platform, settings));
+      let { interests, interval, isActive, platform, settingId } = json;
+      if (json) {
+        console.log('platform, settings, settingId', platform, settings, settingId);
+        dispatch(receiveSettingsFields(platform, settings, settingId));
       }
     });
   };

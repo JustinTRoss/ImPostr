@@ -14,11 +14,12 @@ class App extends React.Component {
 
   render() {
     const childToRender = this.props.loggedIn ? <Home /> : <Auth />;
+          // {childToRender}
 
     return (
       <div>App
         <Navbar />
-          {childToRender}
+        <Home />
         <Footer />
       </div>
 		);

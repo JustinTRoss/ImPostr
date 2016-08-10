@@ -23,6 +23,7 @@ const PlatformListEntry = (state, action) => {
     case RECEIVE_SETTINGS_FIELDS:
       return Object.assign({}, state, {
         settings: action.settings,
+        settingId: action.settingId,
       });
     default:
       return state;
@@ -32,38 +33,41 @@ const PlatformListEntry = (state, action) => {
 //all platform list actions are actions on each list item
 const PlatformList = (state = [
   {
-    platformName: 'facebook',
+    platform: 'facebook',
+    settingId: null,
     userPlatformLoggedIn: false,
     showModal: false,
     settings: {
-      autoPilot: false,
-      interests: ['whales', 'pizza', 'pasta'],
-      postFrequency: 0,
+      isActive: false,
+      interests: '',
+      interval: 0,
     },
   },
   {
-    platformName: 'linkedin',
+    platform: 'linkedin',
+    settingId: null,
     userPlatformLoggedIn: false,
     showModal: false,
     settings: {
-      autoPilot: false,
-      interests: [],
-      postFrequency: 0,
+      isActive: false,
+      interests: '',
+      interval: 0,
     },
   },
   {
-    platformName: 'twitter',
+    platform: 'twitter',
+    settingId: null,
     userPlatformLoggedIn: false,
     showModal: false,
     settings: {
-      autoPilot: false,
-      interests: [],
-      postFrequency: 0,
+      isActive: false,
+      interests: '',
+      interval: 0,
     },
   },
 ], action) => {
   return state.map(platform => {
-    if (platform.platformName !== action.platform) {
+    if (platform.platform !== action.platform) {
       return platform;
     }
     return PlatformListEntry(platform, action);

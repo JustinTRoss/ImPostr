@@ -5,7 +5,12 @@ const Sequelize = require('sequelize');
 const User = require('../users/user.model');
 
 const Post = sequelize.define('post', {
-  postId: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
+  postId: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
+  },
   platform: Sequelize.STRING,
   isActive: Sequelize.BOOLEAN,
   message: Sequelize.STRING,

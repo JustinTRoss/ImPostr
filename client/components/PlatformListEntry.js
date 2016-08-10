@@ -12,17 +12,17 @@ const PlatformListEntry = ({
 }) => {
   const login = (
     <Button
-      onClick={() => { onLoginClick(platform.platformName); }}
+      onClick={() => { onLoginClick(platform.platform); }}
     >
-      {`Login to ${platform.platformName}`}
+      {`Login to ${platform.platform}`}
     </Button>
   );
 
   const logout = (
     <Button
-      onClick={() => { onLogoutClick(platform.platformName); }}
+      onClick={() => { onLogoutClick(platform.platform); }}
     >
-      {`Logout of ${platform.platformName}`}
+      {`Logout of ${platform.platform}`}
     </Button>
   );
 
@@ -31,10 +31,10 @@ const PlatformListEntry = ({
   return (
     <ListGroupItem>
       <div>
-        {platform.platformName}
+        {platform.platform}
       </div>
       <div>
-        {`Autopost is currently ${platform.settings.autoPilot ? 'on' : 'off'}`}
+        {`Autopost is currently ${platform.settings.isActive ? 'on' : 'off'}`}
       </div>
       <div>
         {`User is currently ${platform.userPlatformLoggedIn ? '' : 'not '}logged in`}

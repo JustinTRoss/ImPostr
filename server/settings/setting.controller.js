@@ -1,5 +1,7 @@
 const Setting = require('./setting.model');
 
+//saveInitial
+
 //getActiveOverDueNext
   //for postGenerator worker to get a list of users over due to generate post
 const getActiveOverDueNext = (cb) => {
@@ -50,20 +52,36 @@ const getSettings = (req, res) => {
   //for client to update settings { interests, frequency, isActive }
   //**FIX CLIENT LABELLING and interests to a comma deliminated string
 const updateSettings = (req, res) => {
-  const { settingId, settings } = req.body;
-  const { autoPilot, interests, postFrequency } = settings;
-  Setting.update({
-    isActive: autoPilot,
-    interval: postFrequency,
-    interests,
-  }, {
-    where: {
-      settingId,
-    },
-  }).then(updateStatus => {
-    console.log('updateStatus ' , updateStatus);
-    res.send(updateStatus);
-  });
+  const { settingId, settings, platform } = req.body;
+  const { interests, interval, isActive } = settings;
+
+  if (settingId) {
+    Setting.update({
+      interests,
+      interval,
+      isActive,
+    }, {
+      where: {
+        settingId,
+      },
+    }).then(updateStatus => {
+      //update status validation, returning [1]...
+      const response = { interests, interval, isActive, platform, settingId };
+      console.log('response', response);
+      res.send(response);
+    });
+  } else {
+    Setting.create({
+      interests,
+      interval,
+      isActive,
+      platform,
+      dueNext: new Date(),
+    }).then(createStatus => {
+      console.log('createStatus.dataValues', createStatus.dataValues);
+      res.send(createStatus.dataValues);
+    });
+  }
 };
 
 //requestPlatformLogin
