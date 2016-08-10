@@ -9,7 +9,7 @@ module.exports = function(app, config) {
   app.use('/platform', PlatformRouter);
   // app.use('/platformuser', PlatformUserRouter);
   // app.use('/post', PostRouter);
-  app.use('/user', UserRouter);
+  app.use('/auth', UserRouter);
 
 //may need to add public folder to client
   app.get('/*', (req, res) => {
