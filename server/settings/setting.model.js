@@ -4,10 +4,9 @@ const sequelize = require('../config/sequelize');
 const Sequelize = require('sequelize');
 const User = require('../users/user.model');
 
-const Setting = sequelize.define('platform_user', {
-  platform_userId: { type: Sequelize.INTEGER, autoIncrement: true },
-  userId: Sequelize.INTEGER,
-  platformId: Sequelize.INTEGER,
+const Setting = sequelize.define('setting', {
+  settingId: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
+  platform: Sequelize.STRING,
   token: Sequelize.STRING,
   isActive: Sequelize.BOOLEAN,
   interests: Sequelize.STRING,
@@ -15,9 +14,7 @@ const Setting = sequelize.define('platform_user', {
   dueNext: Sequelize.DATE,
 });
 
-User.belongsToMany(Platform, { through: Setting });
-Platform.belongsToMany(User, { through: Setting });
-Setting.belongsTo(Platform);
+Setting.belongsTo(User);
 
 Setting.sync();
 
