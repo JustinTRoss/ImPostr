@@ -12,7 +12,8 @@ const Platform_User = sequelize.define('platform_user', {
   token: Sequelize.STRING,
   isActive: Sequelize.BOOLEAN,
   interests: Sequelize.STRING,
-  frequency: Sequelize.INTEGER,
+  interval: Sequelize.INTEGER,
+  dueNext: Sequelize.DATE,
 });
 
 User.belongsToMany(Platform, { through: Platform_User });
