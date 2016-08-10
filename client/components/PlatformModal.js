@@ -6,24 +6,24 @@ const PlatformModal = ({
   onToggleModalClick,
   onSetSettingsClick,
 }) => {
-  let settings = {
-    interests: platform.settings.interests.join(', '),
-    frequency: platform.settings.frequency,
-    autoPilot: platform.settings.autoPilot,
+  const settings = {
+    interests: platform.settings.interests,
+    interval: platform.settings.interval,
+    isActive: platform.settings.isActive,
   };
   return (
     <div>
       <Button
         bsStyle="primary"
         bsSize="small"
-        onClick={() => { onToggleModalClick(platform.platformName); }}
+        onClick={() => { onToggleModalClick(platform.platform); }}
       >
         Change settings
       </Button>
 
       <Modal show={platform.showModal}>
         <Modal.Header>
-          <Modal.Title>{`${platform.platformName}'s settings`}</Modal.Title>
+          <Modal.Title>{`${platform.platform}'s settings`}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form>
@@ -38,8 +38,8 @@ const PlatformModal = ({
               </div>
             </div>
             <Checkbox
-              defaultChecked={settings.autoPilot}
-              onChange={(e) => { settings.autoPilot = e.target.checked; }}
+              defaultChecked={settings.isActive}
+              onChange={(e) => { settings.isActive = e.target.checked; }}
             >
               Autopost mode
             </Checkbox>
@@ -48,8 +48,8 @@ const PlatformModal = ({
               <div>
                 <input
                   type="text"
-                  defaultValue={settings.frequency}
-                  onChange={(e) => { settings.frequency = e.target.value; }}
+                  defaultValue={settings.interval}
+                  onChange={(e) => { settings.interval = e.target.value; }}
                 />
               </div>
             </div>
@@ -57,14 +57,14 @@ const PlatformModal = ({
         </Modal.Body>
         <Modal.Footer>
           <Button
-            onClick={() => { onToggleModalClick(platform.platformName); }}
+            onClick={() => { onToggleModalClick(platform.platform); }}
           >
             Close
           </Button>
           <Button
             onClick={() => {
-              onToggleModalClick(platform.platformName);
-              onSetSettingsClick(platform.platformName, settings);
+              onToggleModalClick(platform.platform);
+              onSetSettingsClick(platform, settings);
             }}
           >
             Save

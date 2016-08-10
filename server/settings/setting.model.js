@@ -5,7 +5,12 @@ const Sequelize = require('sequelize');
 const User = require('../users/user.model');
 
 const Setting = sequelize.define('setting', {
-  settingId: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
+  settingId: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
+  },
   platform: Sequelize.STRING,
   token: Sequelize.STRING,
   isActive: Sequelize.BOOLEAN,
