@@ -1,20 +1,17 @@
 const express = require('express');
 const router = express.Router();
+const userController = require('../db/users/usercontroller');
 
 router.post('/login', (req, res) => {
   console.log(req.body);
   console.log('/auth/login');
-  res.json({
-    loggedIn: true,
-  });
+  userController.userLogin(req, res);
 });
 
 router.post('/signup', (req, res) => {
   console.log(req.body);
   console.log('/auth/signup');
-  res.json({
-    loggedIn: true,
-  });
+  userController.userSignup(req, res);
 });
 
 router.post('/logout', (req, res) => {
@@ -26,19 +23,3 @@ router.post('/logout', (req, res) => {
 });
 
 module.exports = router;
-/*
-
-
-app.put('/updateSettings', (req, res) => {
-  let response;
-  if (req.body.platform === 'facebook') {
-    response = {settings: 'fb settings updated'}
-  } else if (req.body.platform === 'linkedin') {
-    response = {settings: 'li settings updated'}
-  } else if (req.body.platform === 'twitter') {
-    response = {settings: 'tw settings updated'}
-  }
-  res.send(response)
-})
-
-*/
