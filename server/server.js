@@ -12,7 +12,6 @@ config.init(app);
 db.dbStart();
 app.use('/auth', AuthRouter);
 app.use('/platform', PlatformRouter);
->>>>>>> Complete auth functionality
 // routes
 
 app.use(express.static(publicDir));
