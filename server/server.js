@@ -13,6 +13,9 @@ app.use('/auth', AuthRouter);
 app.use('/platform', PlatformRouter);
 // routes
 
+//initiate worker
+require('./workers/postGenerator.js');
+
 app.use(express.static(publicDir));
 
 app.listen(3000, () => {
