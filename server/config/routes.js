@@ -1,5 +1,5 @@
 // const AuthRouter = require('../auth/auth.routes');
-const PlatformRouter = require('../platforms/platforms.routes');
+const PlatformRouter = require('../platforms/platform.routes');
 // const PlatformUserRouter = require('../platforms_users/platform_user.routes');
 // const PostRouter = require('../posts/post.routes');
 const UserRouter = require('../users/user.routes');
