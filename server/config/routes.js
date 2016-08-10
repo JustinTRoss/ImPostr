@@ -1,18 +1,15 @@
-// const AuthRouter = require('../auth/auth.routes');
 const PlatformRouter = require('../platforms/platform.routes');
-// const PlatformUserRouter = require('../platforms_users/platform_user.routes');
-// const PostRouter = require('../posts/post.routes');
+const PlatformUserRouter = require('../platforms_users/platform_user.routes');
+const PostRouter = require('../posts/post.routes');
 const UserRouter = require('../users/user.routes');
 
-module.exports = function(app, config) {
-  // app.use('/auth', AuthRouter);
+module.exports = (app, config) => {
   app.use('/platform', PlatformRouter);
-  // app.use('/platformuser', PlatformUserRouter);
-  // app.use('/post', PostRouter);
-  app.use('/auth', UserRouter);
+  app.use('/platformuser', PlatformUserRouter);
+  app.use('/post', PostRouter);
+  app.use('/user', UserRouter);
 
-//may need to add public folder to client
   app.get('/*', (req, res) => {
-    res.sendFile(config.rootPath + '/client');
+    res.sendFile(config.rootPath + '/client/index.html');
   });
-}
+};

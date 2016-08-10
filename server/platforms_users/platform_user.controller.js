@@ -1,5 +1,6 @@
 const Platform_User = require('./platform_user.model');
 
+//updateSettings
 
 //getActiveOverDueNext
   //for postGenerator worker to get a list of users over due to generate post
@@ -46,9 +47,21 @@ const getSettings = (req, res) => {
   });
 };
 
+//updateSettings
+  //for client to update settings { interests, frequency, isActive }
+const updateSettings = (req, res) => {
+
+};
+
 //requestPlatformLogin
   //for client to login to a platform { boolean }
 const requestPlatformLogin = (req, res) => {
+  //make a call to social media manager
+};
+
+//requestPlatformLogout
+  //for client to logout to a platform { boolean }
+const requestPlatformLogout = (req, res) => {
   //make a call to social media manager
 };
 
@@ -56,5 +69,7 @@ module.exports = {
   getActiveOverDueNext,
   updateDueNext,
   getSettings,
+  updateSettings,
   requestPlatformLogin,
+  requestPlatformLogout,
 };
