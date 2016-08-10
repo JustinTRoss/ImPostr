@@ -1,13 +1,13 @@
 import { expect } from 'chai';
 
-import reducer from '../../client/reducers/platformList';
+import reducer from '../../../client/reducers/platformList';
 
 import {
   LOGIN_PLATFORM,
   LOGOUT_PLATFORM,
   TOGGLE_MODAL,
   RECEIVE_SETTINGS_FIELDS,
-} from '../../client/actions/platformListActions';
+} from '../../../client/actions/platformListActions';
 
 describe('Platform List Reducer', () => {
 

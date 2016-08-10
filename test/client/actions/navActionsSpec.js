@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 
-import { authNavToggle, AUTH_NAV_TOGGLE } from '../../client/actions/navActions';
+import { authNavToggle, AUTH_NAV_TOGGLE } from '../../../client/actions/navActions';
 
 describe('Navigation Actions', () => {
   describe('authNavToggle()', () => {

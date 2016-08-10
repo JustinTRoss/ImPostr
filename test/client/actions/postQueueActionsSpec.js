@@ -5,7 +5,7 @@ import {
   insertItem,
   REMOVE_ITEM_FROM_QUEUE,
   INSERT_ITEM_FROM_QUEUE,
-} from '../../client/actions/postQueueActions';
+} from '../../../client/actions/postQueueActions';
 
 describe('Post Queue Actions', () => {
   describe('removeItem()', () => {
