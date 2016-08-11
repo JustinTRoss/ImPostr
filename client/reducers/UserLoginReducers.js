@@ -1,4 +1,15 @@
-import { REQUEST_START, RECEIVE_FAILURE, RECEIVE_USER_LOGIN, RECEIVE_USER_LOGOUT, RECEIVE_USER_SIGNUP, UPDATE_FORM_VALUE, CHANGE_FORM_TYPE } from '../actions/UserLoginActions';
+import {
+  REQUEST_START,
+  RECEIVE_FAILURE,
+  RECEIVE_USER_LOGIN,
+  RECEIVE_USER_LOGOUT,
+  RECEIVE_USER_SIGNUP,
+  UPDATE_FORM_VALUE,
+  CHANGE_FORM_TYPE,
+  RECEIVE_JWT_FAILURE,
+  RECEIVE_JWT_SUCCESS,
+
+} from '../actions/UserLoginActions';
 
 const UserObject = (state = {
   userId: '',
@@ -11,10 +22,17 @@ const UserObject = (state = {
   signup: {
     username: '',
     password: '',
-    fullName: '',
   },
 }, action) => {
   switch (action.type) {
+    case RECEIVE_JWT_FAILURE:
+      return Object.assign({}, state, {
+        isLoggedIn: false,
+      })
+    case RECEIVE_JWT_SUCCESS:
+      return Object.assign({}, state, {
+        isLoggedIn: true,
+      })
     case CHANGE_FORM_TYPE:
       return Object.assign({}, state, {
         isLogin: action.formType,
@@ -34,7 +52,6 @@ const UserObject = (state = {
         signup: {
           username: '',
           password: '',
-          fullName: '',
         },
         loggedIn: false,
       });
@@ -52,7 +69,6 @@ const UserObject = (state = {
         signup: {
           username: '',
           password: '',
-          fullName: '',
         },
       });
     case RECEIVE_USER_LOGOUT:
