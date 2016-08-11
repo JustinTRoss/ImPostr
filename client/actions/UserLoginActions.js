@@ -66,7 +66,7 @@ export const sendLoginToServer = ( formData ) => {
   return dispatch => {
     dispatch(requestStart());
     dispatch(updateFormValue(formData));
-    return fetch(`http://localhost:3000/auth/login`, {
+    return fetch(`http://127.0.0.1:3000/user/login`, {
       method: 'POST',
       body: JSON.stringify({
         formData,
@@ -92,7 +92,7 @@ export const sendSignupToServer = ( formData ) => {
   return dispatch => {
     dispatch(requestStart());
     dispatch(updateFormValue(formData));
-    return fetch(`http://localhost:3000/auth/signup`, {
+    return fetch(`http://127.0.0.1:3000/user/signup`, {
       method: 'POST',
       body: JSON.stringify({
         formData,
@@ -118,7 +118,7 @@ export const requestLogout = ({ username }) => {
   return (dispatch, getState) => {
     dispatch(requestStart());
     let stateToStore = getState();
-    return fetch(`http://localhost:3000/auth/logout`, {
+    return fetch(`http://127.0.0.1:3000/user/logout`, {
       method: 'POST',
       body: JSON.stringify({
         username,

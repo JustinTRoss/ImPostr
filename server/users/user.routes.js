@@ -2,24 +2,12 @@
 const UserRouter = require('express').Router();
 const UserCtrl = require('./user.controller');
 
-UserRouter.post('/login', (req, res) => {
-  console.log(req.body);
-  console.log('/user/login');
-  UserCtrl.userLogin(req, res);
-});
+UserRouter.get('/checkJWT', passport.authenticate('jwt', {session: false}), UserCtrl.checkJWT);
 
-UserRouter.post('/signup', (req, res) => {
-  console.log(req.body);
-  console.log('/user/signup');
-  UserCtrl.userSignup(req, res);
-});
+UserRouter.post('/login', UserCtrl.userLogin);
 
-UserRouter.post('/logout', (req, res) => {
-  console.log(req.body, 'this should receive state');
-  console.log('/user/logout');
-  res.json({
-    message: 'loggedOut',
-  });
-});
+UserRouter.post('/signup', UserCtrl.userSignup);
+
+UserRouter.post('/logout', UserCtrl.userLogout);
 
 module.exports = UserRouter;
