@@ -5,8 +5,8 @@
     //addNew(messageObject)
     //updateDueNext(platform_userId, new Date(new Date() + timeInterval))
 
-import { getActiveOverDueNext, updateDueNext } from '../settings/setting.controller';
-import { addNew } from '../posts/post.controller';
+const { getActiveOverDueNext, updateDueNext } = require('../settings/setting.controller');
+const { addNew } = require('../posts/post.controller');
 
 //import { fetchUrl } from Twitter Microservice
 const fetchUrl = (interests, cb) => {

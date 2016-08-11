@@ -10,6 +10,7 @@ require('./config/routes')(app, config);
 
 // require('./workers/postGenerator');
 // require('./workers/queueMonitor');
+// require('./workers/testWorkers');
 
 app.use(express.static(publicDir));
 

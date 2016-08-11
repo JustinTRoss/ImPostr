@@ -47,7 +47,7 @@ const addNew = (post, cb) => {
     message,
     expires,
   }).then(createStatus => {
-    console.log('createStatus ' , createStatus);
+    // console.log('createStatus ' , createStatus);
     cb(createStatus);
   });
 };
