@@ -27,11 +27,11 @@ const UserObject = (state = {
   switch (action.type) {
     case RECEIVE_JWT_FAILURE:
       return Object.assign({}, state, {
-        isLoggedIn: false,
+        loggedIn: false,
       })
     case RECEIVE_JWT_SUCCESS:
       return Object.assign({}, state, {
-        isLoggedIn: true,
+        loggedIn: true,
       })
     case CHANGE_FORM_TYPE:
       return Object.assign({}, state, {
