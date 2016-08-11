@@ -29,7 +29,7 @@ export const requestPlatformLogin = (platform) => {
     })
     .then(response => response.json())
     .then(json => {
-        dispatch(receivePlatformLogin(platform));
+      dispatch(receivePlatformLogin(platform));
     });
   };
 };

@@ -51,6 +51,7 @@ const getSettings = (req, res) => {
 //updateSettings
   //for client to update settings { interests, frequency, isActive }
   //**FIX CLIENT LABELLING and interests to a comma deliminated string
+  //**connected to client**
 const updateSettings = (req, res) => {
   const { settingId, settings, platform } = req.body;
   const { interests, interval, isActive } = settings;
@@ -67,7 +68,6 @@ const updateSettings = (req, res) => {
     }).then(updateStatus => {
       //update status validation, returning [1]...
       const response = { interests, interval, isActive, platform, settingId };
-      console.log('response', response);
       res.send(response);
     });
   } else {
@@ -78,7 +78,6 @@ const updateSettings = (req, res) => {
       platform,
       dueNext: new Date(),
     }).then(createStatus => {
-      console.log('createStatus.dataValues', createStatus.dataValues);
       res.send(createStatus.dataValues);
     });
   }
