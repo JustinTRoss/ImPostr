@@ -1,18 +1,22 @@
 const passport = require('passport');
-const JWTStrategy = require('passport-jwt').Strategy;
-const ExtractJWT = require('passport-jwt').ExtractJWT;
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
 const User = require('../users/user.model');
 const config = require('./config');
 
-passport.use(new JWTStrategy(
+passport.use(new JwtStrategy(
   {
     secretOrKey: config.secret,
     jwtFromRequest: ExtractJwt.fromAuthHeader()
   }, (jwtPayload, done) => {
-    User.findOne({where: { userid : jwtPayload.userid }})
-      .then(user => {
+    User.findOne({ where: { userId: jwtPayload.userId }})
+    .then(user => {
+      if (user) {
         done(null, user);
-      })
-      .catch(done);
+      } else {
+        done(null, false);
+      }
+    })
+    .catch(done);
   }
 ));

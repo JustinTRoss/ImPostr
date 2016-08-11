@@ -1,5 +1,7 @@
 const User = require('./user.model');
 const jwt = require('jwt-simple');
+const config = require('../config/config');
+const util = require('./util');
 
 module.exports = {
   checkJWT,
@@ -27,29 +29,36 @@ function userLogout(req, res) {
 }
 
 function userSignup(req, res) {
-  let { username, password } = req.body;
-  User.create({
-    username,
-    password,
+  return util.hashPassword(req.body.password)
+  .then(hashedPassword => {
+    req.body.password = hashedPassword;
+    console.log(req.body);
+    return User.create(req.body);
   })
-    .then(({id}) => { // Check if the parens are necessary
-
-    })
-  res.json({
-    username,
-    password,
+  .then(user => { 
+    let { userId } = user; 
+    const token = jwt.encode({userId}, config.secret);
+    res.json({
+      token,
+    });
   });
 }
 
 function userLogin(req, res) {
-  let { username, password } = req.body;
-  // usermodel.userLogin(username, password, (results) => {
-  //   res.json({
-  //     loggedIn: results,
-  //   });
-  // });
-  res.json({
-    username,
-    password,
+  return User.findOne({where : {username : req.body.username}})
+  .then(user => {
+    if (user) {
+      req.body.user = user;
+      return util.comparePassword(req.body.password, user.password);
+    }
+  })
+  .then(passwordMatches => {
+    if (passwordMatches) {
+      let { userId } = req.body.user; 
+      const token = jwt.encode({userId}, config.secret);
+      res.json({
+        token
+      });
+    }
   });
 }

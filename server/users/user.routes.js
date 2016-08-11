@@ -2,7 +2,7 @@
 const UserRouter = require('express').Router();
 const UserCtrl = require('./user.controller');
 
-UserRouter.get('/checkJWT', UserCtrl.checkJWT);
+UserRouter.get('/checkJWT', passport.authenticate('jwt', {session: false}), UserCtrl.checkJWT);
 
 UserRouter.post('/login', UserCtrl.userLogin);
 
