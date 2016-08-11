@@ -7,15 +7,20 @@
 import { getExpiredActive, removeExpired } from '../posts/post.controller';
 
 //import { postOnPlatforms } from (social media platforms)
-const postOnPlatforms = (post) => {
+const postOnPlatforms = (post, cb) => {
   console.log(post);
+  const status = 'good';
+  cb(status);
 };
 
 const CronJob = require('cron').CronJob;
+
 const queueMonitor = new CronJob('*/5 * * * * *', () => {
   getExpiredActive(posts => {
     posts.forEach(post => {
-      postOnPlatforms(post);
+      postOnPlatforms(post, status => {
+        console.log(status);
+      });
     });
   });
   removeExpired(status => {
