@@ -10,3 +10,10 @@ export const insertItem = (index) => ({
   type: INSERT_ITEM_FROM_QUEUE,
   index,
 });
+
+  // const token = window.localStorage.getItem('ImPostr-JWT');
+  // headers: {
+  //   'Content-Type': 'application/json',
+  //   'Authorization': `JWT ${token}`,
+
+  // },
