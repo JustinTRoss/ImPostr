@@ -83,7 +83,7 @@ export const checkJWTWithServer = () => {
     if (!token) { 
       dispatch(receiveJWTFailure);
     } else {
-      console.log(token);
+      console.log(token, 'testes');
       return fetch('http://127.0.0.1:3000/user/checkJWT', {
         headers: new Headers({
           'Authorization': `JWT ${token}`,
@@ -91,7 +91,7 @@ export const checkJWTWithServer = () => {
       })
       .then(res => res.json())
       .then(jsonRes => {
-      console.log(jsonRes);
+      console.log(jsonRes, 'testles');
       dispatch(receiveJWTSuccess(jsonRes));
       })
       .catch(err => {
