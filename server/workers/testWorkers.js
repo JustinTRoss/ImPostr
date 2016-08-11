@@ -2,6 +2,8 @@ const CronJob = require('cron').CronJob;
 
 const { addNew } = require('../posts/post.controller');
 
+
+
 let counter = 0;
 const fakePostGenerator = new CronJob('* * * * * *', () => {
   counter++;
@@ -10,11 +12,16 @@ const fakePostGenerator = new CronJob('* * * * * *', () => {
     isActive: true,
     message: `yolo${counter}`,
     expires: new Date(),
+    idUserId: 2,
   }, addNewPostStatus => {
     console.log('new post added')
     // console.log('addNewPostStatus', addNewPostStatus);
   });
 }, null, true, 'America/Los_Angeles');
+
+
+
+
 
 module.exports = {
   fakePostGenerator,

@@ -39,6 +39,7 @@ const addNew = (post, cb) => {
     isActive,
     message,
     expires,
+    idUserId,
   } = post;
 
   Post.create({
@@ -46,6 +47,7 @@ const addNew = (post, cb) => {
     isActive,
     message,
     expires,
+    idUserId,
   }).then(createStatus => {
     // console.log('createStatus ' , createStatus);
     cb(createStatus);
