@@ -21,10 +21,10 @@ function checkJWT(req, res) {
 
 //logout
 function userLogout(req, res) {
-  let { userid, state} = req.body;
+  const userId = req.body.user.userId;
   res.json({
-    userid,
-    state,
+    userId: req.body.user.userId,
+    storedState: req.body.storedState,
   });
 }
 
@@ -32,7 +32,6 @@ function userSignup(req, res) {
   return util.hashPassword(req.body.password)
   .then(hashedPassword => {
     req.body.password = hashedPassword;
-    console.log(req.body);
     return User.create(req.body);
   })
   .then(user => { 

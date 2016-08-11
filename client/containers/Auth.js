@@ -20,7 +20,6 @@ class Auth extends React.Component {
       signup: {
         username: '',
         password: '',
-        fullName: '',
       }
     };
   }
@@ -45,7 +44,6 @@ class Auth extends React.Component {
       /> : <Signup
         username={this.state.signup.username}
         password={this.state.signup.password}
-        fullName={this.state.signup.fullName}
         handleFieldChange={e => this.handleFieldChange('signup', e.target.name, e.target.value)}
         handleSignupSubmit={() => {
           console.log(this.handleSignupSubmit);

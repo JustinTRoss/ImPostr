@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
+import { checkJWTWithServer } from '../actions/UserLoginActions';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Home from '../components/Home';
@@ -10,6 +10,11 @@ import Auth from './Auth';
 class App extends React.Component {
   constructor(props) {
     super(props);
+    // this.checkJWT = this.props.checkJWT.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.checkJWT();
   }
 
   render() {
@@ -19,7 +24,7 @@ class App extends React.Component {
     return (
       <div>App
         <Navbar />
-        <Home />
+        {childToRender}
         <Footer />
       </div>
 		);
@@ -33,6 +38,17 @@ function mapStateToProps(state) {
   };
 }
 
-App = connect(mapStateToProps)(App);
+function mapDispatchToProps(dispatch) {
+  return {
+    checkJWT: () => {
+      dispatch(checkJWTWithServer());
+    },
+  }
+}
+
+App = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);
 
 export default App;
