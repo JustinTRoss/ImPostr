@@ -5,12 +5,13 @@
     //addNew(messageObject)
     //updateDueNext(platform_userId, new Date(new Date() + timeInterval))
 
-import { getActiveOverDueNext, updateDueNext } from '../settings/setting.controller';
-import { addNew } from '../posts/post.controller';
+const { getActiveOverDueNext, updateDueNext } = require('../settings/setting.controller');
+const { addNew } = require('../posts/post.controller');
 
 //import { fetchUrl } from Twitter Microservice
+//
 const fetchUrl = (interests, cb) => {
-  const topic = interests[ Math.floor(interests.length * Math.random()) ]
+  const topic = interests[ Math.floor(interests.length * Math.random()) ];
   cb(`www.google.com?${topic}`);
 };
 
@@ -22,7 +23,7 @@ const postGenerator = new CronJob('*/5 * * * * *', () => {
       const date = new Date(); 
       const dueNext = new Date(date.setTime(date.getTime() + user.interval * 86400000));
       updateDueNext(user.settingId, dueNext, updateDueNextStatus => {
-        console.log('updateDueNextStatus', updateDueNextStatus);
+        console.log('user due next status updated');
       });
 
       fetchUrl(user.interests, url => {
@@ -30,14 +31,16 @@ const postGenerator = new CronJob('*/5 * * * * *', () => {
         const isActive = true;
         const message = url;
         const expires = new Date(date.setTime(date.getTime() + 3 * 86400000));
+        const userUserId = user.userUserId;
 
         addNew({
           platform,
           isActive,
           message,
           expires,
+          userUserId,
         }, addNewPostStatus => {
-          console.log('addNewPostStatus', addNewPostStatus);
+          console.log('new post added');
         });
       });
     });
