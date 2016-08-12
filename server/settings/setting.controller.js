@@ -13,7 +13,7 @@ const getActiveOverDueNext = (cb) => {
       },
     },
   }).then(activeOverDueNext => {
-    console.log('activeOverDueNext ' , activeOverDueNext);
+
     cb(activeOverDueNext);
   })
 };
@@ -28,7 +28,7 @@ const updateDueNext = (settingId, dueNext, cb) => {
       settingId,
     },
   }).then(updateStatus => {
-    console.log('updateStatus ' , updateStatus);
+
     cb(updateStatus);
   });
 };
@@ -42,7 +42,7 @@ const getSettings = (req, res) => {
       userUserId: userId,
     },
   }).then(userSettings => {
-    console.log('userSettings ' , userSettings);
+
     res.send(userSettings);
   });
 };
@@ -87,10 +87,40 @@ const updateSettings = (req, res) => {
 //requestPlatformLogin
   //for client to login to a platform { boolean }
 const requestPlatformLogin = (req, res) => {
-  //make a call to social media manager
-  res.json({
-    verdict: 'success',
-  });
+  const { platform, accessToken } = req.body;
+  const { userId } = req.user;
+
+  Setting.findAll({
+    where: {
+      userUserId: userId,
+      platform,
+    },
+  }).then(settings => {
+    if (settings.length) {
+      Setting.update({
+        token: accessToken,
+      }, {
+        where: {
+          userUserId: userId,
+          platform,
+        },
+      }).then(status => {
+        res.json({
+          verdict: 'success',
+        });
+      })
+    } else {
+  console.log('platform, accessToken', platform, accessToken);
+  console.log('userId', userId);
+      Setting.create({
+        userUserId: userId,
+        platform,
+        token: accessToken,
+      }).then(newSetting => {
+        res.json(newSetting);
+      });
+    }
+  })
 };
 
 //requestPlatformLogout
