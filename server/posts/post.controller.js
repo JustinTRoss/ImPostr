@@ -55,9 +55,9 @@ const addNew = (post, cb) => {
 //toggleIsActive
 //for client to update based on user input
 const toggleIsActive = (req, res) => {
-  const { postId } = req.body;
+  const { postId, isActive } = req.body;
   Post.update({
-    isActive: 'f',
+    isActive,
   }, {
     where: {
       postId,

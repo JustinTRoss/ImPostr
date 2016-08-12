@@ -30,9 +30,32 @@ export const requestQueue = () => {
     })
       .then(response => response.json())
       .then(json => {
-        console.log('/getUser-----------(*DS&F', json.queue);
         dispatch(insertQueue(json));
       })
       .catch(err => console.log(err, '/getUser'));
+  };
+};
+
+export const requestRemove = ({ postId, isActive, index }) => {
+  return dispatch => {
+    fetch(`http://127.0.0.1:3000/post/toggleIsActive`, {
+      method: 'POST',
+      body: JSON.stringify({
+        postId,
+        isActive,
+      }),
+      headers: new Headers({
+        'Content-Type': 'application/json',
+      }),
+    })
+      .then(res => res.json())
+      .then(confirmationOfRemoval => {
+        if (isActive === 'f') {
+          dispatch(removeItem(index));
+        } else {
+          dispatch(insertItem(index));
+        }
+      })
+      .catch(err => console.log('could not remove item', err));
   };
 };
