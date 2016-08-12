@@ -13,7 +13,8 @@ export const receivePlatformLogin = (platform) => ({
   platform,
 });
 
-export const requestPlatformLogin = (platform) => {
+
+export const requestPlatformLogin = (platform, userID, accessToken) => {
   return dispatch => {
     const token = window.localStorage.getItem('ImPostr-JWT');
     return fetch('http://127.0.0.1:3000/settings/platformlogin', {
@@ -24,6 +25,8 @@ export const requestPlatformLogin = (platform) => {
       },
       body: JSON.stringify({
         platform,
+        userID,
+        accessToken,
       }),
     })
     .then(response => response.json())
@@ -33,10 +36,58 @@ export const requestPlatformLogin = (platform) => {
   };
 };
 
+export const requestFacebookLogin = () => {
+  const deleteCookie = (name) => {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/`;
+  };
+
+  const cookies = document.cookie.split(';');
+  for (let i = 0; i < cookies.length; i++) {
+    if (cookies[i].split('=')[0].indexOf('fblo_') !== -1) {
+      deleteCookie(cookies[i].split('=')[0]);
+    };
+  };
+
+  return dispatch => {
+    FB.getLoginStatus(response => {
+      FB.login(response => {
+        const { userID, accessToken } = response.authResponse;
+        dispatch(requestPlatformLogin('facebook', userID, accessToken));
+      })
+    })
+  }
+};
+
+export const selectPlatformLogin = (platform) => {
+  return dispatch => {
+    if (platform === 'facebook') {
+      dispatch(requestFacebookLogin());
+    }
+  };
+};
+
 export const logoutPlatform = (platform) => ({
   type: LOGOUT_PLATFORM,
   platform,
 });
+
+export const requestFacebookLogout = () => {
+  return dispatch => {
+    FB.getLoginStatus(response => {
+      FB.logout(response => {
+        dispatch(logoutPlatform('facebook'));
+      })
+    })
+  }
+};
+
+export const selectPlatformLogout = (platform) => {
+  return dispatch => {
+    if (platform === 'facebook') {
+      dispatch(requestFacebookLogout());
+    }
+  };
+};
 
 export const toggleModal = (platform) => ({
   type: TOGGLE_MODAL,
@@ -95,11 +146,11 @@ export const getSettingsFields = () => {
           isActive,
         };
         dispatch(receiveSettingsFields(platform, settings, settingId));
-        if (token) {
-          dispatch(receivePlatformLogin(platform));
-        } else {
-          dispatch(logoutPlatform(platform));
-        }
+        // if (token) {
+        //   dispatch(receivePlatformLogin(platform));
+        // } else {
+        //   dispatch(logoutPlatform(platform));
+        // }
       }
     });
   };

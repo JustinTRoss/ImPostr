@@ -12,7 +12,6 @@ const PlatformListEntry = (state, action) => {
         userPlatformLoggedIn: true,
       });
     case LOGOUT_PLATFORM:
-      //delete the jwt as well
       return Object.assign({}, state, {
         userPlatformLoggedIn: false,
       });

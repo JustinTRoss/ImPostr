@@ -27,14 +27,10 @@ class Auth extends React.Component {
   handleFieldChange(form, field, value) {
     const temp = this.state[form];
     temp[field] = value;
-    console.log(temp);
     this.setState(temp);
   }
 
   render() {
-    console.log(this.props);
-    console.log(this.state.signup);
-
     let childToRender = this.props.isLogin === 'login' ?
       <Login
         username={this.state.login.username}
@@ -46,7 +42,6 @@ class Auth extends React.Component {
         password={this.state.signup.password}
         handleFieldChange={e => this.handleFieldChange('signup', e.target.name, e.target.value)}
         handleSignupSubmit={() => {
-          console.log(this.handleSignupSubmit);
           this.handleSignupSubmit(this.state.signup);
         }}
       />;
