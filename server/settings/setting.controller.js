@@ -36,7 +36,7 @@ const updateDueNext = (settingId, dueNext, cb) => {
 //getSettings
   //for client to populate state { interests, frequency, isActive }
 const getSettings = (req, res) => {
-  const { userId } = req.user.dataValues;
+  const { userId } = req.user;
   Setting.findAll({
     where: {
       userUserId: userId,
@@ -79,9 +79,7 @@ const updateSettings = (req, res) => {
       userUserId: userId,
       dueNext: new Date(),
     }).then(newSetting => {
-      res.json({
-        newSetting,
-      });
+      res.json(newSetting);
     });
   }
 };
