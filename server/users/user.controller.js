@@ -33,8 +33,8 @@ function userSignup(req, res) {
     req.body.password = hashedPassword;
     return User.create(req.body);
   })
-  .then(user => { 
-    let { userId } = user; 
+  .then(user => {
+    let { userId } = user;
     const token = jwt.encode({userId}, config.secret);
     res.json({
       token,
@@ -52,7 +52,7 @@ function userLogin(req, res) {
   })
   .then(passwordMatches => {
     if (passwordMatches) {
-      let { userId } = req.body.user; 
+      let { userId } = req.body.user;
       const token = jwt.encode({userId}, config.secret);
       res.json({
         token
