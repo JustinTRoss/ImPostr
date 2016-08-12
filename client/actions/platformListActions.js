@@ -70,10 +70,8 @@ export const setSettingsFields = (platformObject, settings) => {
     .then(response => response.json())
     .then(json => {
       let { interests, interval, isActive, platform, settingId } = json;
-      if (json) {
-        console.log('platform, settings, settingId', platform, settings, settingId);
-        dispatch(receiveSettingsFields(platform, settings, settingId));
-      }
+      console.log(json, 'platform, settings, settingId', platform, settings, settingId);
+      dispatch(receiveSettingsFields(platform, settings, settingId));
     });
   };
 };
@@ -81,7 +79,7 @@ export const setSettingsFields = (platformObject, settings) => {
 export const getSettingsFields = () => {
   return dispatch => {
     const jwt = window.localStorage.getItem('ImPostr-JWT');
-    return fetch('http://127.0.0.1:3000/settings/updateSettings', {
+    return fetch('http://127.0.0.1:3000/settings/getSettings', {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `JWT ${jwt}`,
@@ -89,24 +87,20 @@ export const getSettingsFields = () => {
     })
     .then(response => response.json())
     .then(settingObjAry => {
-      let { interests, interval, isActive, platform, settingId, token } = settingObjAry;
-      const settings = {
-        interests,
-        interval,
-        isActive,
-      };
       for (var i = 0; i < settingObjAry.length; i++) {
+        let { interests, interval, isActive, platform, settingId, token } = settingObjAry[i];
+        let settings = {
+          interests,
+          interval,
+          isActive,
+        };
         dispatch(receiveSettingsFields(platform, settings, settingId));
         if (token) {
           dispatch(receivePlatformLogin(platform));
         } else {
           dispatch(logoutPlatform(platform));
         }
-      });
+      }
     });
   };
 };
-
-export const updateSettings = () => {
-
-}

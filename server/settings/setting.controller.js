@@ -79,9 +79,7 @@ const updateSettings = (req, res) => {
       userUserId: userId,
       dueNext: new Date(),
     }).then(newSetting => {
-      res.json({
-        newSetting,
-      });
+      res.json(newSetting);
     });
   }
 };
