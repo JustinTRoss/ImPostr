@@ -53,9 +53,11 @@ const addNew = (post, cb) => {
 };
 
 //toggleIsActive
-  //for client to update based on user input
+//for client to update based on user input
 const toggleIsActive = (req, res) => {
+  console.log(req.body);
   const { postId, isActive } = req.body;
+  console.log(isActive, postId);
   Post.update({
     isActive,
   }, {
@@ -68,11 +70,9 @@ const toggleIsActive = (req, res) => {
   });
 };
 
-
 //getUser
   //for client to get all unserviced posts when user logs in
 const getUser = (req, res) => {
-  console.log('WE HIT GET USER');
   let { userId } = req.user;
   Post.findAll({
     where: {
@@ -80,14 +80,16 @@ const getUser = (req, res) => {
     },
   }).then(userPosts => {
     let justPosts = userPosts.map((obj) => {
-      let { message, expires, platform } = obj.dataValues;
-      return {
-        message,
-        platform,
-        time: expires,
-      };
+      let { postId, message, expires, platform, isActive } = obj.dataValues;
+      if (isActive === 't') {
+        return {
+          postId,
+          message,
+          platform,
+          time: expires,
+        };
+      }
     });
-    console.log(justPosts);
     res.json({
       queue: justPosts,
     });

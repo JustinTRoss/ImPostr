@@ -6,6 +6,7 @@ import PostQueueEntry from './PostQueueEntry';
 import PostQueueRemovedEntry from './PostQueueRemovedEntry';
 
 const PostQueue = ({
+  postId,
   queuedItems,
   removedItems,
   onRemoveItemClick,

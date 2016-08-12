@@ -1,9 +1,8 @@
 const PostRouter = require('express').Router();
 const PostCtrl = require('./post.controller');
 
-PostRouter.put('/toggleIsActive', (req, res) => {
-  console.log(req.body);
-  console.log('/posts/toggleIsActive');
+PostRouter.post('/toggleIsActive', (req, res) => {
+  console.log(req.body, '/post/toggleIsActive');
   PostCtrl.toggleIsActive(req, res);
 });
 

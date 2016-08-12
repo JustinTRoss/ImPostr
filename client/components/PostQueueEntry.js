@@ -6,7 +6,10 @@ const PostQueueEntry = ({ post, onRemoveItemClick, index }) => (
   <ListGroupItem>
     {`${post.message} will be posted on ${post.platform} at ${moment(post.time).fromNow()}`}
     <Button
-      onClick={() => { onRemoveItemClick(index); }}
+      onClick={() => {
+        onRemoveItemClick(post.postId, index);
+        console.log(post.postId);
+       }}
       bsStyle="warning"
       size="small"
     >

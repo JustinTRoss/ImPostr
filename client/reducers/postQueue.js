@@ -1,18 +1,7 @@
 import { REMOVE_ITEM_FROM_QUEUE, INSERT_ITEM_FROM_QUEUE, INSERT_QUEUE } from '../actions/postQueueActions';
 
 const PostQueue = (state = {
-  queuedItems: [
-    {
-      message: 'yo',
-      time: 'tomorrow',
-      platform: 'facebook',
-    },
-    {
-      message: 'heyasdfasdf',
-      time: 'tomorrow',
-      platform: 'twitter',
-    },
-  ],
+  queuedItems: [],
   removedItems: [],
 }, action) => {
   switch (action.type) {
