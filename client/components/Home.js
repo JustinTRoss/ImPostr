@@ -3,7 +3,7 @@ import PlatformListContainer from '../containers/PlatformListContainer';
 import PostQueueContainer from '../containers/PostQueueContainer';
 
 const Home = () => (
-  <div>Home
+  <div>
     <div>
       <PlatformListContainer />
     </div>
