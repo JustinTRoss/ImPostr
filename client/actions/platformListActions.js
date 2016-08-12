@@ -14,9 +14,6 @@ export const receivePlatformLogin = (platform) => ({
 });
 
 export const requestPlatformLogin = (platform) => {
-  console.log('requestPlatformLogin', JSON.stringify({
-    platform: platform,
-  }));
   return dispatch => {
     const token = window.localStorage.getItem('ImPostr-JWT');
     return fetch('http://127.0.0.1:3000/settings/platformlogin', {
@@ -81,4 +78,35 @@ export const setSettingsFields = (platformObject, settings) => {
   };
 };
 
+export const getSettingsFields = () => {
+  return dispatch => {
+    const jwt = window.localStorage.getItem('ImPostr-JWT');
+    return fetch('http://127.0.0.1:3000/settings/updateSettings', {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `JWT ${jwt}`,
+      },
+    })
+    .then(response => response.json())
+    .then(settingObjAry => {
+      let { interests, interval, isActive, platform, settingId, token } = settingObjAry;
+      const settings = {
+        interests,
+        interval,
+        isActive,
+      };
+      for (var i = 0; i < settingObjAry.length; i++) {
+        dispatch(receiveSettingsFields(platform, settings, settingId));
+        if (token) {
+          dispatch(receivePlatformLogin(platform));
+        } else {
+          dispatch(logoutPlatform(platform));
+        }
+      });
+    });
+  };
+};
 
+export const updateSettings = () => {
+
+}
