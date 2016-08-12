@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { checkJWTWithServer } from '../actions/UserLoginActions';
+import { checkJWTWithServer, receiveLogout } from '../actions/UserLoginActions';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Home from '../components/Home';
@@ -23,7 +23,7 @@ class App extends React.Component {
 
     return (
       <div>App
-        <Navbar />
+        <Navbar receiveLogout={this.props.receiveLogout} />
           {childToRender}
         <Footer />
       </div>
@@ -40,13 +40,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    checkJWT: () => {
-      dispatch(checkJWTWithServer());
-    },
-
-    pullQueue: () => {
-      dispatch(requestQueue());
-    },
+    checkJWT: () => { dispatch(checkJWTWithServer()); },
+    pullQueue: () => { dispatch(requestQueue()); },
+    receiveLogout: () => { dispatch(receiveLogout()); },
   };
 }
 

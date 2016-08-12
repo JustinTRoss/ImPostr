@@ -1,12 +1,16 @@
 import React from 'react';
 
-const Navbar = () => {
+const Navbar = ({ receiveLogout }) => {
 	return (
 		<div>
       Navbar
-      PlatformModal
-		</div>
-	);
-}
+      <button
+        onClick={receiveLogout}
+      >
+        Logout
+      </button>
+    </div>
+  );
+};
 
 export default Navbar;

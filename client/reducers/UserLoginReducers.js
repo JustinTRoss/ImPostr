@@ -71,6 +71,7 @@ const UserObject = (state = {
         },
       });
     case RECEIVE_USER_LOGOUT:
+      window.localStorage.setItem('ImPostr-JWT', '');
       return Object.assign({}, state, {
         loggedIn: false,
       });
