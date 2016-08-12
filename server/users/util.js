@@ -8,7 +8,6 @@ Promise.promisifyAll(bcrypt, {
 const hashPassword = (password) => {
   return bcrypt.genSaltAsync(10)
   .then(salt => {
-    console.log(salt, ' and peppa\'s here');
     return bcrypt.hashAsync(password, salt);
   })
   .catch(err => console.error(err, 'error on generating salt'));

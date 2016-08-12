@@ -29,6 +29,9 @@ passport.use(new LinkedInStrategy({
   callbackURL: `http://localhost:3000/`,
   scope: ['r_emailaddress', 'r_basicprofile', 'w_share'],
 }, (...args) => {
-  console.log(args, 'what is passed in?');
+  process.nextTick((accessToken, refreshToken, profile, done) => {
+    console.log(accessToken, 'at');
+    console.log(refreshToken, 'rt');
+  });
 }
 ));
