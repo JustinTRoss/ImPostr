@@ -1,28 +1,28 @@
 const SettingRouter = require('express').Router();
-const SettingCntl = require('./setting.controller');
+const SettingCtrl = require('./setting.controller');
 
 SettingRouter.get('/getSettings', (req, res) => {
   console.log(req.body);
   console.log('/settings/getSettings');
-  SettingCntl.getSettings(req, res);
+  SettingCtrl.getSettings(req, res);
 });
 
 SettingRouter.put('/updateSettings', (req, res) => {
   console.log(req.body);
   console.log('/settings/updateSettings');
-  SettingCntl.updateSettings(req, res);
+  SettingCtrl.updateSettings(req, res);
 });
 
-SettingRouter.post('/requestPlatformLogin', (req, res) => {
+SettingRouter.post('/platformlogin', (req, res) => {
   console.log(req.body);
   console.log('/settings/requestPlatformLogin');
-  SettingCntl.requestPlatformLogin(req, res);
+  SettingCtrl.requestPlatformLogin(req, res);
 });
 
 SettingRouter.post('/requestPlatformLogout', (req, res) => {
   console.log(req.body);
   console.log('/settings/requestPlatformLogout');
-  SettingCntl.requestPlatformLogout(req, res);
+  SettingCtrl.requestPlatformLogout(req, res);
 });
 
 module.exports = SettingRouter;

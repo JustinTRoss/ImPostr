@@ -19,12 +19,11 @@ export const requestPlatformLogin = (platform) => {
   }));
   return dispatch => {
     const token = window.localStorage.getItem('ImPostr-JWT');
-    return fetch('http://127.0.0.1:3000/platform/platformlogin', {
-      method: 'post',
+    return fetch('http://127.0.0.1:3000/settings/platformlogin', {
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `JWT ${token}`,
-
       },
       body: JSON.stringify({
         platform,
@@ -57,11 +56,10 @@ export const receiveSettingsFields = (platform, settings, settingId) => ({
 export const setSettingsFields = (platformObject, settings) => {
   let { platform, settingId } = platformObject;
 
-  console.log('JSON.stringify({platform, settingId, settings, })', JSON.stringify({platform, settingId, settings, }));
   return dispatch => {
     const token = window.localStorage.getItem('ImPostr-JWT');
     return fetch('http://127.0.0.1:3000/settings/updateSettings', {
-      method: 'put',
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `JWT ${token}`,

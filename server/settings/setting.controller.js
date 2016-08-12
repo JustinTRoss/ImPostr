@@ -55,6 +55,7 @@ const getSettings = (req, res) => {
 const updateSettings = (req, res) => {
   const { settingId, settings, platform } = req.body;
   const { interests, interval, isActive } = settings;
+  const { userId } = req.user;
 
   if (settingId) {
     Setting.update({
@@ -76,9 +77,12 @@ const updateSettings = (req, res) => {
       interval,
       isActive,
       platform,
+      userUserId: userId,
       dueNext: new Date(),
-    }).then(createStatus => {
-      res.send(createStatus.dataValues);
+    }).then(newSetting => {
+      res.json({
+        newSetting,
+      });
     });
   }
 };
@@ -87,6 +91,9 @@ const updateSettings = (req, res) => {
   //for client to login to a platform { boolean }
 const requestPlatformLogin = (req, res) => {
   //make a call to social media manager
+  res.json({
+    verdict: 'success',
+  });
 };
 
 //requestPlatformLogout

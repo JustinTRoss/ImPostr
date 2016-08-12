@@ -13,9 +13,8 @@ module.exports = {
 /****** PUBLIC ******/
 
 function checkJWT(req, res) {
-  let state = 'state';
   res.json({
-    state,
+    userId: req.user.userId,
   });
 }
 

@@ -10,7 +10,6 @@ import {
   RECEIVE_JWT_SUCCESS,
 
 } from '../actions/UserLoginActions';
-
 const UserObject = (state = {
   userId: '',
   isLogin: 'login',
