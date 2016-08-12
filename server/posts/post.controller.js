@@ -53,7 +53,7 @@ const addNew = (post, cb) => {
 };
 
 //toggleIsActive
-//for client to update based on user input
+// for client to update based on user input
 const toggleIsActive = (req, res) => {
   console.log(req.body);
   const { postId, isActive } = req.body;
@@ -79,17 +79,9 @@ const getUser = (req, res) => {
       userUserId: userId,
     },
   }).then(userPosts => {
-    let justPosts = userPosts.map((obj) => {
-      let { postId, message, expires, platform, isActive } = obj.dataValues;
-      if (isActive === 't') {
-        return {
-          postId,
-          message,
-          platform,
-          time: expires,
-        };
-      }
-    });
+    let justPosts = userPosts
+      .map(post => post.dataValues)
+      .filter(post => !!post.isActive);
     res.json({
       queue: justPosts,
     });
