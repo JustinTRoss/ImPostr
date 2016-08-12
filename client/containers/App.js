@@ -5,16 +5,17 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Home from '../components/Home';
 import Auth from './Auth';
-
+import { requestQueue } from '../actions/postQueueActions';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    // this.checkJWT = this.props.checkJWT.bind(this);
   }
 
   componentWillMount() {
-    this.props.checkJWT();
+    let { checkJWT, pullQueue } = this.props;
+    checkJWT();
+    pullQueue();
   }
 
   render() {
@@ -42,7 +43,11 @@ function mapDispatchToProps(dispatch) {
     checkJWT: () => {
       dispatch(checkJWTWithServer());
     },
-  }
+
+    pullQueue: () => {
+      dispatch(requestQueue());
+    },
+  };
 }
 
 App = connect(

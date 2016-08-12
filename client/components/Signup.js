@@ -10,6 +10,7 @@ const Signup = ({ username, password, handleFieldChange, handleSignupSubmit }) =
       />
       <input
         name="password"
+        type="password"
         value={password}
         onChange={handleFieldChange}
       />

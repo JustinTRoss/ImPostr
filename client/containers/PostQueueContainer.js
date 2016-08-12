@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import PostQueue from '../components/PostQueue';
-import { removeItem, insertItem } from '../actions/postQueueActions';
+import { removeItem, insertItem, insertQueue } from '../actions/postQueueActions';
 
 const mapStateToProps = (state) => ({
   queuedItems: state.postQueue.queuedItems,
