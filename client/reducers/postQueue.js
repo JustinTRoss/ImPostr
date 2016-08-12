@@ -1,4 +1,4 @@
-import { REMOVE_ITEM_FROM_QUEUE, INSERT_ITEM_FROM_QUEUE } from '../actions/postQueueActions';
+import { REMOVE_ITEM_FROM_QUEUE, INSERT_ITEM_FROM_QUEUE, INSERT_QUEUE } from '../actions/postQueueActions';
 
 const PostQueue = (state = {
   queuedItems: [
@@ -8,7 +8,7 @@ const PostQueue = (state = {
       platform: 'facebook',
     },
     {
-      message: 'hey',
+      message: 'heyasdfasdf',
       time: 'tomorrow',
       platform: 'twitter',
     },
@@ -24,6 +24,13 @@ const PostQueue = (state = {
       return Object.assign({}, state, {
         queuedItems: newQueue,
         removedItems: newRemoved,
+      });
+
+    case INSERT_QUEUE:
+      let { queue } = action;
+      return Object.assign({}, state, {
+        queuedItems: queue,
+        removedItems: [],
       });
 
     case INSERT_ITEM_FROM_QUEUE:

@@ -63,6 +63,7 @@ const toggleIsActive = (req, res) => {
       postId,
     },
   }).then(updateStatus => {
+    console.log('updateStatus ', updateStatus);
     res.send(updateStatus);
   });
 };
@@ -71,14 +72,25 @@ const toggleIsActive = (req, res) => {
 //getUser
   //for client to get all unserviced posts when user logs in
 const getUser = (req, res) => {
-  console.log('May be formatting differences with userId', userId);
-  const { userId } = req.body;
+  console.log('WE HIT GET USER');
+  let { userId } = req.user;
   Post.findAll({
     where: {
-      userId,
+      userUserId: userId,
     },
   }).then(userPosts => {
-    res.send(userPosts);
+    let justPosts = userPosts.map((obj) => {
+      let { message, expires, platform } = obj.dataValues;
+      return {
+        message,
+        platform,
+        time: expires,
+      };
+    });
+    console.log(justPosts);
+    res.json({
+      queue: justPosts,
+    });
   });
 };
 

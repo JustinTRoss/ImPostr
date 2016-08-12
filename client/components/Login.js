@@ -9,6 +9,7 @@ const Login = ({ username, handleFieldChange, password, handleLoginSubmit }) => 
         onChange={handleFieldChange}
       />
       <input
+        type="password"
         name="password"
         value={password}
         onChange={handleFieldChange}
