@@ -8,20 +8,21 @@ const { getExpiredActive, removeExpired } = require('../posts/post.controller');
 
 //requie { postOnPlatforms } = require(social media platforms)
 const postOnPlatforms = (post, cb) => {
-  console.log(post);
-  const status = 'good';
-  cb(status);
+  const status = 'Post Succesful';
+  cb(status, post);
 };
 
 const CronJob = require('cron').CronJob;
 
-const queueMonitor = new CronJob('* * * * * *', () => {
+const queueMonitor = new CronJob('*/5 * * * * *', () => {
   getExpiredActive(posts => {
-    posts.forEach(post => {
-      postOnPlatforms(post, status => {
-        console.log(status);
+    posts
+      .map(post => post.dataValues)
+      .forEach(post => {
+        postOnPlatforms(post, status => {
+          console.log(status, post);
+        });
       });
-    });
   });
   removeExpired(status => {
     console.log('Posts removed: ', status);

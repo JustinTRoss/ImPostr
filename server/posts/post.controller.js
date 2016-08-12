@@ -11,7 +11,6 @@ const getExpiredActive = (cb) => {
       },
     },
   }).then(expiredActive => {
-    console.log('expiredActive ' , expiredActive);
     cb(expiredActive);
   });
 };
@@ -26,7 +25,6 @@ const removeExpired = (cb) => {
       },
     },
   }).then(expired => {
-    console.log('expired ' , expired);
     cb(expired);
   });
 };
@@ -39,7 +37,7 @@ const addNew = (post, cb) => {
     isActive,
     message,
     expires,
-    idUserId,
+    userUserId,
   } = post;
 
   Post.create({
@@ -47,7 +45,7 @@ const addNew = (post, cb) => {
     isActive,
     message,
     expires,
-    idUserId,
+    userUserId,
   }).then(createStatus => {
     // console.log('createStatus ' , createStatus);
     cb(createStatus);
@@ -65,7 +63,6 @@ const toggleIsActive = (req, res) => {
       postId,
     },
   }).then(updateStatus => {
-    console.log('updateStatus ' , updateStatus);
     res.send(updateStatus);
   });
 };
@@ -81,7 +78,6 @@ const getUser = (req, res) => {
       userId,
     },
   }).then(userPosts => {
-    console.log('userPosts ' , userPosts);
     res.send(userPosts);
   });
 };

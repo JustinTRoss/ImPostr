@@ -36,11 +36,10 @@ const updateDueNext = (settingId, dueNext, cb) => {
 //getSettings
   //for client to populate state { interests, frequency, isActive }
 const getSettings = (req, res) => {
-  console.log('Mat be syntax issue with userId', userId);
-  const { userId } = req.body;
+  const { userId } = req.user.dataValues;
   Setting.findAll({
     where: {
-      userId,
+      userUserId: userId,
     },
   }).then(userSettings => {
     console.log('userSettings ' , userSettings);
