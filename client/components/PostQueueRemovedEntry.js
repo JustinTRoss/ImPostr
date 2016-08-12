@@ -7,7 +7,11 @@ const PostQueueRemovedEntry = ({ post, onInsertItemClick, index }) => (
   <ListGroupItem>
     {`${post.message} will NOT be posted anymore on ${post.platform} at ${moment(post.time).fromNow()}`}
     <Button
-      onClick={() => { onInsertItemClick(index); }}
+      onClick={() => {
+        onInsertItemClick(post.postId, index);
+        console.log(post.postId);
+      }}
+
       bsStyle="primary"
       size="small"
     >

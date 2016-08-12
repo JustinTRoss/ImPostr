@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import PostQueue from '../components/PostQueue';
-import { removeItem, insertItem, insertQueue } from '../actions/postQueueActions';
+import { removeItem, insertItem, insertQueue, requestRemove } from '../actions/postQueueActions';
 
 const mapStateToProps = (state) => ({
   queuedItems: state.postQueue.queuedItems,
@@ -8,8 +8,21 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onInsertItemClick: (id) => dispatch(insertItem(id)),
-  onRemoveItemClick: (id) => dispatch(removeItem(id)),
+  onInsertItemClick: (postId, index) => {
+    dispatch(requestRemove({
+      postId,
+      isActive: 't',
+      index,
+    }));
+  },
+
+  onRemoveItemClick: (postId, index) => {
+    dispatch(requestRemove({
+      postId,
+      isActive: 'f',
+      index,
+    }));
+  },
 });
 
 const PostQueueContainer = connect(
