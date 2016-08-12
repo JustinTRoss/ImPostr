@@ -15,12 +15,15 @@ const fakePostGenerator = new CronJob('* * * * * *', () => {
   const topics = ['whales', 'pizza', 'tennis', 'chocolate', 'politics'];
   const topic = topics[counter % topics.length];
 
+  const date = new Date(); 
+  const expires = new Date(date.setTime(date.getTime() + 1 * 86400000));
+
   let post = {
     platform,
     isActive,
     message: `yolo?${topic}`,
-    expires: new Date(),
-    userUserId: 2,
+    expires,
+    userUserId: 8,
   };
 
   addNew(post, addNewPostStatus => {
