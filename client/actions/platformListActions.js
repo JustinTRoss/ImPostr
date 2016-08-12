@@ -79,11 +79,31 @@ export const logoutPlatform = (platform) => ({
   platform,
 });
 
+export const requestPlatformLogout = (platform) => {
+  return dispatch => {
+    const token = window.localStorage.getItem('ImPostr-JWT');
+    return fetch('http://127.0.0.1:3000/settings/requestPlatformLogout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `JWT ${token}`,
+      },
+      body: JSON.stringify({
+        platform,
+      }),
+    })
+    .then(response => response.json())
+    .then(json => {
+      dispatch(logoutPlatform(platform));
+    });
+  };
+};
+
 export const requestFacebookLogout = () => {
   return dispatch => {
     FB.getLoginStatus(response => {
       FB.logout(response => {
-        dispatch(logoutPlatform('facebook'));
+        dispatch(requestPlatformLogout('facebook'));
       })
     })
   }

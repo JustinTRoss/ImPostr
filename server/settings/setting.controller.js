@@ -52,33 +52,40 @@ const updateSettings = (req, res) => {
   const { settingId, settings, platform } = req.body;
   const { interests, interval, isActive } = settings;
   const { userId } = req.user;
+  const response = { interests, interval, isActive, platform, settingId };
 
-  if (settingId) {
-    Setting.update({
-      interests,
-      interval,
-      isActive,
-    }, {
-      where: {
-        settingId,
-      },
-    }).then(updateStatus => {
-      //update status validation, returning [1]...
-      const response = { interests, interval, isActive, platform, settingId };
-      res.send(response);
-    });
-  } else {
-    Setting.create({
-      interests,
-      interval,
-      isActive,
-      platform,
+  Setting.findAll({
+    where: {
       userUserId: userId,
-      dueNext: new Date(),
-    }).then(newSetting => {
-      res.json(newSetting);
-    });
-  }
+      platform,
+    },
+  }).then(settings => {
+    if (settings.length) {
+      Setting.update({
+        interests,
+        interval,
+        isActive,
+      }, {
+        where: {
+          userUserId: userId,
+          platform,
+        },
+      }).then(status => {
+        res.send(response)
+      });
+    } else {
+      Setting.create({
+        interests,
+        interval,
+        isActive,
+        platform,
+        userUserId: userId,
+        dueNext: new Date(),
+      }).then(newSetting => {
+        res.json(newSetting);
+      });
+    }
+  })
 };
 
 //requestPlatformLogin
@@ -107,8 +114,6 @@ const requestPlatformLogin = (req, res) => {
         });
       })
     } else {
-  console.log('platform, accessToken', platform, accessToken);
-  console.log('userId', userId);
       Setting.create({
         userUserId: userId,
         platform,
@@ -123,7 +128,21 @@ const requestPlatformLogin = (req, res) => {
 //requestPlatformLogout
   //for client to logout to a platform { boolean }
 const requestPlatformLogout = (req, res) => {
-  //make a call to social media manager
+  const { platform } = req.body;
+  const { userId } = req.user;
+
+  Setting.update({
+    token: '',
+  }, {
+    where: {
+      userUserId: userId,
+      platform,
+    },
+  }).then(status => {
+    res.json({
+      verdict: 'success',
+    });
+  });
 };
 
 module.exports = {
