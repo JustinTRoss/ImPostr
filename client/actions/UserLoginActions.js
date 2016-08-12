@@ -77,12 +77,6 @@ export const receiveLogout = () => {
   };
 };
 
-export const getInitialState = () => {
-  return dispatch => {
-
-  }
-}
-
 export const checkJWTWithServer = () => {
   return dispatch => {
     dispatch(requestStart());
