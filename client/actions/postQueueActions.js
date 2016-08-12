@@ -22,7 +22,7 @@ export const insertQueue = ({ queue }) => (
 export const requestQueue = () => {
   let token = window.localStorage.getItem('ImPostr-JWT');
   return dispatch => {
-    fetch(`localhost:3000/post/getUser`, {
+    fetch(`http://localhost:3000/post/getUser`, {
       headers: new Headers({
         'Content-Type': 'application/json',
         Authorization: `JWT ${token}`,
@@ -32,7 +32,7 @@ export const requestQueue = () => {
       .then(json => {
         console.log('/getUser-----------(*DS&F', json.queue);
         dispatch(insertQueue(json));
-      });
+      })
       .catch(err => console.log(err, '/getUser'));
   };
 };
