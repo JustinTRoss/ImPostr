@@ -121,7 +121,6 @@ export const setSettingsFields = (platformObject, settings) => {
     .then(response => response.json())
     .then(json => {
       let { interests, interval, isActive, platform, settingId } = json;
-      console.log(json, 'platform, settings, settingId', platform, settings, settingId);
       dispatch(receiveSettingsFields(platform, settings, settingId));
     });
   };
