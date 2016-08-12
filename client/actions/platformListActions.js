@@ -58,6 +58,14 @@ export const requestFacebookLogin = () => {
   }
 };
 
+export const requestLinkedInLogin = () => {
+  return dispatch => {
+    fetch(`http://localhost:3000/auth/linkedin`)
+      .then(response => console.log(response))
+      .catch(err => console.log(err, 'linkedin OAUTH2'));
+  };
+};
+
 export const selectPlatformLogin = (platform) => {
   return dispatch => {
     if (platform === 'facebook') {

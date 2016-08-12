@@ -7,10 +7,8 @@ require('./passport');
 
 
 module.exports = function(app, config){
-  console.log(`morgan/body parser`);
   app.use(cors());
   app.use(passport.initialize());
   app.use(morgan('dev'));
   app.use(bodyParser.json());
-
 };

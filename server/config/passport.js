@@ -26,7 +26,7 @@ passport.use(new JwtStrategy(
 passport.use(new LinkedInStrategy({
   clientID: LINKEDIN_KEY,
   clientSecret: LINKEDIN_SECRET,
-  callbackURL: `http://127.0.0.1:3000/auth/linkedin/callback`,
+  callbackURL: `http://localhost:3000/`,
   scope: ['r_emailaddress', 'r_basicprofile', 'w_share'],
 }, (...args) => {
   console.log(args, 'what is passed in?');
