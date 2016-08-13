@@ -7,6 +7,11 @@
 const { getExpiredActive, removeExpired } = require('../posts/post.controller');
 
 //requie { postOnPlatforms } = require(social media platforms)
+
+// import from fb
+// import tw
+// import from li
+
 const postOnPlatforms = (post, cb) => {
   const status = 'Post Succesful';
   cb(status, post);
