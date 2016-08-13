@@ -14,7 +14,6 @@ const saveLinkedInToken = (req, res) => {
   })
   .then(res => res.json())
   .then(json => {
-    console.log(json, 'THIS IS OUR TOKEN!');
     Settings.findOne({
       where: {
         userUserId: userId,
@@ -30,7 +29,7 @@ const saveLinkedInToken = (req, res) => {
         Settings.create({
           userUserId: userId,
           platform: 'linkedin',
-          token: json.access_Token,
+          token: json.access_token,
         });
       }
     });
