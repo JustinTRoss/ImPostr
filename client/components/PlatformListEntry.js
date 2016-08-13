@@ -11,9 +11,7 @@ const PlatformListEntry = ({
   onSetSettingsClick,
 }) => {
   const login = (
-    <Button
-      onClick={() => { onLoginClick(platform.platform); }}
-    >
+    <Button href={`http://localhost:3000/auth/${platform.platform}`}>
       {`Login to ${platform.platform}`}
     </Button>
   );
