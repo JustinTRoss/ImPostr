@@ -1,6 +1,7 @@
 const config = require('./config');
 const Sequelize = require('sequelize');
-const db = new Sequelize(config.db, { 
+const db = new Sequelize(config.db, {
+  logging: false,
   dialectOptions: {
     ssl: true,
   },
