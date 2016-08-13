@@ -13,6 +13,7 @@ const Setting = sequelize.define('setting', {
   },
   platform: Sequelize.STRING,
   token: Sequelize.STRING,
+  tokenSecret: Sequelize.STRING,
   isActive: Sequelize.BOOLEAN,
   interests: Sequelize.STRING,
   interval: Sequelize.INTEGER,

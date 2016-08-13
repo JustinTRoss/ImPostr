@@ -6,7 +6,7 @@ const TwitterStrategy = require('passport-twitter').Strategy;
 const Settings = require('../settings/setting.model');
 const config = require('./config');
 const LinkedInStrategy = require('passport-linkedin-oauth2').Strategy;
-const { LINKEDIN_KEY, LINKEDIN_SECRET } = require('../../__cutestuff');
+const { LINKEDIN_KEY, LINKEDIN_SECRET, TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET } = require('../../__cutestuff');
 
 passport.use(new JwtStrategy(
   {
@@ -38,8 +38,8 @@ passport.use(new LinkedInStrategy({
 
 passport.use(new TwitterStrategy(
   {
-    consumerKey: config.twitterConsumerKey,
-    consumerSecret: config.twitterConsumerSecret,
+    consumerKey: TWITTER_CONSUMER_KEY,
+    consumerSecret: TWITTER_CONSUMER_SECRET,
     callbackURL: 'http://127.0.0.1:3000/auth/twitter/callback',
   }, (token, tokenSecret, profile, done) => {
     const userTwitterInfo = {

@@ -114,9 +114,23 @@ export const requestFacebookLogout = () => {
   };
 };
 
-export const requestTwitterLogin = () => ({
-  
-})
+export const requestTwitterLogin = () => {
+  return dispatch => {
+    const token = window.localStorage.getItem('ImPostr-JWT');
+    return fetch('http://127.0.0.1:3000/auth/twitter', {
+      headers: {
+        'Authorization': `JWT ${token}`,
+      },
+    })
+    .then(response => response.json())
+    .then(json => {
+      dispatch(receivePlatformLogin(platform));
+    })
+    .catch(err => {
+      dispatch(selectPlatformLogout(platform));
+    })
+  };
+};
 
 export const selectPlatformLogout = (platform) => {
   return dispatch => {
