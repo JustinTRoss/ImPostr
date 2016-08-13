@@ -42,10 +42,11 @@ export const receiveFailure = ({ username, formName}) => {
   };
 };
 
-export const updateFormValue = ( formData ) => {
+export const updateFormValue = ( formData, formName ) => {
   return {
     type: UPDATE_FORM_VALUE,
     formData,
+    formName,
   }
 }
 
@@ -105,7 +106,8 @@ export const checkJWTWithServer = () => {
 export const sendLoginToServer = ( formData ) => {
   return dispatch => {
     dispatch(requestStart());
-    dispatch(updateFormValue(formData));
+    dispatch(updateFormValue(formData, 'login'));
+    console.log('~~~~~~~~~', formData);
     return fetch(`http://127.0.0.1:3000/user/login`, {
       method: 'POST',
       body: JSON.stringify({
@@ -135,7 +137,8 @@ export const sendLoginToServer = ( formData ) => {
 export const sendSignupToServer = ( formData ) => {
   return dispatch => {
     dispatch(requestStart());
-    dispatch(updateFormValue(formData));
+    dispatch(updateFormValue(formData, 'signup'));
+    console.log('~~~~~~~~~', formData);
     return fetch(`http://127.0.0.1:3000/user/signup`, {
       method: 'POST',
       body: JSON.stringify({

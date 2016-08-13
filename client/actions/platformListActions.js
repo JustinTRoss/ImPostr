@@ -73,7 +73,7 @@ export const selectPlatformLogin = (platform) => {
     if (platform === 'facebook') {
       dispatch(requestFacebookLogin());
     } else if (platform === 'twitter') {
-      dispatch(requestTwitterLogin());
+      //dispatch(requestTwitterLogin());
     }
   };
 };
@@ -111,24 +111,6 @@ export const requestFacebookLogout = () => {
       }
       dispatch(requestPlatformLogout('facebook'));
     });
-  };
-};
-
-export const requestTwitterLogin = () => {
-  return dispatch => {
-    const token = window.localStorage.getItem('ImPostr-JWT');
-    return fetch('http://127.0.0.1:3000/auth/twitter', {
-      headers: {
-        'Authorization': `JWT ${token}`,
-      },
-    })
-    .then(response => response.json())
-    .then(json => {
-      dispatch(receivePlatformLogin(platform));
-    })
-    .catch(err => {
-      dispatch(selectPlatformLogout(platform));
-    })
   };
 };
 
