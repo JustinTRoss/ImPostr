@@ -72,6 +72,8 @@ export const selectPlatformLogin = (platform) => {
   return dispatch => {
     if (platform === 'facebook') {
       dispatch(requestFacebookLogin());
+    } else if (platform === 'twitter') {
+      dispatch(requestTwitterLogin());
     }
   };
 };
@@ -111,6 +113,10 @@ export const requestFacebookLogout = () => {
     });
   };
 };
+
+export const requestTwitterLogin = () => ({
+  
+})
 
 export const selectPlatformLogout = (platform) => {
   return dispatch => {

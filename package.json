@@ -55,6 +55,7 @@
     "passport": "^0.3.2",
     "passport-jwt": "^2.1.0",
     "passport-linkedin-oauth2": "^1.4.1",
+    "passport-twitter": "^1.0.4",
     "path": "^0.12.7",
     "pg": "^6.0.3",
     "react": "^15.3.0",
