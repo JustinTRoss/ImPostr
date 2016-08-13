@@ -10,8 +10,8 @@ const PlatformListEntry = ({
   onSetSettingsClick,
 }) => {
   const login = (
-    // <Button href={`http://127.0.0.1:3000/auth/${platform.platform}`}>
-    <Button href={`http://www.localhost:3000/auth/${platform.platform}`}>
+    // <Button href={`http://www.localhost:3000/auth/${platform.platform}`}>
+    <Button href={`http://127.0.0.1:3000/auth/${platform.platform}`}>
       {`Login to ${platform.platform}`}
     </Button>
   );
