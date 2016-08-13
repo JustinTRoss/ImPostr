@@ -47,7 +47,6 @@ const addNew = (post, cb) => {
     expires,
     userUserId,
   }).then(createStatus => {
-    // console.log('createStatus ' , createStatus);
     cb(createStatus);
   });
 };

@@ -20,10 +20,9 @@ const CronJob = require('cron').CronJob;
 const postGenerator = new CronJob('*/5 * * * * *', () => {
   getActiveOverDueNext(users => {
     users.forEach(user => {
-      const date = new Date(); 
+      const date = new Date();
       const dueNext = new Date(date.setTime(date.getTime() + user.interval * 86400000));
       updateDueNext(user.settingId, dueNext, updateDueNextStatus => {
-        console.log('user due next status updated');
       });
 
       fetchUrl(user.interests, url => {
@@ -40,7 +39,6 @@ const postGenerator = new CronJob('*/5 * * * * *', () => {
           expires,
           userUserId,
         }, addNewPostStatus => {
-          console.log('new post added');
         });
       });
     });

@@ -13,7 +13,6 @@ const getActiveOverDueNext = (cb) => {
       },
     },
   }).then(activeOverDueNext => {
-
     cb(activeOverDueNext);
   })
 };
@@ -28,7 +27,6 @@ const updateDueNext = (settingId, dueNext, cb) => {
       settingId,
     },
   }).then(updateStatus => {
-
     cb(updateStatus);
   });
 };
@@ -42,7 +40,6 @@ const getSettings = (req, res) => {
       userUserId: userId,
     },
   }).then(userSettings => {
-
     res.send(userSettings);
   });
 };
