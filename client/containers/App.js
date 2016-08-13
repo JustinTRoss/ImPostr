@@ -7,9 +7,6 @@ import Footer from '../components/Footer';
 import Home from '../components/Home';
 import Auth from './Auth';
 import { requestQueue } from '../actions/postQueueActions';
-import { FACEBOOK_APP_ID } from '../../__cutestuff';
-
-
 
 class App extends React.Component {
   constructor(props) {
@@ -31,8 +28,8 @@ class App extends React.Component {
           {childToRender}
         <Footer />
       </div>
-		);
-	}
+    );
+  }
 }
 
 function mapStateToProps(state) {

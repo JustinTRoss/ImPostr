@@ -37,7 +37,7 @@ const saveTwitterTokens = (req, res) => {
 const saveLinkedInToken = (req, res) => {
 console.log('saveLinkedInToken');
   const { userId } = jwt.decode(req.cookies.jwtStuff, config.secret);
-  fetch(`https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&code=${req.query.code}&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth%2Flinkedin%2Fcallback&client_id=${LINKEDIN_KEY}&client_secret=${LINKEDIN_SECRET}`, {
+  fetch(`https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&code=${req.query.code}&redirect_uri=http%3A%2F%2F127.0.0.1%3A3000%2Fauth%2Flinkedin%2Fcallback&client_id=${LINKEDIN_KEY}&client_secret=${LINKEDIN_SECRET}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -84,45 +84,32 @@ const saveFacebookToken = (req, res) => {
       'cors': 'no-cors',
     },
   })
-  .then(response => {
-  console.log('response', response);
-    res.redirect('/')
+  .then(res => res.json())
+  .then(json => {
+    Settings.findOne({
+      where: {
+        userUserId: userId,
+        platform: 'facebook',
+      },
+    })
+    .then(settings => {
+      if (settings) {
+        settings.updateAttributes({
+          token: json.access_token,
+        });
+      } else {
+        Settings.create({
+          userUserId: userId,
+          platform: 'facebook',
+          token: json.access_Token,
+        });
+      }
+    });
   })
-
-  // .then(res => {
-  //   res.json()
-  // })
-  // .then(json => {
-  //   console.log(json, 'THIS IS OUR TOKEN!');
-  //   Settings.findOne({
-  //     where: {
-  //       userUserId: userId,
-  //       platform: 'facebook',
-  //     },
-  //   })
-  //   .then(settings => {
-  //     if (settings) {
-  //       settings.updateAttributes({
-  //         token: json.access_token,
-  //       });
-  //     } else {
-  //       Settings.create({
-  //         userUserId: userId,
-  //         platform: 'facebook',
-  //         token: json.access_Token,
-  //       });
-  //     }
-  //   });
-  // })
-  // .then(() => {
-  //   res.redirect('/');
-  // })
-  // .catch(err => console.log(err));
-
+  .then(() => {
+    res.redirect('/');
+  })
 };
-
-
-
 
 module.exports = {
   saveLinkedInToken,

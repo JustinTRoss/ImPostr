@@ -13,72 +13,7 @@ export const receivePlatformLogin = (platform) => ({
   platform,
 });
 
-
-export const requestPlatformLogin = (platform, userID, accessToken) => {
-  return dispatch => {
-    const token = window.localStorage.getItem('ImPostr-JWT');
-    return fetch('http://127.0.0.1:3000/settings/platformlogin', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `JWT ${token}`,
-      },
-      body: JSON.stringify({
-        platform,
-        userID,
-        accessToken,
-      }),
-    })
-    .then(response => response.json())
-    .then(json => {
-      dispatch(receivePlatformLogin(platform));
-    });
-  };
-};
-
-export const requestFacebookLogin = () => {
-  const deleteCookie = (name) => {
-    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/`;
-  };
-
-  const cookies = document.cookie.split(';');
-  for (let i = 0; i < cookies.length; i++) {
-    if (cookies[i].split('=')[0].indexOf('fblo_') !== -1) {
-      deleteCookie(cookies[i].split('=')[0]);
-    };
-  };
-
-  return dispatch => {
-    FB.getLoginStatus(response => {
-      if (response.status !== 'connected') {
-        FB.login(response => {
-          const { userID, accessToken } = response.authResponse;
-          dispatch(requestPlatformLogin('facebook', userID, accessToken));
-        });
-      }
-    });
-  };
-};
-
-export const requestLinkedInLogin = () => {
-  return dispatch => {
-    fetch(`http://localhost:3000/auth/linkedin`)
-      .then(response => console.log(response))
-      .catch(err => console.log(err, 'linkedin OAUTH2'));
-  };
-};
-
-export const selectPlatformLogin = (platform) => {
-  return dispatch => {
-    if (platform === 'facebook') {
-      dispatch(requestFacebookLogin());
-    } else if (platform === 'twitter') {
-      //dispatch(requestTwitterLogin());
-    }
-  };
-};
-
-export const logoutPlatform = (platform) => ({
+export const receivePlatformLogout = (platform) => ({
   type: LOGOUT_PLATFORM,
   platform,
 });
@@ -98,27 +33,9 @@ export const requestPlatformLogout = (platform) => {
     })
     .then(response => response.json())
     .then(json => {
-      dispatch(logoutPlatform(platform));
+      //validate json response
+      dispatch(receivePlatformLogout(platform));
     });
-  };
-};
-
-export const requestFacebookLogout = () => {
-  return dispatch => {
-    FB.getLoginStatus(response => {
-      if (response.status === 'connected') {
-        FB.logout();
-      }
-      dispatch(requestPlatformLogout('facebook'));
-    });
-  };
-};
-
-export const selectPlatformLogout = (platform) => {
-  return dispatch => {
-    if (platform === 'facebook') {
-      dispatch(requestFacebookLogout());
-    }
   };
 };
 

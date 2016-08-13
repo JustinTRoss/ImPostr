@@ -20,7 +20,6 @@ const PlatformModal = ({
       >
         Change settings
       </Button>
-
       <Modal show={platform.showModal}>
         <Modal.Header>
           <Modal.Title>{`${platform.platform}'s settings`}</Modal.Title>

@@ -5,7 +5,6 @@ import PlatformModal from './PlatformModal';
 
 const PlatformListEntry = ({
   platform,
-  onLoginClick,
   onLogoutClick,
   onToggleModalClick,
   onSetSettingsClick,
@@ -15,7 +14,6 @@ const PlatformListEntry = ({
       {`Login to ${platform.platform}`}
     </Button>
   );
-
   const logout = (
     <Button
       onClick={() => { onLogoutClick(platform.platform); }}

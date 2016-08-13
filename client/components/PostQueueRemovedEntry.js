@@ -9,9 +9,7 @@ const PostQueueRemovedEntry = ({ post, onInsertItemClick, index }) => (
     <Button
       onClick={() => {
         onInsertItemClick(post.postId, index);
-        console.log(post.postId);
       }}
-
       bsStyle="primary"
       size="small"
     >
