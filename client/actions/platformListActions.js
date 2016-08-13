@@ -174,11 +174,9 @@ export const getSettingsFields = () => {
           isActive,
         };
         dispatch(receiveSettingsFields(platform, settings, settingId));
-        // if (token) {
-        //   dispatch(receivePlatformLogin(platform));
-        // } else {
-        //   dispatch(logoutPlatform(platform));
-        // }
+        if (token) {
+          dispatch(receivePlatformLogin(platform));
+        }
       }
     });
   };
