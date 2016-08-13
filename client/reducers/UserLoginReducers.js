@@ -37,7 +37,17 @@ const UserObject = (state = {
         isLogin: action.formType,
       })
     case UPDATE_FORM_VALUE:
-      return Object.assign({}, state, action.formData);
+      if (action.formName === 'login') {
+        return Object.assign({}, state, {
+          login: action.formData,
+        });
+      } else if (action.formName === 'signup') {
+        return Object.assign({}, state, {
+          signup: action.formData,
+        });
+      } else {
+        return state;
+      }
     case REQUEST_START:
       return Object.assign({}, state, {
         // Do something to let user know we are processing request
@@ -71,7 +81,8 @@ const UserObject = (state = {
         },
       });
     case RECEIVE_USER_LOGOUT:
-      window.localStorage.setItem('ImPostr-JWT', '');
+      window.localStorage.removeItem('ImPostr-JWT');
+      document.cookie = `jwtStuff='';expires=Thu, 01-Jan-70 00:00:01 GMT`;
       return Object.assign({}, state, {
         loggedIn: false,
       });

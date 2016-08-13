@@ -1,5 +1,6 @@
 const Setting = require('./setting.model');
 const request = require('request');
+const twitterLogin = require('../../apiServers/TwitterApi/auth.controller');
 
 const { FACEBOOK_APP_ID, FACEBOOK_APP_SECRET } = require('../../__cutestuff');
 

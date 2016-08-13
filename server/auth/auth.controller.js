@@ -4,6 +4,35 @@ const fetch = require('isomorphic-fetch');
 const config = require('../config/config');
 const { LINKEDIN_KEY, LINKEDIN_SECRET } = require('../../__cutestuff');
 
+const saveTwitterTokens = (req, res) => {
+  const { userId } = jwt.decode(req.cookies.jwtStuff, config.secret);
+  Settings.findOne({
+    where: {
+      userUserId: userId,
+      platform: 'twitter',
+    },
+  })
+  .then(settings => {
+    if (settings) {
+      settings.updateAttributes({
+        token: req.user.token,
+        tokenSecret: req.user.tokenSecret,
+      });
+    } else {
+      Settings.create({
+        userUserId: userId,
+        platform: 'twitter',
+        token: req.user.token,
+        tokenSecret: req.user.tokenSecret,
+      });
+    }
+  })
+  .then(() => {
+    res.redirect('/');
+  })
+  .catch(err => console.log(err));
+};
+
 const saveLinkedInToken = (req, res) => {
   const { userId } = jwt.decode(req.cookies.jwtStuff, config.secret);
   fetch(`https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&code=${req.query.code}&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth%2Flinkedin%2Fcallback&client_id=${LINKEDIN_KEY}&client_secret=${LINKEDIN_SECRET}`, {
@@ -38,9 +67,9 @@ const saveLinkedInToken = (req, res) => {
     res.redirect('/');
   })
   .catch(err => console.log(err));
-
 };
 
 module.exports = {
   saveLinkedInToken,
+  saveTwitterTokens,
 };

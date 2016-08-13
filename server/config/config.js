@@ -10,6 +10,8 @@ const config = {
     secret: process.env.SECRET || 'mattdubiesucks123',
     db: process.env.DATABASE_URL || 'postgres://palpaca:mattdubiesucks123@impostorthesis.ct52emcpwnt6.us-west-1.rds.amazonaws.com/thesis',
     logLevel: process.env.LOG_LEVEL || 'dev',
+    twitterConsumerKey: process.env.TWITTER_CONSUMER_KEY || '',
+    twitterConsumerSecret: process.env.TWITTER_CONSUMER_SECRET || '',
   },
   production: {
     rootPath: rootPath,
