@@ -12,5 +12,5 @@ __cutestuff.js
 ## Dockerfile has creds on it
 Dockerfile
 
-##ignore credentials
+##config creds
 /server/config/config.js
