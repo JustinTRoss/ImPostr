@@ -26,12 +26,10 @@ passport.use(new JwtStrategy(
 passport.use(new LinkedInStrategy({
   clientID: LINKEDIN_KEY,
   clientSecret: LINKEDIN_SECRET,
-  callbackURL: `http://localhost:3000/`,
+  callbackURL: `http://localhost:3000/auth/linkedin/callback`,
   scope: ['r_emailaddress', 'r_basicprofile', 'w_share'],
 }, (...args) => {
   process.nextTick((accessToken, refreshToken, profile, done) => {
-    console.log(accessToken, 'at');
-    console.log(refreshToken, 'rt');
   });
 }
 ));
