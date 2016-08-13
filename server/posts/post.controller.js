@@ -34,7 +34,7 @@ const removeExpired = (cb) => {
 const addNew = (post, cb) => {
   const {
     platform,
-    postToken,
+    token,
     isActive,
     message,
     expires,
@@ -43,7 +43,7 @@ const addNew = (post, cb) => {
 
   Post.create({
     platform,
-    postToken,
+    token,
     isActive,
     message,
     expires,

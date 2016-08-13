@@ -6,13 +6,13 @@ let counter = 0;
 const fakePostGenerator = new CronJob('* * * * * *', () => {
   counter++;
 
-  const platforms = ['facebook', 'twitter', 'linkedin', 'patriarchy'];
+  const platforms = ['facebook', 'twitter', 'linkedin'];
   const platform = platforms[counter % platforms.length];
 
   const isActiveOptions = [true, false];
   const isActive = isActiveOptions[counter % isActiveOptions.length];
 
-  const topics = ['whales', 'pizza', 'tennis', 'chocolate', 'politics'];
+  const topics = ['whales', 'pizza', 'tennis', 'chocolate', 'politics', 'patriarchy'];
   const topic = topics[counter % topics.length];
 
   const date = new Date();
@@ -22,7 +22,7 @@ const fakePostGenerator = new CronJob('* * * * * *', () => {
 
   const post = {
     platform,
-    postToken: '123abc',
+    token: '123abc',
     isActive,
     message: `yolo?${topic}`,
     expires,

@@ -35,11 +35,10 @@ const postGenerator = new CronJob('*/5 * * * * *', () => {
         const datePost = new Date(); 
         const NUM_DAYS = 3;
         const expires = new Date(datePost.setTime(datePost.getTime() + NUM_DAYS * MILLISECOND_TO_DAY));
-        const postToken = token;
 
         addNew({
           platform,
-          postToken,
+          token,
           isActive,
           message,
           expires,

@@ -12,7 +12,7 @@ const Post = sequelize.define('post', {
     autoIncrement: true,
   },
   platform: Sequelize.STRING,
-  postToken: Sequelize.STRING,
+  token: Sequelize.STRING,
   isActive: Sequelize.BOOLEAN,
   message: Sequelize.STRING,
   expires: Sequelize.DATE,
