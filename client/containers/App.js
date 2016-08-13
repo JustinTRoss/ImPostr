@@ -17,45 +17,9 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    let { checkJWT, pullQueue, requestPlatformLogin } = this.props;
+    const { checkJWT, pullQueue } = this.props;
     checkJWT();
     pullQueue();
-
-    /************** Facebook SDK Injectino *****************/
-
-    (function(d, s, id){
-       var js, fjs = d.getElementsByTagName(s)[0];
-       if (d.getElementById(id)) {return;}
-       js = d.createElement(s); js.id = id;
-       js.src = "//connect.facebook.net/en_US/sdk.js";
-       fjs.parentNode.insertBefore(js, fjs);
-     }(document, 'script', 'facebook-jssdk'));
-
-    window.fbAsyncInit = function() {
-      FB.init({
-        appId      : FACEBOOK_APP_ID,
-        xfbml      : true,
-        version    : 'v2.7',
-      });
-
-      const deleteCookie = (name) => {
-        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/`;
-      };
-
-      const cookies = document.cookie.split(';');
-      for (let i = 0; i < cookies.length; i++) {
-        if (cookies[i].split('=')[0].indexOf('fblo_') !== -1) {
-          deleteCookie(cookies[i].split('=')[0]);
-        };
-      };
-
-      FB.getLoginStatus(response => {
-        if (response.status === 'connected') {
-          const { userID, accessToken } = response.authResponse;
-          requestPlatformLogin('facebook', userID, accessToken);
-        }
-      });
-    };
   }
 
   render() {

@@ -7,10 +7,6 @@ const { FACEBOOK_APP_ID, FACEBOOK_APP_SECRET } = require('../../__cutestuff');
 
 const saveLinkedInToken = (req, res) => {
   const { userId } = jwt.decode(req.cookies.jwtStuff, config.secret);
-  console.log('userId', userId);
-  console.log('LINKEDIN_KEY', LINKEDIN_KEY);
-  console.log('LINKEDIN_SECRET', LINKEDIN_SECRET);
-  console.log('req.query.code', req.query.code);
   fetch(`https://www.linkedin.com/oauth/v2/accessToken?grant_type=authorization_code&code=${req.query.code}&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fauth%2Flinkedin%2Fcallback&client_id=${LINKEDIN_KEY}&client_secret=${LINKEDIN_SECRET}`, {
     method: 'POST',
     headers: {
@@ -47,6 +43,7 @@ const saveLinkedInToken = (req, res) => {
 const saveFacebookToken = (req, res) => {
   const code = req.query.code;
   const redirectURI = 'http%3A%2F%2Fwww.localhost%3A3000%2Fauth%2Ffacebook%2Fcallback';
+<<<<<<< 8f322e02128530a0ab9e307e001eec6203411569
 <<<<<<< 02849505a1e9b683e6a46ef0e8fafc1f7e38f8c7
   const { userId } = jwt.decode(req.cookies.jwtStuff, config.secret);
 =======
@@ -54,6 +51,9 @@ const saveFacebookToken = (req, res) => {
   const { userId } = jwt.decode(req.cookies.jwtStuff, config.secret);
   console.log('userId', userId);
 >>>>>>> facebook auth now working
+=======
+  const { userId } = jwt.decode(req.cookies.jwtStuff, config.secret);
+>>>>>>> commit to merge
   const url = `https://graph.facebook.com/v2.3/oauth/access_token?client_id=${FACEBOOK_APP_ID}&redirect_uri=${redirectURI}&client_secret=${FACEBOOK_APP_SECRET}&code=${code}`;
 
   fetch(url, {
