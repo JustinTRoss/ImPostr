@@ -47,8 +47,6 @@ const getSettings = (req, res) => {
 
 //updateSettings
   //for client to update settings { interests, frequency, isActive }
-  //**FIX CLIENT LABELLING and interests to a comma deliminated string
-  //**connected to client**
 const updateSettings = (req, res) => {
   const { settingId, settings, platform } = req.body;
   const { interests, interval, isActive } = settings;

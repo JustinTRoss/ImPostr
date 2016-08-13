@@ -6,7 +6,7 @@ let counter = 0;
 const fakePostGenerator = new CronJob('* * * * * *', () => {
   counter++;
 
-  const platforms = ['facebook', 'twitter', 'linkedin'];
+  const platforms = ['facebook', 'twitter', 'linkedin', 'patriarchy'];
   const platform = platforms[counter % platforms.length];
 
   const isActiveOptions = [true, false];
@@ -15,19 +15,22 @@ const fakePostGenerator = new CronJob('* * * * * *', () => {
   const topics = ['whales', 'pizza', 'tennis', 'chocolate', 'politics'];
   const topic = topics[counter % topics.length];
 
-  const date = new Date(); 
-  const expires = new Date(date.setTime(date.getTime() + 1 * 86400000));
+  const date = new Date();
+  const NUM_DAYS = 1;
+  const MILLISECOND_TO_DAY = 86400000;
+  const expires = new Date(date.setTime(date.getTime() + NUM_DAYS * MILLISECOND_TO_DAY));
 
-  let post = {
+  const post = {
     platform,
+    postToken: '123abc',
     isActive,
     message: `yolo?${topic}`,
     expires,
-    userUserId: 8,
+    userUserId: 1,
   };
 
   addNew(post, addNewPostStatus => {
-    console.log('new post added')
+    // test post against error
   });
 }, null, true, 'America/Los_Angeles');
 
