@@ -107,7 +107,6 @@ export const sendLoginToServer = ( formData ) => {
   return dispatch => {
     dispatch(requestStart());
     dispatch(updateFormValue(formData, 'login'));
-    console.log('~~~~~~~~~', formData);
     return fetch(`http://127.0.0.1:3000/user/login`, {
       method: 'POST',
       body: JSON.stringify({
@@ -121,7 +120,6 @@ export const sendLoginToServer = ( formData ) => {
       // if successful login
       .then(response => response.json())
       .then(jsonRes => {
-        console.log(jsonRes, jsonRes.token);
         window.localStorage.setItem('ImPostr-JWT', jsonRes.token);
         document.cookie = `jwtStuff=${jsonRes.token}`;
         dispatch(receiveLogin(jsonRes));
@@ -138,7 +136,6 @@ export const sendSignupToServer = ( formData ) => {
   return dispatch => {
     dispatch(requestStart());
     dispatch(updateFormValue(formData, 'signup'));
-    console.log('~~~~~~~~~', formData);
     return fetch(`http://127.0.0.1:3000/user/signup`, {
       method: 'POST',
       body: JSON.stringify({
