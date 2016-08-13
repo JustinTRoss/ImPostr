@@ -65,6 +65,7 @@ const updateSettings = (req, res) => {
         interests,
         interval,
         isActive,
+        dueNext: new Date(),
       }, {
         where: {
           userUserId: userId,

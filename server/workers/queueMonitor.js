@@ -6,20 +6,23 @@
 
 const { getExpiredActive, removeExpired } = require('../posts/post.controller');
 
-//requie { postOnPlatforms } = require(social media platforms)
-
 // import from fb
 // import tw
-// import from li
+const { postOnFacebook } = require('../platformservices/facebook/facebook');
 
 const postOnPlatforms = (post, cb) => {
+  if (post.platform === 'facebook') {
+    postOnFacebook(post, status => {
+      //do some status handling here
+    });
+  }
   const status = 'Post Succesful';
   cb(status, post);
 };
 
 const CronJob = require('cron').CronJob;
 
-const queueMonitor = new CronJob('*/5 * * * * *', () => {
+const queueMonitor = new CronJob('* * * * * *', () => {
   getExpiredActive(posts => {
     posts
       .map(post => post.dataValues)
