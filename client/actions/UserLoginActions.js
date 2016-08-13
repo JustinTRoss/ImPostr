@@ -81,7 +81,7 @@ export const checkJWTWithServer = () => {
   return dispatch => {
     dispatch(requestStart());
     const token = window.localStorage.getItem('ImPostr-JWT');
-    if (!token) { 
+    if (!token) {
       dispatch(receiveJWTFailure);
     } else {
       return fetch('http://127.0.0.1:3000/user/checkJWT', {
@@ -121,6 +121,7 @@ export const sendLoginToServer = ( formData ) => {
       .then(jsonRes => {
         console.log(jsonRes, jsonRes.token);
         window.localStorage.setItem('ImPostr-JWT', jsonRes.token);
+        document.cookie = `jwtStuff=${jsonRes.token}`;
         dispatch(receiveLogin(jsonRes));
       })
       // if failed login
@@ -149,6 +150,7 @@ export const sendSignupToServer = ( formData ) => {
       .then(response => response.json())
       .then(jsonRes => {
         window.localStorage.setItem('ImPostr-JWT', jsonRes.token);
+        document.cookie = `jwtStuff=${jsonRes.token}`;
         dispatch(receiveSignup(jsonRes));
       })
       // if failed SIGNUP

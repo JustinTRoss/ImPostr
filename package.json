@@ -31,6 +31,7 @@
     "body-parser": "^1.15.2",
     "bootstrap": "^3.3.7",
     "chai": "^3.5.0",
+    "cookie-parser": "^1.4.3",
     "cors": "^2.7.1",
     "cron": "^1.1.0",
     "es6-promise": "^3.2.1",
