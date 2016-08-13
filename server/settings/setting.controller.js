@@ -94,9 +94,7 @@ const updateSettings = (req, res) => {
 const requestPlatformLogin = (req, res) => {
   const { platform, accessToken } = req.body;
   const { userId } = req.user;
-
   const url = `https://graph.facebook.com/oauth/access_token?grant_type=fb_exchange_token&client_id=${FACEBOOK_APP_ID}&client_secret=${FACEBOOK_APP_SECRET}&fb_exchange_token=${accessToken}`;
-  console.log('SHORT TERM', accessToken);
 
   request({
     url,

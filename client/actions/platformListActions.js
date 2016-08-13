@@ -50,12 +50,14 @@ export const requestFacebookLogin = () => {
 
   return dispatch => {
     FB.getLoginStatus(response => {
-      FB.login(response => {
-        const { userID, accessToken } = response.authResponse;
-        dispatch(requestPlatformLogin('facebook', userID, accessToken));
-      })
-    })
-  }
+      if (response.status !== 'connected') {
+        FB.login(response => {
+          const { userID, accessToken } = response.authResponse;
+          dispatch(requestPlatformLogin('facebook', userID, accessToken));
+        });
+      }
+    });
+  };
 };
 
 export const requestLinkedInLogin = () => {
@@ -102,11 +104,12 @@ export const requestPlatformLogout = (platform) => {
 export const requestFacebookLogout = () => {
   return dispatch => {
     FB.getLoginStatus(response => {
-      FB.logout(response => {
-        dispatch(requestPlatformLogout('facebook'));
-      })
-    })
-  }
+      if (response.status === 'connected') {
+        FB.logout();
+      }
+      dispatch(requestPlatformLogout('facebook'));
+    });
+  };
 };
 
 export const selectPlatformLogout = (platform) => {
@@ -157,11 +160,11 @@ export const setSettingsFields = (platformObject, settings) => {
 
 export const getSettingsFields = () => {
   return dispatch => {
-    const jwt = window.localStorage.getItem('ImPostr-JWT');
+    const token = window.localStorage.getItem('ImPostr-JWT');
     return fetch('http://127.0.0.1:3000/settings/getSettings', {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `JWT ${jwt}`,
+        'Authorization': `JWT ${token}`,
       },
     })
     .then(response => response.json())
