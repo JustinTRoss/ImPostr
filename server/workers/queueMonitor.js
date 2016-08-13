@@ -24,12 +24,12 @@ const queueMonitor = new CronJob('*/5 * * * * *', () => {
       .map(post => post.dataValues)
       .forEach(post => {
         postOnPlatforms(post, status => {
-          console.log(status, post);
+          //test status for an error
         });
       });
   });
   removeExpired(status => {
-    console.log('Posts removed: ', status);
+    //test status for an error
   });
 }, null, true, 'America/Los_Angeles');
 

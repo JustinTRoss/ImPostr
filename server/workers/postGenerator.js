@@ -9,7 +9,7 @@ const { getActiveOverDueNext, updateDueNext } = require('../settings/setting.con
 const { addNew } = require('../posts/post.controller');
 
 //import { fetchUrl } from Twitter Microservice
-//
+
 const fetchUrl = (interests, cb) => {
   const topic = interests[ Math.floor(interests.length * Math.random()) ];
   cb(`www.google.com?${topic}`);
@@ -20,25 +20,31 @@ const CronJob = require('cron').CronJob;
 const postGenerator = new CronJob('*/5 * * * * *', () => {
   getActiveOverDueNext(users => {
     users.forEach(user => {
-      const date = new Date();
-      const dueNext = new Date(date.setTime(date.getTime() + user.interval * 86400000));
-      updateDueNext(user.settingId, dueNext, updateDueNextStatus => {
+      const { settingId, platform, token, userUserId, interval } = user;
+
+      const dateSettings = new Date(); 
+      const MILLISECOND_TO_DAY = 86400000;
+      const dueNext = new Date(dateSettings.setTime(dateSettings.getTime() + interval * MILLISECOND_TO_DAY));
+      updateDueNext(settingId, dueNext, updateStatus => {
+        //if doesn't equal [1] then throw error
       });
 
       fetchUrl(user.interests, url => {
-        const platform = user.platform;
         const isActive = true;
         const message = url;
-        const expires = new Date(date.setTime(date.getTime() + 3 * 86400000));
-        const userUserId = user.userUserId;
+        const datePost = new Date(); 
+        const NUM_DAYS = 3;
+        const expires = new Date(datePost.setTime(datePost.getTime() + NUM_DAYS * MILLISECOND_TO_DAY));
 
         addNew({
           platform,
+          token,
           isActive,
           message,
           expires,
           userUserId,
-        }, addNewPostStatus => {
+        }, newPostStatus => {
+          //throw error if not same fields
         });
       });
     });
