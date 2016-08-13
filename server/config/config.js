@@ -12,6 +12,8 @@ const config = {
     logLevel: process.env.LOG_LEVEL || 'dev',
     twitterConsumerKey: process.env.TWITTER_CONSUMER_KEY || '',
     twitterConsumerSecret: process.env.TWITTER_CONSUMER_SECRET || '',
+    hostedDomain: process.env.hostedDomain || 'http://www.localhost:3000',
+    alternateDomain: process.env.alternateDomain || 'http://127.0.0.1:3000',
   },
   production: {
     rootPath: rootPath,
