@@ -1,7 +1,6 @@
 import React from 'react';
 import { Panel, ListGroup } from 'react-bootstrap';
 
-
 import PostQueueEntry from './PostQueueEntry';
 import PostQueueRemovedEntry from './PostQueueRemovedEntry';
 

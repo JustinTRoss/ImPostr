@@ -3,10 +3,6 @@
   //   iterate over them all
   //     postOnPlatforms
   // removeExpired
-  
-
-  //add data fields fully populate posts (token and user id)
-  
 
 const { getExpiredActive, removeExpired } = require('../posts/post.controller');
 

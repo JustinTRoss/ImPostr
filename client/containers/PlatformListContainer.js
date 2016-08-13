@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 
 import PlatformList from '../components/PlatformList';
-import { selectPlatformLogin, selectPlatformLogout, toggleModal, setSettingsFields } from '../actions/platformListActions';
+import { requestPlatformLogout, toggleModal, setSettingsFields } from '../actions/platformListActions';
 
 
 const mapStateToProps = (state) => ({
@@ -9,8 +9,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onLoginClick: (platform) => dispatch(selectPlatformLogin(platform)),
-  onLogoutClick: (platform) => dispatch(selectPlatformLogout(platform)),
+  onLogoutClick: (platform) => dispatch(requestPlatformLogout(platform)),
   onToggleModalClick: (platform) => dispatch(toggleModal(platform)),
   onSetSettingsClick: (platform, settings) => dispatch(setSettingsFields(platform, settings)),
 });

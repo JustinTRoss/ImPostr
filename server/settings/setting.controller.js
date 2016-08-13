@@ -88,52 +88,6 @@ const updateSettings = (req, res) => {
   })
 };
 
-//requestPlatformLogin
-  //for client to login to a platform { boolean }
-const requestPlatformLogin = (req, res) => {
-  const { platform, accessToken } = req.body;
-  const { userId } = req.user;
-  const url = `https://graph.facebook.com/oauth/access_token?grant_type=fb_exchange_token&client_id=${FACEBOOK_APP_ID}&client_secret=${FACEBOOK_APP_SECRET}&fb_exchange_token=${accessToken}`;
-
-  request({
-    url,
-    method: 'GET',
-    gzip: true,
-  }, (error, response, body) => {
-    const token = body.split(/[=&]/g)[1];
-    Setting.findAll({
-      where: {
-        userUserId: userId,
-        platform,
-      },
-    }).then(settings => {
-      if (settings.length) {
-        Setting.update({
-          token,
-        }, {
-          where: {
-            userUserId: userId,
-            platform,
-          },
-        }).then(status => {
-          res.json({
-            verdict: 'success',
-          });
-        })
-      } else {
-        Setting.create({
-          userUserId: userId,
-          platform,
-          token,
-        }).then(newSetting => {
-          res.json(newSetting);
-        });
-      }
-    });
-    }
-  )
-};
-
 //requestPlatformLogout
   //for client to logout to a platform { boolean }
 const requestPlatformLogout = (req, res) => {
@@ -159,6 +113,5 @@ module.exports = {
   updateDueNext,
   getSettings,
   updateSettings,
-  requestPlatformLogin,
   requestPlatformLogout,
 };

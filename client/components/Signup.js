@@ -17,6 +17,6 @@ const Signup = ({ username, password, handleFieldChange, handleSignupSubmit }) =
       <button onClick={handleSignupSubmit}> Submit </button>
     </div>
   );
-}
+};
 
 export default Signup;

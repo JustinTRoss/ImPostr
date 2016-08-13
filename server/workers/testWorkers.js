@@ -26,7 +26,7 @@ const fakePostGenerator = new CronJob('* * * * * *', () => {
     isActive,
     message: `yolo?${topic}`,
     expires,
-    userUserId: 1,
+    userUserId: 50,
   };
 
   addNew(post, addNewPostStatus => {
