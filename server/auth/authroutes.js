@@ -6,7 +6,7 @@ AuthRouter.get('/linkedin', passport.authenticate('linkedin', { state: 'asodfija
 
 AuthRouter.get('/linkedin/callback', AuthController.saveLinkedInToken);
 
-AuthRouter.get('/facebook', passport.authenticate('facebook', { state: 'asodfijasoidfj' }));
+AuthRouter.get('/facebook', passport.authenticate('facebook', { state: 'asodfijasoidfj' }), () => { });
 
 AuthRouter.get('/facebook/callback', AuthController.saveFacebookToken);
 

@@ -63,7 +63,7 @@ passport.use(new FacebookStrategy({
     clientSecret: FACEBOOK_APP_SECRET,
     callbackURL: "http://www.localhost:3000/auth/facebook/callback",
   }, (accessToken, refreshToken, profile, cb) => {
-    cb(accessToken);
+    cb(accessToken, refreshToken, profile);
   }
 ));
 

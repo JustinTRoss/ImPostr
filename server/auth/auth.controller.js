@@ -126,9 +126,6 @@ const saveFacebookToken = (req, res) => {
 
 module.exports = {
   saveLinkedInToken,
-<<<<<<< 6da89c3e3937c5b6c5c0ecf686563e9dbbee7ab5:server/auth/auth.controller.js
   saveTwitterTokens,
-=======
   saveFacebookToken,
->>>>>>> to merge:server/auth/authcontroller.js
 };
