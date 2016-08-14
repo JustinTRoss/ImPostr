@@ -43,7 +43,7 @@ const PlatformModal = ({
               Autopost mode
             </Checkbox>
             <div>
-              <label>Frequency</label>
+              <label>Posts per week</label>
               <div>
                 <input
                   type="text"
