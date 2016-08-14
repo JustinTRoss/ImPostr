@@ -11,7 +11,4 @@ module.exports = (app, config) => {
   app.use('/post', passport.authenticate('jwt', {session: false}), PostRouter);
   app.use('/user', UserRouter);
   app.use('/auth', AuthRouter);
-  // app.get('/*', (req, res) => {
-  //   res.sendFile(config.rootPath + '/client/index.html');
-  // });
 };

@@ -22,7 +22,7 @@ const postOnPlatforms = (post, cb) => {
 
 const CronJob = require('cron').CronJob;
 
-const queueMonitor = new CronJob('* * * * * *', () => {
+const queueMonitor = new CronJob('* */5 * * * *', () => {
   getExpiredActive(posts => {
     posts
       .map(post => post.dataValues)
