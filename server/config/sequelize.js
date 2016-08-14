@@ -16,5 +16,4 @@ db.authenticate()
     console.error(err);
   });
 
-
 module.exports = db;
