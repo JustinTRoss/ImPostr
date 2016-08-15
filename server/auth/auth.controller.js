@@ -2,7 +2,11 @@ const Settings = require('../settings/setting.model');
 const jwt = require('jwt-simple');
 const fetch = require('isomorphic-fetch');
 const config = require('../config/config');
-const { LINKEDIN_KEY, LINKEDIN_SECRET, FACEBOOK_APP_ID, FACEBOOK_APP_SECRET } = require('../../__cutestuff');
+const { LINKEDIN_KEY,
+        LINKEDIN_SECRET,
+        FACEBOOK_APP_ID,
+        FACEBOOK_APP_SECRET
+      } = require('../../__cutestuff');
 
 const saveTwitterTokens = (req, res) => {
   const { userId } = jwt.decode(req.cookies.jwtStuff, config.secret);

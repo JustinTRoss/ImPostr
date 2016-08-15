@@ -10,8 +10,8 @@ import Avatar from 'material-ui/Avatar';
 import {pinkA200, transparent} from 'material-ui/styles/colors';
 
 const style = {
-  backgroundColor:'rgba(210, 196, 196, 0.11)',
-  position: 'absolute',
+  backgroundColor:'rgba(35,25,19, 0.65)',
+  position: 'fixed',
   right: '0',
   bottom: '0',
   left: '0',

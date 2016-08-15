@@ -5,11 +5,11 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 
 const Navbar = ({ receiveLogout, showLogout }) => {
-const style = showLogout === 'Logout' ? {backgroundColor:'rgba(210, 196, 196, 1)'} : {backgroundColor:'rgba(210, 196, 196, 0.11)'};
+const style = showLogout === 'Logout' ? {backgroundColor:'#cec3a4'} : {backgroundColor:'rgba(56,49,38, 0.31)'};
 	return (
 		<Toolbar style={style} >
       <ToolbarGroup firstChild={true}>
-        <a href="http://127.0.0.1:3000" className="logo" />
+        <a href="http://127.0.0.1:3000" className="logoSmall" />
       </ToolbarGroup>
       <ToolbarGroup lastChild={true}>
         <RaisedButton label={showLogout} primary={true} onClick={receiveLogout} />

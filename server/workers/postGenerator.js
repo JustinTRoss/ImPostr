@@ -12,24 +12,29 @@ const { getUrlByTopic } = require('../platformServices/TwitterApi/twitter.contro
 const CronJob = require('cron').CronJob;
 
 const postGenerator = new CronJob('*/5 * * * * *', () => {
+  console.log('oops1');
   getActiveOverDueNext(settings => {
+    console.log(settings);
     settings.forEach(settingObj => {
-      const { settingId, platform, token, tokenSecret, userUserId, interval } = settingObj;
-
+      console.log('oops2');
+      const { settingId, platform, token, tokenSecret, userUserId, interval, interests } = settingObj;
+      const daysTillNext = 7 / interval;
       const dateSettings = new Date(); 
       const MILLISECOND_TO_DAY = 86400000;
       const dueNext = new Date(dateSettings.setTime(dateSettings.getTime() + daysTillNext * MILLISECOND_TO_DAY));
       updateDueNext(settingId, dueNext, updateStatus => {
         //if doesn't equal [1] then throw error
+        console.log('oops');
       });
-
-      const topic = interests[ Math.floor(interests.length + 1 * Math.random()) ];
+      console.log(interests, '<~~~~~~~~~~~~~~');
+      const topic = interests[ Math.floor((interests.length + 1) * Math.random()) ];
+      console.log(topic);
       const isActive = true;
       const datePost = new Date(); 
       const NUM_DAYS = 3;
       const expires = new Date(datePost.setTime(datePost.getTime() + NUM_DAYS * MILLISECOND_TO_DAY));
       
-      getUrlByTopic(settingObj, topic, message => {
+      getUrlByTopic(topic, message => {
         addNew({
           platform,
           token,

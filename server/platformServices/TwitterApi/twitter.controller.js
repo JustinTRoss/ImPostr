@@ -13,8 +13,8 @@ module.exports = {
 
 /**********PUBLIC**********/
 
-function getUrlByTopic(setting, topic, cb) {
-  const client = createClient(setting.token, setting.tokenSecret);
+function getUrlByTopic(topic, cb) {
+  const client = createAppClient();
   client.get('search/tweets', {
     q: topic,
     lang: 'en',
@@ -26,7 +26,7 @@ function getUrlByTopic(setting, topic, cb) {
     } else {
       let tweetUrls = tweets.statuses.filter(tweetObj => tweetObj.entities.urls.length > 0)
         .map(tweetUrlObj => tweetUrlObj.entities.urls[0].expanded_url);
-      cb(tweetUrls[0] ? tweetUrls[0] : ['http://attackofthecute.com/popular.php']);
+      cb(tweetUrls[0] ? tweetUrls[0] : 'http://attackofthecute.com/popular.php');
     }
   });
 };
@@ -83,7 +83,15 @@ function createClient(accessToken, accessTokenSecret) {
     access_token_key: accessToken,
     access_token_secret: accessTokenSecret,
   });
-};
+}
+
+function createAppClient() {
+  return new Twitter({
+    consumer_key: config.twitterConsumerKey,
+    consumer_secret: config.twitterConsumerSecret,
+    bearer_token: config.twitterBearerToken,
+  });
+}
 // function getUrlbyTopic(req, res) => {
 //   const topic = req.body.topic || 'facebook';
 //   const sentiment = req.body.sentiment || ':)';

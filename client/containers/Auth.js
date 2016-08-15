@@ -48,20 +48,26 @@ class Auth extends React.Component {
 
     let textToRender = (this.props.isLogin) === 'login' ?
       <div className="splashfonts">
-        <div>Do you want to feel like Evan?</div>
-        <div><a onClick={() => this.props.handleFormChange('signup')}>Sign up today!</a></div>
+        <div>
+          Do you want to feel like Evan?
+          <a onClick={() => this.props.handleFormChange('signup')}>Sign up today!</a>
+        </div>
       </div>
       :
       <div className="splashfonts">
-        <div>Already enjoying yourself?</div>
-        <div><a onClick={() => this.props.handleFormChange('login')}>Log in now!</a></div>
+        <div>
+          Already enjoying yourself?
+          <a onClick={() => this.props.handleFormChange('login')}>Log in now!</a>
+        </div>
       </div>;
 
     return (
       <div className="AuthAndSplash">
         <Splash />
-        {childToRender}
-        {textToRender}
+          <div className="authBox">
+            {childToRender}
+            {textToRender}
+          </div>
       </div>
     );
   }
