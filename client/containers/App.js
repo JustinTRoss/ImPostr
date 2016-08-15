@@ -21,10 +21,12 @@ class App extends React.Component {
 
   render() {
     const childToRender = this.props.loggedIn ? <Home /> : <Auth />;
+    const showLogout = this.props.loggedIn ? 'Logout' : 'Log In';
+    const SpaceOrPlain = this.props.loggedIn ? 'space' : 'space';
 
     return (
-      <div>App
-        <Navbar receiveLogout={this.props.receiveLogout} />
+      <div className={SpaceOrPlain}>
+        <Navbar receiveLogout={this.props.receiveLogout} showLogout={showLogout} />
           {childToRender}
         <Footer />
       </div>

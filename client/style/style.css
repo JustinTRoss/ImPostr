@@ -32,6 +32,21 @@
   font-style:italic;
   font-size: 16px;
 }
+/**********BODY**********/
+
+body {
+  background-image: url('./spaceBeer.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/*not used
+.plain {
+  background-color: #c2ae95;
+}
+*/
+
+/**********AUTH COMPONENTS**********/
 
 .AuthContainer {
   display: flex;
@@ -63,3 +78,15 @@
   width: 50%;
   align-self: center;
 }
+
+/**********NAVBAR**********/
+
+.logo {
+  background-image: url('./impostrIcon.png');
+  background-size: 61px 55px;
+  width: 61px;
+  height: 55px;
+}
+
+/**********FOOTER**********/
+/********** **********/
