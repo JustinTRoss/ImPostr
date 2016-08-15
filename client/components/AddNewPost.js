@@ -7,7 +7,26 @@ import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
 import Paper from 'material-ui/Paper';
 
-const AddNewPost = () => {
+const AddNewPost = ({
+  fields,
+  handleDateChange,
+  handleTimeChange,
+  handleMessageChange,
+  handleFacebookChange,
+  handleLinkedinChange,
+  handleTwitterChange,
+  handleFormSubmit,
+}) => {
+  console.log('fields', fields);
+  const {
+  date,
+  time,
+  message,
+  facebook,
+  linkedin,
+  twitter,
+} = fields;
+
   return (
     <Paper>
       <Paper>
