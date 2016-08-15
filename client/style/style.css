@@ -1,0 +1,22 @@
+.AuthContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.AuthFields {
+  display: flex;
+  flex-direction: column;
+}
+
+.AuthUser {
+  order: 1;
+}
+
+.AuthPassword {
+  order: 2;
+}
+
+.AuthButton {
+  width: 50%;
+  align-self: center;
+}
