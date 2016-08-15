@@ -24,13 +24,11 @@ const CronJob = require('cron').CronJob;
 
 const queueMonitor = new CronJob('* */5 * * * *', () => {
   getExpiredActive(posts => {
-    posts
-      .map(post => post.dataValues)
-      .forEach(post => {
-        postOnPlatforms(post, status => {
-          //test status for an error
-        });
+    posts.forEach(post => {
+      postOnPlatforms(post, status => {
+        //test status for an error
       });
+    });
   });
   removeExpired(status => {
     //test status for an error
@@ -40,3 +38,35 @@ const queueMonitor = new CronJob('* */5 * * * *', () => {
 module.exports = {
   queueMonitor,
 };
+
+
+// const { getExpiredActive, removeExpired } = require('../posts/post.controller');
+
+// //requie { postOnPlatforms } = require(social media platforms)
+// const postOnPlatforms = (post) => {
+//   const status = 'Post Succesful';
+//   switch (post.platform) {
+//     case 'twitter':
+//       //call twitter posting fn
+//       return;
+//     default:
+//       return;
+//   }
+// };
+
+// const CronJob = require('cron').CronJob;
+
+// const queueMonitor = new CronJob('*/5 * * * * *', () => {
+//   getExpiredActive()
+//   .then(posts => {
+//     posts.forEach(post => {
+//       postOnPlatforms(post)
+//     });
+//   })
+//   .then(removeExpired())
+//   .catch(err => console.error(err));
+// }, null, true, 'America/Los_Angeles');
+
+// module.exports = {
+//   queueMonitor,
+// };

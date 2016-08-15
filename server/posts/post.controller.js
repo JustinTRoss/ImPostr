@@ -2,16 +2,14 @@ const Post = require('./post.model');
 
 //getExpiredActive
   //for worker to service
-const getExpiredActive = (cb) => {
-  Post.findAll({
+const getExpiredActive = () => {
+  return Post.findAll({
     where: {
       isActive: true,
       expires: {
         $lt: new Date(),
       },
     },
-  }).then(expiredActive => {
-    cb(expiredActive);
   });
 };
 

@@ -1,4 +1,6 @@
-DS_Store
+.DS_Store
+/client/.DS_Store
+/client/style/.DS_Store
 *.log
 node_modules
 
@@ -8,6 +10,7 @@ node_modules
 
 ## creds
 __cutestuff.js
+/server/config/config.js
 
 ## Dockerfile has creds on it
 Dockerfile

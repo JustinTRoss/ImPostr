@@ -11,18 +11,7 @@ export const CHANGE_FORM_TYPE = 'CHANGE_FORM_TYPE';
 export const RECEIVE_JWT_FAILURE = 'RECEIVE_JWT_FAILURE';
 export const RECEIVE_JWT_SUCCESS = 'RECEIVE_JWT_SUCCESS';
 
-export const receiveJWTSuccess = () => {
-  return {
-    type: RECEIVE_JWT_SUCCESS,
-  }
-}
-
-export const receiveJWTFailure = () => {
-  return {
-    type: RECEIVE_JWT_FAILURE,
-  }
-}
-
+/**********ASYNC START AND END**********/
 
 export const requestStart = () => {
   return {
@@ -42,41 +31,20 @@ export const receiveFailure = ({ username, formName}) => {
   };
 };
 
-export const updateFormValue = ( formData, formName ) => {
+/**********JWT AND COOKIE**********/
+
+export const receiveJWTSuccess = () => {
   return {
-    type: UPDATE_FORM_VALUE,
-    formData,
-    formName,
+    type: RECEIVE_JWT_SUCCESS,
   }
 }
 
-export const changeFormType = ( formType ) => {
+export const receiveJWTFailure = () => {
   return {
-    type: CHANGE_FORM_TYPE,
-    formType,
+    type: RECEIVE_JWT_FAILURE,
   }
 }
 
-export const receiveLogin = ({ userId }) => {
-  return {
-    type: RECEIVE_USER_LOGIN,
-    userId,
-  };
-};
-
-export const receiveSignup = ({ userId }) => {
-  return {
-    type: RECEIVE_USER_SIGNUP,
-    userId,
-  };
-};
-
-
-export const receiveLogout = () => {
-  return {
-    type: RECEIVE_USER_LOGOUT,
-  };
-};
 
 export const checkJWTWithServer = () => {
   return dispatch => {
@@ -102,6 +70,32 @@ export const checkJWTWithServer = () => {
     }
   }
 }
+
+/**********FORMS***********/
+
+export const updateFormValue = ( formData, formName ) => {
+  return {
+    type: UPDATE_FORM_VALUE,
+    formData,
+    formName,
+  }
+}
+
+export const changeFormType = ( formType ) => {
+  return {
+    type: CHANGE_FORM_TYPE,
+    formType,
+  }
+}
+
+/**********LOGIN**********/
+
+export const receiveLogin = ({ userId }) => {
+  return {
+    type: RECEIVE_USER_LOGIN,
+    userId,
+  };
+};
 
 export const sendLoginToServer = ( formData ) => {
   return dispatch => {
@@ -132,6 +126,15 @@ export const sendLoginToServer = ( formData ) => {
   };
 };
 
+/**********SIGNUP**********/
+
+export const receiveSignup = ({ userId }) => {
+  return {
+    type: RECEIVE_USER_SIGNUP,
+    userId,
+  };
+};
+
 export const sendSignupToServer = ( formData ) => {
   return dispatch => {
     dispatch(requestStart());
@@ -158,6 +161,14 @@ export const sendSignupToServer = ( formData ) => {
         console.error(err, 'error signing up');
         dispatch(receiveFailure(formData));
       });
+  };
+};
+
+/**********LOGOUT**********/
+
+export const receiveLogout = () => {
+  return {
+    type: RECEIVE_USER_LOGOUT,
   };
 };
 

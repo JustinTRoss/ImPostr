@@ -14,20 +14,20 @@ const Login = ({ username, handleFieldChange, password, handleLoginSubmit }) => 
             onChange={handleFieldChange}
             hintText="username"
             type="text"
-            hintStyle={{fontSize: '0.88em', bottom: '7px'}}
-            inputStyle={{fontSize: '0.88em', bottom: '7px'}}
-            style={{ width: '80%', height: '80%' }}
+            hintStyle={{fontSize: '1em', bottom: '6px',}}
+            inputStyle={{fontSize: '1em', bottom: '3px',}}
+            style={{ width: '90%', height: '80%', backgroundColor: 'white', }}
             />
           <TextField
             className="AuthPassword"
             name="password"
             value={password}
             onChange={handleFieldChange}
-            hintStyle={{fontSize: '0.88em', bottom: '7px'}}
-            inputStyle={{fontSize: '0.88em', bottom: '7px'}}
+            hintStyle={{fontSize: '1em', bottom: '6px',}}
+            inputStyle={{fontSize: '1em', bottom: '3px',}}
             hintText="password"
             type="password"
-            style={{ width: '80%', height: '80%' }}
+            style={{ width: '90%', height: '80%', backgroundColor: 'white', }}
             />
         </div>
         <div className="AuthButton">

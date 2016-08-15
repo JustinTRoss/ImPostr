@@ -39,6 +39,27 @@ export const requestPlatformLogout = (platform) => {
   };
 };
 
+export const requestFacebookLogout = () => {
+  return dispatch => {
+    FB.getLoginStatus(response => {
+      if (response.status === 'connected') {
+        FB.logout();
+      }
+      dispatch(requestPlatformLogout('facebook'));
+    });
+  };
+};
+
+export const selectPlatformLogout = (platform) => {
+  return dispatch => {
+    if (platform === 'facebook') {
+      dispatch(requestFacebookLogout());
+    } else {
+      dispatch(requestPlatformLogout(platform));
+    }
+  };
+};
+
 export const toggleModal = (platform) => ({
   type: TOGGLE_MODAL,
   platform,
