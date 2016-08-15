@@ -1,6 +1,49 @@
+.AuthAndSplash {
+  display: inline-block;
+  background-clip: border-box;
+  background-color: blanchedalmond;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+  font-family: "Source Sans Pro";
+  width: 45%;
+  height: 23%;
+  position: absolute;
+  top: 0;
+  bottom: -18%;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.Splashy {
+  font-family: "Source Sans Pro";
+  font-weight: 300;
+  text-align: center;
+  padding-bottom: 12px;
+}
+
+#impostor-title {
+  font-size: 24px;
+  font-weight: 900;
+}
+
+#evan-quote {
+  font-style:italic;
+  font-size: 16px;
+}
+
 .AuthContainer {
   display: flex;
   flex-direction: row;
+}
+
+.AuthParent {
+  display: inline-block;
+  background-clip: border-box;
+  background-color: aliceblue;
+  padding: 20px;
+  border-radius: 5px;
 }
 
 .AuthFields {

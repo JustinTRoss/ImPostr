@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { updateFieldValue, changeFormType, sendLoginToServer, sendSignupToServer } from '../actions/UserLoginActions';
-
+import Splash from '../components/Splash';
 import Login from '../components/Login';
 import Signup from '../components/Signup';
 
@@ -46,15 +46,22 @@ class Auth extends React.Component {
         }}
       />;
 
+    let textToRender = (this.props.isLogin) === 'login' ?
+      <div className="splashfonts">
+        <div>Do you want to feel like Evan?</div>
+        <div><a onClick={() => this.props.handleFormChange('signup')}>Sign up today!</a></div>
+      </div>
+      :
+      <div className="splashfonts">
+        <div>Already enjoying yourself?</div>
+        <div><a onClick={() => this.props.handleFormChange('login')}>Log in now!</a></div>
+      </div>;
+
     return (
-      <div>
-        <button onClick={() => this.props.handleFormChange('signup')}>
-          Signup
-        </button>
-        <button onClick={() => this.props.handleFormChange('login')}>
-          Login
-        </button>
+      <div className="AuthAndSplash">
+        <Splash />
         {childToRender}
+        {textToRender}
       </div>
     );
   }
@@ -75,11 +82,11 @@ const mapDispatchToProps = dispatch => {
     },
     handleLoginSubmit: formData => {
       //this reference lost - Fix manana
-      dispatch(sendLoginToServer(formData)); 
+      dispatch(sendLoginToServer(formData));
     },
     handleSignupSubmit: formData => {
       //this reference lost - Fix manana
-      dispatch(sendSignupToServer(formData)); 
+      dispatch(sendSignupToServer(formData));
     },
 
   };
