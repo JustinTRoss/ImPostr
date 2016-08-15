@@ -4,57 +4,42 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 const Login = ({ username, handleFieldChange, password, handleLoginSubmit }) => {
   return (
-    <div className="AuthContainer">
-      <div className="AuthFields">
-        <TextField
-          className="AuthUser"
-          name="username"
-          value={username}
-          onChange={handleFieldChange}
-          hintText="username"
-          type="text"
-          hintStyle={{fontSize: '0.88em'}}
-          style={{ width: '80%' }}
-          />
-        <TextField
-          className="AuthPassword"
-          name="password"
-          value={password}
-          onChange={handleFieldChange}
-          hintStyle={{fontSize: '0.88em'}}
-          hintText="password"
-          type="password"
-          style={{ width: '80%' }}
-          />
-      </div>
-      <div className="AuthButton">
-        <RaisedButton
-          label="Log In"
-          backgroundColor="#7F7F7F"
-          />
+    <div className="AuthParent">
+      <div className="AuthContainer">
+        <div className="AuthFields">
+          <TextField
+            className="AuthUser"
+            name="username"
+            value={username}
+            onChange={handleFieldChange}
+            hintText="username"
+            type="text"
+            hintStyle={{fontSize: '0.88em', bottom: '7px'}}
+            inputStyle={{fontSize: '0.88em', bottom: '7px'}}
+            style={{ width: '80%', height: '80%' }}
+            />
+          <TextField
+            className="AuthPassword"
+            name="password"
+            value={password}
+            onChange={handleFieldChange}
+            hintStyle={{fontSize: '0.88em', bottom: '7px'}}
+            inputStyle={{fontSize: '0.88em', bottom: '7px'}}
+            hintText="password"
+            type="password"
+            style={{ width: '80%', height: '80%' }}
+            />
+        </div>
+        <div className="AuthButton">
+          <RaisedButton
+            label="Log In"
+            backgroundColor="#e6e6e6"
+            onClick={handleLoginSubmit}
+            />
+        </div>
       </div>
     </div>
   );
 };
 
 export default Login;
-
-
-/*
-return (
-  <div>
-    <input
-      name="username"
-      value={username}
-      onChange={handleFieldChange}
-    />
-    <input
-      type="password"
-      name="password"
-      value={password}
-      onChange={handleFieldChange}
-    />
-    <button onClick={handleLoginSubmit}> Log In </button>
-  </div>
-);
-*/
