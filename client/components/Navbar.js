@@ -2,14 +2,16 @@ import React from 'react';
 
 const Navbar = ({ receiveLogout }) => {
 	return (
-		<div>
-      Navbar
-      <button
-        onClick={receiveLogout}
-      >
-        Logout
-      </button>
-    </div>
+		<Toolbar>
+      <ToolbarGroup firstChild={true}>
+
+      </ToolbarGroup>
+      <ToolbarGroup lastChild={true}>
+        <RaisedButton label="Primary" primary={true} onClick={receiveLogout}>
+          Logout
+        </RaisedButton>
+      </ToolbarGroup>
+    </Toolbar>
   );
 };
 

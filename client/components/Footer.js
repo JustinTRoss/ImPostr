@@ -1,10 +1,13 @@
 import React from 'react';
+import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 
 const Footer = () => {
 	return (
-		<div>
-      Footer
-		</div>
+		<Toolbar>
+      <ToolbarGroup firstChild={true}>
+        Footer the police
+      </ToolbarGroup>
+		</Toolbar>
 	);
 };
 

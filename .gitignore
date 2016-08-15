@@ -8,6 +8,7 @@ node_modules
 
 ## creds
 __cutestuff.js
+/server/config/config.js
 
 ## Dockerfile has creds on it
 Dockerfile
