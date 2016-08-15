@@ -7,8 +7,8 @@
   text-align: center;
   font-family: "Source Sans Pro";
   width: 55%;
-  height: 70%;
-  position: absolute;
+/*  max-height: 500px;
+*/  position: absolute;
   top: 0;
   bottom: -10%;
   left: 0;
@@ -119,8 +119,15 @@
 
 /**********NAVBAR**********/
 
-.logoSmall {
+.logoSmallAuth {
   background-image: url('./whiteIcon.png');
+  background-size: 61px 55px;
+  width: 61px;
+  height: 55px;
+}
+
+.logoSmallHome {
+  background-image: url('./bigBlack.png');
   background-size: 61px 55px;
   width: 61px;
   height: 55px;

@@ -28,18 +28,22 @@ function userLogout(req, res) {
 }
 
 function userSignup(req, res) {
-  return util.hashPassword(req.body.password)
-  .then(hashedPassword => {
-    req.body.password = hashedPassword;
-    return User.create(req.body);
-  })
-  .then(user => {
-    let { userId } = user;
-    const token = jwt.encode({userId}, config.secret);
-    res.json({
-      token,
-    });
-  });
+  if (req.body.password.length >= 8 && req.body.username.length >= 8) {
+    return util.hashPassword(req.body.password)
+    .then(hashedPassword => {
+      req.body.password = hashedPassword;
+      return User.create(req.body);
+    })
+    .then(user => {
+      let { userId } = user;
+      const token = jwt.encode({userId}, config.secret);
+      res.json({
+        token,
+      });
+    });    
+  } else {
+    res.status(500).send({error: 'http://apne.ws/2brrH0G'});
+  }
 }
 
 function userLogin(req, res) {
