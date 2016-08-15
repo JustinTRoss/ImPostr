@@ -10,7 +10,6 @@ require('./config/routes')(app, config);
 
 require('./workers/postGenerator');
 require('./workers/queueMonitor');
-// require('./platformServices/TwitterApi/twitter.controller');
 
 app.use(express.static(publicDir));
 

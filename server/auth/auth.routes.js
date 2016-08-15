@@ -8,7 +8,7 @@ AuthRouter.get('/linkedin/callback', AuthCtrl.saveLinkedInToken);
 AuthRouter.get('/facebook', passport.authenticate('facebook', { state: 'asodfijasoidfj' }));
 AuthRouter.get('/facebook/callback', AuthCtrl.saveFacebookToken);
 
-AuthRouter.get('/twitter', passport.authenticate('twitter', {session: false}));
-AuthRouter.get('/twitter/callback', passport.authenticate('twitter', {session: false}), AuthCtrl.saveTwitterTokens);
+AuthRouter.get('/twitter', passport.authenticate('twitter', { session: false }));
+AuthRouter.get('/twitter/callback', passport.authenticate('twitter', { session: false }), AuthCtrl.saveTwitterTokens);
 
 module.exports = AuthRouter;

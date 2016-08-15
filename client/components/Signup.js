@@ -12,7 +12,9 @@ const Signup = ({ username, password, handleFieldChange, handleSignupSubmit }) =
             name="username"
             value={username}
             onChange={handleFieldChange}
-            hintText="username"
+            hintText="Username"
+            pattern=".{5,10}"
+            required
             type="text"
             hintStyle={{fontSize: '1em', bottom: '6px', fontWeight: 'normal'}}
             inputStyle={{fontSize: '1em', bottom: '3px', fontWeight: 'normal'}}
@@ -25,7 +27,7 @@ const Signup = ({ username, password, handleFieldChange, handleSignupSubmit }) =
             onChange={handleFieldChange}
             hintStyle={{fontSize: '1em', bottom: '6px'}}
             inputStyle={{fontSize: '1em', bottom: '3px'}}
-            hintText="password"
+            hintText="Password"
             type="password"
             style={{ width: '90%', height: '80%', backgroundColor: 'white', }}
             />

@@ -8,17 +8,20 @@ import {
   CHANGE_FORM_TYPE,
   RECEIVE_JWT_FAILURE,
   RECEIVE_JWT_SUCCESS,
-
+  THROW_FIELD_VALIDATION_ERROR,
 } from '../actions/UserLoginActions';
+
 const UserObject = (state = {
   userId: '',
   isLogin: 'login',
   loggedIn: false,
-  login: {  
+  login: {
+    error: '',  
     username: '',
     password: '',
   },
   signup: {
+    error: '',  
     username: '',
     password: '',
   },
@@ -32,6 +35,23 @@ const UserObject = (state = {
       return Object.assign({}, state, {
         loggedIn: true,
       })
+    case THROW_FIELD_VALIDATION_ERROR:
+      const errorObj = {
+        error:`${action.fieldName} must be greater than 8 characters`,
+        username: '',
+        password: '',
+      }
+      if (action.formName === 'login') {
+        return Object.assign({}, state, {
+          login:errorObj,
+        });
+      } else if (action.formName === 'signup') {
+        return Object.assign({}, state, {
+          signup: errorObj,
+        });
+      } else {
+        return state;
+      }
     case CHANGE_FORM_TYPE:
       return Object.assign({}, state, {
         isLogin: action.formType,

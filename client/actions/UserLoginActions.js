@@ -10,6 +10,8 @@ export const UPDATE_FORM_VALUE = 'UPDATE_FORM_VALUE';
 export const CHANGE_FORM_TYPE = 'CHANGE_FORM_TYPE';
 export const RECEIVE_JWT_FAILURE = 'RECEIVE_JWT_FAILURE';
 export const RECEIVE_JWT_SUCCESS = 'RECEIVE_JWT_SUCCESS';
+export const THROW_FIELD_VALIDATION_ERROR = 'THROW_FIELD_VALIDATION_ERROR';
+
 
 /**********ASYNC START AND END**********/
 
@@ -72,6 +74,14 @@ export const checkJWTWithServer = () => {
 }
 
 /**********FORMS***********/
+
+export const throwFieldValidationError = (formData, fieldName, formName) => {
+  return {
+    type: THROW_FIELD_VALIDATION_ERROR,
+    fieldName,
+    formName,
+  }
+}
 
 export const updateFormValue = ( formData, formName ) => {
   return {
@@ -137,30 +147,36 @@ export const receiveSignup = ({ userId }) => {
 
 export const sendSignupToServer = ( formData ) => {
   return dispatch => {
-    dispatch(requestStart());
-    dispatch(updateFormValue(formData, 'signup'));
-    return fetch(`http://127.0.0.1:3000/user/signup`, {
-      method: 'POST',
-      body: JSON.stringify({
-        username: formData.username,
-        password: formData.password,
-      }),
-      headers: new Headers({
-        'Content-Type': 'application/json',
-      }),
-    })
-      // if successful SIGNUP
-      .then(response => response.json())
-      .then(jsonRes => {
-        window.localStorage.setItem('ImPostr-JWT', jsonRes.token);
-        document.cookie = `jwtStuff=${jsonRes.token}`;
-        dispatch(receiveSignup(jsonRes));
+    if (formData.username.length < 8) {
+      dispatch(throwFieldValidationError(formData, 'username', 'signup'));
+    } else if (formData.password.length < 8) {
+      dispatch(throwFieldValidationError(formData, 'username', 'signup'));
+    } else {
+      dispatch(requestStart());
+      dispatch(updateFormValue(formData, 'signup'));
+      return fetch(`http://127.0.0.1:3000/user/signup`, {
+        method: 'POST',
+        body: JSON.stringify({
+          username: formData.username,
+          password: formData.password,
+        }),
+        headers: new Headers({
+          'Content-Type': 'application/json',
+        }),
       })
-      // if failed SIGNUP
-      .catch(err => {
-        console.error(err, 'error signing up');
-        dispatch(receiveFailure(formData));
-      });
+        // if successful SIGNUP
+        .then(response => response.json())
+        .then(jsonRes => {
+          window.localStorage.setItem('ImPostr-JWT', jsonRes.token);
+          document.cookie = `jwtStuff=${jsonRes.token}`;
+          dispatch(receiveSignup(jsonRes));
+        })
+        // if failed SIGNUP
+        .catch(err => {
+          console.error(err, 'error signing up');
+          dispatch(receiveFailure(formData));
+        });
+    }
   };
 };
 

@@ -12,7 +12,7 @@ const Login = ({ username, handleFieldChange, password, handleLoginSubmit }) => 
             name="username"
             value={username}
             onChange={handleFieldChange}
-            hintText="username"
+            hintText="Username"
             type="text"
             hintStyle={{fontSize: '1em', bottom: '6px',}}
             inputStyle={{fontSize: '1em', bottom: '3px',}}
@@ -25,7 +25,7 @@ const Login = ({ username, handleFieldChange, password, handleLoginSubmit }) => 
             onChange={handleFieldChange}
             hintStyle={{fontSize: '1em', bottom: '6px',}}
             inputStyle={{fontSize: '1em', bottom: '3px',}}
-            hintText="password"
+            hintText="Password"
             type="password"
             style={{ width: '90%', height: '80%', backgroundColor: 'white', }}
             />
