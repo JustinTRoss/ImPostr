@@ -5,6 +5,7 @@ import PlatformListEntry from './PlatformListEntry';
 const PlatformList = ({
   platforms,
   handleFieldChange,
+  validateForm,
   onLogoutClick,
   onToggleModalClick,
   onSetSettingsClick,
@@ -15,11 +16,12 @@ const PlatformList = ({
         <ListGroup>
           {platforms.map(platform =>
             <PlatformListEntry
+              platform={platform}
               handleFieldChange={handleFieldChange}
+              validateForm={validateForm}
               onLogoutClick={onLogoutClick}
               onToggleModalClick={onToggleModalClick}
               onSetSettingsClick={onSetSettingsClick}
-              platform={platform}
             />)}
         </ListGroup>
       </Panel>

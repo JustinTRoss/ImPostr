@@ -1,5 +1,6 @@
 import {
   FIELD_CHANGE,
+  VALIDATE_FORM,
   LOGIN_PLATFORM,
   LOGOUT_PLATFORM,
   TOGGLE_MODAL,
@@ -51,6 +52,33 @@ const PlatformListEntry = (state, action) => {
         default:
           return state;
       }
+    case VALIDATE_FORM:
+      const { isActive, interests, interval } = action.fields;
+      let feedback = '';
+      if (isActive && !interests) {
+        feedback = 'Please enter interests';
+      } else if (isActive && !(interval >= 1) && !(interval <= 25) && !(typeof interval === 'number')) {
+        feedback = 'Please select posts per week 1 - 25';
+      }
+
+      if (feedback === '') {
+        const tempIsValid = Object.assign({}, state.settings, {
+          isValid: true,
+          formFeedback: '',
+        });
+        return Object.assign({}, state, {
+          settings: tempIsValid,
+        });
+      }
+
+      const tempForm = Object.assign({}, state.settings, {
+        formFeedback: feedback,
+        isValid: false,
+      });
+      return Object.assign({}, state, {
+        settings: tempForm,
+      });
+
     default:
       return state;
   }
@@ -66,7 +94,9 @@ const PlatformList = (state = [
     settings: {
       isActive: false,
       interests: '',
-      interval: 0,
+      interval: 5,
+      isValid: false,
+      formFeedback: '',
     },
   },
   {
@@ -77,7 +107,9 @@ const PlatformList = (state = [
     settings: {
       isActive: false,
       interests: '',
-      interval: 0,
+      interval: 5,
+      isValid: false,
+      formFeedback: '',
     },
   },
   {
@@ -88,7 +120,9 @@ const PlatformList = (state = [
     settings: {
       isActive: false,
       interests: '',
-      interval: 0,
+      interval: 5,
+      isValid: false,
+      formFeedback: '',
     },
   },
 ], action) => {

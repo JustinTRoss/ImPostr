@@ -16,7 +16,7 @@ const fakePostGenerator = new CronJob('* * * * * *', () => {
   const topic = topics[counter % topics.length];
 
   const date = new Date();
-  const NUM_DAYS = 1;
+  const NUM_DAYS = 0;
   const MILLISECOND_TO_DAY = 86400000;
   const expires = new Date(date.setTime(date.getTime() + NUM_DAYS * MILLISECOND_TO_DAY));
 
@@ -26,7 +26,7 @@ const fakePostGenerator = new CronJob('* * * * * *', () => {
     isActive,
     message: `yolo?${topic}`,
     expires,
-    userUserId: 50,
+    userUserId: 19,
   };
 
   addNew(post, addNewPostStatus => {
