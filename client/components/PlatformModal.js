@@ -18,7 +18,7 @@ const PlatformModal = ({
   onToggleModalClick,
   onSetSettingsClick,
 }) => {
-  const { isActive, interests, interval, isValid, formFeedback } = platform.settings;
+  const { isActive, interests, interval } = platform.settings;
 
   return (
     <Paper>
@@ -46,10 +46,7 @@ const PlatformModal = ({
           max={25}
           step={1}
           value={interval}
-          onChange={(x, value) => {
-            handleFieldChange(platform.platform, 'interval', value);
-            validateForm(platform.platform, platform.settings);
-          }}
+          onChange={(x, value) => { handleFieldChange(platform.platform, 'interval', value); }}
         />
         <span>{`${interval} posts per week`}</span>
         <RaisedButton
@@ -61,9 +58,7 @@ const PlatformModal = ({
           label="Save"
           primary={true}
           onClick={() => {
-            if (isValid) {
-              onSetSettingsClick(platform, platform.settings);
-            }
+            onSetSettingsClick(platform, platform.settings);
             onToggleModalClick(platform.platform);
           }}
         />
