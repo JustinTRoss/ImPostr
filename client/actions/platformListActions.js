@@ -3,10 +3,18 @@ import { polyfill } from 'es6-promise';
 
 polyfill();
 
+export const FIELD_CHANGE = 'FIELD_CHANGE';
 export const LOGIN_PLATFORM = 'LOGIN_PLATFORM';
 export const LOGOUT_PLATFORM = 'LOGOUT_PLATFORM';
 export const TOGGLE_MODAL = 'TOGGLE_MODAL';
 export const RECEIVE_SETTINGS_FIELDS = 'RECEIVE_SETTINGS_FIELDS';
+
+export const handleFieldChange = (platform, field, data) => ({
+  type: FIELD_CHANGE,
+  platform,
+  field,
+  data,
+});
 
 export const receivePlatformLogin = (platform) => ({
   type: LOGIN_PLATFORM,

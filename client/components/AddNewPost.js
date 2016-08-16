@@ -12,13 +12,10 @@ injectTapEventPlugin();
 
 const AddNewPost = ({
   fields,
-  handleDateChange,
-  handleTimeChange,
-  handleMessageChange,
-  handleFacebookChange,
-  handleLinkedinChange,
-  handleTwitterChange,
+  platforms,
+  handleFieldChange,
   handleFormSubmit,
+  validateForm,
   resetForm,
 }) => {
   const {
@@ -28,7 +25,14 @@ const AddNewPost = ({
     facebook,
     linkedin,
     twitter,
+    isValid,
+    formFeedback,
   } = fields;
+
+  if (isValid) {
+    handleFormSubmit(fields);
+    resetForm();
+  }
 
   return (
     <Paper>
@@ -39,7 +43,7 @@ const AddNewPost = ({
         <TextField
           hintText="Enter a new message"
           value={message}
-          onChange={(e) => { handleMessageChange(e.target.value); }}
+          onChange={({ target }) => { handleFieldChange('message', target.value); }}
         />
       </Paper>
       <Paper>
@@ -47,12 +51,12 @@ const AddNewPost = ({
           <DatePicker
             hintText="Pick a date"
             value={date}
-            onChange={(x, date) => { handleDateChange(date); }}
+            onChange={(x, date) => { handleFieldChange('date', date); }}
           />
           <TimePicker
             hintText="Pick a time"
             value={time}
-            onChange={(x, time) => { handleTimeChange(time); }}
+            onChange={(x, time) => { handleFieldChange('time', time); }}
 
           />
         </Paper>
@@ -62,8 +66,9 @@ const AddNewPost = ({
             <ListItem
               leftCheckbox={
                 <Checkbox
+                  disabled={!platforms.filter(platform => platform.platform === 'facebook')[0].userPlatformLoggedIn}
                   checked={facebook}
-                  onCheck={(e) => { handleFacebookChange(e.target.checked); }}
+                  onCheck={({ target }) => { handleFieldChange('facebook', target.checked); }}
                 />
               }
               primaryText="Facebook"
@@ -71,8 +76,9 @@ const AddNewPost = ({
             <ListItem
               leftCheckbox={
                 <Checkbox
+                  disabled={!platforms.filter(platform => platform.platform === 'linkedin')[0].userPlatformLoggedIn}
                   defaultChecked={linkedin}
-                  onCheck={(e) => { handleLinkedinChange(e.target.checked); }}
+                  onCheck={({ target }) => { handleFieldChange('linkedin', target.checked); }}
                 />
               }
               primaryText="LinkedIn"
@@ -80,28 +86,29 @@ const AddNewPost = ({
             <ListItem
               leftCheckbox={
                 <Checkbox
+                  disabled={!platforms.filter(platform => platform.platform === 'twitter')[0].userPlatformLoggedIn}
                   defaultChecked={twitter}
-                  onCheck={(e) => { handleTwitterChange(e.target.checked); }}
+                  onCheck={({ target }) => { handleFieldChange('twitter', target.checked); }}
                 />
               }
               primaryText="Twitter"
             />
           </List>
         </Paper>
+        <Paper>{formFeedback}</Paper>
         <Paper>
           <RaisedButton
             label="Post"
             primary={true}
             onClick={() => {
-              handleFormSubmit(fields);
-              resetForm()
+              validateForm(fields);
             }}
           />
           <RaisedButton
             label="Cancel"
             secondary={true}
             onClick={() => {
-              resetForm()
+              resetForm();
             }}
           />
         </Paper>

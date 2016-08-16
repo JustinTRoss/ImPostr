@@ -5,46 +5,23 @@ import { requestQueue } from './postQueueActions';
 
 polyfill();
 
-export const DATE_CHANGE = 'DATE_CHANGE';
-export const TIME_CHANGE = 'TIME_CHANGE';
-export const MESSAGE_CHANGE = 'MESSAGE_CHANGE';
-export const FACEBOOK_CHANGE = 'FACEBOOK_CHANGE';
-export const LINKEDIN_CHANGE = 'LINKEDIN_CHANGE';
-export const TWITTER_CHANGE = 'TWITTER_CHANGE';
+export const FIELD_CHANGE = 'FIELD_CHANGE';
 export const RESET_FORM = 'RESET_FORM';
+export const VALIDATE_FORM = 'VALIDATE_FORM';
 
-export const handleDateChange = (date) => ({
-  type: DATE_CHANGE,
-  date,
-});
-
-export const handleTimeChange = (time) => ({
-  type: TIME_CHANGE,
-  time,
-});
-
-export const handleMessageChange = (message) => ({
-  type: MESSAGE_CHANGE,
-  message,
-});
-
-export const handleFacebookChange = (status) => ({
-  type: FACEBOOK_CHANGE,
-  status,
-});
-
-export const handleLinkedinChange = (status) => ({
-  type: LINKEDIN_CHANGE,
-  status,
-});
-
-export const handleTwitterChange = (status) => ({
-  type: TWITTER_CHANGE,
-  status,
+export const handleFieldChange = (field, data) => ({
+  type: FIELD_CHANGE,
+  field,
+  data,
 });
 
 export const resetForm = () => ({
   type: RESET_FORM,
+});
+
+export const validateForm = (fields) => ({
+  type: VALIDATE_FORM,
+  fields,
 });
 
 export const handleFormSubmit = (post) => {

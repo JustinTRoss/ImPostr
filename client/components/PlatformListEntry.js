@@ -5,6 +5,7 @@ import PlatformModal from './PlatformModal';
 
 const PlatformListEntry = ({
   platform,
+  handleFieldChange,
   onLogoutClick,
   onToggleModalClick,
   onSetSettingsClick,
@@ -42,6 +43,7 @@ const PlatformListEntry = ({
       <div>
         <PlatformModal
           platform={platform}
+          handleFieldChange={handleFieldChange}
           onToggleModalClick={onToggleModalClick}
           onSetSettingsClick={onSetSettingsClick}
         />

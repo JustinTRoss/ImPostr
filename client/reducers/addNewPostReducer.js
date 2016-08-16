@@ -1,11 +1,7 @@
 import {
-  DATE_CHANGE,
-  TIME_CHANGE,
-  MESSAGE_CHANGE,
-  FACEBOOK_CHANGE,
-  LINKEDIN_CHANGE,
-  TWITTER_CHANGE,
+  FIELD_CHANGE,
   RESET_FORM,
+  VALIDATE_FORM,
 } from '../actions/addNewPostActions';
 
 const addNewPost = (state = {
@@ -15,32 +11,63 @@ const addNewPost = (state = {
   facebook: false,
   linkedin: false,
   twitter: false,
+  isValid: false,
+  formFeedback: '',
 }, action) => {
   switch (action.type) {
-    case DATE_CHANGE:
+    case FIELD_CHANGE:
+      switch (action.field) {
+        case 'date':
+          return Object.assign({}, state, {
+            date: action.data,
+          });
+        case 'time':
+          return Object.assign({}, state, {
+            time: action.data,
+          });
+        case 'message':
+          return Object.assign({}, state, {
+            message: action.data,
+          });
+        case 'facebook':
+          return Object.assign({}, state, {
+            facebook: action.data,
+          });
+        case 'linkedin':
+          return Object.assign({}, state, {
+            linkedin: action.data,
+          });
+        case 'twitter':
+          return Object.assign({}, state, {
+            twitter: action.data,
+          });
+        default:
+          return state;
+      }
+    case VALIDATE_FORM:
+      const { date, time, message, facebook, linkedin, twitter } = action.fields;
+      let feedback = '';
+      if (!message) {
+        feedback = 'Please enter a message';
+      } else if (!date) {
+        feedback = 'Please enter a date';
+      } else if (new Date(date) < new Date()) {
+        feedback = 'Please enter a date in the future';
+      } else if (!time) {
+        feedback = 'Please enter a time';
+      } else if (!facebook && !linkedin && !twitter) {
+        feedback = 'Please select atleast one platform you are connected to';
+      }
+
+      if (feedback === '') {
+        return Object.assign({}, state, {
+          isValid: true,
+        });
+      }
       return Object.assign({}, state, {
-        date: action.date,
+        formFeedback: feedback,
       });
-    case TIME_CHANGE:
-      return Object.assign({}, state, {
-        time: action.time,
-      });
-    case MESSAGE_CHANGE:
-      return Object.assign({}, state, {
-        message: action.message,
-      });
-    case FACEBOOK_CHANGE:
-      return Object.assign({}, state, {
-        facebook: action.status,
-      });
-    case LINKEDIN_CHANGE:
-      return Object.assign({}, state, {
-        linkedin: action.status,
-      });
-    case TWITTER_CHANGE:
-      return Object.assign({}, state, {
-        twitter: action.status,
-      });
+
     case RESET_FORM:
       return {
         date: null,
@@ -49,6 +76,8 @@ const addNewPost = (state = {
         facebook: false,
         linkedin: false,
         twitter: false,
+        isValid: false,
+        formFeedback: '',
       };
     default:
       return state;

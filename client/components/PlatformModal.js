@@ -1,76 +1,69 @@
 import React from 'react';
-import { Button, Modal, Checkbox } from 'react-bootstrap';
+
+import RaisedButton from 'material-ui/RaisedButton';
+import { List, ListItem } from 'material-ui/List';
+import Subheader from 'material-ui/Subheader';
+import Checkbox from 'material-ui/Checkbox';
+import TextField from 'material-ui/TextField';
+import DatePicker from 'material-ui/DatePicker';
+import TimePicker from 'material-ui/TimePicker';
+import Paper from 'material-ui/Paper';
+import Dialog from 'material-ui/Dialog';
+import Slider from 'material-ui/Slider';
 
 const PlatformModal = ({
   platform,
+  handleFieldChange,
   onToggleModalClick,
   onSetSettingsClick,
 }) => {
-  const settings = {
-    interests: platform.settings.interests,
-    interval: platform.settings.interval,
-    isActive: platform.settings.isActive,
-  };
+  const { isActive, interests, interval } = platform.settings;
+
   return (
-    <div>
-      <Button
-        bsStyle="primary"
-        bsSize="small"
+    <Paper>
+      <RaisedButton
+        label="Change settings"
+        primary={true}
         onClick={() => { onToggleModalClick(platform.platform); }}
+      />
+      <Dialog
+        title={`${platform.platform}'s settings`}
+        open={platform.showModal}
       >
-        Change settings
-      </Button>
-      <Modal show={platform.showModal}>
-        <Modal.Header>
-          <Modal.Title>{`${platform.platform}'s settings`}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <form>
-            <div>
-              <label>Topics of interest</label>
-              <div>
-                <input
-                  type="text"
-                  defaultValue={settings.interests}
-                  onChange={(e) => { settings.interests = e.target.value; }}
-                />
-              </div>
-            </div>
-            <Checkbox
-              defaultChecked={settings.isActive}
-              onChange={(e) => { settings.isActive = e.target.checked; }}
-            >
-              Autopost mode
-            </Checkbox>
-            <div>
-              <label>Posts per week</label>
-              <div>
-                <input
-                  type="text"
-                  defaultValue={settings.interval}
-                  onChange={(e) => { settings.interval = e.target.value; }}
-                />
-              </div>
-            </div>
-          </form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            onClick={() => { onToggleModalClick(platform.platform); }}
-          >
-            Close
-          </Button>
-          <Button
-            onClick={() => {
-              onToggleModalClick(platform.platform);
-              onSetSettingsClick(platform, settings);
-            }}
-          >
-            Save
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </div>
+        <TextField
+          hintText="Enter your interests: NBA, Olympics, Wall Street"
+          value={interests}
+          onChange={({ target }) => { handleFieldChange(platform.platform, 'interests', target.value); }}
+        />
+        <Checkbox
+          label="Autopost mode"
+          checked={isActive}
+          onCheck={({ target }) => { handleFieldChange(platform.platform, 'isActive', target.checked); }}
+        />
+        <Slider
+          min={0}
+          max={25}
+          step={1}
+          defaultValue={5}
+          value={interval}
+          onChange={(x, value) => { handleFieldChange(platform.platform, 'interval', value); }}
+        />
+        <span>{`${interval} posts per week`}</span>
+        <RaisedButton
+          label="Cancel"
+          secondary={true}
+          onClick={() => { onToggleModalClick(platform.platform); }}
+        />
+        <RaisedButton
+          label="Save"
+          primary={true}
+          onClick={() => {
+            onToggleModalClick(platform.platform);
+            // onSetSettingsClick(platform, settings);
+          }}
+        />
+      </Dialog>
+    </Paper>
   );
 };
 
