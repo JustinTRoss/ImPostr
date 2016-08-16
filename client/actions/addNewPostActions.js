@@ -7,6 +7,7 @@ polyfill();
 
 export const FIELD_CHANGE = 'FIELD_CHANGE';
 export const RESET_FORM = 'RESET_FORM';
+export const VALIDATE_FORM = 'VALIDATE_FORM';
 
 export const handleFieldChange = (field, data) => ({
   type: FIELD_CHANGE,
@@ -16,6 +17,11 @@ export const handleFieldChange = (field, data) => ({
 
 export const resetForm = () => ({
   type: RESET_FORM,
+});
+
+export const validateForm = (fields) => ({
+  type: VALIDATE_FORM,
+  fields,
 });
 
 export const handleFormSubmit = (post) => {

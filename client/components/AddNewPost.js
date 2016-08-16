@@ -12,8 +12,10 @@ injectTapEventPlugin();
 
 const AddNewPost = ({
   fields,
+  platforms,
   handleFieldChange,
   handleFormSubmit,
+  validateForm,
   resetForm,
 }) => {
   const {
@@ -23,6 +25,8 @@ const AddNewPost = ({
     facebook,
     linkedin,
     twitter,
+    isValid,
+    formFeedback,
   } = fields;
 
   return (
@@ -57,6 +61,7 @@ const AddNewPost = ({
             <ListItem
               leftCheckbox={
                 <Checkbox
+                  disabled={!platforms.filter(platform => platform.platform === 'facebook')[0].userPlatformLoggedIn}
                   checked={facebook}
                   onCheck={({ target }) => { handleFieldChange('facebook', target.checked); }}
                 />
@@ -66,6 +71,7 @@ const AddNewPost = ({
             <ListItem
               leftCheckbox={
                 <Checkbox
+                  disabled={!platforms.filter(platform => platform.platform === 'linkedin')[0].userPlatformLoggedIn}
                   defaultChecked={linkedin}
                   onCheck={({ target }) => { handleFieldChange('linkedin', target.checked); }}
                 />
@@ -75,6 +81,7 @@ const AddNewPost = ({
             <ListItem
               leftCheckbox={
                 <Checkbox
+                  disabled={!platforms.filter(platform => platform.platform === 'twitter')[0].userPlatformLoggedIn}
                   defaultChecked={twitter}
                   onCheck={({ target }) => { handleFieldChange('twitter', target.checked); }}
                 />
@@ -83,13 +90,15 @@ const AddNewPost = ({
             />
           </List>
         </Paper>
+        <Paper>{`Formfeedback: ${formFeedback}, isValid: ${isValid}`}</Paper>
         <Paper>
           <RaisedButton
             label="Post"
             primary={true}
             onClick={() => {
-              handleFormSubmit(fields);
-              resetForm();
+              validateForm(fields);
+              // handleFormSubmit(fields);
+              // resetForm();
             }}
           />
           <RaisedButton
