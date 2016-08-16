@@ -1,5 +1,9 @@
 import fetch from 'isomorphic-fetch';
 import { getSettingsFields } from './platformListActions';
+import { requestQueue } from './postQueueActions';
+import { requestHistory } from './historyListActions';
+
+
 
 export const REQUEST_START = 'REQUEST_START';
 export const RECEIVE_USER_LOGIN = 'RECEIVE_USER_LOGIN';
@@ -64,6 +68,8 @@ export const checkJWTWithServer = () => {
       .then(jsonRes => {
         dispatch(receiveJWTSuccess(jsonRes));
         dispatch(getSettingsFields());
+        dispatch(requestQueue());
+        dispatch(requestHistory());
       })
       .catch(err => {
         console.error(err, 'error in JWT Validation');
