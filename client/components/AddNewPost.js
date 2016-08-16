@@ -12,12 +12,7 @@ injectTapEventPlugin();
 
 const AddNewPost = ({
   fields,
-  handleDateChange,
-  handleTimeChange,
-  handleMessageChange,
-  handleFacebookChange,
-  handleLinkedinChange,
-  handleTwitterChange,
+  handleFieldChange,
   handleFormSubmit,
   resetForm,
 }) => {
@@ -39,7 +34,7 @@ const AddNewPost = ({
         <TextField
           hintText="Enter a new message"
           value={message}
-          onChange={(e) => { handleMessageChange(e.target.value); }}
+          onChange={({ target }) => { handleFieldChange('message', target.value); }}
         />
       </Paper>
       <Paper>
@@ -47,12 +42,12 @@ const AddNewPost = ({
           <DatePicker
             hintText="Pick a date"
             value={date}
-            onChange={(x, date) => { handleDateChange(date); }}
+            onChange={(x, date) => { handleFieldChange('date', date); }}
           />
           <TimePicker
             hintText="Pick a time"
             value={time}
-            onChange={(x, time) => { handleTimeChange(time); }}
+            onChange={(x, time) => { handleFieldChange('time', time); }}
 
           />
         </Paper>
@@ -63,7 +58,7 @@ const AddNewPost = ({
               leftCheckbox={
                 <Checkbox
                   checked={facebook}
-                  onCheck={(e) => { handleFacebookChange(e.target.checked); }}
+                  onCheck={({ target }) => { handleFieldChange('facebook', target.checked); }}
                 />
               }
               primaryText="Facebook"
@@ -72,7 +67,7 @@ const AddNewPost = ({
               leftCheckbox={
                 <Checkbox
                   defaultChecked={linkedin}
-                  onCheck={(e) => { handleLinkedinChange(e.target.checked); }}
+                  onCheck={({ target }) => { handleFieldChange('linkedin', target.checked); }}
                 />
               }
               primaryText="LinkedIn"
@@ -81,7 +76,7 @@ const AddNewPost = ({
               leftCheckbox={
                 <Checkbox
                   defaultChecked={twitter}
-                  onCheck={(e) => { handleTwitterChange(e.target.checked); }}
+                  onCheck={({ target }) => { handleFieldChange('twitter', target.checked); }}
                 />
               }
               primaryText="Twitter"
@@ -94,14 +89,14 @@ const AddNewPost = ({
             primary={true}
             onClick={() => {
               handleFormSubmit(fields);
-              resetForm()
+              resetForm();
             }}
           />
           <RaisedButton
             label="Cancel"
             secondary={true}
             onClick={() => {
-              resetForm()
+              resetForm();
             }}
           />
         </Paper>

@@ -2,12 +2,7 @@ import { connect } from 'react-redux';
 
 import AddNewPost from '../components/AddNewPost';
 import {
-  handleDateChange,
-  handleTimeChange,
-  handleMessageChange,
-  handleFacebookChange,
-  handleLinkedinChange,
-  handleTwitterChange,
+  handleFieldChange,
   handleFormSubmit,
   resetForm,
  } from '../actions/addNewPostActions';
@@ -18,12 +13,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleDateChange: (date) => { dispatch(handleDateChange(date)); },
-  handleTimeChange: (time) => { dispatch(handleTimeChange(time)); },
-  handleMessageChange: (message) => { dispatch(handleMessageChange(message)); },
-  handleFacebookChange: (status) => { dispatch(handleFacebookChange(status)); },
-  handleLinkedinChange: (status) => { dispatch(handleLinkedinChange(status)); },
-  handleTwitterChange: (status) => { dispatch(handleTwitterChange(status)); },
+  handleFieldChange: (field, data) => { dispatch(handleFieldChange(field, data)); },
   handleFormSubmit: (post) => { dispatch(handleFormSubmit(post)); },
   resetForm: () => { dispatch(resetForm()); },
 });
