@@ -12,11 +12,11 @@ module.exports = {
 };
 
 /**********PUBLIC**********/
-
+ // source:twitterfeed
 function getUrlByTopic(topic) {
   const client = createAppClient();
   return client.getAsync('search/tweets', {
-    q: topic,
+    q: `"${topic}" filter:links`,
     lang: 'en',
     result_type: 'popular',
     count: 100,
@@ -34,7 +34,7 @@ function postToTwitter(setting, url) {
   client.postAsync('statuses/update', {
     status: url,
   })
-  .then((tweet, res) => console.log('err', err, 'tweet', tweet, 'res', res));
+  .then((tweet, res) => console.log('tweet', tweet, 'res', res));
 }
 
 /**********PRIVATE**********/

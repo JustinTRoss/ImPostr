@@ -4,7 +4,7 @@ const { getUrlByTopic } = require('../platformServices/TwitterApi/twitter.contro
 
 const CronJob = require('cron').CronJob;
 
-const postGenerator = new CronJob('*/5 * * * * *', () => {
+const postGenerator = new CronJob('* */5 * * * *', () => {
   return getActiveOverDueNext()
   .then(settings => {
     console.log(settings);
@@ -17,8 +17,9 @@ const postGenerator = new CronJob('*/5 * * * * *', () => {
 
       // Update dueNext value for user's settings entry
       updateDueNext(settingId, dueNext);
-
-      const topic = interests[Math.floor((interests.length + 1) * Math.random())];
+      const interestAry = interests ? interests.split(/\s*,\s*/) : ['matriarchy'];
+      console.log(interestAry);
+      const topic = interestAry[Math.floor((interestAry.length + 1) * Math.random())];
       const isActive = true;
       const datePost = new Date();
       const NUM_DAYS = 3;
