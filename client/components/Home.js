@@ -5,15 +5,19 @@ import AddNewPostContainer from '../containers/AddNewPostContainer';
 import HistoryListContainer from '../containers/HistoryListContainer';
 
 const Home = () => (
-  <div>
-    <div>
-      <PlatformListContainer />
+  <div id="Home">
+    <div id="homeLeft">
+      <div id="platformListContainer">
+        <PlatformListContainer />
+      </div>
+      <div id="addNewPostContainer">
+        <AddNewPostContainer />
+      </div>
     </div>
-    <div>
-      <AddNewPostContainer />
-    </div>
-    <div>
-      <PostQueueContainer />
+    <div id="homeRight">
+      <div id="postQueueContainer">
+        <PostQueueContainer />
+      </div>
     </div>
     <div>
       <HistoryListContainer />

@@ -26,8 +26,8 @@ class App extends React.Component {
 
     return (
       <div>
+        <Navbar receiveLogout={this.props.receiveLogout} showLogout={showLogout} />
         <div id='content'>
-          <Navbar receiveLogout={this.props.receiveLogout} showLogout={showLogout} />
           {childToRender}
         </div>
         <footer>

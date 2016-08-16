@@ -29,18 +29,15 @@ const PlatformListEntry = ({
 
   return (
     <ListGroupItem>
-      <div>
-        {platform.platform}
-      </div>
-      <div>
-        {`Autopost is currently ${platform.settings.isActive ? 'on' : 'off'}`}
-      </div>
-      <div>
-        {`User is currently ${platform.userPlatformLoggedIn ? '' : 'not '}logged in`}
-      </div>
-      <div>
+      <span>
         {buttonToRender}
-      </div>
+      </span>
+      <span>
+        {`Autopost ${platform.settings.isActive ? 'on' : 'off'}`}
+      </span>
+      <span>
+        {`User  ${platform.userPlatformLoggedIn ? '' : 'not '}logged in`}
+      </span>
       <div>
         <PlatformModal
           platform={platform}

@@ -5,23 +5,28 @@ import RaisedButton from 'material-ui/RaisedButton';
 const Signup = ({ username, password, handleFieldChange, handleSignupSubmit }) => {
   return (
     <div className="AuthParent">
-      <div className="AuthContainer">
         <div className="AuthFields">
           <TextField
-            className="AuthUser"
+            className="AuthInput"
             name="username"
             value={username}
             onChange={handleFieldChange}
             hintText="Username"
-            pattern=".{5,10}"
-            required
             type="text"
             hintStyle={{fontSize: '1em', bottom: '6px', fontWeight: 'normal'}}
             inputStyle={{fontSize: '1em', bottom: '3px', fontWeight: 'normal'}}
-            style={{ width: '90%', height: '80%', backgroundColor: 'white', }}
-            />
+            style={{
+                backgroundColor: 'white',
+                display: 'block',
+                alignContent: 'flex-start',
+                justifyContent: 'flex-start',
+                width: '85%',
+                height: '100%',
+                lineHeight: '33px',
+            }}
+          />
           <TextField
-            className="AuthPassword"
+            className="AuthInput"
             name="password"
             value={password}
             onChange={handleFieldChange}
@@ -29,8 +34,15 @@ const Signup = ({ username, password, handleFieldChange, handleSignupSubmit }) =
             inputStyle={{fontSize: '1em', bottom: '3px'}}
             hintText="Password"
             type="password"
-            style={{ width: '90%', height: '80%', backgroundColor: 'white', }}
-            />
+            style={{ backgroundColor: 'white',
+                display: 'block',
+                alignContent: 'flex-start',
+                justifyContent: 'flex-start',
+                width: '85%',
+                height: '100%',
+                lineHeight: '33px',
+            }}
+          />
         </div>
         <div className="AuthButton">
           <RaisedButton
@@ -39,7 +51,6 @@ const Signup = ({ username, password, handleFieldChange, handleSignupSubmit }) =
             onClick={handleSignupSubmit}
             />
         </div>
-      </div>
     </div>
   );
 };

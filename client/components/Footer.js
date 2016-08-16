@@ -11,10 +11,10 @@ import {pinkA200, transparent} from 'material-ui/styles/colors';
 
 const style = {
   backgroundColor:'rgba(35,25,19, 0.65)',
-  position: 'fixed',
-  right: '0',
-  bottom: '0',
-  left: '0',
+  // position: 'fixed',
+  // right: '0',
+  // bottom: '0',
+  // left: '0',
 }
 
 const iconStyles = {
