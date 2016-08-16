@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 import HistoryListItem from './HistoryListItem';
+import Paper from 'material-ui/Paper';
 
 const HistoryList = ({ history }) => {
   let itemToRender = !history ? <div></div>
-  : <div>
+:   <Paper>
       {history.map(historyItem => <HistoryListItem history={historyItem}/>)}
-    </div>
+    </Paper>
 
   return (
-    <div>
+    <Paper>
+      <p>Posted Items History</p>
       {itemToRender}
-    </div>
+    </Paper>
   );
 };
 
