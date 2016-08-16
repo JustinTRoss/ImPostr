@@ -9,12 +9,12 @@ const getExpiredActive = () => {
       posted: true,
     },
     {
-      where:     {
-            isActive: true,
-            expires: {
-              $lt: new Date(),
-            },
-          },
+      where:{
+        isActive: true,
+        expires: {
+          $lt: new Date(),
+        },
+      },
     }
   );
 
@@ -36,18 +36,19 @@ const removeExpired = () => {
       expires: {
         $lt: new Date(),
       },
+      // Only destroy posts that were not posted
       $or: [{ posted: false }, { posted: null }],
-      // only destroy posts that were not posted
     },
   });
 };
 
 //addNew
   //for worker to add a post
-const addNew = ({ platform, token, isActive, message, expires, userUserId }) => {
+const addNew = ({ platform, token, tokenSecret, isActive, message, expires, userUserId }) => {
   return Post.create({
     platform,
     token,
+    tokenSecret,
     isActive,
     message,
     expires,
