@@ -16,6 +16,7 @@ const Post = sequelize.define('post', {
   isActive: Sequelize.BOOLEAN,
   message: Sequelize.STRING,
   expires: Sequelize.DATE,
+  posted: Sequelize.BOOLEAN,
 });
 
 Post.belongsTo(User);
