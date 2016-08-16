@@ -1,5 +1,7 @@
 const Post = require('./post.model');
-const Setting = require('../settings/setting.controller');
+const Setting = require('../settings/setting.model');
+const Promise = require('bluebird');
+Promise.promisifyAll(require("pg"));
 
 //getExpiredActive
   //for worker to service
@@ -58,52 +60,43 @@ const addNew = ({ platform, token, tokenSecret, isActive, message, expires, user
 };
 
 const addNewFromUser = (req, res) => {
-  const { date, time, message, facebook, linkedin, twitter } = req.body;
+  const { date, time, message, facebook, linkedin, twitter } = req.body.post;
   const { userId } = req.user;
+  const expires = new Date(`${date.split('T')[0]}T${time.split('T')[1]}`);
 
-  console.log('date', date);
-  console.log('time', time);
+  const shouldPostOnPlatform = [facebook, linkedin, twitter]
+  const platforms = ['facebook', 'linkedin', 'twitter'].filter((platform, i) => shouldPostOnPlatform[i]);
 
-  const expires = date; //plus time...
-  const platforms = {
-    'facebook': facebook,
-    'linkedin': linkedin,
-    'twitter': twitter,
-  };
-
-
-  // platform: grab from req.body and loop over fields present
-  // token: query settings by userUserId
-  // isActive: true
-  // message: grab from req.body
-  // expires: grab from req.body
-  // userUserId: grab from req.user
-  // promisefy all
-
-  for (let platform in platforms) {
-    if (platforms[platform]) {
-      Setting.findOne({
+  const getPostFields = (platforms) => {
+    return Promise.all(platforms.map(platform => {
+      return Setting.findOne({
         where: {
           userUserId: userId,
           platform,
         },
       }).then(setting => {
-        const { token, tokenSecret } = setting;
-        Post.create({
-          platform,
-          token,
-          tokenSecret,
-          isActive: true,
-          message,
-          expires,
-          userUserId: userId,
-        }).then(status => {
-          console.log(status);
-          res.send(status);
-        });
+        if (setting && setting.token) {
+          const { token, tokenSecret } = setting;
+          return {
+            platform,
+            token,
+            tokenSecret,
+            isActive: true,
+            message,
+            expires,
+            userUserId: userId,
+          };
+        }
       });
-    }
-  }
+    }));
+  };
+
+  getPostFields(platforms).done(results => {
+    Post.bulkCreate(results).then((status) => {
+      //some sort of status validation
+      res.send(status);
+    });
+  });
 };
 
 //toggleIsActive
@@ -160,6 +153,7 @@ module.exports = {
   removeExpired,
   toggleIsActive,
   addNew,
+  addNewFromUser,
   getUser,
   getUserPostHistory,
 };

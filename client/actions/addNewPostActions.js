@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch';
 import { polyfill } from 'es6-promise';
 
-import requestQueue from './postQueueActions';
+import { requestQueue } from './postQueueActions';
 
 polyfill();
 
@@ -57,7 +57,6 @@ export const handleFormSubmit = (post) => {
     })
     .then(response => response.json())
     .then(json => {
-      console.log('create actions based on response', json);
       //validate json response, easy solution, call update queue on response
       dispatch(requestQueue());
     });
