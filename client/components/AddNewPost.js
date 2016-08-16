@@ -29,6 +29,11 @@ const AddNewPost = ({
     formFeedback,
   } = fields;
 
+  if (isValid) {
+    handleFormSubmit(fields);
+    resetForm();
+  }
+
   return (
     <Paper>
       <Paper>
@@ -90,15 +95,13 @@ const AddNewPost = ({
             />
           </List>
         </Paper>
-        <Paper>{`Formfeedback: ${formFeedback}, isValid: ${isValid}`}</Paper>
+        <Paper>{formFeedback}</Paper>
         <Paper>
           <RaisedButton
             label="Post"
             primary={true}
             onClick={() => {
               validateForm(fields);
-              // handleFormSubmit(fields);
-              // resetForm();
             }}
           />
           <RaisedButton

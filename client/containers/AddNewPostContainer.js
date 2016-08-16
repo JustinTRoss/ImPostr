@@ -8,7 +8,6 @@ import {
   resetForm,
  } from '../actions/addNewPostActions';
 
-
 const mapStateToProps = (state) => ({
   fields: state.addNewPost,
   platforms: state.platformList,

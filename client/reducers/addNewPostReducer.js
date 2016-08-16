@@ -47,14 +47,14 @@ const addNewPost = (state = {
     case VALIDATE_FORM:
       const { date, time, message, facebook, linkedin, twitter } = action.fields;
       let feedback = '';
-      if (!date) {
+      if (!message) {
+        feedback = 'Please enter a message';
+      } else if (!date) {
         feedback = 'Please enter a date';
       } else if (new Date(date) < new Date()) {
         feedback = 'Please enter a date in the future';
       } else if (!time) {
         feedback = 'Please enter a time';
-      } else if (!message) {
-        feedback = 'Please enter a message';
       } else if (!facebook && !linkedin && !twitter) {
         feedback = 'Please select atleast one platform you are connected to';
       }
