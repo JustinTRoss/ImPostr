@@ -4,59 +4,38 @@ const fetch = require('isomorphic-fetch');
 const config = require('../../config/config');
 const Twitter = require('twitter');
 const btoa = require('btoa');
-// Promise.promisifyAll(Twitter);
+Promise.promisifyAll(Twitter.prototype);
 
 module.exports = {
   getUrlByTopic,
-  postUrlToTwitter,
+  postToTwitter,
 };
 
 /**********PUBLIC**********/
 
-function getUrlByTopic(topic, cb) {
+function getUrlByTopic(topic) {
   const client = createAppClient();
-  client.get('search/tweets', {
+  return client.getAsync('search/tweets', {
     q: topic,
     lang: 'en',
     result_type: 'popular',
     count: 100,
-  }, (err, tweets, res) => {
-    if (err) {
-      console.error(err, 'error getting url by topic');
-    } else {
-      let tweetUrls = tweets.statuses.filter(tweetObj => tweetObj.entities.urls.length > 0)
-        .map(tweetUrlObj => tweetUrlObj.entities.urls[0].expanded_url);
-      cb(tweetUrls[0] ? tweetUrls[0] : 'http://attackofthecute.com/popular.php');
-    }
-  });
-};
+  })
+  .then(tweets => {
+    const tweetUrls = tweets.statuses.filter(tweetObj => tweetObj.entities.urls.length > 0)
+      .map(tweetUrlObj => tweetUrlObj.entities.urls[0].expanded_url);
+    return tweetUrls[0] ? tweetUrls[0] : 'http://attackofthecute.com/popular.php';
+  })
+  .catch(err => console.error(err));
+}
 
-function postUrlToTwitter(setting, url) {
+function postToTwitter(setting, url) {
   const client = createClient(setting.token, setting.tokenSecret);
-  client.post('statuses/update', {
+  client.postAsync('statuses/update', {
     status: url,
-  }, (err, tweet, res) => console.log('err', err, 'tweet', tweet, 'res', res));
-};
-
-// function getUrlByTopic(setting, topic) {
-//   const client = createClient(setting.token, setting.TokenSecret);
-//   client.getAsync('search/tweets', {
-//     q: topic,
-//     lang: 'en',
-//     result_type: 'popular',
-//     count: 100,
-//   })
-//   .then(tweets => console.log(tweets))
-//   .catch(err => console.error(err));
-// };
-
-// function postUrlToTwitter(setting, url) {
-//   const client = createClient(setting.token, setting.tokenSecret);
-//   client.postAsync('statuses/update', {
-//     status: url,
-//   })
-//   .then(res => console.log(res));
-// }
+  })
+  .then((tweet, res) => console.log('err', err, 'tweet', tweet, 'res', res));
+}
 
 /**********PRIVATE**********/
 
@@ -72,7 +51,7 @@ function getNewBearerToken() {
     },
   })
   .then(res => res.json())
-  .then(bearerToken => config.twitterBearerToken = bearerToken)
+  .then(bearerToken => console.log(config.twitterBearerToken = bearerToken))
   .catch(err => console.error(err));
 }
 
@@ -92,28 +71,6 @@ function createAppClient() {
     bearer_token: config.twitterBearerToken,
   });
 }
-// function getUrlbyTopic(req, res) => {
-//   const topic = req.body.topic || 'facebook';
-//   const sentiment = req.body.sentiment || ':)';
-//   fetch(`https://api.twitter.com/1.1/search/tweets.json?q=${topic}&lang=en&result_type=popular&count=100`, { 
-//     headers: {
-//       'Authorization': 'bearer AAAAAAAAAAAAAAAAAAAAADBMwQAAAAAA9vxtpYpYao2anTI8CmGUhN3%2BEuA%3DCs2SH8SG9iYBRAQwnxhg0RSLNIitI6w70SBinwON9hMOZjpmNl',
-//       'content-type': 'application/json',
-//     },
-//   })
-//   .then(res => res.json())
-//   .then(data => {
-//     const tweets = Object.assign({}, data);
-//     console.log(tweets);
-//     let tweetUrls = data.statuses.filter(tweetObj => tweetObj.entities.urls.length > 0)
-//       .map(tweetUrlObj => tweetUrlObj.entities.urls[0].expanded_url);
-//     tweetUrls = tweetUrls[0] ? tweetUrls : ['http://attackofthecute.com/popular.php'];
-//     console.log(tweets);
-//     res.send(tweetUrls);
-//   })
-//   .catch(err => res.send(err));
-// };
-
 
 // const createNonce = () => {
 //   let text = '';

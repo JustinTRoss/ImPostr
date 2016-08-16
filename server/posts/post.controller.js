@@ -30,8 +30,8 @@ const getExpiredActive = () => {
 
 //removeExpired
   //for worker to prevent reprocessing servived posts
-const removeExpired = (cb) => {
-  Post.destroy({
+const removeExpired = () => {
+  return Post.destroy({
     where: {
       expires: {
         $lt: new Date(),
@@ -39,32 +39,19 @@ const removeExpired = (cb) => {
       $or: [{ posted: false }, { posted: null }],
       // only destroy posts that were not posted
     },
-  }).then(expired => {
-    cb(expired);
   });
 };
 
 //addNew
   //for worker to add a post
-const addNew = (post, cb) => {
-  const {
+const addNew = ({ platform, token, isActive, message, expires, userUserId }) => {
+  return Post.create({
     platform,
     token,
     isActive,
     message,
     expires,
     userUserId,
-  } = post;
-
-  Post.create({
-    platform,
-    token,
-    isActive,
-    message,
-    expires,
-    userUserId,
-  }).then(createStatus => {
-    cb(createStatus);
   });
 };
 

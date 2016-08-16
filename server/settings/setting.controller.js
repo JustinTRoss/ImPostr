@@ -5,30 +5,26 @@ const { FACEBOOK_APP_ID, FACEBOOK_APP_SECRET } = require('../../__cutestuff');
 
 //getActiveOverDueNext
   //for postGenerator worker to get a list of users over due to generate post
-const getActiveOverDueNext = (cb) => {
-  Setting.findAll({
+const getActiveOverDueNext = () => {
+  return Setting.findAll({
     where: {
       isActive: true,
       dueNext: {
         $lt: new Date(),
       },
     },
-  }).then(activeOverDueNext => {
-    cb(activeOverDueNext);
-  })
+  });
 };
 
 //updateDueNext
   //for postGenerator worker to update a specific users dueNext field
-const updateDueNext = (settingId, dueNext, cb) => {
-  Setting.update({
+const updateDueNext = (settingId, dueNext) => {
+  return Setting.update({
     dueNext,
   }, {
     where: {
       settingId,
     },
-  }).then(updateStatus => {
-    cb(updateStatus);
   });
 };
 
@@ -58,7 +54,8 @@ const updateSettings = (req, res) => {
       userUserId: userId,
       platform,
     },
-  }).then(settings => {
+  })
+  .then(settings => {
     if (settings.length) {
       Setting.update({
         interests,
@@ -70,8 +67,8 @@ const updateSettings = (req, res) => {
           userUserId: userId,
           platform,
         },
-      }).then(status => {
-        res.send(response)
+      }).then(settingObj => {
+        res.send(settingObj);
       });
     } else {
       Setting.create({
@@ -81,11 +78,11 @@ const updateSettings = (req, res) => {
         platform,
         userUserId: userId,
         dueNext: new Date(),
-      }).then(newSetting => {
-        res.json(newSetting);
+      }).then(newSettingObj => {
+        res.json(newSettingObj);
       });
     }
-  })
+  });
 };
 
 //requestPlatformLogout
