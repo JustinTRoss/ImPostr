@@ -12,11 +12,11 @@ module.exports = {
 };
 
 /**********PUBLIC**********/
-
+ // source:twitterfeed
 function getUrlByTopic(topic) {
   const client = createAppClient();
   return client.getAsync('search/tweets', {
-    q: topic,
+    q: `"${topic}" filter:links`,
     lang: 'en',
     result_type: 'popular',
     count: 100,
@@ -24,6 +24,8 @@ function getUrlByTopic(topic) {
   .then(tweets => {
     const tweetUrls = tweets.statuses.filter(tweetObj => tweetObj.entities.urls.length > 0)
       .map(tweetUrlObj => tweetUrlObj.entities.urls[0].expanded_url);
+      console.log('~~~~~~~~~~   ', topic, '    ~~~~~~~~~~');
+      console.log(tweets);
     return tweetUrls[0] ? tweetUrls[0] : 'http://attackofthecute.com/popular.php';
   })
   .catch(err => console.error(err));
