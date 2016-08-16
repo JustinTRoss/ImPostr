@@ -1,7 +1,7 @@
 const Post = require('./post.model');
 const Setting = require('../settings/setting.model');
 const Promise = require('bluebird');
-Promise.promisifyAll(require("pg"));
+Promise.promisifyAll(require('pg'));
 
 //getExpiredActive
   //for worker to service
@@ -12,7 +12,7 @@ const getExpiredActive = () => {
       posted: true,
     },
     {
-      where:{
+      where: {
         isActive: true,
         expires: {
           $lt: new Date(),
@@ -39,8 +39,7 @@ const removeExpired = () => {
       expires: {
         $lt: new Date(),
       },
-      // Only destroy posts that were not posted
-      $or: [{ posted: false }, { posted: null }],
+      posted: false || null,
     },
   });
 };
