@@ -9,4 +9,9 @@ PostRouter.get('/getUser', (req, res) => {
   PostCtrl.getUser(req, res);
 });
 
+PostRouter.get('/getPostHistory', (req, res) => {
+  console.log('/post/getPostHistory');
+  PostCtrl.getUserPostHistory(req, res);
+});
+
 module.exports = PostRouter;
