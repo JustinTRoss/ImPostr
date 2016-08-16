@@ -13,11 +13,12 @@ import Slider from 'material-ui/Slider';
 
 const PlatformModal = ({
   platform,
+  validateForm,
   handleFieldChange,
   onToggleModalClick,
   onSetSettingsClick,
 }) => {
-  const { isActive, interests, interval } = platform.settings;
+  const { isActive, interests, interval, isValid, formFeedback } = platform.settings;
 
   return (
     <Paper>
@@ -31,7 +32,7 @@ const PlatformModal = ({
         open={platform.showModal}
       >
         <TextField
-          hintText="Enter your interests: NBA, Olympics, Wall Street"
+          hintText="Enter your interests"
           value={interests}
           onChange={({ target }) => { handleFieldChange(platform.platform, 'interests', target.value); }}
         />
@@ -41,12 +42,14 @@ const PlatformModal = ({
           onCheck={({ target }) => { handleFieldChange(platform.platform, 'isActive', target.checked); }}
         />
         <Slider
-          min={0}
+          min={1}
           max={25}
           step={1}
-          defaultValue={5}
           value={interval}
-          onChange={(x, value) => { handleFieldChange(platform.platform, 'interval', value); }}
+          onChange={(x, value) => {
+            handleFieldChange(platform.platform, 'interval', value);
+            validateForm(platform.platform, platform.settings);
+          }}
         />
         <span>{`${interval} posts per week`}</span>
         <RaisedButton
@@ -58,8 +61,10 @@ const PlatformModal = ({
           label="Save"
           primary={true}
           onClick={() => {
+            if (isValid) {
+              onSetSettingsClick(platform, platform.settings);
+            }
             onToggleModalClick(platform.platform);
-            // onSetSettingsClick(platform, settings);
           }}
         />
       </Dialog>
