@@ -1,4 +1,5 @@
 import {
+  FIELD_CHANGE,
   LOGIN_PLATFORM,
   LOGOUT_PLATFORM,
   TOGGLE_MODAL,
@@ -24,6 +25,32 @@ const PlatformListEntry = (state, action) => {
         settings: action.settings,
         settingId: action.settingId,
       });
+    case FIELD_CHANGE:
+      switch (action.field) {
+        case 'isActive':
+          const tempIsActive = Object.assign({}, state.settings, {
+            isActive: action.data,
+          });
+          return Object.assign({}, state, {
+            settings: tempIsActive,
+          });
+        case 'interests':
+          const tempInterests = Object.assign({}, state.settings, {
+            interests: action.data,
+          });
+          return Object.assign({}, state, {
+            settings: tempInterests,
+          });
+        case 'interval':
+          const tempInterval = Object.assign({}, state.settings, {
+            interval: action.data,
+          });
+          return Object.assign({}, state, {
+            settings: tempInterval,
+          });
+        default:
+          return state;
+      }
     default:
       return state;
   }
