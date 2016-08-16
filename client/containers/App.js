@@ -7,6 +7,7 @@ import Footer from '../components/Footer';
 import Home from '../components/Home';
 import Auth from './Auth';
 import { requestQueue } from '../actions/postQueueActions';
+import { requestHistory } from '../actions/historyListActions';
 
 class App extends React.Component {
   constructor(props) {
@@ -14,9 +15,8 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-    const { checkJWT, pullQueue } = this.props;
+    const { checkJWT, pullQueue, pullHistory } = this.props;
     checkJWT();
-    pullQueue();
   }
 
   render() {
@@ -48,9 +48,12 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     checkJWT: () => { dispatch(checkJWTWithServer()); },
-    pullQueue: () => { dispatch(requestQueue()); },
+    // pullQueue: () => { dispatch(requestQueue()); },
     receiveLogout: () => { dispatch(receiveLogout()); },
     requestPlatformLogin: (platform, userID, accessToken) => { dispatch(requestPlatformLogin(platform, userID, accessToken)); },
+    // pullHistory: () => {
+    //     dispatch(requestHistory());
+    //   },
   };
 }
 

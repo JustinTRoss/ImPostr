@@ -137,7 +137,7 @@ const getUserPostHistory = (req, res) => {
   Post.findAll({
     where: {
       posted: true,
-      userUserId: 7,
+      userUserId: userId,
     },
   })
     .then(historyArr => {
