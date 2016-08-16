@@ -5,10 +5,9 @@ import RaisedButton from 'material-ui/RaisedButton';
 const Login = ({ username, handleFieldChange, password, handleLoginSubmit }) => {
   return (
     <div className="AuthParent">
-      <div className="AuthContainer">
         <div className="AuthFields">
           <TextField
-            className="AuthUser"
+            className="AuthInput"
             name="username"
             value={username}
             onChange={handleFieldChange}
@@ -16,10 +15,18 @@ const Login = ({ username, handleFieldChange, password, handleLoginSubmit }) => 
             type="text"
             hintStyle={{fontSize: '1em', bottom: '6px',}}
             inputStyle={{fontSize: '1em', bottom: '3px',}}
-            style={{ width: '90%', height: '80%', backgroundColor: 'white', }}
-            />
+            style={{
+                backgroundColor: 'white',
+                display: 'block',
+                alignContent: 'flex-start',
+                justifyContent: 'flex-start',
+                width: '85%',
+                height: '100%',
+                lineHeight: '33px',
+            }}
+          />
           <TextField
-            className="AuthPassword"
+            className="AuthInput"
             name="password"
             value={password}
             onChange={handleFieldChange}
@@ -27,8 +34,16 @@ const Login = ({ username, handleFieldChange, password, handleLoginSubmit }) => 
             inputStyle={{fontSize: '1em', bottom: '3px',}}
             hintText="Password"
             type="password"
-            style={{ width: '90%', height: '80%', backgroundColor: 'white', }}
-            />
+            style={{
+                backgroundColor: 'white',
+                display: 'block',
+                alignContent: 'flex-start',
+                justifyContent: 'flex-start',
+                width: '85%',
+                height: '100%',
+                lineHeight: '33px',
+            }}
+          />
         </div>
         <div className="AuthButton">
           <RaisedButton
@@ -37,7 +52,6 @@ const Login = ({ username, handleFieldChange, password, handleLoginSubmit }) => 
             onClick={handleLoginSubmit}
             />
         </div>
-      </div>
     </div>
   );
 };
