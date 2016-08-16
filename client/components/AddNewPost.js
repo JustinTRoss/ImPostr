@@ -17,7 +17,6 @@ const AddNewPost = ({
   handleTwitterChange,
   handleFormSubmit,
 }) => {
-  console.log('fields', fields);
   const {
   date,
   time,
@@ -35,12 +34,18 @@ const AddNewPost = ({
       <Paper>
         <TextField
           hintText="Enter a new message"
+          message={message}
+          onChange={(e) => { handleMessageChange(e.target.value); }}
         />
       </Paper>
       <Paper>
         <Paper>
-          <DatePicker hintText="Pick a date" />
-          <TimePicker hintText="Pick a time" />
+          <DatePicker
+            hintText="Pick a date"
+          />
+          <TimePicker
+            hintText="Pick a time"
+          />
         </Paper>
         <Paper>
           <List>

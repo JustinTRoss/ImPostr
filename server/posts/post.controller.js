@@ -1,4 +1,5 @@
 const Post = require('./post.model');
+const Setting = require('../settings/setting.controller');
 
 //getExpiredActive
   //for worker to service
@@ -54,6 +55,55 @@ const addNew = ({ platform, token, tokenSecret, isActive, message, expires, user
     expires,
     userUserId,
   });
+};
+
+const addNewFromUser = (req, res) => {
+  const { date, time, message, facebook, linkedin, twitter } = req.body;
+  const { userId } = req.user;
+
+  console.log('date', date);
+  console.log('time', time);
+
+  const expires = date; //plus time...
+  const platforms = {
+    'facebook': facebook,
+    'linkedin': linkedin,
+    'twitter': twitter,
+  };
+
+
+  // platform: grab from req.body and loop over fields present
+  // token: query settings by userUserId
+  // isActive: true
+  // message: grab from req.body
+  // expires: grab from req.body
+  // userUserId: grab from req.user
+  // promisefy all
+
+  for (let platform in platforms) {
+    if (platforms[platform]) {
+      Setting.findOne({
+        where: {
+          userUserId: userId,
+          platform,
+        },
+      }).then(setting => {
+        const { token, tokenSecret } = setting;
+        Post.create({
+          platform,
+          token,
+          tokenSecret,
+          isActive: true,
+          message,
+          expires,
+          userUserId: userId,
+        }).then(status => {
+          console.log(status);
+          res.send(status);
+        });
+      });
+    }
+  }
 };
 
 //toggleIsActive

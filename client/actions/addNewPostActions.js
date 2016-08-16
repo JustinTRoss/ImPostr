@@ -45,7 +45,7 @@ export const handleTwitterChange = (status) => ({
 export const handleFormSubmit = (post) => {
   return dispatch => {
     const token = window.localStorage.getItem('ImPostr-JWT');
-    return fetch('http://127.0.0.1:3000/', {
+    return fetch('http://127.0.0.1:3000/post/addNewFromUser', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

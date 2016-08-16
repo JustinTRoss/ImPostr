@@ -10,8 +10,10 @@ PostRouter.get('/getUser', (req, res) => {
 });
 
 PostRouter.get('/getPostHistory', (req, res) => {
-  console.log('/post/getPostHistory');
   PostCtrl.getUserPostHistory(req, res);
+
+PostRouter.post('/addNewFromUser', (req, res) => {
+  PostCtrl.addNewFromUser(req, res);
 });
 
 module.exports = PostRouter;
