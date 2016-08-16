@@ -64,7 +64,7 @@ const addNewFromUser = (req, res) => {
   const { userId } = req.user;
   const expires = new Date(`${date.split('T')[0]}T${time.split('T')[1]}`);
 
-  const shouldPostOnPlatform = [facebook, linkedin, twitter]
+  const shouldPostOnPlatform = [facebook, linkedin, twitter];
   const platforms = ['facebook', 'linkedin', 'twitter'].filter((platform, i) => shouldPostOnPlatform[i]);
 
   const getPostFields = (platforms) => {

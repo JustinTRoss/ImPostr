@@ -11,16 +11,24 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
 const AddNewPost = ({
+  fields,
+  handleDateChange,
+  handleTimeChange,
+  handleMessageChange,
+  handleFacebookChange,
+  handleLinkedinChange,
+  handleTwitterChange,
   handleFormSubmit,
+  resetForm,
 }) => {
-  let post = {
-    date: new Date(),
-    time: new Date(),
-    message: '',
-    facebook: false,
-    linkedin: false,
-    twitter: false,
-  };
+  const {
+    date,
+    time,
+    message,
+    facebook,
+    linkedin,
+    twitter,
+  } = fields;
 
   return (
     <Paper>
@@ -30,19 +38,21 @@ const AddNewPost = ({
       <Paper>
         <TextField
           hintText="Enter a new message"
-          defaultValue={post.message}
-          onChange={(e) => { post.message = e.target.value; }}
+          value={message}
+          onChange={(e) => { handleMessageChange(e.target.value); }}
         />
       </Paper>
       <Paper>
         <Paper>
           <DatePicker
             hintText="Pick a date"
-            onChange={(x, date) => { post.date = date; }}
+            value={date}
+            onChange={(x, date) => { handleDateChange(date); }}
           />
           <TimePicker
             hintText="Pick a time"
-            onChange={(x, time) => { post.time = time; }}
+            value={time}
+            onChange={(x, time) => { handleTimeChange(time); }}
 
           />
         </Paper>
@@ -52,8 +62,8 @@ const AddNewPost = ({
             <ListItem
               leftCheckbox={
                 <Checkbox
-                  defaultChecked={post.facebook}
-                  onCheck={(e) => { post.facebook = e.target.checked; }}
+                  checked={facebook}
+                  onCheck={(e) => { handleFacebookChange(e.target.checked); }}
                 />
               }
               primaryText="Facebook"
@@ -61,8 +71,8 @@ const AddNewPost = ({
             <ListItem
               leftCheckbox={
                 <Checkbox
-                  defaultChecked={post.linkedin}
-                  onCheck={(e) => { post.linkedin = e.target.checked; }}
+                  defaultChecked={linkedin}
+                  onCheck={(e) => { handleLinkedinChange(e.target.checked); }}
                 />
               }
               primaryText="LinkedIn"
@@ -70,8 +80,8 @@ const AddNewPost = ({
             <ListItem
               leftCheckbox={
                 <Checkbox
-                  defaultChecked={post.twitter}
-                  onCheck={(e) => { post.twitter = e.target.checked; }}
+                  defaultChecked={twitter}
+                  onCheck={(e) => { handleTwitterChange(e.target.checked); }}
                 />
               }
               primaryText="Twitter"
@@ -82,11 +92,17 @@ const AddNewPost = ({
           <RaisedButton
             label="Post"
             primary={true}
-            onClick={() => { handleFormSubmit(post); }}
+            onClick={() => {
+              handleFormSubmit(fields);
+              resetForm()
+            }}
           />
           <RaisedButton
             label="Cancel"
             secondary={true}
+            onClick={() => {
+              resetForm()
+            }}
           />
         </Paper>
       </Paper>

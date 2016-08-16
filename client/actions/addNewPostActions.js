@@ -11,6 +11,7 @@ export const MESSAGE_CHANGE = 'MESSAGE_CHANGE';
 export const FACEBOOK_CHANGE = 'FACEBOOK_CHANGE';
 export const LINKEDIN_CHANGE = 'LINKEDIN_CHANGE';
 export const TWITTER_CHANGE = 'TWITTER_CHANGE';
+export const RESET_FORM = 'RESET_FORM';
 
 export const handleDateChange = (date) => ({
   type: DATE_CHANGE,
@@ -40,6 +41,10 @@ export const handleLinkedinChange = (status) => ({
 export const handleTwitterChange = (status) => ({
   type: TWITTER_CHANGE,
   status,
+});
+
+export const resetForm = () => ({
+  type: RESET_FORM,
 });
 
 export const handleFormSubmit = (post) => {

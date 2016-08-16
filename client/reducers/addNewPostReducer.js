@@ -5,11 +5,12 @@ import {
   FACEBOOK_CHANGE,
   LINKEDIN_CHANGE,
   TWITTER_CHANGE,
+  RESET_FORM,
 } from '../actions/addNewPostActions';
 
 const addNewPost = (state = {
-  date: new Date(),
-  time: new Date(),
+  date: null,
+  time: null,
   message: '',
   facebook: false,
   linkedin: false,
@@ -40,6 +41,15 @@ const addNewPost = (state = {
       return Object.assign({}, state, {
         twitter: action.status,
       });
+    case RESET_FORM:
+      return {
+        date: null,
+        time: null,
+        message: '',
+        facebook: false,
+        linkedin: false,
+        twitter: false,
+      };
     default:
       return state;
   }
