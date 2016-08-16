@@ -1,72 +1,39 @@
-// OPTION A: check on certain intervals if a post is overdue
-  // getExpiredActive
-  //   iterate over them all
-  //     postOnPlatforms
-  // removeExpired
-
+// Import expired post handling functions
 const { getExpiredActive, removeExpired } = require('../posts/post.controller');
 
-// import from fb
-// import tw
-const { postOnFacebook } = require('../platformservices/facebook/facebook');
+// Import platform posting functions
+const { postToFacebook } = require('../platformservices/facebook/facebook');
+const { postToTwitter } = require('../platformservices/TwitterApi/twitter.controller');
+const { postToLinkedIn } = require('../platformservices/linkedin');
 
-const postOnPlatforms = (post, cb) => {
-  if (post.platform === 'facebook') {
-    postOnFacebook(post, status => {
-      //do some status handling here
-    });
+// Post to appropriate platform
+const postOnPlatforms = (post) => {
+  console.log('posting on ', post.platform);
+  switch (post.platform) {
+    case 'twitter':
+      return postToTwitter(post);
+    case 'facebook':
+      return postToFacebook(post);
+    case 'linkedin':
+      return postToLinkedIn(post);
+    default:
+      return;
   }
-  const status = 'Post Succesful';
-  cb(status, post);
 };
 
+// Find posts that require action
 const CronJob = require('cron').CronJob;
-
-const queueMonitor = new CronJob('* */5 * * * *', () => {
-  getExpiredActive(posts => {
+const queueMonitor = new CronJob('*/5 * * * * *', () => {
+  return getExpiredActive()
+  .then(posts => {
     posts.forEach(post => {
-      postOnPlatforms(post, status => {
-        //test status for an error
-      });
+      postOnPlatforms(post);
     });
-  });
-  removeExpired(status => {
-    //test status for an error
-  });
+  })
+  .then(removeExpired())
+  .catch(err => console.error(err));
 }, null, true, 'America/Los_Angeles');
 
 module.exports = {
   queueMonitor,
 };
-
-
-// const { getExpiredActive, removeExpired } = require('../posts/post.controller');
-
-// //requie { postOnPlatforms } = require(social media platforms)
-// const postOnPlatforms = (post) => {
-//   const status = 'Post Succesful';
-//   switch (post.platform) {
-//     case 'twitter':
-//       //call twitter posting fn
-//       return;
-//     default:
-//       return;
-//   }
-// };
-
-// const CronJob = require('cron').CronJob;
-
-// const queueMonitor = new CronJob('*/5 * * * * *', () => {
-//   getExpiredActive()
-//   .then(posts => {
-//     posts.forEach(post => {
-//       postOnPlatforms(post)
-//     });
-//   })
-//   .then(removeExpired())
-//   .catch(err => console.error(err));
-// }, null, true, 'America/Los_Angeles');
-
-// module.exports = {
-//   queueMonitor,
-// };

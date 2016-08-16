@@ -1,6 +1,6 @@
 const graph = require('fbgraph');
 
-const postOnFacebook = ({ message, token }, cb) => {
+const postToFacebook = ({ message, token }, cb) => {
   const post = { message };
   graph.setAccessToken(token);
   graph.post('/feed', post, (err, res) => {
@@ -10,5 +10,5 @@ const postOnFacebook = ({ message, token }, cb) => {
 };
 
 module.exports = {
-  postOnFacebook,
+  postToFacebook,
 };
