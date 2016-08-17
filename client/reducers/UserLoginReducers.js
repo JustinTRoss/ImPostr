@@ -13,6 +13,7 @@ import {
 
 const UserObject = (state = {
   userId: '',
+  token: '',
   isLogin: 'login',
   loggedIn: false,
   login: {
@@ -34,6 +35,7 @@ const UserObject = (state = {
     case RECEIVE_JWT_SUCCESS:
       return Object.assign({}, state, {
         loggedIn: true,
+        token: action.token,
       })
     case THROW_FIELD_VALIDATION_ERROR:
       const errorObj = {
@@ -87,6 +89,7 @@ const UserObject = (state = {
     case RECEIVE_USER_LOGIN:
       return Object.assign({}, state, {
         loggedIn: true,
+        token: action.token,
         login: {
           username: '',
           password: '',
@@ -95,6 +98,7 @@ const UserObject = (state = {
     case RECEIVE_USER_SIGNUP:
       return Object.assign({}, state, {
         loggedIn: true,
+        token: action.token,
         signup: {
           username: '',
           password: '',

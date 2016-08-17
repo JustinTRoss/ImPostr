@@ -9,8 +9,7 @@ export const receiveHistory = ({ history }) => (
   }
 );
 
-export const requestHistory = () => {
-  let token = window.localStorage.getItem('ImPostr-JWT');
+export const requestHistory = (token) => {
   return dispatch => {
     fetch('http://localhost:3000/post/getPostHistory', {
       headers: new Headers({

@@ -13,8 +13,10 @@ module.exports = {
 /****** PUBLIC ******/
 
 function checkJWT(req, res) {
+  const token = req.headers.authorization.split(' ')[1];
   res.json({
     userId: req.user.userId,
+    token,
   });
 }
 

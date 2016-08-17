@@ -19,8 +19,7 @@ export const insertQueue = ({ queue }) => (
   }
 );
 
-export const requestQueue = () => {
-  let token = window.localStorage.getItem('ImPostr-JWT');
+export const requestQueue = (token) => {
   return dispatch => {
     fetch(`http://localhost:3000/post/getUser`, {
       headers: new Headers({
@@ -32,14 +31,12 @@ export const requestQueue = () => {
       .then(json => {
         dispatch(insertQueue(json));
       })
-      .catch(err => console.log(err, '/getUser'));
   };
 };
 
 export const requestRemove = ({ postId, isActive, index }) => {
   let token = window.localStorage.getItem('ImPostr-JWT');
   return dispatch => {
-    console.log(JSON.stringify({postId, isActive}));
     fetch(`http://localhost:3000/post/toggleIsActive`, {
       method: 'POST',
       body: JSON.stringify({
@@ -59,6 +56,5 @@ export const requestRemove = ({ postId, isActive, index }) => {
           dispatch(insertItem(index));
         }
       })
-      .catch(err => console.log('could not remove item', err));
   };
 };

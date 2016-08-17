@@ -33,9 +33,22 @@ export const receivePlatformLogout = (platform) => ({
   platform,
 });
 
+export const toggleModal = (platform) => ({
+  type: TOGGLE_MODAL,
+  platform,
+});
+
+export const receiveSettingsFields = (platform, settings, settingId) => ({
+  type: RECEIVE_SETTINGS_FIELDS,
+  platform,
+  settings,
+  settingId,
+});
+
 export const requestPlatformLogout = (platform) => {
-  return dispatch => {
-    const token = window.localStorage.getItem('ImPostr-JWT');
+  return (dispatch, getState) => {
+    const { userLogin: { token } } = getState();
+    console.log('jwt', token);
     return fetch('http://127.0.0.1:3000/settings/requestPlatformLogout', {
       method: 'POST',
       headers: {
@@ -54,45 +67,10 @@ export const requestPlatformLogout = (platform) => {
   };
 };
 
-export const requestFacebookLogout = () => {
-  return dispatch => {
-    FB.getLoginStatus(response => {
-      if (response.status === 'connected') {
-        FB.logout();
-      }
-      dispatch(requestPlatformLogout('facebook'));
-    });
-  };
-};
-
-export const selectPlatformLogout = (platform) => {
-  return dispatch => {
-    if (platform === 'facebook') {
-      dispatch(requestFacebookLogout());
-    } else {
-      dispatch(requestPlatformLogout(platform));
-    }
-  };
-};
-
-export const toggleModal = (platform) => ({
-  type: TOGGLE_MODAL,
-  platform,
-});
-
-export const receiveSettingsFields = (platform, settings, settingId) => ({
-
-  type: RECEIVE_SETTINGS_FIELDS,
-  platform,
-  settings,
-  settingId,
-});
-
 export const setSettingsFields = (platformObject, settings) => {
-  let { platform, settingId } = platformObject;
-
-  return dispatch => {
-    const token = window.localStorage.getItem('ImPostr-JWT');
+  const { platform, settingId } = platformObject;
+  return (dispatch, getState) => {
+    const { userLogin: { token } } = getState();
     return fetch('http://127.0.0.1:3000/settings/updateSettings', {
       method: 'PUT',
       headers: {
@@ -107,15 +85,14 @@ export const setSettingsFields = (platformObject, settings) => {
     })
     .then(response => response.json())
     .then(json => {
-      let { interests, interval, isActive, platform, settingId } = json;
+      //validate json response
       dispatch(receiveSettingsFields(platform, settings, settingId));
     });
   };
 };
 
-export const getSettingsFields = () => {
+export const getSettingsFields = (token) => {
   return dispatch => {
-    const token = window.localStorage.getItem('ImPostr-JWT');
     return fetch('http://127.0.0.1:3000/settings/getSettings', {
       headers: {
         'Content-Type': 'application/json',
@@ -124,9 +101,9 @@ export const getSettingsFields = () => {
     })
     .then(response => response.json())
     .then(settingObjAry => {
-      for (var i = 0; i < settingObjAry.length; i++) {
-        let { interests, interval, isActive, platform, settingId, token } = settingObjAry[i];
-        let settings = {
+      for (let i = 0; i < settingObjAry.length; i++) {
+        const { interests, interval, isActive, platform, settingId, token } = settingObjAry[i];
+        const settings = {
           interests,
           interval,
           isActive,

@@ -39,9 +39,10 @@ export const receiveFailure = ({ username, formName}) => {
 
 /**********JWT AND COOKIE**********/
 
-export const receiveJWTSuccess = () => {
+export const receiveJWTSuccess = ({ token }) => {
   return {
     type: RECEIVE_JWT_SUCCESS,
+    token,
   }
 }
 
@@ -67,9 +68,9 @@ export const checkJWTWithServer = () => {
       .then(res => res.json())
       .then(jsonRes => {
         dispatch(receiveJWTSuccess(jsonRes));
-        dispatch(getSettingsFields());
-        dispatch(requestQueue());
-        dispatch(requestHistory());
+        dispatch(getSettingsFields(jsonRes.token));
+        dispatch(requestQueue(jsonRes.token));
+        dispatch(requestHistory(jsonRes.token));
       })
       .catch(err => {
         console.error(err, 'error in JWT Validation');
@@ -106,10 +107,11 @@ export const changeFormType = ( formType ) => {
 
 /**********LOGIN**********/
 
-export const receiveLogin = ({ userId }) => {
+export const receiveLogin = ({ userId, token }) => {
   return {
     type: RECEIVE_USER_LOGIN,
     userId,
+    token,
   };
 };
 
@@ -144,10 +146,11 @@ export const sendLoginToServer = ( formData ) => {
 
 /**********SIGNUP**********/
 
-export const receiveSignup = ({ userId }) => {
+export const receiveSignup = ({ userId, token }) => {
   return {
     type: RECEIVE_USER_SIGNUP,
     userId,
+    token,
   };
 };
 
