@@ -27,7 +27,6 @@ const mockStore = configureMockStore(middlewares);
 
 describe('Platform List Actions', () => {
   describe('sync actions', () => {
-
     describe('validateForm()', () => {
       it('should create an action to validate a particular platform settings form', () => {
         const platform = 'facebook';
@@ -94,7 +93,7 @@ describe('Platform List Actions', () => {
         const platform = 'facebook';
         const settings = {
           autoPilot: false,
-          interests: [],
+          interests: '',
           postFrequency: 0,
         };
         const settingId = 21;
@@ -148,7 +147,7 @@ describe('Platform List Actions', () => {
         const platform = 'facebook';
         const settings = {
           autoPilot: false,
-          interests: [],
+          interests: '',
           postFrequency: 0,
         };
         const settingId = 15;
@@ -160,7 +159,7 @@ describe('Platform List Actions', () => {
         };
 
         nock('http://127.0.0.1:3000')
-          .post('/platform/updatesettings', {
+          .post('/settings/updateSettings', {
             platform,
             settings,
           })
@@ -175,6 +174,41 @@ describe('Platform List Actions', () => {
       });
     });
 
-    describe('getSettingsFields()');
+    describe('getSettingsFields()', () => {
+      afterEach(() => {
+        nock.cleanAll();
+      });
+
+      it('should create a 3 RECEIVE_SETTINGS_FIELDS actions when fetching todos has been done', () => {
+        const token = 'abc';
+        const store = mockStore({ userLogin: { token: 'abc' } });
+        const platform = 'facebook';
+        const settings = {
+          autoPilot: false,
+          interests: '',
+          postFrequency: 0,
+        };
+        const settingId = 15;
+        const expectedAction = {
+          type: RECEIVE_SETTINGS_FIELDS,
+          platform,
+          settings,
+          settingId,
+        };
+
+        nock('http://127.0.0.1:3000')
+          .post('/settings/getSettings', {
+            token,
+          })
+          .reply(200, { body: { status: 'array of settings objects' } });
+
+        store.dispatch(getSettingsFields(token))
+          .then(() => {
+            expect(store.getActions()[0]).to.deep.equal(expectedAction);
+          });
+
+        expect(receiveSettingsFields(platform, settings, settingId)).to.deep.equal(expectedAction);
+      });
+    });
   });
 });

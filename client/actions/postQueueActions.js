@@ -35,8 +35,8 @@ export const requestQueue = (token) => {
 };
 
 export const requestRemove = ({ postId, isActive, index }) => {
-  let token = window.localStorage.getItem('ImPostr-JWT');
-  return dispatch => {
+  return (dispatch, getState) => {
+    const { userLogin: { token } } = getState();
     fetch(`http://localhost:3000/post/toggleIsActive`, {
       method: 'POST',
       body: JSON.stringify({
