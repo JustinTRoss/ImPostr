@@ -116,7 +116,7 @@ describe('Platform List Actions', () => {
       });
 
       it('should create LOGOUT_PLATFORM action when fetching todos has been done', () => {
-        const store = mockStore({ userLogin: { jwt: 'abc' } });
+        const store = mockStore({ userLogin: { token: 'abc' } });
         const platform = 'facebook';
         const expectedAction = {
           type: LOGOUT_PLATFORM,
@@ -144,17 +144,19 @@ describe('Platform List Actions', () => {
       });
 
       it('should create RECEIVE_SETTINGS_FIELDS action when fetching todos has been done', () => {
-        const store = mockStore({ userLogin: { jwt: 'abc' } });
+        const store = mockStore({ userLogin: { token: 'abc' } });
         const platform = 'facebook';
         const settings = {
           autoPilot: false,
           interests: [],
           postFrequency: 0,
         };
+        const settingId = 15;
         const expectedAction = {
           type: RECEIVE_SETTINGS_FIELDS,
           platform,
           settings,
+          settingId,
         };
 
         nock('http://127.0.0.1:3000')
@@ -169,7 +171,7 @@ describe('Platform List Actions', () => {
             expect(store.getActions()[0]).to.deep.equal(expectedAction);
           });
 
-        expect(receiveSettingsFields(platform, settings)).to.deep.equal(expectedAction);
+        expect(receiveSettingsFields(platform, settings, settingId)).to.deep.equal(expectedAction);
       });
     });
 
