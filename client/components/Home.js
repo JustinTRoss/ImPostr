@@ -19,7 +19,7 @@ const Home = () => (
         <PostQueueContainer />
       </div>
     </div>
-    <div>
+    <div id="HistoryList">
       <HistoryListContainer />
     </div>
   </div>

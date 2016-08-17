@@ -34,6 +34,10 @@ body: {
 
 }
 
+#HistoryList {
+  height: 100vh;
+}
+
 
 /**********AUTH and SPLASH COMPONENTS**********/
 .AuthAndSplash {

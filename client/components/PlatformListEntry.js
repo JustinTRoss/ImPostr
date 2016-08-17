@@ -1,12 +1,12 @@
 import React from 'react';
 import { Button, ListGroupItem } from 'react-bootstrap';
+import RaisedButton from 'material-ui/RaisedButton';
+import Paper from 'material-ui/Paper';
 
 import PlatformModal from './PlatformModal';
 
 const PlatformListEntry = ({
   platform,
-  handleFieldChange,
-  validateForm,
   onLogoutClick,
   onToggleModalClick,
   onSetSettingsClick,
@@ -14,40 +14,46 @@ const PlatformListEntry = ({
     // <Button href={`http://www.localhost:3000/auth/${platform.platform}`}>
   const login = (
     <Button href={`http://127.0.0.1:3000/auth/${platform.platform}`}>
-      {`Login to ${platform.platform}`}
+      Login
     </Button>
   );
   const logout = (
-    <Button
-      onClick={() => { onLogoutClick(platform.platform); }}
-    >
-      {`Logout of ${platform.platform}`}
+    <Button onClick={() => { onLogoutClick(platform.platform); }}>
+      Logout
     </Button>
   );
+
+  // Use to toggle greyed out?
+ // {`User  ${platform.userPlatformLoggedIn ? '' : 'not '}logged in`}
 
   const buttonToRender = platform.userPlatformLoggedIn ? logout : login;
 
   return (
-    <ListGroupItem>
+    <Paper>
+      <RaisedButton label={platform.platform} />
+      <RaisedButton
+        label="Change settings"
+        primary={true}
+        onClick={() => { onToggleModalClick(platform.platform); }}
+      />
       <span>
         {buttonToRender}
       </span>
       <span>
-        {`Autopost ${platform.settings.isActive ? 'on' : 'off'}`}
+        <Button>
+          {`Autopost ${platform.settings.isActive ? 'on' : 'off'}`}
+        </Button>
       </span>
       <span>
-        {`User  ${platform.userPlatformLoggedIn ? '' : 'not '}logged in`}
       </span>
       <div>
         <PlatformModal
           platform={platform}
-          handleFieldChange={handleFieldChange}
-          validateForm={validateForm}
-          onToggleModalClick={onToggleModalClick}
           onSetSettingsClick={onSetSettingsClick}
+          onToggleModalClick={onToggleModalClick}
         />
       </div>
-    </ListGroupItem>
+    </Paper>
   );
 };
 
