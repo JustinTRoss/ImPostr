@@ -7,8 +7,8 @@ import {
   INSERT_ITEM_FROM_QUEUE,
 } from '../../../client/actions/postQueueActions';
 
-describe('Post Queue Actions', () => {
-  describe('removeItem()', () => {
+xdescribe('Post Queue Actions', () => {
+  xdescribe('removeItem()', () => {
     it('should create an action to remove item', () => {
       const index = 1;
       const expectedAction = {
@@ -19,7 +19,7 @@ describe('Post Queue Actions', () => {
     });
   });
 
-  describe('insertItem()', () => {
+  xdescribe('insertItem()', () => {
     it('should create an action to insert item', () => {
       const index = 1;
       const expectedAction = {

@@ -4,7 +4,7 @@ import reducer from '../../../client/reducers/postQueue';
 
 import { REMOVE_ITEM_FROM_QUEUE, INSERT_ITEM_FROM_QUEUE } from '../../../client/actions/postQueueActions';
 
-describe('Post Queue Reducer', () => {
+xdescribe('Post Queue Reducer', () => {
   it('should return initial state', () => {
     const initialState = undefined;
 
