@@ -25,8 +25,8 @@ export const validateForm = (fields) => ({
 });
 
 export const handleFormSubmit = (post) => {
-  return dispatch => {
-    const token = window.localStorage.getItem('ImPostr-JWT');
+  return (dispatch, getState) => {
+    const { userLogin: { token } } = getState();
     return fetch('http://127.0.0.1:3000/post/addNewFromUser', {
       method: 'POST',
       headers: {
@@ -40,7 +40,7 @@ export const handleFormSubmit = (post) => {
     .then(response => response.json())
     .then(json => {
       //validate json response, easy solution, call update queue on response
-      dispatch(requestQueue());
+      dispatch(requestQueue(token));
     });
   }
 }
