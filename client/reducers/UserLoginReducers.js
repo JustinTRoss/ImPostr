@@ -13,15 +13,16 @@ import {
 
 const UserObject = (state = {
   userId: '',
+  token: '',
   isLogin: 'login',
   loggedIn: false,
   login: {
-    error: '',  
+    error: '',
     username: '',
     password: '',
   },
   signup: {
-    error: '',  
+    error: '',
     username: '',
     password: '',
   },
@@ -30,20 +31,21 @@ const UserObject = (state = {
     case RECEIVE_JWT_FAILURE:
       return Object.assign({}, state, {
         loggedIn: false,
-      })
+      });
     case RECEIVE_JWT_SUCCESS:
       return Object.assign({}, state, {
         loggedIn: true,
-      })
+        token: action.token,
+      });
     case THROW_FIELD_VALIDATION_ERROR:
       const errorObj = {
-        error:`${action.fieldName} must be greater than 8 characters`,
+        error: `${action.fieldName} must be greater than 8 characters`,
         username: '',
         password: '',
-      }
+      };
       if (action.formName === 'login') {
         return Object.assign({}, state, {
-          login:errorObj,
+          login: errorObj,
         });
       } else if (action.formName === 'signup') {
         return Object.assign({}, state, {
@@ -55,7 +57,7 @@ const UserObject = (state = {
     case CHANGE_FORM_TYPE:
       return Object.assign({}, state, {
         isLogin: action.formType,
-      })
+      });
     case UPDATE_FORM_VALUE:
       if (action.formName === 'login') {
         return Object.assign({}, state, {
@@ -87,6 +89,7 @@ const UserObject = (state = {
     case RECEIVE_USER_LOGIN:
       return Object.assign({}, state, {
         loggedIn: true,
+        token: action.token,
         login: {
           username: '',
           password: '',
@@ -95,6 +98,7 @@ const UserObject = (state = {
     case RECEIVE_USER_SIGNUP:
       return Object.assign({}, state, {
         loggedIn: true,
+        token: action.token,
         signup: {
           username: '',
           password: '',

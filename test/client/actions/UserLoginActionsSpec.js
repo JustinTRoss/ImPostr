@@ -23,9 +23,9 @@ import {
   CHANGE_FORM_TYPE,
 } from '../../../client/actions/UserLoginActions';
 
-describe('User Login Actions Spec', () => {
-  describe('sync actions', () => {
-    describe('requestStart()', () => {
+xdescribe('User Login Actions Spec', () => {
+  xdescribe('sync actions', () => {
+    xdescribe('requestStart()', () => {
       it('should create an action to requestStart', () => {
         const expectedAction = {
           type: REQUEST_START,
@@ -34,7 +34,7 @@ describe('User Login Actions Spec', () => {
       });
     });
 
-    describe('receiveFailure()', () => {
+    xdescribe('receiveFailure()', () => {
       it('should create an action to receiveFailure', () => {
         const username = 'tom';
         const formName = 'signup';
@@ -47,7 +47,7 @@ describe('User Login Actions Spec', () => {
       });
     });
 
-    describe('updateFormValue()', () => {
+    xdescribe('updateFormValue()', () => {
       it('should create an action to updateFormValue', () => {
         const formData = 'tom';
         const expectedAction = {
@@ -58,7 +58,7 @@ describe('User Login Actions Spec', () => {
       });
     });
 
-    describe('changeFormType()', () => {
+    xdescribe('changeFormType()', () => {
       it('should create an action to changeFormType', () => {
         const formType = 'signup';
         const expectedAction = {
@@ -69,7 +69,7 @@ describe('User Login Actions Spec', () => {
       });
     });
 
-    describe('receiveLogin()', () => {
+    xdescribe('receiveLogin()', () => {
       it('should create an action to receiveLogin', () => {
         const user = { userId: '123' };
         const { userId } = user;
@@ -81,7 +81,7 @@ describe('User Login Actions Spec', () => {
       });
     });
 
-    describe('receiveSignup()', () => {
+    xdescribe('receiveSignup()', () => {
       it('should create an action to receiveSignup', () => {
         const user = { userId: '123' };
         const { userId } = user;
@@ -93,7 +93,7 @@ describe('User Login Actions Spec', () => {
       });
     });
 
-    describe('receiveLogout()', () => {
+    xdescribe('receiveLogout()', () => {
       it('should create an action to receiveLogout', () => {
         const expectedAction = {
           type: RECEIVE_USER_LOGOUT,
@@ -103,14 +103,14 @@ describe('User Login Actions Spec', () => {
     });
   });
 
-  describe('async actions', () => {
-    describe('sendLoginToServer()', () => {
+  xdescribe('async actions', () => {
+    xdescribe('sendLoginToServer()', () => {
     });
 
-    describe('sendSignupToServer()', () => {
+    xdescribe('sendSignupToServer()', () => {
     });
 
-    describe('requestLogout()', () => {
+    xdescribe('requestLogout()', () => {
     });
   });
 });

@@ -9,6 +9,7 @@ const PostQueue = (state = {
       const newQueue = state.queuedItems.slice();
       const newRemoved = state.removedItems.slice();
       const temp = newQueue.splice(action.index, 1);
+      temp[0].isActive = !temp[0].isActive;
       newRemoved.push(temp[0]);
       return Object.assign({}, state, {
         queuedItems: newQueue,
@@ -26,6 +27,7 @@ const PostQueue = (state = {
       const newQueueInsert = state.queuedItems.slice();
       const newRemovedInsert = state.removedItems.slice();
       const tempInsert = newRemovedInsert.splice(action.index, 1);
+      tempInsert[0].isActive = !tempInsert[0].isActive;
       newQueueInsert.push(tempInsert[0]);
       return Object.assign({}, state, {
         queuedItems: newQueueInsert,
