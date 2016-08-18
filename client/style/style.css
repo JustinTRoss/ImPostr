@@ -1,20 +1,38 @@
 /**********BODY**********/
 body: {
+}
+
+#App { 
   display: flex;
+  justify-content: center;
 }
 
 /**********HOME**********/
 
+#ContentTabs {
+  display: flex;
+  justify-content: center;
+  flex-flow: row nowrap;
+  width: 100%;
+}
+
 #Home {
   display: flex;
+  width: 90%;
 
   /*FLEX*/
-  flex-flow: row nowrap;
-  justify-content: flex-start;
+  flex-flow: column nowrap;
+  align-items: flex-start;
 
 }
 
-#homeLeft {
+#Main {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+
+/*#homeLeft {
   justify-content: flex-start;
   width: 40%;
 }
@@ -34,6 +52,10 @@ body: {
 
 }
 
+#HistoryList {
+  height: 100vh;
+}
+*/
 
 /**********AUTH and SPLASH COMPONENTS**********/
 .AuthAndSplash {

@@ -1,11 +1,13 @@
 const graph = require('fbgraph');
 
-const postToFacebook = ({ message, token }, cb) => {
+const postToFacebook = ({ message, token }) => {
   const post = { message };
   graph.setAccessToken(token);
   graph.post('/feed', post, (err, res) => {
-    if (err) { cb(err); }
-    if (!err) { cb(res); }
+    if (err) {
+      return err;
+    }
+    return res;
   });
 };
 

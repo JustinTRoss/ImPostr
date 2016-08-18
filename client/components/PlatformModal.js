@@ -22,11 +22,6 @@ const PlatformModal = ({
 
   return (
     <Paper>
-      <RaisedButton
-        label="Change settings"
-        primary={true}
-        onClick={() => { onToggleModalClick(platform.platform); }}
-      />
       <Dialog
         title={`${platform.platform}'s settings`}
         open={platform.showModal}

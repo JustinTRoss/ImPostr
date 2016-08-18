@@ -1,18 +1,17 @@
 import React from 'react';
 import moment from 'moment';
-import { ListGroupItem, Button } from 'react-bootstrap';
+import { ListItem } from 'material-ui/List';
+import FlatButton from 'material-ui/FlatButton';
 
 const PostQueueEntry = ({ post, onRemoveItemClick, index }) => (
-  <ListGroupItem>
+  <ListItem style={{backgroundColor: 'white', border: '1px'}}>
     {`${post.message} will be posted on ${post.platform} at ${moment(post.time).fromNow()}`}
-    <Button
+    <FlatButton
+      label="Remove"
+      primary={true}
       onClick={() => { onRemoveItemClick(post.postId, index); }}
-      bsStyle="warning"
-      size="small"
-    >
-      Remove item
-    </Button>
-  </ListGroupItem>
+     />
+  </ListItem>
 );
 
 export default PostQueueEntry;

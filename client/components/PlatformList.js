@@ -1,6 +1,6 @@
 import React from 'react';
-import { Panel, ListGroup } from 'react-bootstrap';
 import PlatformListEntry from './PlatformListEntry';
+import { List } from 'material-ui/List';
 
 const PlatformList = ({
   platforms,
@@ -11,20 +11,18 @@ const PlatformList = ({
   onSetSettingsClick,
 }) => {
   return (
-    <div>
-      <Panel header="Platforms">
-        <ListGroup>
-          {platforms.map(platform =>
-            <PlatformListEntry
-              platform={platform}
-              handleFieldChange={handleFieldChange}
-              validateForm={validateForm}
-              onLogoutClick={onLogoutClick}
-              onToggleModalClick={onToggleModalClick}
-              onSetSettingsClick={onSetSettingsClick}
-            />)}
-        </ListGroup>
-      </Panel>
+    <div id="PlatformListContainer">
+      <List style={{backgroundColor: 'white', height: '100vh'}}>
+        {platforms.map(platform =>
+          <PlatformListEntry
+            platform={platform}
+            handleFieldChange={handleFieldChange}
+            validateForm={validateForm}
+            onLogoutClick={onLogoutClick}
+            onToggleModalClick={onToggleModalClick}
+            onSetSettingsClick={onSetSettingsClick}
+          />)}
+      </List>
     </div>
   );
 };
