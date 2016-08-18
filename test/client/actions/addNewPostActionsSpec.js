@@ -56,7 +56,7 @@ describe('addNewPostActions', () => {
     });
   });
 
-  //issues >> makes multiple http calls: handle form submit, request queue
+  //issues >> makes multiple http calls: handle form submit, request queue, store isnt being updated, fix reliance on functions
   xdescribe('async actions', () => {
     describe('handleFormSubmit()', () => {
       afterEach(() => {
@@ -69,16 +69,11 @@ describe('addNewPostActions', () => {
           message: 'lets go',
           time: 'tomorrow',
         };
-
         nock('http://127.0.0.1:3000')
           .post('/post/addNewFromUser', {
             post,
           })
           .reply(200, { status: true });
-
-        
-
-
       });
     });
   });
