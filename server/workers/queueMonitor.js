@@ -8,7 +8,6 @@ const { postToLinkedIn } = require('../platformservices/linkedin');
 
 // Post to appropriate platform
 const postOnPlatforms = (post) => {
-  console.log('posting on ', post.platform);
   switch (post.platform) {
     case 'twitter':
       return postToTwitter(post);

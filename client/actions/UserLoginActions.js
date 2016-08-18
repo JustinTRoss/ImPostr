@@ -68,9 +68,11 @@ export const checkJWTWithServer = () => {
       .then(res => res.json())
       .then(jsonRes => {
         dispatch(receiveJWTSuccess(jsonRes));
-        dispatch(getSettingsFields(jsonRes.token));
-        dispatch(requestQueue(jsonRes.token));
-        dispatch(requestHistory(jsonRes.token));
+        return;
+      }).then(() => {
+        dispatch(getSettingsFields());
+        dispatch(requestQueue());
+        dispatch(requestHistory());
       })
       .catch(err => {
         console.error(err, 'error in JWT Validation');

@@ -72,9 +72,9 @@ describe('historyListActions', () => {
           },
         ];
 
-        const store = mockStore({ history: [] });
+        const store = mockStore({ userLogin: { token } });
 
-        return store.dispatch(requestHistory(token))
+        return store.dispatch(requestHistory())
          .then(() => {
            expect(store.getActions()).to.deep.equal(expectedAction);
          });

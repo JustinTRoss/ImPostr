@@ -4,16 +4,13 @@ import { ListItem } from 'material-ui/List';
 import FlatButton from 'material-ui/FlatButton';
 
 const PostQueueEntry = ({ post, requestRemove, index }) => (
-  <ListGroupItem>
+  <ListItem>
     {`${post.message} will be posted on ${post.platform} at ${moment(post.expires).fromNow()}`}
-    <Button
+    <FlatButton
+      label="Remove item"
       onClick={() => { requestRemove(post, index); }}
-      bsStyle="warning"
-      size="small"
-    >
-      Remove item
-    </Button>
-  </ListGroupItem>
+    />
+  </ListItem>
 );
 
 export default PostQueueEntry;

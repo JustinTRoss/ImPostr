@@ -7,8 +7,9 @@ export const receiveHistory = ({ history }) => ({
   history,
 });
 
-export const requestHistory = (token) => {
-  return dispatch => {
+export const requestHistory = () => {
+  return (dispatch, getState) => {
+    const { userLogin: { token } } = getState();
     return fetch('http://localhost:3000/post/getPostHistory', {
       headers: new Headers({
         'Content-Type': 'application/json',

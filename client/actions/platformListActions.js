@@ -91,8 +91,9 @@ export const setSettingsFields = (platformObject, settings) => {
   };
 };
 
-export const getSettingsFields = (token) => {
-  return dispatch => {
+export const getSettingsFields = () => {
+  return (dispatch, getState) => {
+    const { userLogin: { token } } = getState();
     return fetch('http://127.0.0.1:3000/settings/getSettings', {
       headers: {
         'Content-Type': 'application/json',
