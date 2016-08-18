@@ -48,7 +48,7 @@ export const receiveSettingsFields = (platform, settings, settingId) => ({
 export const requestPlatformLogout = (platform) => {
   return (dispatch, getState) => {
     const { userLogin: { token } } = getState();
-    console.log('jwt', token);
+
     return fetch('http://127.0.0.1:3000/settings/requestPlatformLogout', {
       method: 'POST',
       headers: {

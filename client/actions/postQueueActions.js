@@ -1,3 +1,8 @@
+import fetch from 'isomorphic-fetch';
+import { polyfill } from 'es6-promise';
+
+polyfill();
+
 export const REMOVE_ITEM_FROM_QUEUE = 'REMOVE_ITEM_FROM_QUEUE';
 export const INSERT_ITEM_FROM_QUEUE = 'INSERT_ITEM_FROM_QUEUE';
 export const INSERT_QUEUE = 'INSERT_QUEUE';
@@ -12,32 +17,30 @@ export const insertItem = (index) => ({
   index,
 });
 
-export const insertQueue = ({ queue }) => (
-  {
-    type: INSERT_QUEUE,
-    queue,
-  }
-);
+export const insertQueue = ({ queue }) => ({
+  type: INSERT_QUEUE,
+  queue,
+});
 
 export const requestQueue = (token) => {
   return dispatch => {
-    fetch(`http://localhost:3000/post/getUser`, {
-      headers: new Headers({
+    return fetch(`http://localhost:3000/post/getUser`, {
+      headers: {
         'Content-Type': 'application/json',
         Authorization: `JWT ${token}`,
-      }),
+      },
     })
       .then(response => response.json())
       .then(json => {
         dispatch(insertQueue(json));
-      })
+      });
   };
 };
 
 export const requestRemove = ({ postId, isActive, index }) => {
   return (dispatch, getState) => {
     const { userLogin: { token } } = getState();
-    fetch(`http://localhost:3000/post/toggleIsActive`, {
+    return fetch(`http://localhost:3000/post/toggleIsActive`, {
       method: 'POST',
       body: JSON.stringify({
         postId,
@@ -50,11 +53,11 @@ export const requestRemove = ({ postId, isActive, index }) => {
     })
       .then(res => res.json())
       .then(confirmationOfRemoval => {
-        if (isActive === 'f') {
+        if (isActive) {
           dispatch(removeItem(index));
         } else {
           dispatch(insertItem(index));
         }
-      })
+      });
   };
 };
