@@ -37,14 +37,15 @@ export const requestQueue = (token) => {
   };
 };
 
-export const requestRemove = ({ postId, isActive, index }) => {
+export const requestRemove = (post, index) => {
+  const { postId, isActive } = post;
   return (dispatch, getState) => {
     const { userLogin: { token } } = getState();
     return fetch(`http://localhost:3000/post/toggleIsActive`, {
       method: 'POST',
       body: JSON.stringify({
         postId,
-        isActive,
+        isActive: !isActive,
       }),
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -52,10 +53,11 @@ export const requestRemove = ({ postId, isActive, index }) => {
       }),
     })
       .then(res => res.json())
-      .then(confirmationOfRemoval => {
-        if (isActive) {
+      .then(status => {
+        if (isActive && status.status) {
           dispatch(removeItem(index));
-        } else {
+        }
+        if (!isActive && status.status) {
           dispatch(insertItem(index));
         }
       });

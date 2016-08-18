@@ -9,9 +9,9 @@ const PostQueue = ({
   postId,
   queuedItems,
   removedItems,
-  onRemoveItemClick,
-  onInsertItemClick,
+  requestRemove,
 }) => (
+<<<<<<< b7b5a37a6cbe1cb7e7cb2fd8568cc740625e8668
     <Tabs style={{display: 'block',}}>
       <Tab label="Pending Posts">
         <List>
@@ -36,6 +36,32 @@ const PostQueue = ({
         </List>
       </Tab>
     </Tabs>
+=======
+  <Panel header="All posts">
+    <ListGroup>
+      Pending posts
+      {queuedItems.map((post, index) => (
+        <PostQueueEntry
+          index={index}
+          requestRemove={requestRemove}
+          post={post}
+        />
+      )
+      )}
+    </ListGroup>
+    <ListGroup>
+      Cancelled posts
+      {removedItems.map((post, index) => (
+        <PostQueueRemovedEntry
+          index={index}
+          requestRemove={requestRemove}
+          post={post}
+        />
+      )
+      )}
+    </ListGroup>
+  </Panel>
+>>>>>>> fixed bug in adding to and removing from post queue
 );
 
 export default PostQueue;

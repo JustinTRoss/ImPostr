@@ -108,8 +108,12 @@ const toggleIsActive = (req, res) => {
     where: {
       postId,
     },
-  }).then(updateStatus => {
-    res.send(updateStatus);
+  }).then(status => {
+    if (status[0] === 1) {
+      res.send({ status: true });
+    } else {
+      res.send({ status: false });
+    }
   });
 };
 
