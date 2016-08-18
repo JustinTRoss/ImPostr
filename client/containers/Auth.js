@@ -4,6 +4,9 @@ import { updateFieldValue, changeFormType, sendLoginToServer, sendSignupToServer
 import Splash from '../components/Splash';
 import Login from '../components/Login';
 import Signup from '../components/Signup';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+
 
 class Auth extends React.Component {
   constructor(props) {
@@ -31,6 +34,7 @@ class Auth extends React.Component {
   }
 
   render() {
+    const showLogout = this.props.loggedIn ? 'Logout' : 'Log In';
     let childToRender = this.props.isLogin === 'login' ?
       <Login
         username={this.state.login.username}
@@ -58,6 +62,8 @@ class Auth extends React.Component {
       </div>;
 
     return (
+      <div id='content'>
+        <Navbar receiveLogout={this.props.receiveLogout} showLogout={showLogout} />
       <div className="AuthAndSplash">
         <div id="splashBox">
         <Splash />
@@ -66,6 +72,10 @@ class Auth extends React.Component {
             {textToRender}
           </div>
         </div>
+      </div>
+        <footer>
+          <Footer />
+        </footer>
       </div>
     );
   }

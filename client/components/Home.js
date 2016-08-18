@@ -1,27 +1,10 @@
 import React from 'react';
-import PlatformListContainer from '../containers/PlatformListContainer';
-import PostQueueContainer from '../containers/PostQueueContainer';
-import AddNewPostContainer from '../containers/AddNewPostContainer';
-import HistoryListContainer from '../containers/HistoryListContainer';
+import ContentTabs from './ContentTabs';
+import ContentSwitch from './ContentSwitch';
 
 const Home = () => (
   <div id="Home">
-    <div id="homeLeft">
-      <div id="platformListContainer">
-        <PlatformListContainer />
-      </div>
-      <div id="addNewPostContainer">
-        <AddNewPostContainer />
-      </div>
-    </div>
-    <div id="homeRight">
-      <div id="postQueueContainer">
-        <PostQueueContainer />
-      </div>
-    </div>
-    <div id="HistoryList">
-      <HistoryListContainer />
-    </div>
+    <ContentTabs />
   </div>
 );
 

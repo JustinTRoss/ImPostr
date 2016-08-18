@@ -3,12 +3,12 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import App from './containers/App';
+import AppContainer from './containers/AppContainer';
 import configureStore from './configureStore';
 
 const Appy = () => (
   <MuiThemeProvider>
-    <App />
+    <AppContainer />
   </MuiThemeProvider>
 );
 

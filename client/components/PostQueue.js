@@ -1,6 +1,7 @@
 import React from 'react';
 import { Panel, ListGroup } from 'react-bootstrap';
-
+import { List } from 'material-ui/List';
+import {Tabs, Tab} from 'material-ui/Tabs';
 import PostQueueEntry from './PostQueueEntry';
 import PostQueueRemovedEntry from './PostQueueRemovedEntry';
 
@@ -11,30 +12,30 @@ const PostQueue = ({
   onRemoveItemClick,
   onInsertItemClick,
 }) => (
-  <Panel header="All posts">
-    <ListGroup>
-      Pending posts
-      {queuedItems.map((post, index) => (
-        <PostQueueEntry
-          index={index}
-          onRemoveItemClick={onRemoveItemClick}
-          post={post}
-        />
-      )
-      )}
-    </ListGroup>
-    <ListGroup>
-      Cancelled posts
-      {removedItems.map((post, index) => (
-        <PostQueueRemovedEntry
-          index={index}
-          onInsertItemClick={onInsertItemClick}
-          post={post}
-        />
-      )
-      )}
-    </ListGroup>
-  </Panel>
+    <Tabs style={{display: 'block',}}>
+      <Tab label="Pending Posts">
+        <List>
+          {queuedItems.map((post, index) => (
+            <PostQueueEntry
+              index={index}
+              onRemoveItemClick={onRemoveItemClick}
+              post={post}
+            />
+          ))}
+        </List>
+      </Tab>
+      <Tab label="Cancelled Posts" >
+        <List>
+          {removedItems.map((post, index) => (
+            <PostQueueRemovedEntry
+              index={index}
+              onInsertItemClick={onInsertItemClick}
+              post={post}
+            />
+          ))}
+        </List>
+      </Tab>
+    </Tabs>
 );
 
 export default PostQueue;
