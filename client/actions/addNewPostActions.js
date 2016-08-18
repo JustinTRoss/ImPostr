@@ -38,9 +38,10 @@ export const handleFormSubmit = (post) => {
       }),
     })
     .then(response => response.json())
-    .then(json => {
-      //validate json response, easy solution, call update queue on response
-      dispatch(requestQueue(token));
+    .then(res => {
+      if (res.status) {
+        dispatch(requestQueue(token));
+      }
     });
-  }
-}
+  };
+};

@@ -17,10 +17,12 @@ export const insertItem = (index) => ({
   index,
 });
 
-export const insertQueue = ({ queue }) => ({
-  type: INSERT_QUEUE,
-  queue,
-});
+export const insertQueue = ({ queue }) => {
+  return {
+    type: INSERT_QUEUE,
+    queue,
+  }
+};
 
 export const requestQueue = (token) => {
   return dispatch => {

@@ -92,8 +92,11 @@ const addNewFromUser = (req, res) => {
 
   getPostFields(platforms).done(results => {
     Post.bulkCreate(results).then((status) => {
-      //some sort of status validation
-      res.send(status);
+      if (status.length) {
+        res.send({ status: true });
+      } else {
+        res.send({ status: false });
+      }
     });
   });
 };
@@ -114,19 +117,19 @@ const toggleIsActive = (req, res) => {
     } else {
       res.send({ status: false });
     }
-  });
+  }); 
 };
 
 //getUser
   //for client to get all unserviced posts when user logs in
 const getUser = (req, res) => {
-  let { userId } = req.user;
+  const { userId } = req.user;
   Post.findAll({
     where: {
       userUserId: userId,
     },
   }).then(userPosts => {
-    let justPosts = userPosts
+    const justPosts = userPosts
       .map(post => post.dataValues)
       .filter(post => !!post.isActive);
     res.json({
@@ -136,7 +139,7 @@ const getUser = (req, res) => {
 };
 
 const getUserPostHistory = (req, res) => {
-  let { userId } = req.user;
+  const { userId } = req.user;
   Post.findAll({
     where: {
       posted: true,

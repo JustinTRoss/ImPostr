@@ -98,7 +98,7 @@ describe('Post Queue Actions', () => {
           },
         ];
 
-        const store = mockStore({ userLogin: { token: 'abc' } });
+        const store = mockStore({ userLogin: { token } });
 
         return store.dispatch(requestQueue(token))
           .then(() => {
@@ -137,7 +137,7 @@ describe('Post Queue Actions', () => {
           .post('/post/toggleIsActive')
           .reply(200, { status: true });
 
-        return store.dispatch(requestRemove(post))
+        return store.dispatch(requestRemove(post, index))
           .then(() => {
             expect(store.getActions()).to.deep.equal(expectedActions);
           });
@@ -168,7 +168,7 @@ describe('Post Queue Actions', () => {
           .post('/post/toggleIsActive')
           .reply(200, { status: true });
 
-        return store.dispatch(requestRemove(post))
+        return store.dispatch(requestRemove(post, index))
           .then(() => {
             expect(store.getActions()).to.deep.equal(expectedActions);
           });
