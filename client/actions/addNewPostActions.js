@@ -40,7 +40,7 @@ export const handleFormSubmit = (post) => {
     .then(response => response.json())
     .then(res => {
       if (res.status) {
-        dispatch(requestQueue(token));
+        dispatch(requestQueue());
       }
     });
   };

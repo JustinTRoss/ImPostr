@@ -3,8 +3,6 @@ import { getSettingsFields } from './platformListActions';
 import { requestQueue } from './postQueueActions';
 import { requestHistory } from './historyListActions';
 
-
-
 export const REQUEST_START = 'REQUEST_START';
 export const RECEIVE_USER_LOGIN = 'RECEIVE_USER_LOGIN';
 export const RECEIVE_FAILURE = 'RECEIVE_FAILURE';
@@ -29,7 +27,7 @@ export const requestStart = () => {
   // process is queued, but not yet complete
 };
 
-export const receiveFailure = ({ username, formName}) => {
+export const receiveFailure = ({ username, formName }) => {
   return {
     type: RECEIVE_FAILURE,
     username,
@@ -43,14 +41,14 @@ export const receiveJWTSuccess = ({ token }) => {
   return {
     type: RECEIVE_JWT_SUCCESS,
     token,
-  }
-}
+  };
+};
 
 export const receiveJWTFailure = () => {
   return {
     type: RECEIVE_JWT_FAILURE,
-  }
-}
+  };
+};
 
 
 export const checkJWTWithServer = () => {
@@ -79,33 +77,33 @@ export const checkJWTWithServer = () => {
         dispatch(receiveJWTFailure());
       });
     }
-  }
-}
+  };
+};
 
 /**********FORMS***********/
 
-export const throwFieldValidationError = (formData, fieldName, formName) => {
+export const throwFieldValidationError = (fieldName, formName) => {
   return {
     type: THROW_FIELD_VALIDATION_ERROR,
     fieldName,
     formName,
-  }
-}
+  };
+};
 
-export const updateFormValue = ( formData, formName ) => {
+export const updateFormValue = (formData, formName) => {
   return {
     type: UPDATE_FORM_VALUE,
     formData,
     formName,
-  }
-}
+  };
+};
 
-export const changeFormType = ( formType ) => {
+export const changeFormType = (formType) => {
   return {
     type: CHANGE_FORM_TYPE,
     formType,
-  }
-}
+  };
+};
 
 /**********LOGIN**********/
 
@@ -117,15 +115,16 @@ export const receiveLogin = ({ userId, token }) => {
   };
 };
 
-export const sendLoginToServer = ( formData ) => {
+export const sendLoginToServer = (formData) => {
+  const { username, password } = formData;
   return dispatch => {
     dispatch(requestStart());
     dispatch(updateFormValue(formData, 'login'));
     return fetch(`http://127.0.0.1:3000/user/login`, {
       method: 'POST',
       body: JSON.stringify({
-        username: formData.username,
-        password: formData.password,
+        username,
+        password,
       }),
       headers: new Headers({
         'Content-Type': 'application/json',
@@ -134,8 +133,8 @@ export const sendLoginToServer = ( formData ) => {
       // if successful login
       .then(response => response.json())
       .then(jsonRes => {
-        window.localStorage.setItem('ImPostr-JWT', jsonRes.token);
-        document.cookie = `jwtStuff=${jsonRes.token}`;
+        localStorage.setItem('ImPostr-JWT', jsonRes.token);
+        // document.cookie = `jwtStuff=${jsonRes.token}`;
         dispatch(receiveLogin(jsonRes));
       })
       // if failed login
@@ -156,11 +155,12 @@ export const receiveSignup = ({ userId, token }) => {
   };
 };
 
-export const sendSignupToServer = ( formData ) => {
+export const sendSignupToServer = (formData) => {
+  const { username, password } = formData;
   return dispatch => {
-    if (formData.username.length < 8) {
+    if (username.length < 8) {
       dispatch(throwFieldValidationError(formData, 'username', 'signup'));
-    } else if (formData.password.length < 8) {
+    } else if (password.length < 8) {
       dispatch(throwFieldValidationError(formData, 'username', 'signup'));
     } else {
       dispatch(requestStart());
@@ -168,8 +168,8 @@ export const sendSignupToServer = ( formData ) => {
       return fetch(`http://127.0.0.1:3000/user/signup`, {
         method: 'POST',
         body: JSON.stringify({
-          username: formData.username,
-          password: formData.password,
+          username,
+          password,
         }),
         headers: new Headers({
           'Content-Type': 'application/json',
