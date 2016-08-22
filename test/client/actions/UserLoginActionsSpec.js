@@ -227,7 +227,7 @@ describe('User Login Actions Spec', () => {
 
         return store.dispatch(sendLoginToServer(formData))
           .then(() => {
-            console.log('store.getActions()', store.getActions());
+
             expect(store.getActions()).to.deep.equal(expectedActions);
           });
       });

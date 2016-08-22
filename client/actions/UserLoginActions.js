@@ -219,7 +219,7 @@ export const requestLogout = ({ username }) => {
       .then(response => response.json())
       .then(json => {
         dispatch(receiveLogin(json));
-        console.log(json, 'logged out');
+
       })
       .catch(err => {
         dispatch(receiveFailure({ username }));

@@ -8,8 +8,8 @@ require('./config/sequelize');
 require('./config/middleware')(app, config);
 require('./config/routes')(app, config);
 
-require('./workers/postGenerator');
-require('./workers/queueMonitor');
+// require('./workers/postGenerator');
+// require('./workers/queueMonitor');
 // require('./workers/testWorkers');
 
 app.use(express.static(publicDir));
