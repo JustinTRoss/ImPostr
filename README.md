@@ -37,7 +37,7 @@ ImPostr is your one stop shop social media platform content manager. Connect you
 
 ## Screenshots <CHANGE URLS AND ADD IMAGES>
 <p align="center">
-  <img src="https://cloud.githubusercontent.com/assets/15970451/15833835/529ddcf6-2bdd-11e6-96c0-383f7f93a0d2.png">
+  <img src="<URL HERE>">
 </p>
 
 ## Getting Started
