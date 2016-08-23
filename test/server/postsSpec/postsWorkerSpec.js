@@ -2,12 +2,11 @@ process.env.NODE_ENV = 'test';
 
 const { expect } = require('chai');
 
-// const app = require('../../../server/server');
 const Post = require('../../../server/posts/post.model');
 const User = require('../../../server/users/user.model');
 const { getExpiredActive, removeExpired, addNew } = require('../../../server/posts/post.controller');
 
-describe('post.controller', () => {
+describe('post.controller worker functions', () => {
   describe('queueMonitor work functions', () => {
     beforeEach((done) => {
       const testUser = {

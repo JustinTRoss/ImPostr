@@ -1,5 +1,3 @@
-//need to join to get access token? or include access token here
-
 const sequelize = require('../config/sequelize');
 const Sequelize = require('sequelize');
 const User = require('../users/user.model');

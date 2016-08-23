@@ -1,20 +1,17 @@
 const PostRouter = require('express').Router();
-const PostCtrl = require('./post.controller');
+const {
+  toggleIsActive,
+  getUser,
+  getUserPostHistory,
+  addNewFromUser,
+} = require('./post.controller');
 
-PostRouter.post('/toggleIsActive', (req, res) => {
-  PostCtrl.toggleIsActive(req, res);
-});
+PostRouter.post('/toggleIsActive', toggleIsActive);
 
-PostRouter.get('/getUser', (req, res) => {
-  PostCtrl.getUser(req, res);
-});
+PostRouter.get('/getUser', getUser);
 
-PostRouter.get('/getPostHistory', (req, res) => {
-  PostCtrl.getUserPostHistory(req, res);
-});
+PostRouter.get('/getPostHistory', getUserPostHistory);
 
-PostRouter.post('/addNewFromUser', (req, res) => {
-  PostCtrl.addNewFromUser(req, res);
-});
+PostRouter.post('/addNewFromUser', addNewFromUser);
 
 module.exports = PostRouter;
