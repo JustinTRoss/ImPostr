@@ -4,7 +4,7 @@ const { expect } = require('chai');
 
 const Post = require('../../../server/posts/post.model');
 const User = require('../../../server/users/user.model');
-const { addNewFromUser, toggleIsActive } = require('../../../server/posts/post.controller');
+const { addNewFromUser, toggleIsActive, getUser } = require('../../../server/posts/post.controller');
 
 describe('post.controller client functions', () => {
   describe('addNewFromUser', () => {
@@ -160,4 +160,77 @@ describe('post.controller client functions', () => {
     });
   });
 
+  describe('getUser', () => {
+    beforeEach((done) => {
+      const testUsers = [
+        {
+          userId: 4,
+          username: 'Matt',
+          password: '123',
+        },
+        {
+          userId: 5,
+          username: 'Steven',
+          password: '123',
+        },
+      ];
+
+      const testPosts = [
+        {
+          platform: 'facebook',
+          token: 'abc123',
+          tokenSecret: 'tokensecret123',
+          isActive: true,
+          message: 'This the right user post',
+          expires: new Date(),
+          userUserId: 4,
+          posted: false,
+        },
+        {
+          platform: 'linkedin',
+          token: 'abc123',
+          tokenSecret: 'tokensecret123',
+          isActive: true,
+          message: 'This the right user post',
+          expires: new Date(),
+          userUserId: 4,
+          posted: false,
+        },
+        {
+          platform: 'linkedin',
+          token: 'abc123',
+          tokenSecret: 'tokensecret123',
+          isActive: true,
+          message: 'This the wrong user post',
+          expires: new Date(),
+          userUserId: 5,
+          posted: false,
+        },
+      ];
+
+      User.sync({ force: true })
+        .then(() => User.bulkCreate(testUsers))
+        .then(() => Post.sync({ force: true }))
+        .then(() => Post.bulkCreate(testPosts))
+        .then(() => { done(); });
+    });
+
+    it('should call res.json with posts for specified userId', (done) => {
+      const req = {
+        user: {
+          userId: 4,
+        },
+      };
+
+      const res = {};
+      res.json = (json) => {
+        expect(json.queue.length).to.equal(2);
+        const isPost = json.queue.every(post => post.message === 'This the right user post');
+        expect(isPost).to.equal(true);
+        done();
+      };
+
+      getUser(req, res);
+    });
+  });
 });
