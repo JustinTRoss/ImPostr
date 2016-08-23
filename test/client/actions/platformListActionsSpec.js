@@ -181,7 +181,7 @@ describe('Platform List Actions', () => {
 
       it('should create a 3 RECEIVE_SETTINGS_FIELDS actions when fetching todos has been done', () => {
         const token = 'abc';
-        const store = mockStore({ userLogin: { token: 'abc' } });
+        const store = mockStore({ userLogin: { token } });
         const platform = 'facebook';
         const settings = {
           autoPilot: false,
@@ -202,7 +202,7 @@ describe('Platform List Actions', () => {
           })
           .reply(200, { body: { status: 'array of settings objects' } });
 
-        store.dispatch(getSettingsFields(token))
+        store.dispatch(getSettingsFields())
           .then(() => {
             expect(store.getActions()[0]).to.deep.equal(expectedAction);
           });

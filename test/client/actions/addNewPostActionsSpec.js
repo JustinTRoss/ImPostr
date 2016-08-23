@@ -57,24 +57,9 @@ describe('addNewPostActions', () => {
   });
 
   //issues >> makes multiple http calls: handle form submit, request queue, store isnt being updated, fix reliance on functions
-  xdescribe('async actions', () => {
+  describe('async actions', () => {
     describe('handleFormSubmit()', () => {
-      afterEach(() => {
-        nock.cleanAll();
-      });
-
-      it('should make a call to the add new from user', () => {
-        const token = 'abc';
-        const post = {
-          message: 'lets go',
-          time: 'tomorrow',
-        };
-        nock('http://127.0.0.1:3000')
-          .post('/post/addNewFromUser', {
-            post,
-          })
-          .reply(200, { status: true });
-      });
+      it('has issues because has to access local storage');
     });
   });
 });

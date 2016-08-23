@@ -24,8 +24,9 @@ export const insertQueue = ({ queue }) => {
   }
 };
 
-export const requestQueue = (token) => {
-  return dispatch => {
+export const requestQueue = () => {
+  return (dispatch, getState) => {
+    const { userLogin: { token } } = getState();
     return fetch(`http://localhost:3000/post/getUser`, {
       headers: {
         'Content-Type': 'application/json',

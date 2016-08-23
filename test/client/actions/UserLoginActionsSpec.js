@@ -2,17 +2,28 @@ import { expect } from 'chai';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
+import localStorage from 'mock-local-storage';
+// import jsdom from 'jsdom';
+// const window = jsdom.jsdom().parentWindow;
+// console.log('window', window);
+// import cookies from 'cookies-js';
+// const Cookies = cookies(window);
+
 
 import {
   requestStart,
   receiveFailure,
+  receiveJWTSuccess,
+  receiveJWTFailure,
+  checkJWTWithServer,
+  throwFieldValidationError,
   updateFormValue,
   changeFormType,
   receiveLogin,
-  receiveSignup,
-  receiveLogout,
   sendLoginToServer,
+  receiveSignup,
   sendSignupToServer,
+  receiveLogout,
   requestLogout,
   REQUEST_START,
   RECEIVE_USER_LOGIN,
@@ -21,11 +32,17 @@ import {
   RECEIVE_USER_SIGNUP,
   UPDATE_FORM_VALUE,
   CHANGE_FORM_TYPE,
+  RECEIVE_JWT_FAILURE,
+  RECEIVE_JWT_SUCCESS,
+  THROW_FIELD_VALIDATION_ERROR,
 } from '../../../client/actions/UserLoginActions';
 
-xdescribe('User Login Actions Spec', () => {
-  xdescribe('sync actions', () => {
-    xdescribe('requestStart()', () => {
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
+
+describe('User Login Actions Spec', () => {
+  describe('sync actions', () => {
+    describe('requestStart()', () => {
       it('should create an action to requestStart', () => {
         const expectedAction = {
           type: REQUEST_START,
@@ -34,7 +51,7 @@ xdescribe('User Login Actions Spec', () => {
       });
     });
 
-    xdescribe('receiveFailure()', () => {
+    describe('receiveFailure()', () => {
       it('should create an action to receiveFailure', () => {
         const username = 'tom';
         const formName = 'signup';
@@ -43,74 +60,183 @@ xdescribe('User Login Actions Spec', () => {
           username,
           formName,
         };
-        expect(receiveFailure({ username, formName })).to.deep.equal(expectedAction);      
+        expect(receiveFailure({ username, formName })).to.deep.equal(expectedAction);
       });
     });
 
-    xdescribe('updateFormValue()', () => {
+    describe('receiveJWTSuccess()', () => {
+      it('should create an action to receiveJWTSuccess', () => {
+        const json = {
+          token: 'abc',
+        };
+        const { token } = json;
+        const expectedAction = {
+          type: RECEIVE_JWT_SUCCESS,
+          token,
+        };
+        expect(receiveJWTSuccess(json)).to.deep.equal(expectedAction);
+      });
+    });
+
+    describe('receiveJWTFailure()', () => {
+      it('should create an action to receiveJWTFailure', () => {
+        const expectedAction = {
+          type: RECEIVE_JWT_FAILURE,
+        };
+        expect(receiveJWTFailure()).to.deep.equal(expectedAction);
+      });
+    });
+
+    describe('throwFieldValidationError()', () => {
+      it('should create an action to throwFieldValidationError', () => {
+        const fieldName = 'text';
+        const formName = 'signup';
+        const expectedAction = {
+          type: THROW_FIELD_VALIDATION_ERROR,
+          fieldName,
+          formName,
+        };
+        expect(throwFieldValidationError(fieldName, formName)).to.deep.equal(expectedAction);
+      });
+    });
+
+    describe('updateFormValue()', () => {
       it('should create an action to updateFormValue', () => {
         const formData = 'tom';
+        const formName = 'signup';
         const expectedAction = {
           type: UPDATE_FORM_VALUE,
           formData,
+          formName,
         };
-        expect(updateFormValue(formData)).to.deep.equal(expectedAction);      
+        expect(updateFormValue(formData, formName)).to.deep.equal(expectedAction);
       });
     });
 
-    xdescribe('changeFormType()', () => {
+    describe('changeFormType()', () => {
       it('should create an action to changeFormType', () => {
         const formType = 'signup';
         const expectedAction = {
           type: CHANGE_FORM_TYPE,
           formType,
         };
-        expect(changeFormType(formType)).to.deep.equal(expectedAction);      
+        expect(changeFormType(formType)).to.deep.equal(expectedAction);
       });
     });
 
-    xdescribe('receiveLogin()', () => {
+    describe('receiveLogin()', () => {
       it('should create an action to receiveLogin', () => {
-        const user = { userId: '123' };
-        const { userId } = user;
+        const json = {
+          userId: '123',
+          token: 'abc',
+        };
+        const { userId, token } = json;
         const expectedAction = {
           type: RECEIVE_USER_LOGIN,
           userId,
+          token,
         };
-        expect(receiveLogin(user)).to.deep.equal(expectedAction);      
+        expect(receiveLogin(json)).to.deep.equal(expectedAction);
       });
     });
 
-    xdescribe('receiveSignup()', () => {
+    describe('receiveSignup()', () => {
       it('should create an action to receiveSignup', () => {
-        const user = { userId: '123' };
-        const { userId } = user;
+        const json = {
+          userId: '123',
+          token: 'abc',
+        };
+        const { userId, token } = json;
         const expectedAction = {
           type: RECEIVE_USER_SIGNUP,
           userId,
+          token,
         };
-        expect(receiveSignup(user)).to.deep.equal(expectedAction);      
+        expect(receiveSignup(json)).to.deep.equal(expectedAction);
       });
     });
 
-    xdescribe('receiveLogout()', () => {
+    describe('receiveLogout()', () => {
       it('should create an action to receiveLogout', () => {
         const expectedAction = {
           type: RECEIVE_USER_LOGOUT,
         };
-        expect(receiveLogout()).to.deep.equal(expectedAction);      
+        expect(receiveLogout()).to.deep.equal(expectedAction);
       });
     });
   });
 
-  xdescribe('async actions', () => {
-    xdescribe('sendLoginToServer()', () => {
+  describe('async actions', () => {
+    // afterEach(() => {
+    //         localStorage.clear();
+    //     // remove callback
+    //         localStorage.itemInsertionCallback = null;
+    //     });
+    // const sandbox;
+
+    // beforeEach(() => {
+    //   sandbox = sinon.sandbox.create()
+    //   window.localStorage.token = 'abc';
+    // })
+
+    // afterEach(function() {
+    //   sandbox.restore()
+    // })
+
+    describe('checkJWTWithServer()', () => {
+      it('has issues because has to access local storage');
     });
 
-    xdescribe('sendSignupToServer()', () => {
+    describe('sendLoginToServer()', () => {
+      it('should generate a REQUEST_START, UPDATE_FORM_VALUE, and RECEIVE_USER_LOGIN, if successful server response', () => {
+
+        const formData = {
+          username: 'tom',
+          password: '123',
+        };
+        const formName = 'login';
+        const jsonRes = {
+          userId: 12,
+          token: 'abc',
+        };
+        const { userId, token } = jsonRes;
+        const expectedActions = [
+          {
+            type: REQUEST_START,
+          },
+          {
+            type: UPDATE_FORM_VALUE,
+            formData,
+            formName,
+          },
+          {
+            type: RECEIVE_USER_LOGIN,
+            userId,
+            token,
+          },
+        ];
+        const { username, password } = formData;
+        nock('http://127.0.0.1:3000', {
+          username,
+          password,
+        })
+          .post('/user/login')
+          .reply(200, jsonRes);
+
+        const store = mockStore({});
+
+        return store.dispatch(sendLoginToServer(formData))
+          .then(() => {
+
+            expect(store.getActions()).to.deep.equal(expectedActions);
+          });
+      });
     });
 
-    xdescribe('requestLogout()', () => {
+    describe('sendSignupToServer()', () => {
+    });
+
+    describe('requestLogout()', () => {
     });
   });
 });
