@@ -134,7 +134,6 @@ describe('setting.controller client funciton', () => {
       updateSettings(req, res);
     });
 
-
     it('should update the targetted settingObject in the db', (done) => {
       const req = {
         body: {
@@ -164,8 +163,62 @@ describe('setting.controller client funciton', () => {
 
       updateSettings(req, res);
     });
-    it('should call res.json with the newly created object if the setting object does not exist');
-    it('should write the passed in settingObject to the db if the setting object does not exist');
 
-  })
+    it('should call res.json with the newly created object if the setting object does not exist', (done) => {
+      const req = {
+        body: {
+          settings: {
+            interests: 'This is a new interests string',
+            interval: 7,
+            isActive: true,
+          },
+          platform: 'linkedin',
+        },
+        user: {
+          userId: 4,
+        },
+      };
+
+      const res = {};
+      res.json = (createStatus) => {
+        expect(createStatus.dataValues.platform).to.equal('linkedin');
+        expect(createStatus.dataValues.interests).to.equal('This is a new interests string');
+        done();
+      };
+
+      updateSettings(req, res);
+    });
+
+    it('should write the passed in settingObject to the db if the setting object does not exist', (done) => {
+      const req = {
+        body: {
+          settings: {
+            interests: 'This is a new interests string',
+            interval: 7,
+            isActive: true,
+          },
+          platform: 'linkedin',
+        },
+        user: {
+          userId: 4,
+        },
+      };
+
+      const res = {};
+      res.json = () => {
+        Setting.findOne({
+          where: {
+            userUserId: req.user.userId,
+            platform: req.body.platform,
+          },
+        }).then(setting => {
+          expect(setting.dataValues.platform).to.equal('linkedin');
+          expect(setting.dataValues.interests).to.equal('This is a new interests string');
+          done();
+        });
+      };
+
+      updateSettings(req, res);
+    });
+  });
 });
