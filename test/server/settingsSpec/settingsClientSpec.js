@@ -221,4 +221,82 @@ describe('setting.controller client funciton', () => {
       updateSettings(req, res);
     });
   });
+
+  describe('requestPlatformLogout', () => {
+    beforeEach((done) => {
+      const testUsers = [
+        {
+          userId: 4,
+          username: 'Matt',
+          password: '123',
+        },
+      ];
+
+      const testSettings = [
+        {
+          platform: 'facebook',
+          token: 'abc123',
+          tokenSecret: 'tokensecret123',
+          isActive: true,
+          interests: 'This is the right interests string',
+          interval: 7,
+          dueNext: new Date(),
+          userUserId: 4,
+        },
+      ];
+
+      User.sync({ force: true })
+        .then(() => User.bulkCreate(testUsers))
+        .then(() => Setting.sync({ force: true }))
+        .then(() => Setting.bulkCreate(testSettings))
+        .then(() => { done(); });
+    });
+
+    it('should call res.json with { verdict: success }', (done) => {
+      const req = {
+        body: {
+          platform: 'facebook',
+        },
+        user: {
+          userId: 4,
+        },
+      };
+
+      const res = {};
+      res.json = (verdict) => {
+        expect(verdict).to.deep.equal({ verdict: 'success' });
+        done();
+      };
+
+      requestPlatformLogout(req, res);
+    });
+
+    it('should remove the token and tokenSecret from the db for the specified userId and platform', (done) => {
+      const req = {
+        body: {
+          platform: 'facebook',
+        },
+        user: {
+          userId: 4,
+        },
+      };
+
+      const res = {};
+      res.json = () => {
+        Setting.findOne({
+          where: {
+            platform: req.body.platform,
+            userUserId: req.user.userId,
+          },
+        }).then(setting => {
+          expect(setting.dataValues.platform).to.equal('facebook');
+          expect(setting.dataValues.token).to.equal('');
+          expect(setting.dataValues.tokenSecret).to.equal('');
+          done();
+        });
+      };
+
+      requestPlatformLogout(req, res);
+    });
+  });
 });
