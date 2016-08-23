@@ -74,9 +74,9 @@ describe('post.controller', () => {
 
     describe('getExpiredActive()', () => {
       it('should resond with only the post that both expired and active', (done) => {
-        Post.findAll().then(posts => {
-          expect(posts.length).to.equal(4);
-        }).then(() => getExpiredActive())
+        Post.findAll()
+          .then(posts => { expect(posts.length).to.equal(4); })
+          .then(() => getExpiredActive())
           .then(posts => {
             expect(posts.length).to.equal(1);
             expect(posts[0].message).to.equal('This is an active post that expired yesterday');

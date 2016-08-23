@@ -46,7 +46,8 @@ const removeExpired = () => {
 
 //addNew
   //for worker to add a post
-const addNew = ({ platform, token, tokenSecret, isActive, message, expires, posted, userUserId }) => {
+const addNew = (post) => {
+  const { platform, token, tokenSecret, isActive, message, expires, posted, userUserId } = post;
   return Post.create({
     platform,
     token,
