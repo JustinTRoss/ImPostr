@@ -4,7 +4,7 @@ const { expect } = require('chai');
 
 const Post = require('../../../server/posts/post.model');
 const User = require('../../../server/users/user.model');
-const { addNewFromUser, toggleIsActive, getUser } = require('../../../server/posts/post.controller');
+const { addNewFromUser, toggleIsActive, getUser, getUserPostHistory } = require('../../../server/posts/post.controller');
 
 describe('post.controller client functions', () => {
   describe('addNewFromUser', () => {
@@ -231,6 +231,79 @@ describe('post.controller client functions', () => {
       };
 
       getUser(req, res);
+    });
+  });
+
+  describe('getUserPostHistory', () => {
+    beforeEach((done) => {
+      const testUsers = [
+        {
+          userId: 4,
+          username: 'Matt',
+          password: '123',
+        },
+        {
+          userId: 5,
+          username: 'Steven',
+          password: '123',
+        },
+      ];
+
+      const testPosts = [
+        {
+          platform: 'facebook',
+          token: 'abc123',
+          tokenSecret: 'tokensecret123',
+          isActive: true,
+          message: 'This the right user post',
+          expires: new Date(),
+          userUserId: 4,
+          posted: true,
+        },
+        {
+          platform: 'linkedin',
+          token: 'abc123',
+          tokenSecret: 'tokensecret123',
+          isActive: true,
+          message: 'This the wrong user post',
+          expires: new Date(),
+          userUserId: 4,
+          posted: false,
+        },
+        {
+          platform: 'linkedin',
+          token: 'abc123',
+          tokenSecret: 'tokensecret123',
+          isActive: true,
+          message: 'This the wrong user post',
+          expires: new Date(),
+          userUserId: 5,
+          posted: false,
+        },
+      ];
+
+      User.sync({ force: true })
+        .then(() => User.bulkCreate(testUsers))
+        .then(() => Post.sync({ force: true }))
+        .then(() => Post.bulkCreate(testPosts))
+        .then(() => { done(); });
+    });
+
+    it('should call res.json with post objects that are both posted = true and userId = userId', (done) => {
+      const req = {
+        user: {
+          userId: 4,
+        },
+      };
+
+      const res = {};
+      res.json = (json) => {
+        expect(json.history.length).to.equal(1);
+        expect(json.history[0].message).to.equal('This the right user post');
+        done();
+      };
+
+      getUserPostHistory(req, res);
     });
   });
 });
