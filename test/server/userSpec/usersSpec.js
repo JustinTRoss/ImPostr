@@ -232,5 +232,45 @@ describe('user.controller functions', () => {
 
       userSignup(req, res);
     });
-  })
+  });
+
+  describe('userLogin', () => {
+    beforeEach((done) => {
+      User.sync({ force: true })
+        .then(() => {
+          const reqInit = {
+            body: {
+              username: 'Matt-is-the-man',
+              password: 'abcd1234',
+            },
+          };
+
+          const resInit = {
+            json: () => {
+              done();
+            },
+          };
+
+          userSignup(reqInit, resInit);
+        });
+    });
+
+    it('should call res.json with the user token if username and password matches', (done) => {
+      const req = {
+        body: {
+          username: 'Matt-is-the-man',
+          password: 'abcd1234',
+        },
+      };
+
+      const res = {
+        json: (credentials) => {
+          expect(credentials.token).to.equal('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VySWQiOjF9.QNEFXYc6TcX5yU1_teL2sfpJIB8s51GboYkUb5x5wmc');
+          done();
+        },
+      };
+
+      userLogin(req, res);
+    });
+  });
 });

@@ -62,7 +62,7 @@ const userLogin = (req, res) => {
       res.json({
         token,
       });
-    }
+    } 
   });
 };
 
