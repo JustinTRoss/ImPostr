@@ -22,6 +22,7 @@ const postGenerator = new CronJob('* */5 * * * *', () => {
       const datePost = new Date();
       const NUM_DAYS = 3;
       const expires = new Date(datePost.setTime(datePost.getTime() + NUM_DAYS * MILLISECOND_TO_DAY));
+      const posted = false;
 
       // Retrieve a URL from twitter to create post with
       return getUrlByTopic(topic)
@@ -34,6 +35,7 @@ const postGenerator = new CronJob('* */5 * * * *', () => {
           isActive,
           message,
           expires,
+          posted,
           userUserId,
         });
       })

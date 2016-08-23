@@ -13,6 +13,7 @@ const Post = sequelize.define('post', {
   },
   platform: Sequelize.STRING,
   token: Sequelize.STRING,
+  tokenSecret: Sequelize.STRING,
   isActive: Sequelize.BOOLEAN,
   message: Sequelize.STRING,
   expires: Sequelize.DATE,

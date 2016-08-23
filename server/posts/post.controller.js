@@ -39,14 +39,14 @@ const removeExpired = () => {
       expires: {
         $lt: new Date(),
       },
-      posted: false || null,
+      posted: false,
     },
   });
 };
 
 //addNew
   //for worker to add a post
-const addNew = ({ platform, token, tokenSecret, isActive, message, expires, userUserId }) => {
+const addNew = ({ platform, token, tokenSecret, isActive, message, expires, posted, userUserId }) => {
   return Post.create({
     platform,
     token,
@@ -54,6 +54,7 @@ const addNew = ({ platform, token, tokenSecret, isActive, message, expires, user
     isActive,
     message,
     expires,
+    posted,
     userUserId,
   });
 };
