@@ -78,7 +78,7 @@ const updateSettings = (req, res) => {
           platform,
         },
       }).then(settingObj => {
-        res.send(settingObj);
+        res.json(settingObj);
       });
     } else {
       Setting.create({
