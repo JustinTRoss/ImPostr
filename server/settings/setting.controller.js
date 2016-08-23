@@ -77,8 +77,8 @@ const updateSettings = (req, res) => {
           userUserId: userId,
           platform,
         },
-      }).then(settingObj => {
-        res.json(settingObj);
+      }).then(updateStatus => {
+        res.json(updateStatus);
       });
     } else {
       Setting.create({
