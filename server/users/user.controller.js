@@ -3,33 +3,23 @@ const jwt = require('jwt-simple');
 const config = require('../config/config');
 const util = require('./util');
 
-module.exports = {
-  checkJWT,
-  userLogout,
-  userSignup,
-  userLogin,
-};
-
-/****** PUBLIC ******/
-
-function checkJWT(req, res) {
+const checkJWT = (req, res) => {
   const token = req.headers.authorization.split(' ')[1];
+  const { userId } = req.user;
   res.json({
-    userId: req.user.userId,
+    userId,
     token,
   });
-}
+};
 
-//logout
-function userLogout(req, res) {
-  const userId = req.body.user.userId;
+const userLogout = (req, res) => {
   res.json({
     userId: req.body.user.userId,
     storedState: req.body.storedState,
   });
-}
+};
 
-function userSignup(req, res) {
+const userSignup = (req, res) => {
   if (req.body.password.length >= 8 && req.body.username.length >= 8) {
     return util.hashPassword(req.body.password)
     .then(hashedPassword => {
@@ -37,19 +27,28 @@ function userSignup(req, res) {
       return User.create(req.body);
     })
     .then(user => {
-      let { userId } = user;
-      const token = jwt.encode({userId}, config.secret);
+      const { userId } = user;
+      const token = jwt.encode({ userId }, config.secret);
       res.json({
         token,
       });
-    });    
+    })
+    .catch(error => {
+      res.status(500);
+      res.send({ status: false });
+    })
   } else {
-    res.status(500).send({error: 'http://apne.ws/2brrH0G'});
+    res.status(500);
+    res.send({ status: false });
   }
-}
+};
 
-function userLogin(req, res) {
-  return User.findOne({where : {username : req.body.username}})
+const userLogin = (req, res) => {
+  return User.findOne({
+    where: {
+      username: req.body.username,
+    },
+  })
   .then(user => {
     if (user) {
       req.body.user = user;
@@ -58,11 +57,18 @@ function userLogin(req, res) {
   })
   .then(passwordMatches => {
     if (passwordMatches) {
-      let { userId } = req.body.user;
-      const token = jwt.encode({userId}, config.secret);
+      const { userId } = req.body.user;
+      const token = jwt.encode({ userId }, config.secret);
       res.json({
-        token
+        token,
       });
-    }
+    } 
   });
-}
+};
+
+module.exports = {
+  checkJWT,
+  userLogout,
+  userSignup,
+  userLogin,
+};

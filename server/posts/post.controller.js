@@ -3,10 +3,11 @@ const Setting = require('../settings/setting.model');
 const Promise = require('bluebird');
 Promise.promisifyAll(require('pg'));
 
-//getExpiredActive
-  //for worker to service
+/**
+ * for queueMonitor worker to monitor posts that are ready to post
+ * @return {object} posts - promise object of an array of post objects
+ */
 const getExpiredActive = () => {
-  // untested, but this should update posts that are returned below
   Post.update(
     {
       posted: true,
@@ -31,8 +32,10 @@ const getExpiredActive = () => {
   });
 };
 
-//removeExpired
-  //for worker to prevent reprocessing servived posts
+/**
+ * for queueMonitor worker to monitor the queue and delete post objects that are not posted
+ * @return {object} status - promise object of an array of the number of records destroyed
+ */
 const removeExpired = () => {
   return Post.destroy({
     where: {
@@ -44,8 +47,11 @@ const removeExpired = () => {
   });
 };
 
-//addNew
-  //for worker to add a post
+/**
+ * for postGenerator worker to add new posts to the queue
+ * @param  {object} post - { platform, token, tokenSecret, isActive, message, expires, posted, userUserId }
+ * @return {object} post - promise object of value fields that were created in db write
+ */
 const addNew = (post) => {
   const { platform, token, tokenSecret, isActive, message, expires, posted, userUserId } = post;
   return Post.create({
@@ -60,6 +66,12 @@ const addNew = (post) => {
   });
 };
 
+/**
+ * to let the user manually create a new post
+ * @param  {object} req [description]
+ * @param  {object} res [description]
+ * @return {[type]}     [description]
+ */
 const addNewFromUser = (req, res) => {
   const { date, time, message, facebook, linkedin, twitter } = req.body.post;
   const { userId } = req.user;
@@ -92,8 +104,8 @@ const addNewFromUser = (req, res) => {
     }));
   };
 
-  getPostFields(platforms).done(results => {
-    Post.bulkCreate(results).then((status) => {
+  return getPostFields(platforms).done(results => {
+    return Post.bulkCreate(results).then((status) => {
       if (status.length) {
         res.send({ status: true });
       } else {

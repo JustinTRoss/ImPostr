@@ -81,6 +81,7 @@
     "rewire": "^2.5.2",
     "sequelize": "^3.23.6",
     "sinon": "^1.17.5",
+    "sinon-chai": "^2.8.0",
     "twitter": "^1.4.0",
     "webpack": "^1.13.1"
   },

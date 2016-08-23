@@ -1,5 +1,3 @@
-//add access token or grab on posting
-
 const sequelize = require('../config/sequelize');
 const Sequelize = require('sequelize');
 const User = require('../users/user.model');

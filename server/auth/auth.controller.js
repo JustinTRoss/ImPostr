@@ -5,8 +5,8 @@ const config = require('../config/config');
 const { LINKEDIN_KEY,
         LINKEDIN_SECRET,
         FACEBOOK_APP_ID,
-        FACEBOOK_APP_SECRET
-      } = require('../../__cutestuff');
+        FACEBOOK_APP_SECRET,
+} = require('../../__cutestuff');
 
 const saveTwitterTokens = (req, res) => {
   const { userId } = jwt.decode(req.cookies.jwtStuff, config.secret);
@@ -33,7 +33,7 @@ const saveTwitterTokens = (req, res) => {
   })
   .then(() => {
     res.redirect('/');
-  })
+  });
 };
 
 const saveLinkedInToken = (req, res) => {
