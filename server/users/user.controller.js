@@ -32,9 +32,14 @@ const userSignup = (req, res) => {
       res.json({
         token,
       });
-    });
+    })
+    .catch(error => {
+      res.status(500);
+      res.send({ status: false });
+    })
   } else {
-    res.status(500).send({ error: 'http://apne.ws/2brrH0G' });
+    res.status(500);
+    res.send({ status: false });
   }
 };
 
