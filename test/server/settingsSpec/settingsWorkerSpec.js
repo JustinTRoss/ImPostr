@@ -2,7 +2,6 @@ process.env.NODE_ENV = 'test';
 
 const { expect } = require('chai');
 
-const app = require('../../../server/server');
 const User = require('../../../server/users/user.model');
 const Setting = require('../../../server/settings/setting.model');
 const { getActiveOverDueNext, updateDueNext } = require('../../../server/settings/setting.controller');
@@ -86,7 +85,25 @@ describe('setting.controller', () => {
     });
 
     describe('updateDueNext()', () => {
-      it('should remove posts that are both expired and not posted', (done) => {});
+      it('should update the value of dueNext', (done) => {
+        Setting.findAll()
+          .then(settings => { expect(settings.length).to.equal(4); })
+          .then(() => getActiveOverDueNext())
+          .then(overDueSettings => {
+            expect(overDueSettings.length).to.equal(1);
+            const { settingId, interval } = overDueSettings[0].dataValues;
+            const daysTillNext = 7 / interval;
+            const currentDate = new Date();
+            const MILLISECOND_TO_DAY = 86400000;
+            const dueNext = new Date(currentDate.setTime(currentDate.getTime() + daysTillNext * MILLISECOND_TO_DAY));
+
+            updateDueNext(settingId, dueNext)
+              .then(status => {
+                expect(status[0]).to.equal(1);
+                done();
+              });
+          });
+      });
     });
   });
 });
