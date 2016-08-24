@@ -14,23 +14,22 @@ const PlatformListEntry = ({
   onSetSettingsClick,
   handleFieldChange,
 }) => {
-    // <Button href={`http://www.localhost:3000/auth/${platform.platform}`}>
   const login = (
-    <a href={`http://127.0.0.1:3000/auth/${platform.platform}`}>
-      <FontIcon
+    <a href={`www.localhost:3000/auth/${platform.platform}`}>
+      <i
         className="material-icons"
       >
         power_settings_new
-      </FontIcon>
+      </i>
     </a>
   );
   const logout = (
-    <FontIcon
+    <i
       className="material-icons"
       onClick={() => { onLogoutClick(platform.platform); }}
     >
       power_settings_new
-    </FontIcon>
+    </i>
   );
 
   // Use to toggle greyed out?
@@ -40,32 +39,40 @@ const PlatformListEntry = ({
   const buttonToRender = platform.userPlatformLoggedIn ? logout : login;
   const iconToShow = platform.settings.isActive ? 'autorenew' : 'trending_down';
   return (
-    <ListItem
-      leftIcon={<FontIcon style={{left:"-23px"}} className="material-icons">{iconToShow}</FontIcon>}
-      leftAvatar={<Avatar src="../style/ImpostrIcon.png" />}
-      primaryText="JustinOfRoss"
-      secondaryText={platform.platform}
-      rightIcon={
-        <span className="platformListEntryIcons">
-          <FontIcon
-            className="material-icons"
-            onClick={() => { onToggleModalClick(platform.platform) } }
-          >
-            settings
-          </FontIcon>
-          {buttonToRender}
-        </span>
-      }
-    >
+
+    <div className="list-group-item list-group-item-action PlatformListEntry">
+      
       <div>
-        <PlatformModal
-          platform={platform}
-          onSetSettingsClick={onSetSettingsClick}
-          onToggleModalClick={onToggleModalClick}
-          handleFieldChange={handleFieldChange}
+        <div
+          className="avatar"
+          style={{"backgroundImage": "url('https://pbs.twimg.com/profile_images/739532954431426562/6_o9x8It_normal.jpg')"}}
         />
       </div>
-    </ListItem>
+
+      <div>
+        <span className="">JustinOfRoss</span>
+        <p className="">{platform.platform}</p>
+      </div>
+
+      <div>
+        <i className="material-icons">{iconToShow}</i>
+        <span className="">
+        <i
+          className="material-icons"
+          onClick={() => { onToggleModalClick(platform.platform) } }
+        >settings</i>
+          {buttonToRender}
+        </span>
+        <div>
+          <PlatformModal
+            platform={platform}
+            onSetSettingsClick={onSetSettingsClick}
+            onToggleModalClick={onToggleModalClick}
+            handleFieldChange={handleFieldChange}
+          />
+        </div>
+      </div>
+    </div>
   );
 };
 

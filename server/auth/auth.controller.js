@@ -21,6 +21,8 @@ const saveTwitterTokens = (req, res) => {
       settings.updateAttributes({
         token: req.user.token,
         tokenSecret: req.user.tokenSecret,
+        profileName: req.user.screen_name,
+        profileImg: req.user.profile_image_url_https,
       });
     } else {
       Settings.create({
@@ -28,6 +30,8 @@ const saveTwitterTokens = (req, res) => {
         platform: 'twitter',
         token: req.user.token,
         tokenSecret: req.user.tokenSecret,
+        profileName: req.user.screen_name,
+        profileImg: req.user.profile_image_url_https,
       });
     }
   })
@@ -47,6 +51,7 @@ const saveLinkedInToken = (req, res) => {
   })
   .then(res => res.json())
   .then(json => {
+    console.log(json)
     Settings.findOne({
       where: {
         userUserId: userId,
@@ -86,6 +91,7 @@ const saveFacebookToken = (req, res) => {
   })
   .then(res => res.json())
   .then(json => {
+    console.log(json)
     Settings.findOne({
       where: {
         userUserId: userId,

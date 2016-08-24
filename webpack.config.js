@@ -2,18 +2,23 @@ module.exports = {
   entry: './client/index.js',
   output: {
     path: './client/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   devtool: 'source-map',
   module: {
     loaders: [
-    {
-      test: /\.js$/,
-      loader: 'babel-loader',
-      exclude: /node_modules/,
-      query: {
-        presets: ['es2015', 'react']
-      }
-    }]
-  }
-}
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+        query: {
+          presets: ['es2015', 'react'],
+        },
+      },
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader',
+      },
+    ],
+  },
+};

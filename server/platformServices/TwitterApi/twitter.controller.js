@@ -22,6 +22,7 @@ function getUrlByTopic(topic) {
     count: 100,
   })
   .then(tweets => {
+    console.log(tweets);
     const tweetUrls = tweets.statuses.filter(tweetObj => tweetObj.entities.urls.length > 0)
       .map(tweetUrlObj => tweetUrlObj.entities.urls[0].expanded_url);
     return tweetUrls[0] ? tweetUrls[0] : 'http://attackofthecute.com/popular.php';

@@ -18,4 +18,6 @@ app.listen(config.port, () => {
   console.log(`Listening on ${config.port}`);
 });
 
+console.log(__dirname);
+
 module.exports = app;

@@ -14,7 +14,7 @@ class App extends React.Component {
 
   render() {
     const childToRender = this.props.loggedIn ? <Home /> : <Auth />;
-    document.body.className = this.props.loggedIn ? 'plain' : 'space';
+    document.body.className = this.props.loggedIn ? 'plain' : 'space'; //revisit by changing background of home and auth
 
     return (
       <div id="App">

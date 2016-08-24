@@ -31,7 +31,7 @@
     "bcrypt-nodejs": "0.0.3",
     "bluebird": "^3.4.1",
     "body-parser": "^1.15.2",
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^4.0.0-alpha.3",
     "btoa": "^1.1.2",
     "chai": "^3.5.0",
     "chai-as-promised": "^5.3.0",
@@ -89,10 +89,15 @@
     "babel-eslint": "^6.1.2",
     "babel-register": "^6.11.6",
     "chai": "^3.5.0",
+    "css-loader": "^0.23.1",
     "eslint": "^3.2.2",
     "eslint-config-airbnb": "^10.0.0",
     "eslint-plugin-react": "^6.0.0",
     "mocha": "^3.0.2",
+<<<<<<< b9948166395639942ddad7d2368ccaa85abc5a88
     "mock-local-storage": "^1.0.2"
+=======
+    "style-loader": "^0.13.1"
+>>>>>>> add styling and profile info to db
   }
 }
