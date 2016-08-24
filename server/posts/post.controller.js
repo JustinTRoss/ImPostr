@@ -97,6 +97,7 @@ const addNewFromUser = (req, res) => {
             isActive: true,
             message,
             expires,
+            posted: false,
             userUserId: userId,
           };
         }
@@ -131,7 +132,7 @@ const toggleIsActive = (req, res) => {
     } else {
       res.send({ status: false });
     }
-  }); 
+  });
 };
 
 //getUser

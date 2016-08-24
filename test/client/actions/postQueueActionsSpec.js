@@ -66,12 +66,11 @@ describe('Post Queue Actions', () => {
   });
 
   describe('async actions', () => {
-      afterEach(() => {
-        nock.cleanAll();
-      });
+    afterEach(() => {
+      nock.cleanAll();
+    });
 
     describe('requestQueue()', () => {
-
       it('should create an action to INSERT_QUEUE', () => {
         const token = 'abc';
         const json = {

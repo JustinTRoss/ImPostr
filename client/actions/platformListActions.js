@@ -48,20 +48,18 @@ export const receiveSettingsFields = (platform, settings, settingId) => ({
 export const requestPlatformLogout = (platform) => {
   return (dispatch, getState) => {
     const { userLogin: { token } } = getState();
-
     return fetch('http://127.0.0.1:3000/settings/requestPlatformLogout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `JWT ${token}`,
+        Authorization: `JWT ${token}`,
       },
       body: JSON.stringify({
         platform,
       }),
     })
     .then(response => response.json())
-    .then(json => {
-      //validate json response
+    .then(() => {
       dispatch(receivePlatformLogout(platform));
     });
   };
@@ -75,7 +73,7 @@ export const setSettingsFields = (platformObject, settings) => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `JWT ${token}`,
+        Authorization: `JWT ${token}`,
       },
       body: JSON.stringify({
         platform,
@@ -85,7 +83,6 @@ export const setSettingsFields = (platformObject, settings) => {
     })
     .then(response => response.json())
     .then(json => {
-      //validate json response
       dispatch(receiveSettingsFields(platform, settings, settingId));
     });
   };
@@ -97,13 +94,13 @@ export const getSettingsFields = () => {
     return fetch('http://127.0.0.1:3000/settings/getSettings', {
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `JWT ${token}`,
+        Authorization: `JWT ${token}`,
       },
     })
     .then(response => response.json())
-    .then(settingObjAry => {
-      for (let i = 0; i < settingObjAry.length; i++) {
-        const { interests, interval, isActive, platform, settingId, token } = settingObjAry[i];
+    .then(allSettings => {
+      allSettings.forEach(setting => {
+        const { interests, interval, isActive, platform, settingId, token } = setting;
         const settings = {
           interests,
           interval,
@@ -113,7 +110,7 @@ export const getSettingsFields = () => {
         if (token) {
           dispatch(receivePlatformLogin(platform));
         }
-      }
+      });
     });
   };
 };

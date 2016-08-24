@@ -3,10 +3,6 @@ import Home from './Home';
 import Auth from '../containers/Auth';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentWillMount() {
     const { checkJWT } = this.props;
     checkJWT();
