@@ -2,27 +2,16 @@ import { expect } from 'chai';
 
 import reducer from '../../../client/reducers/postQueue';
 
-import { REMOVE_ITEM_FROM_QUEUE, INSERT_ITEM_FROM_QUEUE } from '../../../client/actions/postQueueActions';
+import { REMOVE_ITEM_FROM_QUEUE, INSERT_ITEM_FROM_QUEUE, INSERT_QUEUE } from '../../../client/actions/postQueueActions';
 
-xdescribe('Post Queue Reducer', () => {
+describe('Post Queue Reducer', () => {
   it('should return initial state', () => {
     const initialState = undefined;
 
     const action = {};
 
     const finalState = {
-      queuedItems: [
-        {
-          message: 'yo',
-          time: 'tomorrow',
-          platform: 'facebook',
-        },
-        {
-          message: 'hey',
-          time: 'tomorrow',
-          platform: 'twitter',
-        },
-      ],
+      queuedItems: [],
       removedItems: [],
     };
 
@@ -36,15 +25,15 @@ xdescribe('Post Queue Reducer', () => {
           message: 'yo',
           time: 'time',
           platform: 'facebook',
+          isActive: true,
         },
       ],
       removedItems: [],
     };
 
-    const index = 0;
     const action = {
       type: REMOVE_ITEM_FROM_QUEUE,
-      index,
+      index: 0,
     };
 
     const finalState = {
@@ -54,6 +43,7 @@ xdescribe('Post Queue Reducer', () => {
           message: 'yo',
           time: 'time',
           platform: 'facebook',
+          isActive: false,
         },
       ],
     };
@@ -69,14 +59,14 @@ xdescribe('Post Queue Reducer', () => {
           message: 'yo',
           time: 'time',
           platform: 'facebook',
+          isActive: false,
         },
       ],
     };
 
-    const index = 0;
     const action = {
       type: INSERT_ITEM_FROM_QUEUE,
-      index,
+      index: 0,
     };
 
     const finalState = {
@@ -85,6 +75,52 @@ xdescribe('Post Queue Reducer', () => {
           message: 'yo',
           time: 'time',
           platform: 'facebook',
+          isActive: true,
+        },
+      ],
+      removedItems: [],
+    };
+
+    expect(reducer(initialState, action)).to.deep.equal(finalState);
+  });
+
+  it('should handle INSERT_QUEUE', () => {
+    const initialState = {
+      queuedItems: [],
+      removedItems: [],
+    };
+
+    const action = {
+      type: INSERT_QUEUE,
+      queue: [
+        {
+          message: 'hey',
+          time: 'time',
+          platform: 'facebook',
+          isActive: true,
+        },
+        {
+          message: 'yo',
+          time: 'time',
+          platform: 'linkedin',
+          isActive: true,
+        },
+      ],
+    };
+
+    const finalState = {
+      queuedItems: [
+        {
+          message: 'hey',
+          time: 'time',
+          platform: 'facebook',
+          isActive: true,
+        },
+        {
+          message: 'yo',
+          time: 'time',
+          platform: 'linkedin',
+          isActive: true,
         },
       ],
       removedItems: [],

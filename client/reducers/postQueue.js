@@ -17,7 +17,7 @@ const PostQueue = (state = {
       });
 
     case INSERT_QUEUE:
-      let { queue } = action;
+      const { queue } = action;
       return Object.assign({}, state, {
         queuedItems: queue,
         removedItems: [],
