@@ -44,7 +44,6 @@ const PostQueue = ({
       </div>
       <div className="tab-pane" id="cancelledPosts" role="tabpanel">
         <div className="list-group">
-          hi
           {removedItems.map((post, index) => (
             <PostQueueRemovedEntry
               index={index}
