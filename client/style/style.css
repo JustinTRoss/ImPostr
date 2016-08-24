@@ -131,26 +131,111 @@ body {
   padding-left: 7vw !important;
 }
 
-.PlatformListEntry {
-  background-color: #f4faff !important;
-  opacity: .4 !important;
-  border-left: 0 !important;
+.PostQueue {
   display: flex;
-  flex-flow: row nowrap;
+  align-items: center;
+  flex-flow: column nowrap;
 }
 
-.avatar {
+.PQEContainer {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  margin-bottom: 5px;
+}
+
+.PQEAvatar {
   min-width: 48px;
   max-width: 48px;
   min-height: 48px;
   max-height: 48px;
-  border-radius: 50%;
+  margin: 10px;
+  border-radius: 50%;  
 }
 
-.PlatformListEntry:hover {
+.PostQueueEntry {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ced7df;
+  border-radius: 4px;
+  padding-left: 1rem;
+  margin-left: 5%;
+  margin-right: 5%;
+  min-width: 80%;
+}
+
+.PQERemoveButton {
+  color: #d9534f !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+}
+
+.PLEContainer {
+  opacity: .4 !important;
+  background-color: #f4faff !important;
+  border-left: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;  
+}
+
+.PlatformListEntry {
+  position: static;
+  border-left: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  display: inline-flex !important;
+  flex-flow: row nowrap !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+}
+
+.PLEText {
+  display: flex !important;
+  flex-flow: column nowrap !important;
+}
+
+.PLELogin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute !important;
+  left: 110%;
+  top: 0px;
+  background-color: white;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  max-height: 100%;
+}
+
+.PLEHeader {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.PLESubheader {
+  font-size: 13px;
+}
+
+.avatar {
+  border-radius: 50%;
+  min-width: 48px;
+  max-width: 48px;
+  min-height: 48px;
+  max-height: 48px;
+}
+
+.PLEContainer:hover {
   background-color: white !important;
   opacity: 1 !important;
 }
+
+.PLEContainer:hover > .PLELogin {
+  left: 0px;
+}
+
 
 .inner-nav-link {
   border-bottom: 1px solid #ced7df !important;

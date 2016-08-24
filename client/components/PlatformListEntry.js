@@ -14,63 +14,40 @@ const PlatformListEntry = ({
   onSetSettingsClick,
   handleFieldChange,
 }) => {
-  const login = (
-    <a href={`http://www.localhost:3000/auth/${platform.platform}`}>
-      <i
-        className="material-icons"
-      >
-        power_settings_new
-      </i>
-    </a>
-  );
-  const logout = (
-    <i
-      className="material-icons"
-      onClick={() => { onLogoutClick(platform.platform); }}
-    >
-      power_settings_new
-    </i>
-  );
-
-  // Use to toggle greyed out?
- // {`User  ${platform.userPlatformLoggedIn ? '' : 'not '}logged in`}
-
-
-  const buttonToRender = platform.userPlatformLoggedIn ? logout : login;
-  const iconToShow = platform.settings.isActive ? 'autorenew' : 'trending_down';
   return (
-
-    <div className="list-group-item list-group-item-action PlatformListEntry">
-      
-      <div>
+    <div className="list-group-item list-group-item-action PLEContainer">
+      <div className="PlatformListEntry">
         <div
           className="avatar"
           style={{"backgroundImage": "url('https://pbs.twimg.com/profile_images/739532954431426562/6_o9x8It_normal.jpg')"}}
         />
-      </div>
 
-      <div>
-        <span className="">JustinOfRoss</span>
-        <p className="">{platform.platform}</p>
-      </div>
-
-      <div>
-        <i className="material-icons">{iconToShow}</i>
-        <span className="">
-        <i
-          className="material-icons"
-          onClick={() => { onToggleModalClick(platform.platform) } }
-        >settings</i>
-          {buttonToRender}
-        </span>
-        <div>
-          <PlatformModal
-            platform={platform}
-            onSetSettingsClick={onSetSettingsClick}
-            onToggleModalClick={onToggleModalClick}
-            handleFieldChange={handleFieldChange}
-          />
+        <div className="PLEText">
+          <span className="PLEHeader text-capitalize">{platform.platform}</span>
+          <p className="PLESubheader">Connect it!</p>
         </div>
+
+        <div>
+          <i className="material-icons">check</i>
+          <i
+            className="material-icons"
+            onClick={() => { onToggleModalClick(platform.platform); }}
+          >settings</i>
+          <div>
+            <PlatformModal
+              platform={platform}
+              onSetSettingsClick={onSetSettingsClick}
+              onToggleModalClick={onToggleModalClick}
+              handleFieldChange={handleFieldChange}
+              onLogoutClick={onLogoutClick}
+            />
+          </div>
+        </div>
+      </div>
+      <div className="PLELogin">
+        <a href={`http://127.0.0.1:3000/auth/${platform.platform}`}>
+          <button type="button" className="btn btn-info">Login</button>
+        </a>
       </div>
     </div>
   );

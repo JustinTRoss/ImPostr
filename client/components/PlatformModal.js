@@ -17,6 +17,7 @@ const PlatformModal = ({
   handleFieldChange,
   onToggleModalClick,
   onSetSettingsClick,
+  onLogoutClick,
 }) => {
   const { isActive, interests, interval } = platform.settings;
 
@@ -57,6 +58,11 @@ const PlatformModal = ({
             onToggleModalClick(platform.platform);
           }}
         />
+        <button
+          type="button"
+          class="btn btn-danger"
+          onClick={() => { onLogoutClick(platform.platform); }}
+        >Logout</button>
       </Dialog>
     </Paper>
   );
