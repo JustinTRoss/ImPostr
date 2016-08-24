@@ -15,7 +15,7 @@ const PlatformListEntry = ({
   handleFieldChange,
 }) => {
   const login = (
-    <a href={`www.localhost:3000/auth/${platform.platform}`}>
+    <a href={`http://www.localhost:3000/auth/${platform.platform}`}>
       <i
         className="material-icons"
       >
