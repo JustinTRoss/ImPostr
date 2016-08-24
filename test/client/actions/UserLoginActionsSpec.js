@@ -2,13 +2,6 @@ import { expect } from 'chai';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import nock from 'nock';
-import localStorage from 'mock-local-storage';
-// import jsdom from 'jsdom';
-// const window = jsdom.jsdom().parentWindow;
-// console.log('window', window);
-// import cookies from 'cookies-js';
-// const Cookies = cookies(window);
-
 
 import {
   requestStart,
@@ -167,29 +160,30 @@ describe('User Login Actions Spec', () => {
   });
 
   describe('async actions', () => {
-    // afterEach(() => {
-    //         localStorage.clear();
-    //     // remove callback
-    //         localStorage.itemInsertionCallback = null;
-    //     });
-    // const sandbox;
+    xdescribe('checkJWTWithServer()', () => {
 
-    // beforeEach(() => {
-    //   sandbox = sinon.sandbox.create()
-    //   window.localStorage.token = 'abc';
-    // })
+      it('should generate a REQUEST_START, RECEIVE_JWT_SUCCESS actions if called when there is a token in the local storage ', (done) => {
+        const jsonRes = {
+          userId: 12,
+          token: 'abc',
+        };
+        
+        nock('http://127.0.0.1:3000')
+          .get('/user/checkJWT')
+          .reply(200, jsonRes);
 
-    // afterEach(function() {
-    //   sandbox.restore()
-    // })
+        const store = mockStore({});
 
-    describe('checkJWTWithServer()', () => {
-      it('has issues because has to access local storage');
+        return store.dispatch(checkJWTWithServer())
+          .then(() => {
+            console.log(store.getActions());
+            done();
+          });
+      });
     });
 
-    describe('sendLoginToServer()', () => {
+    xdescribe('sendLoginToServer()', () => {
       it('should generate a REQUEST_START, UPDATE_FORM_VALUE, and RECEIVE_USER_LOGIN, if successful server response', () => {
-
         const formData = {
           username: 'tom',
           password: '123',
@@ -227,16 +221,13 @@ describe('User Login Actions Spec', () => {
 
         return store.dispatch(sendLoginToServer(formData))
           .then(() => {
-
             expect(store.getActions()).to.deep.equal(expectedActions);
           });
       });
     });
 
-    describe('sendSignupToServer()', () => {
-    });
+    xdescribe('sendSignupToServer()');
 
-    describe('requestLogout()', () => {
-    });
+    xdescribe('requestLogout()');
   });
 });

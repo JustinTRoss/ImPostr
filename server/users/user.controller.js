@@ -36,7 +36,7 @@ const userSignup = (req, res) => {
     .catch(error => {
       res.status(500);
       res.send({ status: false });
-    })
+    });
   } else {
     res.status(500);
     res.send({ status: false });
@@ -62,7 +62,7 @@ const userLogin = (req, res) => {
       res.json({
         token,
       });
-    } 
+    }
   });
 };
 

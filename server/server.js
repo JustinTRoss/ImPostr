@@ -6,7 +6,7 @@ const app = express();
 
 require('./config/sequelize');
 require('./config/middleware')(app, config);
-require('./config/routes')(app, config);
+require('./config/routes')(app);
 
 // require('./workers/postGenerator');
 // require('./workers/queueMonitor');

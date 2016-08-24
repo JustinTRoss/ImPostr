@@ -17,17 +17,15 @@ export const insertItem = (index) => ({
   index,
 });
 
-export const insertQueue = ({ queue }) => {
-  return {
-    type: INSERT_QUEUE,
-    queue,
-  }
-};
+export const insertQueue = ({ queue }) => ({
+  type: INSERT_QUEUE,
+  queue,
+});
 
 export const requestQueue = () => {
   return (dispatch, getState) => {
     const { userLogin: { token } } = getState();
-    return fetch(`http://localhost:3000/post/getUser`, {
+    return fetch('http://localhost:3000/post/getUser', {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `JWT ${token}`,
@@ -44,7 +42,7 @@ export const requestRemove = (post, index) => {
   const { postId, isActive } = post;
   return (dispatch, getState) => {
     const { userLogin: { token } } = getState();
-    return fetch(`http://localhost:3000/post/toggleIsActive`, {
+    return fetch('http://localhost:3000/post/toggleIsActive', {
       method: 'POST',
       body: JSON.stringify({
         postId,

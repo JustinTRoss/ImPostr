@@ -1,6 +1,6 @@
+import { connect } from 'react-redux';
 import { checkJWTWithServer, receiveLogout } from '../actions/UserLoginActions';
 import { requestPlatformLogin } from '../actions/platformListActions';
-import { connect } from 'react-redux';
 import App from '../components/App';
 
 function mapStateToProps(state) {
