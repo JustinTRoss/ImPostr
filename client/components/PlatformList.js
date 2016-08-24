@@ -11,18 +11,16 @@ const PlatformList = ({
   onSetSettingsClick,
 }) => {
   return (
-    <div id="PlatformListContainer">
-      <List style={{backgroundColor: 'white', height: '100vh'}}>
-        {platforms.map(platform =>
-          <PlatformListEntry
-            platform={platform}
-            handleFieldChange={handleFieldChange}
-            validateForm={validateForm}
-            onLogoutClick={onLogoutClick}
-            onToggleModalClick={onToggleModalClick}
-            onSetSettingsClick={onSetSettingsClick}
-          />)}
-      </List>
+    <div className="list-group" id="PlatformListContainer">
+      {platforms.map(platform =>
+        <PlatformListEntry
+          platform={platform}
+          handleFieldChange={handleFieldChange}
+          validateForm={validateForm}
+          onLogoutClick={onLogoutClick}
+          onToggleModalClick={onToggleModalClick}
+          onSetSettingsClick={onSetSettingsClick}
+        />)}
     </div>
   );
 };

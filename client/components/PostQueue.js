@@ -10,30 +10,52 @@ const PostQueue = ({
   removedItems,
   requestRemove,
 }) => (
-  <Tabs style={{ display: 'block' }}>
-    <Tab label="Pending Posts">
-      <List>
-        {queuedItems.map((post, index) => (
-          <PostQueueEntry
-            index={index}
-            requestRemove={requestRemove}
-            post={post}
-          />
-        ))}
-      </List>
-    </Tab>
-    <Tab label="Cancelled Posts" >
-      <List>
-        {removedItems.map((post, index) => (
-          <PostQueueRemovedEntry
-            index={index}
-            requestRemove={requestRemove}
-            post={post}
-          />
-        ))}
-      </List>
-    </Tab>
-  </Tabs>
+  <div className="container-fluid p-x-0">
+    <ul className="nav nav-tabs b-0 row" role="tablist">
+      <li className="nav-item col-xs">
+        <a
+          className="nav-link active b-0 inner-nav-link centerAll"
+          data-toggle="tab"
+          href="#pendingPosts"
+          role="tab"
+        ><span>Pending Posts</span></a>
+      </li>
+      <li className="nav-item col-xs">
+        <a
+          className="nav-link b-0 inner-nav-link centerAll"
+          data-toggle="tab"
+          href="#cancelledPosts"
+          role="tab"
+        ><span>Cancelled Posts</span></a>
+      </li>
+    </ul>
+
+    <div className="tab-content">
+      <div className="tab-pane active" id="pendingPosts" role="tabpanel">
+        <div className="list-group">
+          {queuedItems.map((post, index) => (
+            <PostQueueEntry
+              index={index}
+              requestRemove={requestRemove}
+              post={post}
+            />
+          ))}
+        </div>
+      </div>
+      <div className="tab-pane" id="cancelledPosts" role="tabpanel">
+        <div className="list-group">
+          hi
+          {removedItems.map((post, index) => (
+            <PostQueueRemovedEntry
+              index={index}
+              requestRemove={requestRemove}
+              post={post}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
 );
 
 export default PostQueue;

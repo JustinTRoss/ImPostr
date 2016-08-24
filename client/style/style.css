@@ -1,61 +1,174 @@
 /**********BODY**********/
-body: {
+body {
+  font-family: "Source Sans Pro" !important;
+  font-weight: normal !important;
 }
 
-#App { 
-  display: flex;
-  justify-content: center;
+.space {
+  /*background-image: url('./spaceBeer.jpg');*/
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.plain {
+  background-color: #f4f7f9;
+}
+
+.white {
+  background-color: white;
+}
+
+/**********Nav**********/
+
+.nav-item {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  border-radius: 0 !important;
+  height: 53px !important;
+}
+
+.topTab {
+  font-size: 18px !important;
+}
+
+.tab-content {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.nav-link {
+  border-radius: 0 !important;
+  color: #59626a !important;
+  min-height: 100%;
+  max-height: 100%;
+  min-width: 100%;
+  max-width: 100%;
+}
+
+.nav-link > i {
+  font-size: 18px !important;
+  margin-left: 5px !important;
+  color: #59626a;
+}
+
+.centerAll {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;  
+}
+
+.mainLink:hover {
+  color: #323b43 !important;
+  border: 0 !important;
+}
+
+.mainLink:hover > i, .mainLink.active > i {
+  color: #323b43;
+}
+
+.active {
+  opacity: 1 !important;
+  color: black !important;
+}
+
+.row {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  
+}
+
+/**********Borders**********/
+
+.b-x-0 {
+  border-left: 0 !important;
+  border-right: 0 !important;
+}
+
+.b-l-0 {
+  border-left: 0 !important;
+}
+
+.b-x-1 {
+  border-left: 1px solid black !important;
+  border-right: 1px solid black !important;  
+}
+
+.b-0 {
+  border-top: 0 !important;
+  border-bottom: 0 !important; 
+  border-left: 0 !important;
+  border-right: 0 !important;
+}
+
+.b-1 {
+  border-top: 1px solid black !important;
+  border-bottom: 1px solid black !important;  
+  border-left: 1px solid black !important;
+  border-right: 1px solid black !important;  
 }
 
 /**********HOME**********/
 
-#ContentTabs {
-  display: flex;
-  justify-content: center;
-  flex-flow: row nowrap;
-  width: 100%;
+.accountBack {
+  background-color: #f4faff !important;
+  padding-left: 7vw !important;
+  min-height: 100vh !important;
+  max-height: 100vh !important;
+  overflow: hidden !important;
 }
 
-#Home {
+.accountTab {
   display: flex;
-  width: 90%;
-
-  /*FLEX*/
-  flex-flow: column nowrap;
-  align-items: flex-start;
-
-}
-
-#Main {
-  display: flex;
-  flex-flow: row wrap;
-}
-
-
-/*#homeLeft {
+  align-items: center;
   justify-content: flex-start;
-  width: 40%;
+  background-color: #f4faff !important;
+  padding-left: 7vw !important;
 }
 
-#homeRight {
-  justify-content: flex-end;
-  width: 60%;
+.PlatformListEntry {
+  background-color: #f4faff !important;
+  opacity: .4 !important;
+  border-left: 0 !important;
+  display: flex;
+  flex-flow: row nowrap;
 }
 
-#platformListContainer {
-
-}
-#addNewPostContainer {
-
-}
-#postQueueContainer {
-
+.avatar {
+  min-width: 48px;
+  max-width: 48px;
+  min-height: 48px;
+  max-height: 48px;
+  border-radius: 50%;
 }
 
-#HistoryList {
-  height: 100vh;
+.PlatformListEntry:hover {
+  background-color: white !important;
+  opacity: 1 !important;
 }
-*/
+
+.inner-nav-link {
+  border-bottom: 1px solid #ced7df !important;
+}
+
+.inner-nav-link > span {
+  padding-top: 14px !important;
+  padding-bottom: 14px !important;
+}
+
+.inner-nav-link.active > span {
+  box-shadow: inset 0 -3px 0 #323b43 !important;
+}
+
+.nav-item.open > .dropdown-toggle {
+  color: black !important;
+  opacity: 1 !important;
+}
 
 /**********AUTH and SPLASH COMPONENTS**********/
 .AuthAndSplash {
@@ -100,8 +213,8 @@ body: {
   flex-direction: column;
   align-self: center;
 
-  background-image: url('./otherBigWhite.png');
-  background-repeat: no-repeat;
+/*  background-image: url('./otherBigWhite.png');
+*/  background-repeat: no-repeat;
   height: 228px;
   width: 274px;
   background-size: 265px 188px;
@@ -229,30 +342,18 @@ body: {
   flex-flow: row wrap;
 }
 
-/**********BODY**********/
-
-.space {
-  background-image: url('./spaceBeer.jpg');
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.plain {
-  background-color: #c2ae95;
-}
-
 
 /**********NAVBAR**********/
 
 .logoSmallAuth {
-  background-image: url('./whiteIcon.png');
+  /*background-image: url('./whiteIcon.png');*/
   background-size: 61px 55px;
   width: 61px;
   height: 55px;
 }
 
 .logoSmallHome {
-  background-image: url('./bigBlack.png');
+  /*background-image: url('./bigBlack.png');*/
   background-size: 61px 55px;
   width: 61px;
   height: 55px;

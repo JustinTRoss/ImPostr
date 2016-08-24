@@ -1,9 +1,9 @@
 import React from 'react';
 import moment from 'moment';
-import { ListGroupItem, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 const PostQueueRemovedEntry = ({ post, requestRemove, index }) => (
-  <ListGroupItem>
+  <div className="list-group-item">
     {`${post.message} will NOT be posted anymore on ${post.platform} at ${moment(post.expires).fromNow()}`}
     <Button
       onClick={() => { requestRemove(post, index); }}
@@ -12,7 +12,7 @@ const PostQueueRemovedEntry = ({ post, requestRemove, index }) => (
     >
       Add item
     </Button>
-  </ListGroupItem>
+  </div>
 );
 
 export default PostQueueRemovedEntry;
