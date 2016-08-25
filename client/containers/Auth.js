@@ -34,7 +34,7 @@ class Auth extends React.Component {
   }
 
   render() {
-    const showLogout = this.props.loggedIn ? 'Logout' : 'Log In';
+    // const showLogout = this.props.loggedIn ? 'Logout' : 'Log In';
     let childToRender = this.props.isLogin === 'login' ?
       <Login
         username={this.state.login.username}
@@ -52,30 +52,37 @@ class Auth extends React.Component {
 
     let textToRender = (this.props.isLogin) === 'login' ?
       <div className="splashSwitchAuthText">
-        Do you want to feel like Evan?
+        <p>Do you want to feel like Evan?</p>
         <a onClick={() => this.props.handleFormChange('signup')}>Sign up today!</a>
       </div>
       :
       <div className="splashSwitchAuthText">
-        Already enjoying yourself?
+        <p>Already enjoying yourself?</p>
         <a onClick={() => this.props.handleFormChange('login')}>Log in now!</a>
       </div>;
 
     return (
-      <div id='content'>
-        <Navbar receiveLogout={this.props.receiveLogout} showLogout={showLogout} />
-      <div className="AuthAndSplash">
-        <div id="splashBox">
-        <Splash />
-          <div id="authBox">
-            {childToRender}
-            {textToRender}
+      <div id='content' style={{ backgroundImage: 'url(../style/spaceBeer.jpg)' }}>
+        <div className="AuthAndSplash">
+          <div id="LandingPageHeader">
+            <div>
+              <h1 id="LandingPageHeaderTitle">
+                ImPostr
+              </h1>
+            </div>
+            <div className="LandingPageHeaderLogo" style={{ backgroundImage: 'url(../style/bigWhite.png)' }}>
+            </div>
+          </div>
+          <div id="splashBox">
+            <div>
+              <Splash />
+            </div>
+            <div id="authBox">
+              {childToRender}
+              {textToRender}
+            </div>
           </div>
         </div>
-      </div>
-        <footer>
-          <Footer />
-        </footer>
       </div>
     );
   }
