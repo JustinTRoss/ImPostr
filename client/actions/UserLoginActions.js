@@ -183,26 +183,6 @@ export const receiveLogout = () => ({
 export const requestLogout = () => {
   return dispatch => {
     window.localStorage.removeItem('ImPostr-JWT');
-    const { userLogin: { token } } = getState();
-    const stateToStore = getState();
-    return fetch(`/user/logout`, {
-      method: 'POST',
-      body: JSON.stringify({
-        username,
-        storedState: stateToStore,
-      }),
-      headers: new Headers({
-        'Content-Type': 'application/json',
-        Authorization: `JWT ${token}`,
-      }),
-    })
-      .then(response => response.json())
-      .then(json => {
-        dispatch(receiveLogout(json));
-      })
-      .catch(err => {
-        dispatch(receiveFailure({ username }));
-        console.error(err, 'could not log out!');
-      });
+    dispatch(receiveLogout());
   };
 };
