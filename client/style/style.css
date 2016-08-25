@@ -149,6 +149,7 @@ body {
   justify-content: flex-start;
   margin-top: 15px;
   margin-left: 15px;
+  height: 60px;
 }
 
 .PQELogo {
@@ -171,6 +172,7 @@ body {
   margin-left: 5%;
   margin-right: 5%;
   min-width: 80%;
+  min-height: 90%;
 }
 
 .PostQueueEntryRight {

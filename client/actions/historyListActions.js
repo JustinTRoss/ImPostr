@@ -2,10 +2,13 @@ import fetch from 'isomorphic-fetch';
 
 export const RECEIVE_USER_HISTORY = 'RECEIVE_USER_HISTORY';
 
-export const receiveHistory = ({ history }) => ({
-  type: RECEIVE_USER_HISTORY,
-  history,
-});
+export const receiveHistory = ({ history }) => {
+  console.log('history', history);
+  return {
+    type: RECEIVE_USER_HISTORY,
+    history,
+  };
+};
 
 export const requestHistory = () => {
   return (dispatch, getState) => {
