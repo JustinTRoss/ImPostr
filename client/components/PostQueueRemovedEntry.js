@@ -9,7 +9,7 @@ const PostQueueRemovedEntry = ({ post, requestRemove, index }) => (
     >
     </div>
     <div className="PostQueueEntry">
-    {`${post.message} will NOT be posted anymore on ${post.platform} at ${moment(post.expires).fromNow()}`}
+      {`${post.message} will NOT be posted anymore on ${post.platform} at ${moment(post.expires).fromNow()}`}
       <button
         type="button"
         className="btn btn-link PQERemoveButton"
