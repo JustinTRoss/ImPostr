@@ -1,4 +1,5 @@
-/**********BODY**********/
+/********** Body **********/
+
 body {
   font-family: "Source Sans Pro" !important;
   font-weight: normal !important;
@@ -18,7 +19,7 @@ body {
   background-color: white;
 }
 
-/**********Nav**********/
+/********** Nav **********/
 
 .nav-item {
   padding-left: 0 !important;
@@ -83,7 +84,7 @@ body {
   
 }
 
-/**********Borders**********/
+/********** Borders **********/
 
 .b-x-0 {
   border-left: 0 !important;
@@ -113,7 +114,7 @@ body {
   border-right: 1px solid black !important;  
 }
 
-/**********HOME**********/
+/********** Home **********/
 
 .accountBack {
   background-color: #f4faff !important;
@@ -131,17 +132,22 @@ body {
   padding-left: 7vw !important;
 }
 
+/********** Post Queue **********/
+
+
 .PostQueue {
   display: flex;
   align-items: center;
   flex-flow: column nowrap;
+  overflow: scroll;
 }
 
 .PQEContainer {
   display: flex;
   flex-flow: row nowrap;
   justify-content: flex-start;
-  margin-bottom: 5px;
+  margin-top: 15px;
+  margin-left: 15px;
 }
 
 .PQEAvatar {
@@ -149,7 +155,7 @@ body {
   max-width: 48px;
   min-height: 48px;
   max-height: 48px;
-  margin: 10px;
+  margin-right: 15px;
   border-radius: 50%;  
 }
 
@@ -172,12 +178,19 @@ body {
   text-decoration: none !important;
 }
 
+/********** Platform List **********/
+
 .PLEContainer {
   opacity: .4 !important;
   background-color: #f4faff !important;
   border-left: 0 !important;
   padding-left: 0 !important;
   padding-right: 0 !important;  
+}
+
+.PLEContainer:hover {
+  background-color: white !important;
+  opacity: 1 !important;
 }
 
 .PlatformListEntry {
@@ -202,12 +215,19 @@ body {
   justify-content: center;
   position: absolute !important;
   left: 110%;
-  top: 0px;
+  top: 0;
   background-color: white;
   min-width: 100%;
   max-width: 100%;
   min-height: 100%;
   max-height: 100%;
+  opacity: 0;
+  transition: all .3s ease;
+}
+
+.PLEContainer:hover > .PLELogin {
+  left: 0;
+  opacity: 1;
 }
 
 .PLEHeader {
@@ -227,16 +247,6 @@ body {
   max-height: 48px;
 }
 
-.PLEContainer:hover {
-  background-color: white !important;
-  opacity: 1 !important;
-}
-
-.PLEContainer:hover > .PLELogin {
-  left: 0px;
-}
-
-
 .inner-nav-link {
   border-bottom: 1px solid #ced7df !important;
 }
@@ -255,7 +265,7 @@ body {
   opacity: 1 !important;
 }
 
-/**********AUTH and SPLASH COMPONENTS**********/
+/********** Auth and Splash Components **********/
 .AuthAndSplash {
   display: flex;
   margin: 30px;
@@ -276,7 +286,7 @@ body {
   color: white;
 }
 
-/****SPLASH****/
+/********** Splash **********/
 #splashBox {
   display: flex;
   
@@ -325,7 +335,7 @@ body {
 */
 }
 
-/****AUTH****/
+/********** Auth **********/
 #authBox {
   display: fle x;
   padding: 15px;
@@ -428,7 +438,7 @@ body {
 }
 
 
-/**********NAVBAR**********/
+/********** Navbar **********/
 
 .logoSmallAuth {
   /*background-image: url('./whiteIcon.png');*/
@@ -444,7 +454,7 @@ body {
   height: 55px;
 }
 
-/**********FOOTER**********/
+/********** Footer **********/
 
 #content {
   width: 100vw;
