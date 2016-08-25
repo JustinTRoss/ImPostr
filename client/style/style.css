@@ -6,7 +6,8 @@ body {
 }
 
 .space {
-  /*background-image: url('./spaceBeer.jpg');*/
+  /*background-image: url(../style/spaceBeer.jpg);*/
+  opacity: .8;
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -400,19 +401,38 @@ body {
   margin: 30px;
 /*  margin-top: 15%;
 */  padding: 20px;
-  max-height: 500px;
+  max-height: 800px;
   
   /*FLEX*/
-  justify-content: flex-end;
+  justify-content: space-between;
   align-content: flex-end;
   align-self: flex-end;
   flex-flow: column nowrap;
 
   background-clip: border-box;
-  border-radius: 5px;
+  border-radius: 20px;
   text-align: center;
   font-family: "Source Sans Pro";
   color: white;
+}
+
+#LandingPageHeader {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-content: center;
+}
+
+#LandingPageHeaderTitle {
+  font-weight: bold;
+  font-size: 50px;
+}
+
+.LandingPageHeaderLogo {
+  background-size: contain;
+  height: 80px;
+  width: 80px;
+  background-repeat: no-repeat;
 }
 
 /********** Splash **********/
@@ -420,7 +440,7 @@ body {
   display: flex;
   
   /*FLEX*/
-  justify-content: center;
+  justify-content: space-around;
   align-content: center;
   align-self: center;
   flex-flow: column nowrap;
@@ -542,7 +562,6 @@ body {
 
 .splashSwitchAuthText > div > a {
   display: inline-block;
-
   margin-left: 5px;
   font-weight: bold;
 }
@@ -552,7 +571,7 @@ body {
 
   /*FLEX*/
   justify-content: center;
-  flex-flow: row wrap;
+  flex-flow: column wrap;
 
   font-size: 14px;
   margin: 5px;
