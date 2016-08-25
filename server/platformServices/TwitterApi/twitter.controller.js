@@ -51,10 +51,10 @@ function getNewBearerToken() {
     },
   })
   .then(res => res.json())
-  .then(bearerToken => console.log(config.twitterBearerToken = bearerToken))
+  .then(bearerToken => console.log('~~~~~~~~~>', config.twitterBearerToken = bearerToken))
   .catch(err => console.error(err));
 }
-
+getNewBearerToken();
 function createClient(accessToken, accessTokenSecret) {
   return new Twitter({
     consumer_key: config.twitterConsumerKey,
