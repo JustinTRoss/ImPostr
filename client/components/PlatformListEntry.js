@@ -14,28 +14,24 @@ const PlatformListEntry = ({
   onSetSettingsClick,
   handleFieldChange,
 }) => {
-
-//   // Use to toggle greyed out?
-//  // {`User  ${platform.userPlatformLoggedIn ? '' : 'not '}logged in`}
-
-
-  let platformStatus = platform.userPlatformLoggedIn ?
+  const platformStatus = platform.userPlatformLoggedIn ?
     {
       header: 'logged in',
       subheader: platform.platform,
+      class: 'PLELoggedIn',
     }
     :
     {
       header: platform.platform,
       subheader: 'Connect now!',
+      class: '',
     };
-    console.log(platform.userPlatformLoggedIn, platformStatus);
 //   const iconToShow = platform.settings.isActive ? 'autorenew' : 'trending_down';
 // =======
 // >>>>>>> add style to PlatformList and PostQueue
 
   return (
-    <div className="list-group-item list-group-item-action PLEContainer">
+    <div className={`list-group-item list-group-item-action PLEContainer ${platformStatus.class}`}>
       <div className="PlatformListEntry">
         <div
           className="avatar"
