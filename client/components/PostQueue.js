@@ -43,7 +43,7 @@ const PostQueue = ({
         </div>
       </div>
       <div className="tab-pane" id="cancelledPosts" role="tabpanel">
-        <div className="list-group">
+        <div className="">
           {removedItems.map((post, index) => (
             <PostQueueRemovedEntry
               index={index}

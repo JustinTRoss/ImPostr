@@ -1,4 +1,5 @@
-/**********BODY**********/
+/********** Body **********/
+
 body {
   font-family: "Source Sans Pro" !important;
   font-weight: normal !important;
@@ -18,7 +19,7 @@ body {
   background-color: white;
 }
 
-/**********Nav**********/
+/********** Nav **********/
 
 .nav-item {
   padding-left: 0 !important;
@@ -83,7 +84,7 @@ body {
   
 }
 
-/**********Borders**********/
+/********** Borders **********/
 
 .b-x-0 {
   border-left: 0 !important;
@@ -113,7 +114,7 @@ body {
   border-right: 1px solid black !important;  
 }
 
-/**********HOME**********/
+/********** Home **********/
 
 .accountBack {
   background-color: #f4faff !important;
@@ -131,25 +132,119 @@ body {
   padding-left: 7vw !important;
 }
 
-.PlatformListEntry {
-  background-color: #f4faff !important;
-  opacity: .4 !important;
-  border-left: 0 !important;
+/********** Post Queue **********/
+
+
+.PostQueue {
   display: flex;
-  flex-flow: row nowrap;
+  align-items: center;
+  flex-flow: column nowrap;
+  overflow: scroll;
 }
 
-.avatar {
+.PQEContainer {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  margin-top: 15px;
+  margin-left: 15px;
+}
+
+.PQEAvatar {
   min-width: 48px;
   max-width: 48px;
   min-height: 48px;
   max-height: 48px;
-  border-radius: 50%;
+  margin-right: 15px;
+  border-radius: 50%;  
 }
 
-.PlatformListEntry:hover {
+.PostQueueEntry {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ced7df;
+  border-radius: 4px;
+  padding-left: 1rem;
+  margin-left: 5%;
+  margin-right: 5%;
+  min-width: 80%;
+}
+
+.PQERemoveButton {
+  color: #d9534f !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+}
+
+/********** Platform List **********/
+
+.PLEContainer {
+  opacity: .4 !important;
+  background-color: #f4faff !important;
+  border-left: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;  
+}
+
+.PLEContainer:hover {
   background-color: white !important;
   opacity: 1 !important;
+}
+
+.PlatformListEntry {
+  position: static;
+  border-left: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  display: inline-flex !important;
+  flex-flow: row nowrap !important;
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+}
+
+.PLEText {
+  display: flex !important;
+  flex-flow: column nowrap !important;
+}
+
+.PLELogin {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute !important;
+  left: 110%;
+  top: 0;
+  background-color: white;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  max-height: 100%;
+  opacity: 0;
+  transition: all .3s ease;
+}
+
+.PLEContainer:hover > .PLELogin {
+  left: 0;
+  opacity: 1;
+}
+
+.PLEHeader {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.PLESubheader {
+  font-size: 13px;
+}
+
+.avatar {
+  border-radius: 50%;
+  min-width: 48px;
+  max-width: 48px;
+  min-height: 48px;
+  max-height: 48px;
 }
 
 .inner-nav-link {
@@ -170,7 +265,7 @@ body {
   opacity: 1 !important;
 }
 
-/**********AUTH and SPLASH COMPONENTS**********/
+/********** Auth and Splash Components **********/
 .AuthAndSplash {
   display: flex;
   margin: 30px;
@@ -191,7 +286,7 @@ body {
   color: white;
 }
 
-/****SPLASH****/
+/********** Splash **********/
 #splashBox {
   display: flex;
   
@@ -240,7 +335,7 @@ body {
 */
 }
 
-/****AUTH****/
+/********** Auth **********/
 #authBox {
   display: fle x;
   padding: 15px;
@@ -343,7 +438,7 @@ body {
 }
 
 
-/**********NAVBAR**********/
+/********** Navbar **********/
 
 .logoSmallAuth {
   /*background-image: url('./whiteIcon.png');*/
@@ -359,7 +454,7 @@ body {
   height: 55px;
 }
 
-/**********FOOTER**********/
+/********** Footer **********/
 
 #content {
   width: 100vw;
