@@ -70,22 +70,25 @@ const AddNewPost = ({
         />
       </div>
       <div>
-        <div>
-          <DatePicker
-            hintText="Date"
-            value={date}
-            onChange={(x, date) => { handleFieldChange('date', date); }}
-            style={{"width": "100px"}}
-            textFieldStyle={{"width": "100px"}}
-          />
-          <TimePicker
-            hintText="Time"
-            value={time}
-            onChange={(x, time) => { handleFieldChange('time', time); }}
-            style={{"width": "100px"}}
-            textFieldStyle={{"width": "100px"}}
-
-          />
+        <div id="APSchedule">
+          <span> Schedule a date and time: </span>
+            <span id="APDateTime">
+              <DatePicker
+                hintText="Date"
+                value={date}
+                onChange={(x, date) => { handleFieldChange('date', date); }}
+                style={{"width": "100px"}}
+                textFieldStyle={{"width": "100px"}}
+              />
+              @
+              <TimePicker
+                hintText="Time"
+                value={time}
+                onChange={(x, time) => { handleFieldChange('time', time); }}
+                style={{"width": "100px"}}
+                textFieldStyle={{"width": "100px"}}
+              />
+            </span>
         </div>
         <div>{formFeedback}</div>
         <div>

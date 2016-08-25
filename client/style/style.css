@@ -138,7 +138,8 @@ body {
   margin: 20px 0 60px 30px;
   border: 1px solid #CED7DF;
   border-radius: 4px;
-  width: 685;
+  min-width: 685px;
+  max-width: 685px;
 }
 
 
@@ -148,6 +149,20 @@ body {
   max-height: 250px;
   padding: 10px 20px 10px 20px;
   border: 0;
+}
+
+#APSchedule {
+  display: flex !important;
+  flex-flow: row nowrap !important;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+#APDateTime {
+  display: flex !important;
+  flex-flow: row nowrap !important;
+  align-items: center !important;  
 }
 
 .APAvatar {
@@ -398,7 +413,7 @@ body {
 
 /********** Auth **********/
 #authBox {
-  display: fle x;
+  display: flex;
   padding: 15px;
   
   /*FLEX*/
