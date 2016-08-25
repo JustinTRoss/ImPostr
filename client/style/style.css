@@ -7,9 +7,7 @@ body {
 
 .space {
   /*background-image: url(../style/spaceBeer.jpg);*/
-  opacity: .8;
-  background-size: cover;
-  background-repeat: no-repeat;
+  /*opacity: .8;*/
 }
 
 .plain {
@@ -398,7 +396,6 @@ body {
 /********** Auth and Splash Components **********/
 .AuthAndSplash {
   display: flex;
-  margin: 30px;
 /*  margin-top: 15%;
 */  padding: 20px;
   max-height: 800px;

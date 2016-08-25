@@ -62,7 +62,11 @@ class Auth extends React.Component {
       </div>;
 
     return (
-      <div id='content' style={{ backgroundImage: 'url(../style/spaceBeer.jpg)' }}>
+      <div id='content' style={{
+        backgroundImage: 'url(../style/spaceBeer.jpg)',
+        backgroundSize: "100vw 100vh",
+        backgroundRepeat: "no-repeat", }}
+      >
         <div className="AuthAndSplash">
           <div id="LandingPageHeader">
             <div>
