@@ -25,7 +25,7 @@ export const insertQueue = ({ queue }) => ({
 export const requestQueue = () => {
   return (dispatch, getState) => {
     const { userLogin: { token } } = getState();
-    return fetch('http://localhost:3000/post/getUser', {
+    return fetch('/post/getUser', {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `JWT ${token}`,
