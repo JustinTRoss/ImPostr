@@ -299,12 +299,13 @@ body {
   font-size: 13px;
 }
 
-.avatar {
-  border-radius: 50%;
+.PlatformListEntryHeader {
   min-width: 48px;
   max-width: 48px;
   min-height: 48px;
   max-height: 48px;
+  background-size: contain;
+
 }
 
 .inner-nav-link {

@@ -63,7 +63,10 @@ const PlatformModal = ({
         <button
           type="button"
           class="btn btn-danger"
-          onClick={() => { onLogoutClick(platform.platform); }}
+          onClick={() => {
+            onLogoutClick(platform.platform);
+            onToggleModalClick(platform.platform);
+          }}
         >Logout</button>
       </Dialog>
     </Paper>
