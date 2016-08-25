@@ -36,7 +36,7 @@ const AddNewPost = ({
         <button
           className="APAvatar"
           style={{
-            "backgroundImage": "url('https://pbs.twimg.com/profile_images/739532954431426562/6_o9x8It_normal.jpg')",
+            "backgroundImage": "url(../style/facebookicon.png)",
             "opacity": facebook ? "1" : ".4",
           }}
           onClick={({ target }) => { handleFieldChange('facebook', target); }}
@@ -45,7 +45,7 @@ const AddNewPost = ({
         <button
           className="APAvatar"
           style={{
-            "backgroundImage": "url('https://pbs.twimg.com/profile_images/739532954431426562/6_o9x8It_normal.jpg')",
+            "backgroundImage": "url(../style/linkedinicon.png)",
             "opacity": linkedin ? "1" : ".4",
           }}
           onClick={({ target }) => { handleFieldChange('linkedin', target); }}
@@ -54,55 +54,47 @@ const AddNewPost = ({
         <button
           className="APAvatar"
           style={{
-            "backgroundImage": "url('https://pbs.twimg.com/profile_images/739532954431426562/6_o9x8It_normal.jpg')",
+            "backgroundImage": "url(../style/twittericon.png)",
             "opacity": twitter ? "1" : ".4",
           }}
           onClick={({ target }) => { handleFieldChange('twitter', target); }}
           disabled={!platforms.filter(platform => platform.platform === 'twitter')[0].userPlatformLoggedIn}
         />
       </div>
-      <div>
+        <div id="APFormFeedback">{formFeedback}</div>
         <textarea
           id="APTextarea"
-          placeholder="Enter a new message"
+          placeholder="You're ready to share content with your users!"
           value={message}
           onChange={({ target }) => { handleFieldChange('message', target.value); }}
         />
-      </div>
       <div>
-        <div>
-          <DatePicker
-            hintText="Date"
-            value={date}
-            onChange={(x, date) => { handleFieldChange('date', date); }}
-            style={{"width": "100px"}}
-            textFieldStyle={{"width": "100px"}}
-          />
-          <TimePicker
-            hintText="Time"
-            value={time}
-            onChange={(x, time) => { handleFieldChange('time', time); }}
-            style={{"width": "100px"}}
-            textFieldStyle={{"width": "100px"}}
-
-          />
-        </div>
-        <div>{formFeedback}</div>
-        <div>
-          <RaisedButton
-            label="Post"
-            primary={true}
-            onClick={() => {
-              validateForm(fields);
-            }}
-          />
-          <RaisedButton
-            label="Cancel"
-            secondary={true}
-            onClick={() => {
-              resetForm();
-            }}
-          />
+        <div id="APFooter">
+          <div id="APSchedule">
+            <span>Schedule:</span>
+            <span id="APDateTime">
+              <DatePicker
+                hintText="Date"
+                value={date}
+                onChange={(x, date) => { handleFieldChange('date', date); }}
+                style={{"width": "100px"}}
+                textFieldStyle={{"width": "100px"}}
+              />
+              <TimePicker
+                hintText="Time"
+                value={time}
+                onChange={(x, time) => { handleFieldChange('time', time); }}
+                style={{"width": "100px"}}
+                textFieldStyle={{"width": "100px"}}
+              />
+            </span>
+          </div>
+          <button
+            type="button"
+            className="btn"
+            id="APSubmitBtn"
+            onClick={() => { validateForm(fields); }}
+          >Add to Queue</button>
         </div>
       </div>
     </div>
