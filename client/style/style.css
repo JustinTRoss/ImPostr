@@ -144,19 +144,20 @@ body {
 
 .PQEContainer {
   display: flex;
+  align-items: center;
   flex-flow: row nowrap;
   justify-content: flex-start;
   margin-top: 15px;
   margin-left: 15px;
 }
 
-.PQEAvatar {
+.PQELogo {
   min-width: 48px;
   max-width: 48px;
   min-height: 48px;
   max-height: 48px;
   margin-right: 15px;
-  border-radius: 50%;  
+  background-size: contain;
 }
 
 .PostQueueEntry {
@@ -170,6 +171,13 @@ body {
   margin-left: 5%;
   margin-right: 5%;
   min-width: 80%;
+}
+
+.PostQueueEntryRight {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .PQERemoveButton {
