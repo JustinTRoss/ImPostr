@@ -132,6 +132,47 @@ body {
   padding-left: 7vw !important;
 }
 
+/********** Add Post **********/
+
+#AddNewPost {
+  margin: 20px 0 60px 30px;
+  border: 1px solid #CED7DF;
+  border-radius: 4px;
+  width: 685;
+}
+
+
+#APTextarea {
+  width: 94%;
+  min-height: 100px;
+  max-height: 250px;
+  padding: 10px 20px 10px 20px;
+  border: 0;
+}
+
+.APAvatar {
+  min-height: 42px;
+  max-height: 42px;
+  min-width: 42px;
+  max-width: 42px;
+  margin-right: 12px;
+  border-radius: 5%;  
+}
+
+#APSelectPlatform {
+  padding: 20px 20px 8px 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
 /********** Post Queue **********/
 
 
@@ -198,6 +239,11 @@ body {
   padding-right: 0 !important;  
 }
 
+.PLEContainer.PLELoggedIn {
+  opacity: 1 !important;
+  background-color: white !important;
+}
+
 .PLEContainer:hover {
   background-color: white !important;
   opacity: 1 !important;
@@ -233,6 +279,10 @@ body {
   max-height: 100%;
   opacity: 0;
   transition: all .3s ease;
+}
+
+.PLEContainer.PLELoggedIn > .PLELogin {
+  display: none;
 }
 
 .PLEContainer:hover > .PLELogin {

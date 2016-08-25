@@ -31,15 +31,15 @@ const addNewPost = (state = {
           });
         case 'facebook':
           return Object.assign({}, state, {
-            facebook: action.data,
+            facebook: !state.facebook,
           });
         case 'linkedin':
           return Object.assign({}, state, {
-            linkedin: action.data,
+            linkedin: !state.linkedin,
           });
         case 'twitter':
           return Object.assign({}, state, {
-            twitter: action.data,
+            twitter: !state.twitter,
           });
         default:
           return state;

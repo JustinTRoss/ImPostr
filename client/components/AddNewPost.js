@@ -1,12 +1,8 @@
 import React from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
-import { List, ListItem } from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
 import Checkbox from 'material-ui/Checkbox';
-import TextField from 'material-ui/TextField';
 import DatePicker from 'material-ui/DatePicker';
 import TimePicker from 'material-ui/TimePicker';
-import Paper from 'material-ui/Paper';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
@@ -35,68 +31,64 @@ const AddNewPost = ({
   }
 
   return (
-    <Paper>
-      <Paper>
-        <Subheader>Add New Post</Subheader>
-      </Paper>
-      <Paper>
-        <TextField
-          hintText="Enter a new message"
+    <div id="AddNewPost">
+      <div id="APSelectPlatform">
+        <button
+          className="APAvatar"
+          style={{
+            "backgroundImage": "url('https://pbs.twimg.com/profile_images/739532954431426562/6_o9x8It_normal.jpg')",
+            "opacity": facebook ? "1" : ".4",
+          }}
+          onClick={({ target }) => { handleFieldChange('facebook', target); }}
+          disabled={!platforms.filter(platform => platform.platform === 'facebook')[0].userPlatformLoggedIn}
+        />
+        <button
+          className="APAvatar"
+          style={{
+            "backgroundImage": "url('https://pbs.twimg.com/profile_images/739532954431426562/6_o9x8It_normal.jpg')",
+            "opacity": linkedin ? "1" : ".4",
+          }}
+          onClick={({ target }) => { handleFieldChange('linkedin', target); }}
+          disabled={!platforms.filter(platform => platform.platform === 'linkedin')[0].userPlatformLoggedIn}
+        />
+        <button
+          className="APAvatar"
+          style={{
+            "backgroundImage": "url('https://pbs.twimg.com/profile_images/739532954431426562/6_o9x8It_normal.jpg')",
+            "opacity": twitter ? "1" : ".4",
+          }}
+          onClick={({ target }) => { handleFieldChange('twitter', target); }}
+          disabled={!platforms.filter(platform => platform.platform === 'twitter')[0].userPlatformLoggedIn}
+        />
+      </div>
+      <div>
+        <textarea
+          id="APTextarea"
+          placeholder="Enter a new message"
           value={message}
           onChange={({ target }) => { handleFieldChange('message', target.value); }}
         />
-      </Paper>
-      <Paper>
-        <Paper>
+      </div>
+      <div>
+        <div>
           <DatePicker
-            hintText="Pick a date"
+            hintText="Date"
             value={date}
             onChange={(x, date) => { handleFieldChange('date', date); }}
+            style={{"width": "100px"}}
+            textFieldStyle={{"width": "100px"}}
           />
           <TimePicker
-            hintText="Pick a time"
+            hintText="Time"
             value={time}
             onChange={(x, time) => { handleFieldChange('time', time); }}
+            style={{"width": "100px"}}
+            textFieldStyle={{"width": "100px"}}
 
           />
-        </Paper>
-        <Paper>
-          <List>
-            <Subheader>Select platforms to post</Subheader>
-            <ListItem
-              leftCheckbox={
-                <Checkbox
-                  disabled={!platforms.filter(platform => platform.platform === 'facebook')[0].userPlatformLoggedIn}
-                  checked={facebook}
-                  onCheck={({ target }) => { handleFieldChange('facebook', target.checked); }}
-                />
-              }
-              primaryText="Facebook"
-            />
-            <ListItem
-              leftCheckbox={
-                <Checkbox
-                  disabled={!platforms.filter(platform => platform.platform === 'linkedin')[0].userPlatformLoggedIn}
-                  defaultChecked={linkedin}
-                  onCheck={({ target }) => { handleFieldChange('linkedin', target.checked); }}
-                />
-              }
-              primaryText="LinkedIn"
-            />
-            <ListItem
-              leftCheckbox={
-                <Checkbox
-                  disabled={!platforms.filter(platform => platform.platform === 'twitter')[0].userPlatformLoggedIn}
-                  defaultChecked={twitter}
-                  onCheck={({ target }) => { handleFieldChange('twitter', target.checked); }}
-                />
-              }
-              primaryText="Twitter"
-            />
-          </List>
-        </Paper>
-        <Paper>{formFeedback}</Paper>
-        <Paper>
+        </div>
+        <div>{formFeedback}</div>
+        <div>
           <RaisedButton
             label="Post"
             primary={true}
@@ -111,9 +103,9 @@ const AddNewPost = ({
               resetForm();
             }}
           />
-        </Paper>
-      </Paper>
-    </Paper>
+        </div>
+      </div>
+    </div>
   )
 } 
 
