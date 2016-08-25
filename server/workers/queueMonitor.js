@@ -21,14 +21,14 @@ const postOnPlatforms = (post) => {
 };
 
 // Find posts that require action
-const queueMonitor = new CronJob('*/5 * * * * *', () => {
+const queueMonitor = new CronJob('*/15 * * * * *', () => {
   return getExpiredActive()
   .then(posts => {
     posts.forEach(post => {
       postOnPlatforms(post);
     });
   })
-  .then(removeExpired())
+  // .then(removeExpired())
   .catch(err => console.error(err));
 }, null, true, 'America/Los_Angeles');
 

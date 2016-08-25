@@ -2,10 +2,24 @@ import React from 'react';
 import moment from 'moment';
 
 const HistoryListItem = ({ history }) => {
-  let { message, platform, updatedAt } = history;
+  const { message, platform, expires } = history;
   return (
-    <div>
-      {`'${message}' was posted on ${platform} at ${moment(updatedAt).fromNow()}`}
+    <div className="PQEContainer">
+      <div
+        className="PQELogo"
+        style={{ backgroundImage: `url(../style/${platform}icon.png)` }}
+      >
+      </div>
+      <div className="PostQueueEntry">
+        <div>
+          {message}
+        </div>
+        <div className="PostQueueEntryRight">
+          <div>
+            {moment(expires).fromNow()}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

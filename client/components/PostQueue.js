@@ -35,6 +35,7 @@ const PostQueue = ({
         <div className="list-group">
           {queuedItems.map((post, index) => (
             <PostQueueEntry
+              key={post.postId}
               index={index}
               requestRemove={requestRemove}
               post={post}
@@ -46,6 +47,7 @@ const PostQueue = ({
         <div className="">
           {removedItems.map((post, index) => (
             <PostQueueRemovedEntry
+              key={post.postId}
               index={index}
               requestRemove={requestRemove}
               post={post}
