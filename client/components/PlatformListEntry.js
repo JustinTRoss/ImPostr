@@ -1,5 +1,4 @@
 import React from 'react';
-
 import PlatformModal from './PlatformModal';
 
 const PlatformListEntry = ({
@@ -25,21 +24,25 @@ const PlatformListEntry = ({
     ? loggedInHeader
     : loggedOutHeader;
 
+  const autoCheck = platform.settings.isActive ? 'PLEAutoOn' : '';
+
   return (
     <div className={`list-group-item list-group-item-action PLEContainer ${platformStatus.class}`}>
       <div className="PlatformListEntry">
-        <div
-          className="PlatformListEntryHeader"
-          style={{ backgroundImage: `url(../style/${platform.platform}icon.png)` }}
-        />
-        <div className="PLEText">
-          <span className="PLEHeader text-capitalize">{platformStatus.header}</span>
-          <p className="PLESubheader">{platformStatus.subheader}</p>
+        <div className="PLELeft">
+          <div
+            className="PlatformListEntryIcon"
+            style={{ backgroundImage: `url(../style/${platform.platform}icon.png)` }}
+          />
+          <div className="PLEText">
+            <span className="PLEHeader text-capitalize">{platformStatus.header}</span>
+            <span className="PLESubheader text-capitalize">{platformStatus.subheader}</span>
+          </div>
         </div>
         <div>
-          <i className="material-icons">check</i>
+          <i className={`material-icons PLEAutopilot ${autoCheck}`}>check</i>
           <i
-            className="material-icons"
+            className="material-icons PLESettings"
             onClick={() => { onToggleModalClick(platform.platform); }}
           >settings</i>
           <div>
@@ -55,7 +58,7 @@ const PlatformListEntry = ({
       </div>
       <div className="PLELogin">
         <a href={`/auth/${platform.platform}`}>
-          <button type="button" className="btn btn-info">Login</button>
+          <button type="button" className="btn btn-info">Login to {platform.platform}</button>
         </a>
       </div>
     </div>

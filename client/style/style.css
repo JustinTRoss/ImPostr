@@ -135,11 +135,14 @@ body {
 /********** Add Post **********/
 
 #AddNewPost {
+  position: static;
+  display: block;
   margin: 20px 0 60px 30px;
   border: 1px solid #CED7DF;
   border-radius: 4px;
   min-width: 685px;
   max-width: 685px;
+  padding: 20px;
 }
 
 
@@ -147,22 +150,31 @@ body {
   width: 94%;
   min-height: 100px;
   max-height: 250px;
-  padding: 10px 20px 10px 20px;
+  padding: 10px 0 10px 0;
   border: 0;
+}
+
+#APFooter {
+  display: flex !important;
+  flex-flow: row nowrap !important;
+  align-items: center;
+  justify-content: space-between;
 }
 
 #APSchedule {
   display: flex !important;
   flex-flow: row nowrap !important;
   align-items: center;
-  justify-content: space-between;
-  padding: 20px;
+  justify-content: flex-start;
 }
 
 #APDateTime {
   display: flex !important;
   flex-flow: row nowrap !important;
-  align-items: center !important;  
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  left: 10px; 
 }
 
 .APAvatar {
@@ -171,21 +183,29 @@ body {
   min-width: 42px;
   max-width: 42px;
   margin-right: 12px;
-  border-radius: 5%;  
+  border-radius: 4px;
+  background-size: 42px 42px;
+  background-position: center;
+  transition: all .25s ease;
 }
 
 #APSelectPlatform {
-  padding: 20px 20px 8px 20px;
+  padding-bottom: 8px;
 }
 
+#APSubmitBtn {
+  background-color: #137dcf !important;
+  border: 1px solid #2aabd2 !important;
+  border-radius: .25rem;
+  color: white !important;
+  font-family: "Source Sans Pro" !important;
+}
 
-
-
-
-
-
-
-
+#APFormFeedback {
+  color: red;
+/*  opacity: 0;
+*/  transition: all .25s ease;
+}
 
 
 /********** Post Queue **********/
@@ -251,7 +271,7 @@ body {
   background-color: #f4faff !important;
   border-left: 0 !important;
   padding-left: 0 !important;
-  padding-right: 0 !important;  
+  padding-right: 0 !important; 
 }
 
 .PLEContainer.PLELoggedIn {
@@ -269,15 +289,37 @@ body {
   border-left: 0 !important;
   padding-left: 0 !important;
   padding-right: 0 !important;
-  display: inline-flex !important;
+  display: flex !important;
   flex-flow: row nowrap !important;
-  align-items: flex-start !important;
-  justify-content: flex-start !important;
+  align-items: center !important;
+  justify-content: space-between !important;
 }
 
 .PLEText {
   display: flex !important;
   flex-flow: column nowrap !important;
+  justify-content: center !important;
+  min-height: 48px !important;
+  max-height: 48px !important;
+  margin-left: 15px;
+}
+
+.PLELeft {
+  display: flex !important;
+  flex-flow: row nowrap !important;
+  justify-content: flex-start !important;
+}
+
+.PLESettings {
+  cursor: pointer;
+}
+
+.PLEAutopilot {
+  font-weight: 900;
+}
+
+.PLEAutoOn {
+  color: #2aabd2 !important;
 }
 
 .PLELogin {
@@ -306,21 +348,21 @@ body {
 }
 
 .PLEHeader {
-  font-size: 15px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 900;
 }
 
 .PLESubheader {
-  font-size: 13px;
+  font-size: 14px;
 }
 
-.PlatformListEntryHeader {
+.PlatformListEntryIcon {
   min-width: 48px;
   max-width: 48px;
   min-height: 48px;
   max-height: 48px;
-  background-size: contain;
-
+  background-size: 48px 48px;
+  background-position: center;
 }
 
 .inner-nav-link {
