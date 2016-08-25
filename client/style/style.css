@@ -364,6 +364,7 @@ body {
   max-height: 48px;
   background-size: 48px 48px;
   background-position: center;
+  /*background-size: contain;*/
 }
 
 .inner-nav-link {
