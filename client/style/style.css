@@ -143,6 +143,7 @@ body {
   min-width: 685px;
   max-width: 685px;
   padding: 20px;
+  box-shadow: 0 1px 1px rgba(0,0,0,.1);
 }
 
 
@@ -378,9 +379,18 @@ body {
   box-shadow: inset 0 -3px 0 #323b43 !important;
 }
 
+.nav-item {
+  transition: all .25s ease;
+}
+
 .nav-item.open > .dropdown-toggle {
   color: black !important;
   opacity: 1 !important;
+}
+
+.dropdown-menu {
+  box-shadow: 0 1px 1px rgba(0,0,0,.1) !important;
+  border-radius: 0 !important;
 }
 
 /********** Auth and Splash Components **********/
