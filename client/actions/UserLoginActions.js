@@ -162,7 +162,6 @@ export const sendSignupToServer = (formData) => {
       })
         .then(response => response.json())
         .then(jsonRes => {
-            console.log('jsonRes', jsonRes);
           window.localStorage.setItem('ImPostr-JWT', jsonRes.token);
           document.cookie = `jwtStuff=${jsonRes.token}`;
           dispatch(receiveSignup(jsonRes));
@@ -181,30 +180,9 @@ export const receiveLogout = () => ({
   type: RECEIVE_USER_LOGOUT,
 });
 
-export const requestLogout = ({ username }) => {
-  return (dispatch, getState) => {
-    dispatch(requestStart());
+export const requestLogout = () => {
+  return dispatch => {
     window.localStorage.removeItem('ImPostr-JWT');
-    const { userLogin: { token } } = getState();
-    const stateToStore = getState();
-    return fetch(`http://127.0.0.1:3000/user/logout`, {
-      method: 'POST',
-      body: JSON.stringify({
-        username,
-        storedState: stateToStore,
-      }),
-      headers: new Headers({
-        'Content-Type': 'application/json',
-        Authorization: `JWT ${token}`,
-      }),
-    })
-      .then(response => response.json())
-      .then(json => {
-        dispatch(receiveLogout(json));
-      })
-      .catch(err => {
-        dispatch(receiveFailure({ username }));
-        console.error(err, 'could not log out!');
-      });
+    dispatch(receiveLogout());
   };
 };

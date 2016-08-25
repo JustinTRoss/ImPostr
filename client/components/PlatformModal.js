@@ -1,15 +1,10 @@
 import React from 'react';
 
 import RaisedButton from 'material-ui/RaisedButton';
-import { List, ListItem } from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
 import Checkbox from 'material-ui/Checkbox';
 import TextField from 'material-ui/TextField';
-import DatePicker from 'material-ui/DatePicker';
-import TimePicker from 'material-ui/TimePicker';
 import Paper from 'material-ui/Paper';
 import Dialog from 'material-ui/Dialog';
-import Slider from 'material-ui/Slider';
 
 const PlatformModal = ({
   platform,

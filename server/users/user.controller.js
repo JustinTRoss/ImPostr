@@ -12,13 +12,6 @@ const checkJWT = (req, res) => {
   });
 };
 
-const userLogout = (req, res) => {
-  res.json({
-    userId: req.body.user.userId,
-    storedState: req.body.storedState,
-  });
-};
-
 const userSignup = (req, res) => {
   if (req.body.password.length >= 8 && req.body.username.length >= 8) {
     return util.hashPassword(req.body.password)
@@ -68,7 +61,6 @@ const userLogin = (req, res) => {
 
 module.exports = {
   checkJWT,
-  userLogout,
   userSignup,
   userLogin,
 };

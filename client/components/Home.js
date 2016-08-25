@@ -2,9 +2,9 @@ import React from 'react';
 import ContentTabs from './ContentTabs';
 import ContentSwitch from './ContentSwitch';
 
-const Home = () => (
+const Home = ({ requestLogout }) => (
   <div id="Home">
-    <ContentTabs />
+    <ContentTabs requestLogout={requestLogout} />
   </div>
 );
 
