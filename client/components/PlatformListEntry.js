@@ -26,23 +26,18 @@ const PlatformListEntry = ({
       subheader: 'Connect now!',
       class: '',
     };
-//   const iconToShow = platform.settings.isActive ? 'autorenew' : 'trending_down';
-// =======
-// >>>>>>> add style to PlatformList and PostQueue
 
   return (
     <div className={`list-group-item list-group-item-action PLEContainer ${platformStatus.class}`}>
       <div className="PlatformListEntry">
         <div
-          className="avatar"
-          style={{"backgroundImage": "url('https://pbs.twimg.com/profile_images/739532954431426562/6_o9x8It_normal.jpg')"}}
+          className="PlatformListEntryHeader"
+          style={{ backgroundImage: `url(../style/${platform.platform}icon.png)` }}
         />
-
         <div className="PLEText">
-          <span className="PLEHeader text-capitalize">{platformStatus.header}</span>
-          <p className="PLESubheader">{platformStatus.subheader}</p>
+          <span className="PLEHeader text-capitalize">{platform.platform}</span>
+          <p className="PLESubheader">Connect it!</p>
         </div>
-
         <div>
           <i className="material-icons">check</i>
           <i
