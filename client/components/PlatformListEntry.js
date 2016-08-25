@@ -25,6 +25,7 @@ const PlatformListEntry = ({
         <div className="PLEText">
           <span className="PLEHeader text-capitalize">{platform.platform}</span>
           <p className="PLESubheader">Connect it!</p>
+          <span>{platform.userPlatformLoggedIn.toString()}</span>
         </div>
 
         <div>
