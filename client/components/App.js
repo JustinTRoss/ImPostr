@@ -9,8 +9,11 @@ class App extends React.Component {
   }
 
   render() {
-    const childToRender = this.props.loggedIn ? <Home /> : <Auth />;
-    document.body.className = this.props.loggedIn ? 'plain' : 'space'; //revisit by changing background of home and auth
+    const { loggedIn, requestLogout } = this.props;
+    const childToRender = loggedIn
+      ? <Home requestLogout={requestLogout} />
+      : <Auth />;
+    document.body.className = loggedIn ? 'plain' : 'space'; //revisit by changing background of home and auth
 
     return (
       <div id="App">

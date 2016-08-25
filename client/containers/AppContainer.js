@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { checkJWTWithServer, receiveLogout } from '../actions/UserLoginActions';
+import { checkJWTWithServer, requestLogout } from '../actions/UserLoginActions';
 import { requestPlatformLogin } from '../actions/platformListActions';
 import App from '../components/App';
 
@@ -13,7 +13,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     checkJWT: () => { dispatch(checkJWTWithServer()); },
-    receiveLogout: () => { dispatch(receiveLogout()); },
+    requestLogout: () => { dispatch(requestLogout()); },
     requestPlatformLogin: (platform, userID, accessToken) => { dispatch(requestPlatformLogin(platform, userID, accessToken)); },
   };
 }

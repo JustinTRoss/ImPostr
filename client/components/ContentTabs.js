@@ -1,12 +1,12 @@
 import React from 'react';
-import {Tabs, Tab} from 'material-ui/Tabs';
+import { Tabs, Tab } from 'material-ui/Tabs';
 import PostQueueContainer from '../containers/PostQueueContainer';
 import AddNewPostContainer from '../containers/AddNewPostContainer';
 import HistoryListContainer from '../containers/HistoryListContainer';
 import PlatformListContainer from '../containers/PlatformListContainer';
 
 
-const ContentTabs = () => (
+const ContentTabs = ({ requestLogout }) => (
   <div className="fluid-container">
     <div className="row">
       <div className="nav nav-tabs col-xs-3 row" role="tablist">
@@ -56,11 +56,7 @@ const ContentTabs = () => (
                 aria-expanded="false"
               >Settings<i className="material-icons">settings</i></a>
               <div className="dropdown-menu text-xs-right">
-                <a className="dropdown-item" href="#">Action</a>
-                <a className="dropdown-item" href="#">Another action</a>
-                <a className="dropdown-item" href="#">Something else here</a>
-                <div className="dropdown-divider"></div>
-                <a className="dropdown-item" href="#">Separated link</a>
+                <a className="dropdown-item" onClick={requestLogout} >Logout</a>
               </div>
             </span>
             <span className="col-xs" />

@@ -1,15 +1,10 @@
 import React from 'react';
 
 import RaisedButton from 'material-ui/RaisedButton';
-import { List, ListItem } from 'material-ui/List';
-import Subheader from 'material-ui/Subheader';
 import Checkbox from 'material-ui/Checkbox';
 import TextField from 'material-ui/TextField';
-import DatePicker from 'material-ui/DatePicker';
-import TimePicker from 'material-ui/TimePicker';
 import Paper from 'material-ui/Paper';
 import Dialog from 'material-ui/Dialog';
-import Slider from 'material-ui/Slider';
 
 const PlatformModal = ({
   platform,
@@ -21,6 +16,12 @@ const PlatformModal = ({
 }) => {
   const { isActive, interests, interval } = platform.settings;
 
+  const settings = {
+    interests,
+    isActive,
+    interval,
+  };
+
   return (
     <Paper>
       <Dialog
@@ -29,22 +30,23 @@ const PlatformModal = ({
       >
         <TextField
           hintText="Enter your interests"
-          value={interests}
-          onChange={({ target }) => { handleFieldChange(platform.platform, 'interests', target.value); }}
+          defaultValue={interests}
+          onChange={({ target }) => { settings.interests = target.value; }}
         />
         <Checkbox
           label="Autopost mode"
-          checked={isActive}
-          onCheck={({ target }) => { handleFieldChange(platform.platform, 'isActive', target.checked); }}
+          defaultChecked={isActive}
+          onCheck={({ target }) => { settings.isActive = target.checked; }}
         />
-        <Slider
-          min={1}
-          max={25}
-          step={1}
-          value={interval}
-          onChange={(x, value) => { handleFieldChange(platform.platform, 'interval', value); }}
+        <TextField
+          label="Posts per week"
+          type="number"
+          hintText="Enter posts per week"
+          min="1"
+          max="25"
+          defaultValue={interval}
+          onChange={(x, value) => { settings.interval = value; }}
         />
-        <span>{`${interval} posts per week`}</span>
         <RaisedButton
           label="Cancel"
           secondary={true}
@@ -54,7 +56,7 @@ const PlatformModal = ({
           label="Save"
           primary={true}
           onClick={() => {
-            onSetSettingsClick(platform, platform.settings);
+            onSetSettingsClick(platform, settings);
             onToggleModalClick(platform.platform);
           }}
         />
