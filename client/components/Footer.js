@@ -21,7 +21,7 @@ const Footer = () => {
 	return (
 		<Toolbar style={style}>
       <ToolbarGroup firstChild={true}>
-        <FontIcon href="http://127.0.0.1:3000" className="material-icons" style={iconStyles} color={yellow500}>cloud_upload</FontIcon>
+        <FontIcon href="/" className="material-icons" style={iconStyles} color={yellow500}>cloud_upload</FontIcon>
       </ToolbarGroup>
       <ToolbarGroup lastChild={true}>
         <FontIcon className="material-icons" style={iconStyles} color={yellow500}>share</FontIcon>

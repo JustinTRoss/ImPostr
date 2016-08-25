@@ -45,7 +45,7 @@ const PlatformListEntry = ({
         </div>
       </div>
       <div className="PLELogin">
-        <a href={`http://127.0.0.1:3000/auth/${platform.platform}`}>
+        <a href={`/auth/${platform.platform}`}>
           <button type="button" className="btn btn-info">Login</button>
         </a>
       </div>

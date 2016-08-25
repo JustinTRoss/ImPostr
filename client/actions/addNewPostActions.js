@@ -27,7 +27,7 @@ export const validateForm = (fields) => ({
 export const handleFormSubmit = (post) => {
   return (dispatch, getState) => {
     const { userLogin: { token } } = getState();
-    return fetch('http://127.0.0.1:3000/post/addNewFromUser', {
+    return fetch('/post/addNewFromUser', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -10,7 +10,7 @@ export const receiveHistory = ({ history }) => ({
 export const requestHistory = () => {
   return (dispatch, getState) => {
     const { userLogin: { token } } = getState();
-    return fetch('http://localhost:3000/post/getPostHistory', {
+    return fetch('/post/getPostHistory', {
       headers: new Headers({
         'Content-Type': 'application/json',
         Authorization: `JWT ${token}`,

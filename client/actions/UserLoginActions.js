@@ -44,7 +44,7 @@ export const checkJWTWithServer = () => {
     if (!token) {
       dispatch(receiveJWTFailure);
     } else {
-      return fetch('http://127.0.0.1:3000/user/checkJWT', {
+      return fetch('/user/checkJWT', {
         headers: new Headers({
           Authorization: `JWT ${token}`,
         }),
@@ -106,7 +106,7 @@ export const sendLoginToServer = (formData) => {
   return dispatch => {
     dispatch(requestStart());
     dispatch(updateFormValue(formData, 'login'));
-    return fetch(`http://127.0.0.1:3000/user/login`, {
+    return fetch(`/user/login`, {
       method: 'POST',
       body: JSON.stringify({
         username,
@@ -150,7 +150,7 @@ export const sendSignupToServer = (formData) => {
     } else {
       dispatch(requestStart());
       dispatch(updateFormValue(formData, 'signup'));
-      return fetch(`http://127.0.0.1:3000/user/signup`, {
+      return fetch(`/user/signup`, {
         method: 'POST',
         body: JSON.stringify({
           username,
@@ -183,6 +183,26 @@ export const receiveLogout = () => ({
 export const requestLogout = () => {
   return dispatch => {
     window.localStorage.removeItem('ImPostr-JWT');
-    dispatch(receiveLogout());
+    const { userLogin: { token } } = getState();
+    const stateToStore = getState();
+    return fetch(`/user/logout`, {
+      method: 'POST',
+      body: JSON.stringify({
+        username,
+        storedState: stateToStore,
+      }),
+      headers: new Headers({
+        'Content-Type': 'application/json',
+        Authorization: `JWT ${token}`,
+      }),
+    })
+      .then(response => response.json())
+      .then(json => {
+        dispatch(receiveLogout(json));
+      })
+      .catch(err => {
+        dispatch(receiveFailure({ username }));
+        console.error(err, 'could not log out!');
+      });
   };
 };

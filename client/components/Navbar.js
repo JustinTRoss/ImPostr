@@ -8,7 +8,7 @@ const Navbar = ({ receiveLogout, showLogout }) => {
 	return (
 		<Toolbar style={style} >
       <ToolbarGroup firstChild={true}>
-        <a href="http://127.0.0.1:3000" className={toggleLogoColor} />
+        <a href="/" className={toggleLogoColor} />
       </ToolbarGroup>
       <ToolbarGroup lastChild={true}>
         <RaisedButton label={showLogout} primary={true} onClick={receiveLogout} />
