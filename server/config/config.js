@@ -1,6 +1,6 @@
 const path = require('path');
 
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || 'production';
 const rootPath = path.join(__dirname, '../..');
 
 const config = {
@@ -24,8 +24,8 @@ const config = {
     secret: process.env.SECRET || 'mattdubiesucks123',
     db: process.env.DATABASE_URL || 'postgres://palpaca:mattdubiesucks123@impostorthesis.ct52emcpwnt6.us-west-1.rds.amazonaws.com/thesis',
     logLevel: process.env.LOG_LEVEL || 'tiny',
-    hostedDomain: process.env.hostedDomain || 'www.impostr.co',
-    alternateDomain: process.env.alternateDomain || 'www.impostr.co',
+    hostedDomain: process.env.hostedDomain || 'http://impostr.co',
+    alternateDomain: process.env.alternateDomain || 'http://impostr.co',
     twitterConsumerKey: process.env.TWITTER_CONSUMER_KEY || 'ZCg0dSS281esXcBSR9vTfm2Z1',
     twitterConsumerSecret: process.env.TWITTER_CONSUMER_SECRET || '6O22mHBDq0Qts1mANV3zFEeFL7TxaRul0iKlKR0uDz5f8aTg7y',
     // twitterAppToken: process.env.TWITTER_APP_TOKEN || '4809076273-k27f30MCUdO8Zy8aLMTeDZpcfvpvmssAKKYNnQ5',
