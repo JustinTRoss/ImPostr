@@ -5,8 +5,10 @@ import App from '../components/App';
 
 function mapStateToProps(state) {
   const loggedIn = state.userLogin.loggedIn;
+  const requestingStart = state.userLogin.requestingStart;
   return {
     loggedIn,
+    requestingStart,
   };
 }
 

@@ -30,10 +30,12 @@ const UserObject = (state = {
   switch (action.type) {
     case RECEIVE_JWT_FAILURE:
       return Object.assign({}, state, {
+        requestingStart: false,
         loggedIn: false,
       });
     case RECEIVE_JWT_SUCCESS:
       return Object.assign({}, state, {
+        requestingStart: false,
         loggedIn: true,
         token: action.token,
       });
@@ -73,9 +75,11 @@ const UserObject = (state = {
     case REQUEST_START:
       return Object.assign({}, state, {
         // Do something to let user know we are processing request
+        requestingStart: true,
       });
     case RECEIVE_FAILURE:
       return Object.assign({}, state, {
+        requestingStart: false,
         login: {
           username: '',
           password: '',
@@ -108,6 +112,7 @@ const UserObject = (state = {
       window.localStorage.removeItem('ImPostr-JWT');
       document.cookie = `jwtStuff='';expires=Thu, 01-Jan-70 00:00:01 GMT`;
       return Object.assign({}, state, {
+        requestingStart: false,
         loggedIn: false,
       });
     default:

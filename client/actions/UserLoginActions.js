@@ -42,7 +42,7 @@ export const checkJWTWithServer = () => {
     dispatch(requestStart());
     const token = window.localStorage.getItem('ImPostr-JWT');
     if (!token) {
-      dispatch(receiveJWTFailure);
+      dispatch(receiveJWTFailure());
     } else {
       return fetch('/user/checkJWT', {
         headers: new Headers({
