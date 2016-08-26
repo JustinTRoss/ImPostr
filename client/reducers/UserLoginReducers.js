@@ -63,10 +63,12 @@ const UserObject = (state = {
     case UPDATE_FORM_VALUE:
       if (action.formName === 'login') {
         return Object.assign({}, state, {
+          requestingStart: false,
           login: action.formData,
         });
       } else if (action.formName === 'signup') {
         return Object.assign({}, state, {
+          requestingStart: false,
           signup: action.formData,
         });
       } else {
