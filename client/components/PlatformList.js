@@ -14,6 +14,7 @@ const PlatformList = ({
     <div className="list-group" id="PlatformListContainer">
       {platforms.map(platform =>
         <PlatformListEntry
+          // key={platform.settingId}
           platform={platform}
           handleFieldChange={handleFieldChange}
           validateForm={validateForm}
