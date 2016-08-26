@@ -42,7 +42,7 @@ export const requestRemove = (post, index) => {
   const { postId, isActive } = post;
   return (dispatch, getState) => {
     const { userLogin: { token } } = getState();
-    return fetch('http://localhost:3000/post/toggleIsActive', {
+    return fetch('/post/toggleIsActive', {
       method: 'POST',
       body: JSON.stringify({
         postId,
