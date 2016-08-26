@@ -16,3 +16,6 @@ __cutestuff.js
 Dockerfile
 
 /server/config/config.js
+
+##docs
+/out
