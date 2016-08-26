@@ -98,8 +98,8 @@ export const getSettingsFields = () => {
       },
     })
     .then(response => response.json())
-    .then(allSettings => {
-      allSettings.forEach(setting => {
+    .then(json => {
+      json.settings.forEach(setting => {
         const { interests, interval, isActive, platform, settingId, token } = setting;
         const settings = {
           interests,

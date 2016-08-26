@@ -81,7 +81,7 @@ const saveLinkedInToken = (req, res) => {
 };
 
 const saveFacebookToken = (req, res) => {
-  const code = req.query.code;
+  const { code } = req.query;
   const redirectURI = `${config.hostedDomain}%2Fauth%2Ffacebook%2Fcallback`;
   const { userId } = jwt.decode(req.cookies.jwtStuff, config.secret);
   const url = `https://graph.facebook.com/v2.3/oauth/access_token?client_id=${FACEBOOK_APP_ID}&redirect_uri=${redirectURI}&client_secret=${FACEBOOK_APP_SECRET}&code=${code}`;
