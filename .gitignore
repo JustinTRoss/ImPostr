@@ -3,7 +3,6 @@
 /client/style/.DS_Store
 *.log
 node_modules
-out
 
 ##ignore compiled files
 /client/bundle.js
