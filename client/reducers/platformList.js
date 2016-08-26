@@ -5,6 +5,7 @@ import {
   LOGOUT_PLATFORM,
   TOGGLE_MODAL,
   RECEIVE_SETTINGS_FIELDS,
+  CLEAR_SETTINGS,
 } from '../actions/platformListActions';
 
 const PlatformListEntry = (state, action) => {
@@ -84,8 +85,7 @@ const PlatformListEntry = (state, action) => {
   }
 };
 
-//all platform list actions are actions on each list item
-const PlatformList = (state = [
+const PlatformListDefaultState = [
   {
     platform: 'facebook',
     settingId: null,
@@ -125,7 +125,13 @@ const PlatformList = (state = [
       formFeedback: '',
     },
   },
-], action) => {
+];
+
+//all platform list actions are actions on each list item
+const PlatformList = (state = PlatformListDefaultState, action) => {
+  if (action.type === CLEAR_SETTINGS) {
+    return PlatformListDefaultState;
+  }
   return state.map(platform => {
     if (platform.platform !== action.platform) {
       return platform;

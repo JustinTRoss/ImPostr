@@ -3,10 +3,6 @@ const Setting = require('../settings/setting.model');
 const Promise = require('bluebird');
 Promise.promisifyAll(require('pg'));
 
-/**
- * for queueMonitor worker to monitor posts that are ready to post
- * @return {object} posts - promise object of an array of post objects
- */
 const getExpiredActive = () => {
   Post.update(
     {
@@ -32,10 +28,6 @@ const getExpiredActive = () => {
   });
 };
 
-/**
- * for queueMonitor worker to monitor the queue and delete post objects that are not posted
- * @return {object} status - promise object of an array of the number of records destroyed
- */
 const removeExpired = () => {
   return Post.destroy({
     where: {
@@ -47,11 +39,6 @@ const removeExpired = () => {
   });
 };
 
-/**
- * for postGenerator worker to add new posts to the queue
- * @param  {object} post - { platform, token, tokenSecret, isActive, message, expires, posted, userUserId }
- * @return {object} post - promise object of value fields that were created in db write
- */
 const addNew = (post) => {
   const { platform, token, tokenSecret, isActive, message, expires, posted, userUserId } = post;
   return Post.create({
@@ -67,10 +54,9 @@ const addNew = (post) => {
 };
 
 /**
- * to let the user manually create a new post
- * @param  {object} req [description]
- * @param  {object} res [description]
- * @return {[type]}     [description]
+ * POST /post/addNewFromUser
+ * @param  {object} req { body: { post: { date: [dateObj], time: [dateObj], message: [string], facebook: [bool], linkedin: [bool], twitter: [bool] }}, user: {userId: [number]}}
+ * @param  {object} res body: { status: [bool] }
  */
 const addNewFromUser = (req, res) => {
   const { date, time, message, facebook, linkedin, twitter } = req.body.post;
@@ -78,7 +64,7 @@ const addNewFromUser = (req, res) => {
   const expires = new Date(`${date.split('T')[0]}T${time.split('T')[1]}`);
 
   const shouldPostOnPlatform = [facebook, linkedin, twitter];
-  const platforms = ['facebook', 'linkedin', 'twitter'].filter((platform, i) => shouldPostOnPlatform[i]);
+  const platformsToAddMessage = ['facebook', 'linkedin', 'twitter'].filter((platform, i) => shouldPostOnPlatform[i]);
 
   const getPostFields = (platforms) => {
     return Promise.all(platforms.map(platform => {
@@ -105,19 +91,22 @@ const addNewFromUser = (req, res) => {
     }));
   };
 
-  return getPostFields(platforms).done(results => {
+  return getPostFields(platformsToAddMessage).done(results => {
     return Post.bulkCreate(results).then((status) => {
       if (status.length) {
-        res.send({ status: true });
+        res.json({ status: true });
       } else {
-        res.send({ status: false });
+        res.json({ status: false });
       }
     });
   });
 };
 
-//toggleIsActive
-// for client to update based on user input
+/**
+ * POST /post/toggleIsActive
+ * @param  {object} req { body: { postId: [number], isActive: [bool] }}
+ * @param  {object} res body: { status: [bool] }
+ */
 const toggleIsActive = (req, res) => {
   const { postId, isActive } = req.body;
   Post.update({
@@ -128,15 +117,18 @@ const toggleIsActive = (req, res) => {
     },
   }).then(status => {
     if (status[0] === 1) {
-      res.send({ status: true });
+      res.json({ status: true });
     } else {
-      res.send({ status: false });
+      res.json({ status: false });
     }
   });
 };
 
-//getUser
-  //for client to get all unserviced posts when user logs in
+/**
+ * GET /post/getUser
+ * @param  {object} req { user: {userId: [number]}}
+ * @param  {object} res body: { queue: [array] }
+ */
 const getUser = (req, res) => {
   const { userId } = req.user;
   Post.findAll({
@@ -153,6 +145,11 @@ const getUser = (req, res) => {
   });
 };
 
+/**
+ * GET /post/getUserPostHistory
+ * @param  {object} req { user: {userId: [number]}}
+ * @param  {object} res body: { history: [array] }
+ */
 const getUserPostHistory = (req, res) => {
   const { userId } = req.user;
   Post.findAll({
