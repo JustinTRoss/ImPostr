@@ -54,7 +54,6 @@ const saveLinkedInToken = (req, res) => {
   })
   .then(res => res.json())
   .then(json => {
-    console.log(json);
     Settings.findOne({
       where: {
         userUserId: userId,
@@ -94,7 +93,6 @@ const saveFacebookToken = (req, res) => {
   })
   .then(res => res.json())
   .then(json => {
-    console.log(json);
     Settings.findOne({
       where: {
         userUserId: userId,

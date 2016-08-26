@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch';
-import { getSettingsFields } from './platformListActions';
-import { requestQueue } from './postQueueActions';
-import { requestHistory } from './historyListActions';
+import { getSettingsFields, clearSettings } from './platformListActions';
+import { requestQueue, insertQueue } from './postQueueActions';
+import { requestHistory, receiveHistory } from './historyListActions';
 
 export const REQUEST_START = 'REQUEST_START';
 export const RECEIVE_USER_LOGIN = 'RECEIVE_USER_LOGIN';
@@ -184,5 +184,8 @@ export const requestLogout = () => {
   return dispatch => {
     window.localStorage.removeItem('ImPostr-JWT');
     dispatch(receiveLogout());
+    dispatch(clearSettings());
+    dispatch(insertQueue({ queue: [] }));
+    dispatch(receiveHistory({ history: [] }));
   };
 };

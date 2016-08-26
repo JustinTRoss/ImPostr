@@ -9,6 +9,8 @@ export const LOGIN_PLATFORM = 'LOGIN_PLATFORM';
 export const LOGOUT_PLATFORM = 'LOGOUT_PLATFORM';
 export const TOGGLE_MODAL = 'TOGGLE_MODAL';
 export const RECEIVE_SETTINGS_FIELDS = 'RECEIVE_SETTINGS_FIELDS';
+export const CLEAR_SETTINGS = 'CLEAR_SETTINGS';
+
 
 export const validateForm = (platform, fields) => ({
   type: VALIDATE_FORM,
@@ -43,6 +45,10 @@ export const receiveSettingsFields = (platform, settings, settingId) => ({
   platform,
   settings,
   settingId,
+});
+
+export const clearSettings = () => ({
+  type: CLEAR_SETTINGS,
 });
 
 export const requestPlatformLogout = (platform) => {
