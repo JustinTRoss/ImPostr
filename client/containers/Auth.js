@@ -52,33 +52,27 @@ class Auth extends React.Component {
 
     let textToRender = (this.props.isLogin) === 'login' ?
       <div className="splashSwitchAuthText">
-        <p>Do you want to feel like Evan?</p>
         <a onClick={() => this.props.handleFormChange('signup')}>Sign up today!</a>
       </div>
       :
       <div className="splashSwitchAuthText">
-        <p>Already enjoying yourself?</p>
         <a onClick={() => this.props.handleFormChange('login')}>Log in now!</a>
       </div>;
 
     return (
-      <div id='content' style={{
-        backgroundImage: 'url(../style/spaceBeer.jpg)',
-        backgroundSize: "100vw 100vh",
-        backgroundRepeat: "no-repeat", }}
+      <div id='LandingContainer'
+        style={{
+          backgroundImage: 'url(../style/mainBack.jpg)',
+          backgroundSize: "100vw 100vh",
+          backgroundRepeat: "no-repeat",
+        }}
       >
-        <div className="AuthAndSplash">
-          <div id="LandingPageHeader">
-            <div>
-              <h1 id="LandingPageHeaderTitle">
-                ImPostr
-              </h1>
-            </div>
-            <div className="LandingPageHeaderLogo" style={{ backgroundImage: 'url(../style/bigWhite.png)' }}>
-            </div>
-          </div>
-          <div id="splashBox">
-            <div>
+        <div id="AuthAndSplashHolder">
+          <h1 id="LandingPageHeaderTitle">
+            ImPostr
+          </h1>
+          <div className="AuthAndSplash">
+            <div id="splashBox">
               <Splash />
             </div>
             <div id="authBox">

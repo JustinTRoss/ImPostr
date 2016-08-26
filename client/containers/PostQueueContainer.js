@@ -8,7 +8,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  requestRemove: (post) => { dispatch(requestRemove(post)); },
+  requestRemove: (post, index) => { dispatch(requestRemove(post, index)); },
 });
 
 const PostQueueContainer = connect(
