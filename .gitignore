@@ -18,4 +18,4 @@ Dockerfile
 /server/config/config.js
 
 ##docs
-/out
+out
