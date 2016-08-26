@@ -42,38 +42,41 @@ ImPostr is your one stop shop social media platform content manager. Connect you
 
 ## Getting Started
 
-### Prerequisites <ENTER INSTRUCTIONS FOR SETTING UP EACH PLATFORM, RENAMES __CUTESTUFF.JS>
+### Prerequisites
 
-Install [Node](https://nodejs.org/en/) and [PostgreSQL](https://www.postgresql.org/download/) in your development environment.
+Install [Node](https://nodejs.org/en/) and [PostgreSQL](https://www.postgresql.org/download/) in your development environment; the optional [worker service](https://github.com/HypnoticAlpaca/microservice) is written in [Go](https://golang.org/), which will also require configuration.
 
-You'll also need to set up Facebook, LinkedIn, and Twitter App keys in order to develop for ImPostr:
+Specifically, you will need specific developer keys for Twitter, LinkedIn, and Facebook.
+1. [Facebook](https://developers.facebook.com/docs/facebook-login/access-tokens/)
+2. [LinkedIn](https://developer.linkedin.com/docs/oauth2)
+3. [Twitter](https://dev.twitter.com/oauth/overview)
 
-In your root directory, create file named '__cutestuff.js' and add and export the following parameters obtained from the instructions: DB_ENDPOINT, DB_SECRET, DB_USER, FACEBOOK_APP_ID, FACEBOOK_APP_SECRET, LINKEDIN_KEY, LINKEDIN_SECRET, STATELINKEDIN, TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET
+Environment variables are preferred for app-specific credentials and database endpoint(s).  As an example, the current project has a configuration file with defaults (in case environment variables are not set) in 'server/config'.  The following are required for a fully functional application: database endpoint, database credentials, Facebook APP ID, Facebook APP Secret, LinkedIn Key, LinkedIn Secret, Twitter Consumer Key, and Twitter Consumer Secret.
 
-Finally, set up your Sublime Text with the ESLinter using Package Install.
-[Use this guide](https://medium.com/@dan_abramov/lint-like-it-s-2015-6987d44c5b48#.ne1ikvdg9) to set up your Sublime for linting.
-
-Everything else will be included inside NPM install.
+As always, the [Airbnb Style Guide](https://github.com/airbnb/javascript) is preferred.
+You may configure your linter of choice; for us, Sublime Text with ESLinter was sufficient.  Dan Abramov's [guide](https://medium.com/@dan_abramov/lint-like-it-s-2015-6987d44c5b48#.ne1ikvdg9) may be useful.
 
 ### Installing Dependencies <EDIT>
 
-From within the root directory:
-
+From the root directory, we'll use NPM to handle dependency installation.
 ```sh
 npm i
 ```
 
-### Running The App <DOCKER INSTRUCTIONS>
+### Running The App (cloned from git)
 
-Start your instance of PostgreSQL
-
-Run this script to start webpack -w and to start (w/ nodemon) server/server.js
+The use of Node scripts are ideal for persistent Babel compilation and Node server listening.  Personally, we simply bound the following to "npm run dev" (with the aid of [Nodemon](https://github.com/remy/nodemon)):
 
 ```sh
-npm run dev
+webpack -d --watch & nodemon server/server.js
 ```
+### Running the Application (Docker)
 
-<URL TO START PAGE>
+Alternatively, you may find the deployed image here:
+
+```sh
+docker pull justintross/impostr:latest
+```
 
 ## Understanding the Code Base
 
@@ -114,14 +117,11 @@ Tools user for testing:
 
 ## Tech Stack
 
-- Node
-- Express
+- Node/Express
+- Go
 - PostgreSQL
-- Sequelize
-- Webpack
-- React, Redux, React Dom
-- Eslint
-- Babel
+- React, Redux
+- Docker / AWS (EC2)
 
 ## Core Team
 
