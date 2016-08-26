@@ -75,7 +75,7 @@ webpack -d --watch & nodemon server/server.js
 Alternatively, you may find the deployed image here:
 
 ```sh
-docker pull justintross/impostr:latest
+docker pull stevenchung/impostor:latest
 ```
 
 ## Understanding the Code Base
