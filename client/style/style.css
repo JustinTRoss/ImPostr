@@ -394,16 +394,35 @@ body {
 }
 
 /********** Auth and Splash Components **********/
+
+#LandingContainer {
+  font-family: "Source Sans Pro" !important;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+}
+
+#AuthAndSplashHolder {
+  min-height: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
 .AuthAndSplash {
   display: flex;
-/*  margin-top: 15%;
-*/  padding: 20px;
+  padding: 20px;
   max-height: 800px;
   
   /*FLEX*/
-  justify-content: space-between;
-  align-content: flex-end;
-  align-self: flex-end;
+  justify-content: center;
+  align-content: center;
+  align-self: center;
   flex-flow: column nowrap;
 
   background-clip: border-box;
@@ -413,82 +432,34 @@ body {
   color: white;
 }
 
-#LandingPageHeader {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-content: center;
-}
-
 #LandingPageHeaderTitle {
-  font-weight: bold;
-  font-size: 50px;
-}
-
-.LandingPageHeaderLogo {
-  background-size: contain;
-  height: 80px;
-  width: 80px;
-  background-repeat: no-repeat;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-family: "Source Sans Pro" !important;
+  font-weight: 300;
+  font-size: 40px;
+  margin: 10px;
+  color: white;
 }
 
 /********** Splash **********/
-#splashBox {
-  display: flex;
-  
-  /*FLEX*/
-  justify-content: space-around;
-  align-content: center;
-  align-self: center;
-  flex-flow: column nowrap;
-  
-  padding: 20px;
-  background-clip: border-box;
-  background-color: rgba(56,49,38, 0.40);
-}
-
-#impostor-title {
-  display: block;
-
-  /*FLEX*/
-  flex-direction: column;
-  align-self: center;
-
-/*  background-image: url('./otherBigWhite.png');
-*/  background-repeat: no-repeat;
-  height: 228px;
-  width: 274px;
-  background-size: 265px 188px;
-}
 
 #evan-quote {
-  display: flex;
-
-  /*FLEX*/
-  flex-flow: column nowrap;
-
   font-style:italic;
   font-size: 35px;
   font-weight: 900;
-  text-shadow: 0 0 20px rgba(0,0,0,1);
-}
-
-#fromEvan {
-  display: inline;
-
-  /*FLEX*/
-/*  align-self: flex-end;
-*/
+  text-shadow: 0 0 20px rgba(0,0,0,.65);
 }
 
 /********** Auth **********/
 #authBox {
   display: flex;
-  padding: 15px;
+  padding: 15px 15px 5px 15px;
   
   /*FLEX*/
   flex-flow: column nowrap;
-  justify-content: space-around;
+  justify-content: center;
   align-self: center;
   align-items: center;
 
@@ -497,10 +468,15 @@ body {
   color: white;
   background-color: rgba(35,25,19,.65);
   border-radius: 8px;
+  min-width: 345px;
+  max-width: 545px;
+  min-height: 130px;
+  max-height: 130px;
+
 }
 
 .AuthParent {
-  display: inline-flex;
+  display: flex;
   
   /*FLEX*/
   flex-direction: row nowrap;
@@ -510,6 +486,8 @@ body {
   background-clip: border-box;
   border-radius: 5px;
   color: white;
+  min-width: 100%;
+  max-width: 100%;
 }
 
 .AuthFields {
@@ -518,8 +496,6 @@ body {
   /*FLEX*/
   justify-content: space-between;
   flex-flow: column nowrap;
-
-  padding: .5rem;
 }
 
 .AuthInput {
@@ -557,21 +533,10 @@ body {
   padding-bottom: 12px;
 }
 
-.splashSwitchAuthText > div > a {
-  display: inline-block;
-  margin-left: 5px;
-  font-weight: bold;
-}
-
 .splashSwitchAuthText {
-  display: flex;
-
-  /*FLEX*/
-  justify-content: center;
-  flex-flow: column wrap;
-
   font-size: 14px;
-  margin: 5px;
+  padding: 5px;
+  cursor: pointer;
 }
 
 .authChangeText {
@@ -600,12 +565,6 @@ body {
 }
 
 /********** Footer **********/
-
-#content {
-  width: 100vw;
-  height: 100vh;
-}
-
 footer {
   /*FLEX*/
   align-self: flex-end;
