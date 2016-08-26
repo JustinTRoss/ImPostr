@@ -162,10 +162,13 @@ export const sendSignupToServer = (formData) => {
       })
         .then(response => response.json())
         .then(jsonRes => {
-          window.localStorage.setItem('ImPostr-JWT', jsonRes.token);
-          document.cookie = `jwtStuff=${jsonRes.token}`;
-          dispatch(receiveSignup(jsonRes));
+          if (jsonRes.token) {
+            window.localStorage.setItem('ImPostr-JWT', jsonRes.token);
+            document.cookie = `jwtStuff=${jsonRes.token}`;
+            dispatch(receiveSignup(jsonRes));
+          }
         })
+        .then(() => { dispatch(checkJWTWithServer()); })
         .catch(err => {
           console.error(err, 'error signing up');
           dispatch(receiveFailure(formData));

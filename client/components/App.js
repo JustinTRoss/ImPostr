@@ -20,8 +20,6 @@ class App extends React.Component {
       childToRender = <Auth />;
     }
 
-    document.body.className = loggedIn ? 'plain' : 'space'; //revisit by changing background of home and auth
-
     return (
       <div id="App">
         {childToRender}

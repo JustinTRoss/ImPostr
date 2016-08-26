@@ -3,14 +3,6 @@
 body {
   font-family: "Source Sans Pro" !important;
   font-weight: normal !important;
-}
-
-.space {
-  /*background-image: url(../style/spaceBeer.jpg);*/
-  /*opacity: .8;*/
-}
-
-.plain {
   background-color: #f4f7f9;
 }
 
@@ -392,6 +384,43 @@ body {
   box-shadow: 0 1px 1px rgba(0,0,0,.1) !important;
   border-radius: 0 !important;
 }
+
+/********** Setting Modal **********/
+
+.SettingModalContainer {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-start;
+}
+
+.SMText {
+  min-width: 100%;
+  max-width: 100%;
+}
+
+.SMMid {
+  min-width: 100%;
+  max-width: 100%;
+  padding: 10px;
+}
+
+.SMCheckbox {
+  display: flex;
+  align-items: center;
+}
+
+.SMLogout {
+
+}
+
+.SMButtons {
+  display: flex;
+  align-self: flex-end;
+}
+
+
+
+
 
 /********** Auth and Splash Components **********/
 
