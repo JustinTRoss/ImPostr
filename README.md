@@ -92,6 +92,12 @@ docker pull stevenchung/impostor:latest
 
 #### Server-side
 
+#### Architecture
+
+<p align="center">
+  <img src="">
+</p>
+
 #### Database Design
 
 <p align="center">
