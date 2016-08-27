@@ -111,7 +111,7 @@ npm test
 Tools user for testing:
 - Mocha
 - Chai
-- Sinion
+- Sinon
 - Chai-As-Promised
 <ENTER MORE HERE>
 
