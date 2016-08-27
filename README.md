@@ -95,7 +95,7 @@ docker pull stevenchung/impostor:latest
 #### Architecture
 
 <p align="center">
-  <img src="">
+  <img src="https://github.com/JustinTRoss/ImPostr/blob/master/ImPostrDiagram.jpg?raw=true">
 </p>
 
 #### Database Design
