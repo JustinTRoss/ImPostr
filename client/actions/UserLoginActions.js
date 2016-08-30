@@ -144,9 +144,9 @@ export const sendSignupToServer = (formData) => {
   const { username, password } = formData;
   return dispatch => {
     if (username.length < 8) {
-      dispatch(throwFieldValidationError(formData, 'username', 'signup'));
+      dispatch(throwFieldValidationError('username', 'signup'));
     } else if (password.length < 8) {
-      dispatch(throwFieldValidationError(formData, 'username', 'signup'));
+      dispatch(throwFieldValidationError('password', 'signup'));
     } else {
       dispatch(requestStart());
       dispatch(updateFormValue(formData, 'signup'));

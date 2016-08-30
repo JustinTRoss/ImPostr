@@ -10,6 +10,21 @@ body {
   background-color: white;
 }
 
+.errorMsg {
+  position: relative;
+  bottom: 5px;
+  color: #ea4343;
+  font-weight: 600;
+
+}
+
+.maxSize {
+  min-height: 100%;
+  max-height: 100%;
+  min-width: 100%;
+  max-width: 100%;
+}
+
 /********** Nav **********/
 
 .nav-item {
@@ -500,7 +515,9 @@ body {
   min-width: 345px;
   max-width: 545px;
   min-height: 130px;
-  max-height: 130px;
+  max-height: 160px;
+
+  transition: all .5s ease;
 
 }
 
@@ -508,7 +525,7 @@ body {
   display: flex;
   
   /*FLEX*/
-  flex-direction: row nowrap;
+  flex-flow: row nowrap;
   justify-content: space-between;
   align-items: flex-start;
 
@@ -523,7 +540,6 @@ body {
   display: flex;
   
   /*FLEX*/
-  justify-content: space-between;
   flex-flow: column nowrap;
 }
 

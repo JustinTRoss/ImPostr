@@ -42,6 +42,7 @@ class Auth extends React.Component {
         handleFieldChange={e => this.handleFieldChange('login', e.target.name, e.target.value)}
         handleLoginSubmit={() => this.handleLoginSubmit(this.state.login)}
       /> : <Signup
+        error={this.props.signup.error}
         username={this.state.signup.username}
         password={this.state.signup.password}
         handleFieldChange={e => this.handleFieldChange('signup', e.target.name, e.target.value)}
@@ -56,7 +57,7 @@ class Auth extends React.Component {
       </div>
       :
       <div className="splashSwitchAuthText">
-        <a onClick={() => this.props.handleFormChange('login')}>Log in now!</a>
+        <a onClick={() => this.props.handleFormChange('login')}>Already have an account? Log in now!</a>
       </div>;
 
     return (

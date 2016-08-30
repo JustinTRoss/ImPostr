@@ -14,8 +14,9 @@ import {
 const UserObject = (state = {
   userId: '',
   token: '',
-  isLogin: 'login',
+  isLogin: 'signup',
   loggedIn: false,
+  requestingStart: false,
   login: {
     error: '',
     username: '',

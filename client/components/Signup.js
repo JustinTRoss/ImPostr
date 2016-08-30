@@ -1,7 +1,9 @@
 import React from 'react';
 
-const Signup = ({ username, password, handleFieldChange, handleSignupSubmit }) => {
+const Signup = ({ username, password, handleFieldChange, handleSignupSubmit, error }) => {
   return (
+    <div className="maxSize">
+    <span className="errorMsg text-capitalize">{error}</span>
     <div className="AuthParent">
       <div className="AuthFields">
         <input
@@ -28,6 +30,7 @@ const Signup = ({ username, password, handleFieldChange, handleSignupSubmit }) =
           onClick={handleSignupSubmit}
         >Signup!</button>
       </div>
+    </div>
     </div>
   );
 };
