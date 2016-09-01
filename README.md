@@ -21,9 +21,10 @@ ImPostr is intended to be an automation-as-a-service for curating one's online p
 Install [Node](https://nodejs.org/en/) and [PostgreSQL](https://www.postgresql.org/download/) in your development environment; the optional [worker service](https://github.com/HypnoticAlpaca/microservice) is written in [Go](https://golang.org/), which will also require configuration.
 
 Specifically, you will need specific developer keys for Twitter, LinkedIn, and Facebook.
+
 1. [Facebook](https://developers.facebook.com/docs/facebook-login/access-tokens/)
-2. [LinkedIn](https://developer.linkedin.com/docs/oauth2)
-3. [Twitter](https://dev.twitter.com/oauth/overview)
+1. [LinkedIn](https://developer.linkedin.com/docs/oauth2)
+1. [Twitter](https://dev.twitter.com/oauth/overview)
 
 Environment variables are preferred for app-specific credentials and database endpoint(s).  As an example, the current project has a configuration file with defaults (in case environment variables are not set) in 'server/config'.  The following are required for a fully functional application: database endpoint, database credentials, Facebook APP ID, Facebook APP Secret, LinkedIn Key, LinkedIn Secret, Twitter Consumer Key, and Twitter Consumer Secret.
 
