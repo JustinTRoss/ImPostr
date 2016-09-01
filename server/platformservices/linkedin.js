@@ -2,12 +2,12 @@ const Setting = require('../settings/setting.model');
 
 const postToLinkedIn = ({ token, message }) => {
   let messageObject = {
-    comment: 'Pillow Talk',
+    comment: 'Awesome Content!',
     content: {
-      title: `Hack Reactor and You`,
-      description: `pillows`,
+      title: `Check this out!`,
+      description: `Great Content!`,
       'submitted-url': message,
-      'submitted-image-url': 'https://example.com/logo.png',
+      'submitted-image-url': 'https://golang.org/doc/gopher/frontpage.png',
     },
     visibility: {
       code: 'anyone',

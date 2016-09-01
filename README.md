@@ -1,17 +1,5 @@
-## Demostration <ADD URL>
-picture of LI/FB/TW post
-<p align="center">
-  <img src="<url here>" >
-</p>
-
-## Description <ADD URL>
-ImPostr is your one stop shop social media platform content manager. Connect your Facebook, LinkedIn, and Twitter accounts, enter topics that your are interested in, and sit back and relax. We will go find popular and relevant content and post them on your wall. Build personal brand, get a following, and drive engagemnt with your profiles. Networking for a software job? Ramp up your posts on different technologies on your LinkedIn account. Trying to be more active socially? Post some NFL acticles or cat photos! For a more hands on approach, your can create custom posts, cancel generated posts, and view all of your activity across all platforms in one place.
-
-[Live demo the app here](<url to aws docker container>)
-
-<p align="center">
-  <img src="<url of screenshot entering settings>">
-</p>
+## Description
+ImPostr is intended to be an automation-as-a-service for curating one's online presence.  Connecting Facebook, LinkedIn, and/or Twitter will allow the application to define relevant content and post said content on each of these networks.  There is anxiety associated with maintaining your online persona and ImPostr is intended to handle this for you.  You can also define specific posts, cancel generated posts, and view previous activity from the application.  Give it a whirl!
 
 ## Table of Contents
 
@@ -28,28 +16,15 @@ ImPostr is your one stop shop social media platform content manager. Connect you
 1. [Contributing](#contributing)
 1. [Licensing](#license)
 
-## Usage
-
-1. Go to site url and signup with a username and password
-1. Select and authenticate platforms you would like to connect (Facebook, Twitter, and/or LinkedIn)
-1. For each platform, select posting preferences by entering your interests, autopost, and interval
-1. Sit back and relax! If you want a more hands on experience, you can schedule custom posts, manage your automatically generated post queue, and view your activity
-
-## Screenshots <CHANGE URLS AND ADD IMAGES>
-<p align="center">
-  <img src="<URL HERE>">
-</p>
-
-## Getting Started
-
 ### Prerequisites
 
 Install [Node](https://nodejs.org/en/) and [PostgreSQL](https://www.postgresql.org/download/) in your development environment; the optional [worker service](https://github.com/HypnoticAlpaca/microservice) is written in [Go](https://golang.org/), which will also require configuration.
 
 Specifically, you will need specific developer keys for Twitter, LinkedIn, and Facebook.
+
 1. [Facebook](https://developers.facebook.com/docs/facebook-login/access-tokens/)
-2. [LinkedIn](https://developer.linkedin.com/docs/oauth2)
-3. [Twitter](https://dev.twitter.com/oauth/overview)
+1. [LinkedIn](https://developer.linkedin.com/docs/oauth2)
+1. [Twitter](https://dev.twitter.com/oauth/overview)
 
 Environment variables are preferred for app-specific credentials and database endpoint(s).  As an example, the current project has a configuration file with defaults (in case environment variables are not set) in 'server/config'.  The following are required for a fully functional application: database endpoint, database credentials, Facebook APP ID, Facebook APP Secret, LinkedIn Key, LinkedIn Secret, Twitter Consumer Key, and Twitter Consumer Secret.
 
@@ -77,25 +52,10 @@ Alternatively, you may find the deployed image here:
 ```sh
 docker pull stevenchung/impostor:latest
 ```
-
-## Understanding the Code Base
-
-### File Structure <COPY PASTE FINAL FILE STRUCTURE>
-
-```sh
-<HERE>
-```
-
-### Where to Begin
-
-#### Front-End
-
-#### Server-side
-
 #### Architecture
 
 <p align="center">
-  <img src="https://github.com/JustinTRoss/ImPostr/blob/master/ImPostrDiagram.jpg?raw=true">
+  <img src="./ImPostrDiagram.jpg">
 </p>
 
 #### Database Design
@@ -106,7 +66,7 @@ docker pull stevenchung/impostor:latest
 
 ## Testing
 
-Current testing coverage is <ENTER A PERCETAGE>
+Current testing coverage is ~85%.
 
 From the root directory, run the following script
 
@@ -119,7 +79,6 @@ Tools user for testing:
 - Chai
 - Sinon
 - Chai-As-Promised
-<ENTER MORE HERE>
 
 ## Tech Stack
 
@@ -131,6 +90,10 @@ Tools user for testing:
 
 ## Core Team
 
+<p align="center">
+  <img src="./TEAMPICTURE.jpg">
+</p>
+
   - [Justin Ross](https://github.com/JustinTRoss)
   - [Steven Chung](https://github.com/StevenChung)
   - [Matt Dubie](https://github.com/mdubie)
@@ -139,15 +102,13 @@ Tools user for testing:
 
 1. Fork the repo.
 1. Clone it to your local computer
-1. Cut a namespaced feature branch from master and name it appropriately
+1. Cut a namespaced feature branch from master
 1. Make commits and prefix each commit with the type of work you were doing
 1. Before you push, rebase upstream changes into your branch, fix any potential conflicts, and then push to your fork.
 1. Submit a pull request directly to the master from your feature branch
 1. Someone else will perform code review to keep codebase clean
 1. Fix any errors or issues raised by the reviewer and push the fixes as a single new commit
 1. Repeat until the pull request is merged.
-
-See [CONTRIBUTING.md](_CONTRIBUTING.md) for contribution guidelines in detail.
 
 ## License
 
