@@ -16,8 +16,8 @@ const postGenerator = new CronJob('* */5 * * * *', () => {
 
       // Update dueNext value for user's settings entry
       updateDueNext(settingId, dueNext);
-      const interestAry = interests ? interests.split(/\s*,\s*/) : ['matriarchy'];
-      const topic = interestAry[Math.floor((interestAry.length + 1) * Math.random())];
+      const interestAry = interests ? interests.split(/\s*,\s*/) : ['acquisition'];
+      const topic = interestAry[Math.floor(interestAry.length * Math.random())];
       const isActive = true;
       const datePost = new Date();
       const NUM_DAYS = 3;
@@ -43,8 +43,3 @@ const postGenerator = new CronJob('* */5 * * * *', () => {
     });
   });
 }, null, true, 'America/Los_Angeles');
-
-
-module.exports = {
-  postGenerator,
-};
