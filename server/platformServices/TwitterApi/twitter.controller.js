@@ -29,12 +29,13 @@ function getUrlByTopic(topic) {
   .catch(err => console.error(err));
 }
 
-function postToTwitter(setting, url) {
-  const client = createClient(setting.token, setting.tokenSecret);
+function postToTwitter(post) {
+  const client = createClient(post.token, post.tokenSecret);
   client.postAsync('statuses/update', {
-    status: url,
+    status: post.message || 'I hope everyone is having a great day!',
   })
-  .then((tweet, res) => console.log('tweet', tweet, 'res', res));
+  .then((tweet, res) => console.log('tweet', tweet, 'res', res))
+  .catch(err => console.error(err));
 }
 
 /**********PRIVATE**********/
