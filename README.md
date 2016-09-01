@@ -131,6 +131,10 @@ Tools user for testing:
 
 ## Core Team
 
+<p align="center">
+  <img src="./TEAMPICTURE.jpg">
+</p>
+
   - [Justin Ross](https://github.com/JustinTRoss)
   - [Steven Chung](https://github.com/StevenChung)
   - [Matt Dubie](https://github.com/mdubie)
