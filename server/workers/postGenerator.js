@@ -1,6 +1,6 @@
 const { getActiveOverDueNext, updateDueNext } = require('../settings/setting.controller');
 const { addNew } = require('../posts/post.controller');
-const { getUrlByTopic } = require('../platformServices/TwitterApi/twitter.controller');
+const { getUrlByTopic } = require('../platformservices/TwitterApi/twitter.controller');
 
 const CronJob = require('cron').CronJob;
 

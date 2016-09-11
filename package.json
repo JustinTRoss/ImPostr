@@ -6,7 +6,8 @@
   "scripts": {
     "test": "mocha --compilers js:babel-register --recursive",
     "test:watch": "npm test -- --watch",
-    "dev": "webpack -d --watch & nodemon server/server.js & node server/workers/queueMonitor.js & node server/workers/postGenerator.js",
+    "prod": "nodemon server/server.js & nodemon server/workers/queueMonitor.js & nodemon server/workers/postGenerator.js",
+    "dev": "webpack -d --watch & nodemon server/server.js & nodemon server/workers/queueMonitor.js & nodemon server/workers/postGenerator.js",
     "eslint": "eslint server/"
   },
   "repository": {
