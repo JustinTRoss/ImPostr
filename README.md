@@ -1,5 +1,5 @@
 ## Description
-ImPostr is intended to be an automation-as-a-service for curating one's online presence.  Connecting Facebook, LinkedIn, and/or Twitter will allow the application to define relevant content and post said content on each of these networks.  There is anxiety associated with maintaining your online persona and ImPostr is intended to handle this for you.  You can also define specific posts, cancel generated posts, and view previous activity from the application.  Give it a whirl!
+ImPostr is an automation-as-a-service application for curating one's online presence.  Connecting Facebook, LinkedIn, and/or Twitter will allow the application to define relevant content and post said content on each of these networks.  There is anxiety associated with maintaining your online persona and ImPostr is intended to handle this for you.  You can also define specific posts, cancel generated posts, and view previous activity from the application.  Give it a whirl!
 
 ## Table of Contents
 

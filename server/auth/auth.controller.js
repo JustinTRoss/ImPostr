@@ -61,11 +61,13 @@ const saveLinkedInToken = (req, res) => {
       },
     })
     .then(settings => {
+      console.log('updating', settings, json);
       if (settings) {
         settings.updateAttributes({
           token: json.access_token,
         });
       } else {
+        console.log('creating', settings, json);
         Settings.create({
           userUserId: userId,
           platform: 'linkedin',
@@ -101,10 +103,12 @@ const saveFacebookToken = (req, res) => {
     })
     .then(settings => {
       if (settings) {
+        console.log('updating', settings, json);
         settings.updateAttributes({
           token: json.access_token,
         });
       } else {
+        console.log('creating');
         Settings.create({
           userUserId: userId,
           platform: 'facebook',
