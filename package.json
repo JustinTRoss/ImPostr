@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "preinstall": "npm i -g node-gyp && node-gyp clean",
     "test": "mocha --compilers js:babel-register --recursive",
     "test:watch": "npm test -- --watch",
     "prod": "nodemon server/server.js & nodemon server/workers/queueMonitor.js & nodemon server/workers/postGenerator.js",
