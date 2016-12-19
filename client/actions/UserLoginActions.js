@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch';
+import 'whatwg-fetch';
 import { getSettingsFields, clearSettings } from './platformListActions';
 import { requestQueue, insertQueue } from './postQueueActions';
 import { requestHistory, receiveHistory } from './historyListActions';

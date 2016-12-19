@@ -160,9 +160,9 @@ describe('User Login Actions Spec', () => {
   });
 
   describe('async actions', () => {
-    xdescribe('checkJWTWithServer()', () => {
+    describe('checkJWTWithServer()', () => {
 
-      it('should generate a REQUEST_START, RECEIVE_JWT_SUCCESS actions if called when there is a token in the local storage ', (done) => {
+      it('should generate a REQUEST_START, RECEIVE_JWT_SUCCESS actions if called when there is a token in the local storage ', () => {
         const jsonRes = {
           userId: 12,
           token: 'abc',
@@ -174,10 +174,15 @@ describe('User Login Actions Spec', () => {
 
         const store = mockStore({});
 
+        const expectedAction = [
+          {
+            type: REQUEST_START,
+          },
+        ];
+
         return store.dispatch(checkJWTWithServer())
           .then(() => {
-            console.log(store.getActions());
-            done();
+            expect(store.getActions()).to.deep.equal(expectedAction);
           });
       });
     });

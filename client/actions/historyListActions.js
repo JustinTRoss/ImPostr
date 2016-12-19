@@ -1,4 +1,4 @@
-import fetch from 'isomorphic-fetch';
+import 'whatwg-fetch';
 
 export const RECEIVE_USER_HISTORY = 'RECEIVE_USER_HISTORY';
 
